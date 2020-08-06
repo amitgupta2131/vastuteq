@@ -1,0 +1,674 @@
+/***
+-------------------- A P P  F O N T S --------------------
+***/
+
+// RALEWAY FONT
+@font-face {
+    font-family: "Raleway-Thin";
+    src: url("/assets/fonts/Raleway-Thin.ttf");
+}
+@font-face {
+    font-family: "Raleway-Light";
+    src: url("/assets/fonts/Raleway-Light.ttf");
+}
+@font-face {
+    font-family: "Raleway-Regular";
+    src: url("/assets/fonts/Raleway-Regular.ttf");
+}
+@font-face {
+    font-family: "Raleway-SemiBold";
+    src: url("/assets/fonts/Raleway-SemiBold.ttf");
+}
+@font-face {
+    font-family: "Raleway-Bold";
+    src: url("/assets/fonts/Raleway-Bold.ttf");
+}
+
+
+/***
+-------------------- A P P  C O L O R S --------------------
+***/
+
+$text: #4f4f4f;
+$backgroundPrimary: #efeff0;
+$backgroundSecondary: #f7f7f7;
+$backgroundLight: #f4f4f8;
+$headerBackground: #3a3b3c;
+$button-bg: #6968ab;
+
+
+.dropdown-item {
+    font-weight: 300;
+    letter-spacing: 1px;
+}
+
+//  HIDE SCROLL BAR
+#rightSidebar::-webkit-scrollbar {
+    width: 0 !important;
+}
+#rightSidebar {
+    overflow: -moz-scrollbars-none;
+}
+
+.nav-link {
+    font-size: 13px;
+    font-weight: 400;
+    padding: 0 !important;
+    padding-right: .5rem !important;
+    padding-left: .5rem !important;
+}
+
+.dropdown-item {
+    font-size: 13px;
+    font-weight: 400;
+}
+
+.text-md {
+  font-size: 13px !important;
+}
+
+.text-sm {
+    font-size: 12px !important;
+}
+  
+.text-xs {
+    font-size: 10px !important;
+}
+
+.dropdown-menu {
+    z-index: 999999 !important;
+}
+
+//  HIDE SCROLL BAR
+
+#rightSidebar::-webkit-scrollbar {
+    width: 0 !important;
+}
+
+#rightSidebar {
+    overflow: -moz-scrollbars-none;
+}
+  
+#objectbar::-webkit-scrollbar {
+    width: 0 !important;
+}
+
+#objectbar {
+    overflow: -moz-scrollbars-none;
+}
+.cursor-pointer {
+  cursor: pointer !important;
+}
+.sjx-svg-box-group rect {
+  fill-opacity: 0;
+}
+
+.object-align-center, .object-color-toggle {
+  transition: 250ms all ease-in-out;
+
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.3);
+    transform: scale(0.9);
+    cursor: pointer;
+  }
+}
+
+.zoom-display {
+  width: 65px !important;
+  padding-right: 18px;
+  font-size: 14px;
+  font-family: "Raleway-SemiBold";
+  box-sizing: border-box !important;
+}
+
+.zoom-options {
+  position: absolute;
+  top: 6px;
+  right: 25px;
+}
+
+.percent-icon {
+  position: absolute;
+  top: 4px;
+  right: -2px;
+  font-family: "Raleway-Bold";
+}
+
+
+/* ==================================== */
+/*		  	  Navigaton Menu		
+/* ==================================== */
+
+.menu-wrap {
+  background-color: #6968ab;
+  position: absolute;
+  top: 105px;
+  height: calc(100vh - 105px);
+  width: 280px;
+  margin-left: -280px;
+  font-size: 1em;
+  font-weight: 700;
+  overflow: auto;
+  transition: 0.25s;
+  z-index: 10;
+}
+.menu-show {
+  margin-left: 0;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+.menu-sidebar {
+  // margin: 75px 0 80px 10px;
+  position: relative;
+  top: -5px;
+  margin-left: auto;
+  font-size: 12px;
+}
+ul.menu {
+  padding-left: 0;
+}
+.menu-sidebar li {
+  padding: 18px 22px 0;
+  list-style-type: none;
+}
+.menu-sidebar li > a {
+  color: #f3f3f3;
+  font-size: 1.18em;
+  position: relative;
+  text-decoration: none;
+}
+.menu-sidebar li > a::after {
+  content: "";
+  display: block;
+  height: 0.15em;
+  position: absolute;
+  top: 100%;
+  width: 100%;
+  left: 50%;
+  transform: translate(-50%);
+  background-image: linear-gradient(to right, transparent 50.3%, #fffa3b 50.3%);
+  transition: background-position 0.2s 0.1s ease-out;
+  background-size: 200% auto;
+}
+.menu-sidebar li > a:hover::after {
+  background-position: -100% 0;
+}
+.menu-sidebar .menu-item-has-children {
+  position: relative;
+}
+.menu-sidebar .menu-item-has-children .sub-menu {
+  display: none;
+}
+.sidebar-menu-arrow::after {
+  content: "\f107";
+  font-family: "FontAwesome";
+  padding: 10px;
+  color: #fffa3b;
+  position: relative;
+}
+.sidebar-menu-arrow:hover::after {
+  cursor: pointer;
+  color: #fff;
+}
+.sidebar-menu-arrow:active::after {
+  top: 2px;
+}
+
+/* ==================================== */
+/*		  	  TOGGLE MENU BUTTON		
+/* ==================================== */
+
+.toggle-button {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  top: 37px;
+  left: 37px;
+  transform: translate(-22px, -20px);
+  padding: 2px;
+  transition: 0.25s;
+  z-index: 15;
+}
+
+.toggle-button:hover {
+  cursor: pointer;
+}
+
+.toggle-button .menu-bar {
+  position: absolute;
+  border-radius: 2px;
+  width: 65%;
+  transition: 0.5s;
+}
+
+.toggle-button .menu-bar-top {
+  border: 4px solid #555;
+  border-bottom: none;
+  top: 0;
+}
+
+.toggle-button .menu-bar-middle {
+  height: 4px;
+  background-color: #555;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  top: 4px;
+}
+
+.toggle-button .menu-bar-bottom {
+  border: 4px solid #555;
+  border-top: none;
+  top: 18px;
+}
+
+.button-open .menu-bar-top {
+  transform: rotate(45deg) translate(8px, 8px);
+  transition: 0.5s;
+}
+
+.button-open .menu-bar-middle {
+  transform: translate(230px);
+  transition: 0.1s ease-in;
+  opacity: 0;
+}
+
+.button-open .menu-bar-bottom {
+  transform: rotate(-45deg) translate(8px, -7px);
+  transition: 0.5s;
+}
+
+// ----------------------------------------------------------------------------header
+
+.header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+
+  .title-bar {
+    height: 55px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border-bottom: 1px solid #252528;
+    background-color: $headerBackground;
+  }
+
+  #dynamicBar {
+    position: relative;
+    border: 1px solid #f7f7f7;
+    background: #fff;
+    z-index: 999;
+
+    .breadcrumb {
+      background-color: #fff;
+      border: 1px solid #f7f7f7;
+      justify-content: center;
+    }
+
+    .dynamicbar-right {
+      position: absolute;
+      top: 50%;
+      right: 24px;
+      transform: translateY(-50%);
+
+      display: flex;
+      align-items: center;
+
+      button.btn-outline {
+        border: #6968ab;
+        color: #6968ab;
+        outline: none;
+
+        &:active {
+          box-shadow: 7px 6px 28px 1px rgba(0, 0, 0, 0.24);
+          transform: scale(0.98);
+        }
+      }
+
+      .profile {
+        margin-left: 24px;
+        width: 35px;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        object-fit: cover;
+
+        background-color: #ccc;
+        cursor: pointer;
+
+        &:hover {
+          border: 1px solid #6968ab;
+        }
+      }
+
+      .dropdown-menu {
+        top: 8px !important;
+        left: 0px;
+        right: -14px;
+
+        .dropdown-item {
+          font-size: 12px;
+          color: #555;
+        }
+      }
+    }
+  }
+
+  #menubar {
+    width: 100%;
+    height: 50px;
+    position: relative;
+    border-bottom: 1px solid #fff;
+    background: #f7f7f7;
+    z-index: 999;
+  }
+
+  .zoom-display {
+    width: 65px !important;
+    padding-right: 18px;
+    font-size: 14px;
+    font-family: "Raleway-SemiBold";
+    box-sizing: border-box !important;
+  }
+
+  .zoom-options {
+    position: absolute;
+    top: 6px;
+    right: 25px;
+  }
+
+  .percent-icon {
+    position: absolute;
+    top: 4px;
+    right: -2px;
+    font-family: "Raleway-Bold";
+  }
+
+  .objects-menu-container {
+    width: 730px;
+
+    .objects-item {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 90px;
+      height: 90px;
+      transition: 150ms ease-in-out all;
+      cursor: pointer;
+
+      &:hover {
+        background: rgba(0, 0, 0, 0.4);
+        transform: scale(1.1);
+      }
+
+      span {
+        margin-top: 5px;
+        display: block;
+        font-family: "Raleway-SemiBold";
+        font-size: 9px;
+      }
+    }
+  }
+}
+
+
+
+
+
+body {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 200;
+    letter-spacing: 1px;
+    overflow: hidden;
+}
+
+.drawing-tool, .mouse{
+    width: 18px;
+}
+
+#drawArea {
+    position: absolute;
+    top: 62px;
+    left: 0px;
+
+    width: 100vw;
+    height: calc(100vh - 62px);
+    background-color: #fff;
+    box-sizing: border-box;
+
+    span {
+        font-weight: 600;
+        text-decoration: underline;
+        cursor: pointer;
+    }
+
+    .drop-map {
+        color: white;
+        font-weight: 400;
+        font-size: 28px;
+    }
+
+    #canvasArea {
+      position: absolute;
+      top: 0px;
+      left: 35px;
+      background-color: white;
+
+      width: calc(100vw - 70px);
+      height: calc(100vh - 62px);
+      box-sizing: border-box;
+    }
+
+    #paintCanvas {
+        position: absolute;
+        top: 16px;
+        left: 51px;
+        background-color: transparent;
+    }
+
+    #paintCanvasBackground {
+        position: absolute;
+        top: 16px;
+        left: 51px;
+        background-color: #fff;
+    }
+
+    #vastuteqCanvas {
+        position: absolute;
+        top: -1px;
+        left: 0px;
+        background-color: #ccc;
+        box-sizing: border-box;
+    }
+}
+
+
+#rightSidebar {
+    position: absolute;
+    top: 61px;
+    right: 0px;
+  
+    width: 250px;
+    height: calc(100vh - 61px);
+    background-color: #fff;
+    box-sizing: border-box;
+    overflow-y: scroll;
+  
+    .actionbox {
+      display: none;
+      transition: 400ms ease-in-out all;
+    }
+  
+    .actionbox.active {
+      display: block !important;
+      border: 0;
+      border: 2px solid #ef5350 !important;
+  
+      div[data-action-object] {
+        height: 33px;
+        cursor: pointer;
+  
+        &:hover {
+          background-color: rgba(104, 105, 171, 0.3);
+        }
+      }
+      div.active[data-action-object] {
+        background-color: rgba(104, 105, 171, 0.3);
+      }
+    }
+  
+    .properties-title {
+      color: #495057;
+    }
+  
+    .color-pallete {
+      width: 20px !important;
+      height: 20px;
+      cursor: pointer;
+      transition: 400ms all ease-in-out;
+  
+      &:hover {
+        border: 1px solid #6968ab !important;
+      }
+    }
+  
+    .color-pallete.active {
+      border: 2px solid #495057;
+      box-shadow: 0 4px 8px rgba(104, 105, 171, 0.5);
+    }
+  
+    .color-box {
+      width: 18px;
+      height: 18px;
+      background-color: cornflowerblue;
+    }
+  
+    .property.description {
+      height: 200px;
+    }
+  
+    .property.description::-webkit-scrollbar {
+      width: 0 !important;
+    }
+    .property.description {
+      overflow: -moz-scrollbars-none;
+    }
+  
+    .object-actions {
+      flex-direction: column;
+    }
+}
+
+// PAINT CSS START
+.toolbox{
+  height:calc(100vh - 62px);
+  position: absolute;
+  background-color: #f8f8f8;
+}
+
+.toolbox .group{
+  background-color:#f8f8f8;
+  border-bottom: thin solid #ebebeb;
+  
+}
+
+.toolbox .group .item{
+  width: 35px;
+  height: 35px;
+  padding: 8px;
+  cursor: pointer;
+}
+
+.toolbox .group .item img{
+  width: 100%;
+  height: 100%;
+  filter: invert(20%);
+}
+
+.toolbox .group .item.active, .toolbox .group .item:hover{
+  background-color:#dfdfdf;
+  border: 1px solid #d2d2d2;
+}
+
+.toolbox .group.stroks .item{
+  position: relative;
+}
+
+.toolbox .group.stroks .item .stroke{
+  background-color: #666;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  position: absolute;
+  top:50%;
+  left:50%;
+}
+
+.toolbox .group.colors .item .swatch{
+  box-sizing: border-box;
+  width:100%;
+  height: 100%;
+  border:2px white solid;
+}
+
+.toolbox.left{
+  top: 62px;
+  left: 0px;
+}
+
+.toolbox.right{
+  top: 62px;
+  right: 0px;
+}
+
+#canvas{
+  position: absolute;
+  top: 62px;
+  left: 40px;
+  
+  width: calc(100vw - 80px);
+  height: calc(100vh - 61px);
+  background-color:white;
+}
+
+
+// APP ALERT CSS
+.alert {
+    position: absolute;
+    top: 63px;
+    left: 10px;
+    width: calc(100% - 270px);
+    font-size: 14px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+  
+    button.active.focus,
+    button.active:focus,
+    button.focus,
+    button:active.focus,
+    button:active:focus,
+    button:focus {
+      outline: 0 !important;
+      border-width: 0 !important;
+    }
+}
+
+// OBJECT CSS
+.object-item[data-object-item] {
+  transition: 250ms all ease-in-out;
+
+  &:hover {
+    transform: scale(0.9);
+    background-color: rgba(0, 0, 0, 0.15);
+  }
+}
+
+
+#drawCanvas {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: calc(100% - 250px);
+  height: calc(100vh - 59px);
+}

@@ -66,7 +66,7 @@
     -->
 
     <div class="modal fade bd-example-modal-lg " id="appModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
           <div class="modal-content">
             <div class="modal-header p-1 pl-3 pr-3">
               <h5 class="modal-title" id="devtaTitle"></h5>

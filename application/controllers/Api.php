@@ -55,7 +55,7 @@ class Api extends REST_Controller
 				echo json_encode($error);
 			}
 		} else {
-			$error = array('error' => 'Devta name required');
+			$error = array('error' => 'Division is required');
 			echo json_encode($error);
 		}
 	}
@@ -143,6 +143,23 @@ class Api extends REST_Controller
 			}
 		} else {
 			$error = array('error' => 'Plase enter values array');
+			echo json_encode($error);
+		}
+	}
+
+	//Api method to get houseMap details
+	public function getHouseMaps_post()
+	{		
+		if (isset($_POST['id']) && !empty($_POST['id'])) {
+			$result = $this->MainModel->selectAllFromWhere("housemaps", array("mapId" => $_POST['id']));			
+			if (!empty($result)) {
+				echo json_encode($result);
+			} else {
+				$error = array('error' => 'Something wrong contact to IT');
+				echo json_encode($error);
+			}
+		} else {
+			$error = array('error' => 'no map id found');
 			echo json_encode($error);
 		}
 	}

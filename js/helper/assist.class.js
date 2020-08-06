@@ -1,69 +1,38 @@
-// import { DIRECTION_EIGHT, DIRECTION_SIXTEEN, DIRECTION_THIRTYTWO } from "./directiondetails.class.js";
+import { DIRECTION_EIGHT, DIRECTION_SIXTEEN, DIRECTION_THIRTYTWO } from "./directiondetails.class.js";
 import Utility from './utility.class.js';
 
 export default class Assist {
+
     constructor() {
 
-        // this.DATA_EIGHT = [
-        //     { name: 'N', value: 1, color: "blue" }, { name: 'NE', value: 1, color: "blue" }, { name: 'E', value: 1, color: "green" },
-        //     { name: 'SE', value: 1, color: "red" }, { name: 'S', value: 1, color: "red" }, { name: 'SW', value: 1, color: "yellow" },
-        //     { name: 'W', value: 1, color: "white" }, { name: 'NW', value: 1, color: "white" }
-        // ];
+        this.DATA_EIGHT = [
+            {name: 'N', value: 1, color: "blue"}, {name: 'NE', value: 1, color: "blue"}, {name: 'E', value: 1, color: "green"}, 
+            {name: 'SE', value: 1, color: "red"}, {name: 'S', value: 1, color: "red"}, {name: 'SW', value: 1, color: "yellow"}, 
+            {name: 'W', value: 1, color: "white"}, {name: 'NW', value: 1, color: "white"}
+        ];
 
+        this.DATA_SIXTEEN = [
+            {name: 'N', value: 1, color: "blue"}, {name: 'NNE', value: 1, color: "blue"}, {name: 'NE', value: 1, color: "blue"},
+            {name: 'ENE', value: 1, color: "green"}, {name: 'E', value: 1, color: "green"}, {name: 'ESE', value: 1, color: "green"},
+            {name: 'SE', value: 1, color: "red"}, {name: 'SSE', value: 1, color: "red"}, {name: 'S', value: 1, color: "red"},
+            {name: 'SSW', value: 1, color: "yellow"}, {name: 'SW', value: 1, color: "yellow"},  {name: 'WSW', value: 1, color: "white"},
+            {name: 'W', value: 1, color: "white"}, {name: 'WNW', value: 1, color: "white"}, {name: 'NW', value: 1, color: "white"},
+            {name: 'NNW', value: 1, color: "blue"}
+        ];
 
-        // this.DATA_SIXTEEN = [
-        //     { name: 'N', value: 1, color: "blue" }, { name: 'NNE', value: 1, color: "blue" }, { name: 'NE', value: 1, color: "blue" },
-        //     { name: 'ENE', value: 1, color: "green" }, { name: 'E', value: 1, color: "green" }, { name: 'ESE', value: 1, color: "green" },
-        //     { name: 'SE', value: 1, color: "red" }, { name: 'SSE', value: 1, color: "red" }, { name: 'S', value: 1, color: "red" },
-        //     { name: 'SSW', value: 1, color: "yellow" }, { name: 'SW', value: 1, color: "yellow" }, { name: 'WSW', value: 1, color: "white" },
-        //     { name: 'W', value: 1, color: "white" }, { name: 'WNW', value: 1, color: "white" }, { name: 'NW', value: 1, color: "white" },
-        //     { name: 'NNW', value: 1, color: "blue" }
-        // ];
-
-        // this.DATA_THIRTYTWO = [
-        //     { name: 'N4', value: 1, color: "white", effect: `The Entrance Ensures Abundance Of Money, Inherited And / Or Earned.` }, { name: 'N5', value: 1, color: "white", effect: `This Entrance Makes People Religious, Non-aggressive And Calm.` }, {
-        //         name: 'N6', value: 1, color: "white", effect: `The Entrance Makes Residents Behave In A Manner That People Generally 
-        //     Disapprove Of. People Usually Avoid Listening To Them.` },
-        //     {
-        //         name: 'N7', value: 1, color: "white", effect: `This Entrance Instigates Rebellious Attitude Among Young Girls And Makes 
-        //     Them Go Against The Family’s Culture And Social Beliefs. In The Indian Context, 
-        //     A Girl In Such A Family May Resort To An Inter Caste Marriage.` }, { name: 'N8', value: 1, color: "green", effect: `Such A Entrance Paves Way For A Higher Bank Balance For Its Occupants.` }, { name: 'E1', value: 1, color: "white", effect: `This Entrance Causes Fire Accidents And Unexpected Losses` },
-        //     {
-        //         name: 'E2', value: 1, color: "blue", effect: `This Entrance Induces Wasteful Expenditure. For An Expecting Mother, 
-        //     It Will Increase The Probability Of Birth Of Baby.` }, { name: 'E3', value: 1, color: "blue", effect: `This Is An Auspicious Zone Entrance Which Brings Money, Profits And Overall Success` }, {
-        //         name: 'E4', value: 1, color: "green", effect: `This Entrance Helps The Inhabitants Build Beneficial And Close Association With 
-        //     Government Officials Or With Those In Authority` },
-        //     { name: 'E5', value: 1, color: "blue", effect: `This Entrance Makes People Extremely Short-tempered, Bordering On Insanity At Times.` }, { name: 'E6', value: 1, color: "blue", effect: `This Entrance Makes It Difficult For People To Keep Their Word Making Them Appear Unreliable.` }, { name: 'E7', value: 1, color: "red", effect: `People Of Such Houses Become Insensitive Towards The Problems Of Other People.` },
-        //     { name: 'E8', value: 1, color: "green", effect: `This Entrance Paves Way For Accidents, Financial Losses, Burglary And Other Such Problems.` }, { name: 'S1', value: 1, color: "yellow", effect: `This Entrance Negatively Impacts Children, Especially The Boys Of The House. Their Actions Go Against Their Parents Expectations.` }, { name: 'S2', value: 1, color: "red", effect: `This Entrance Increase The Tendency To Work For Others. It Is Good For People Working In M Or Similar Setups,` },
-        //     { name: 'S3', value: 1, color: "red", effect: `This Entrance Brings Immense Prosperity. The Occupants Of Such A House Become Smarter And Their Work Gets Done Easily` }, { name: 'S4', value: 1, color: "red", effect: `Industries In Such Plots Are Highly Successful. The Family Residing In Such A Space Is Bless With More Sons.` }, { name: 'S5', value: 1, color: "green", effect: `The People In Such Houses Are Rarely Free From Debts. They Feel Incapable Of Making Good Use Of Their Intellect.` },
-        //     { name: 'S6', value: 1, color: "yellow", effect: `A Door Abysmal Poverty` }, { name: 'S7', value: 1, color: "yellow", effect: `People Residing In Such Houses Suffer, As Their Efforts Towards A Profession Or Relationship Keep Going Waste. They Remain Disconnected And Unhappy.` }, {
-        //         name: 'S8', value: 1, color: "yellow", effect: `The Most Ominous Entrance, It Results In Such Behaviour And Attitude, Which Gradually Disconnects The Family From The Rest Of The World, 
-        //     Thereby Severely Affecting Their Finance And Relationships,` },
-        //     { name: 'W1', value: 1, color: "white", effect: `This Entrance IS NEGATIVE FOT THE RESIDENTS Financial Position And Life Span` }, {
-        //         name: 'W2', value: 1, color: "red", effect: `The Entrance Creates Instability In Career. People Residing Here Lack Clarity Of Thought And Vision. They Turn Insure, Especially Of 
-        //     Their Near And Dear Ones.` }, { name: 'W3', value: 1, color: "red", effect: `This Entrance Brings Astounding Growth And Prosperity.` },
-        //     { name: 'W4', value: 1, color: "white", effect: `It Offers No Particular Benefits Or Harms. Life In Such Houses Is Generally Smooth. Overall It Is Good Entrance.` }, { name: 'W5', value: 1, color: "white", effect: `The Entrance Makes One A Perfectionist To The Extent Of Becoming Delusional And Overambitious. One Starts Expecting Unrealistic Gains.` }, { name: 'W6', value: 1, color: "yellow", effect: `This Entrance Makes People Prone To Mental Depression.` },
-        //     { name: 'W7', value: 1, color: "white", effect: `An Entrance In This Zone Causes Loss Of General Happiness In The House. At Times, It Induces The Person To Resort To Drugs And Alcohol.` }, { name: 'W8', value: 1, color: "yellow", effect: `This Entrance Affects The Mentality Of Residents In Such A Way That They Do Not Mind Adopting Unfair And Unlawful Means For Their Own Benefit.` }, { name: 'N1', value: 1, color: "yellow", effect: `In Such A House, The Inhabitants Becomes Susceptible To Harm Caused By Bad Intentions Of Other People.` },
-        //     { name: 'N2', value: 1, color: "white", effect: `A Fear Of Enemies, That Is Not Entirely Unfounded, Stalks People Living In Such Houses, Residents Feel That Others Are Jealous Of Them.` }, { name: 'N3', value: 1, color: "blue", effect: `This Door Bring Lots Of Money And Male Progeny For Those Who Occupy It.` }
-        // ];
-
-        // console.log(this.DATA_THIRTYTWO);
-        // for(let i=0;i<this.DATA_THIRTYTWO.length;i++){
-        //     var formData = new FormData();
-        //     formData.append('1', this.DATA_THIRTYTWO[i]['name']);
-        //     formData.append('2', this.DATA_THIRTYTWO[i]['color']);
-        //     formData.append('3', this.DATA_THIRTYTWO[i]['effect']);
-        //     // formData.append('4', DIRECTION_SIXTEEN[i]['DISHAPALAKWEAPON']); 
-        //     // formData.append('5', DIRECTION_SIXTEEN[i]['ASTHLAKSHMI']);  
-        //     // formData.append('6', DIRECTION_SIXTEEN[i]['COLOUR']);  
-        //     // formData.append('7', DIRECTION_SIXTEEN[i]['desc']);            
-        //     var url = BASE_URL + "/Main/addDevtas";
-        //     AjaxPost(formData, url, devtaSuccess, AjaxError);
-        // }
-        // function devtaSuccess(content, targetTextarea) {
-        //     console.log('done')
-        // }
-
+        this.DATA_THIRTYTWO = [
+            {name: 'N4', value: 1, color: "white"}, {name: 'N5', value: 1, color: "white"}, {name: 'N6', value: 1, color: "white"}, 
+            {name: 'N7', value: 1, color: "white"}, {name: 'N8', value: 1, color: "green"}, {name: 'E1', value: 1, color: "white"},
+            {name: 'E2', value: 1, color: "blue"}, {name: 'E3', value: 1, color: "blue"}, {name: 'E4', value: 1, color: "green"}, 
+            {name: 'E5', value: 1, color: "blue"}, {name: 'E6', value: 1, color: "blue"}, {name: 'E7', value: 1, color: "red"},
+            {name: 'E8', value: 1, color: "green"}, {name: 'S1', value: 1, color: "yellow"}, {name: 'S2', value: 1, color: "red"}, 
+            {name:'S3', value: 1, color: "red"}, {name: 'S4', value: 1, color: "red"}, {name: 'S5', value: 1, color: "green"}, 
+            {name: 'S6', value: 1, color: "yellow"}, {name: 'S7', value: 1, color: "yellow"}, {name: 'S8', value: 1, color: "yellow"}, 
+            {name: 'W1', value: 1, color: "white"}, {name: 'W2', value: 1, color: "red"}, {name: 'W3', value: 1, color: "red"},
+            {name: 'W4', value: 1, color: "white"}, {name: 'W5', value: 1, color: "white"}, {name: 'W6', value: 1, color: "yellow"}, 
+            {name: 'W7', value: 1, color: "white"}, {name: 'W8', value: 1, color: "yellow"}, {name: 'N1', value: 1, color: "yellow"},
+            {name: 'N2', value: 1, color: "white"}, {name: 'N3', value: 1, color: "blue"}
+        ];
     }
 
 
@@ -103,11 +72,11 @@ export default class Assist {
             .attr("width", size.width)
             .attr("height", size.height)
             .attr("mask", "url(#myMask)")
-            .style("fill", "#283333")
+            .style("fill", "#f8f8f8")
             .style("fill-opacity", 0.95);
     }
 
-    drawBoundaries({ layer, points }) {
+    drawBoundaries({ layer, points, type = "custom"}) {
 
         layer.select('g.map-boundaries').remove();
 
@@ -119,23 +88,25 @@ export default class Assist {
             .style('stroke-width', 2)
             .style('fill-opacity', 0);
 
-        for (let i = 0; i < points.length; i++) {
-            let circle = g.selectAll('circles')
-                .data([points[i]]).enter()
-                .append('circle')
-                .classed('dragger', true)
-                .attr('cx', points[i][0])
-                .attr('cy', points[i][1])
-                .attr('r', 4)
-                .attr('fill', '#FDBC07')
-                .attr('stroke', '#000');
+        if(type == "custom"){
+            for (let i = 0; i < points.length; i++) {
+                let circle = g.selectAll('circles')
+                    .data([points[i]]).enter()
+                    .append('circle')
+                    .classed('dragger', true)
+                    .attr('cx', points[i][0])
+                    .attr('cy', points[i][1])
+                    .attr('r', 4)
+                    .attr('fill', '#FDBC07')
+                    .attr('stroke', '#000');
+   
+                g.append('text').text(`P${i}`)
+                    .attr('x', points[i][0] - 5)
+                    .attr('y', points[i][1] - 7)
+                    .attr('fill', '#FFE13E')
+                    .attr('font-weight', '700');
 
-            g.append('text').text(String.fromCharCode(i + 65).toUpperCase())
-                .attr('x', points[i][0] - 5)
-                .attr('y', points[i][1] - 7)
-                .attr('fill', '#FFE13E')
-                .attr('font-weight', '700');
-
+            }
         }
     }
 
@@ -146,9 +117,11 @@ export default class Assist {
         let perpendicularPoints = Utility.getPerpendicularPoint(faceCoords[0], faceCoords[1], centroid);
         let nAngle = Utility.getAngle(centroid.x, centroid.y, perpendicularPoints.x, perpendicularPoints.y);
         let increment = (360 / parseInt(division));
+        let data;
 
-        // console.log((360/parseInt(division)), division, layer, facingWallPoints,centeroid,division,angle);
-        // console.log("nAngle: ",nAngle);
+        if(division == 8) { data = this.DATA_EIGHT; }
+        else if(division == 16) { data = this.DATA_SIXTEEN; }
+        else if(division == 32) { data = this.DATA_THIRTYTWO; }
 
         for (let i = 0; i < division; i++) {
             let direction = layer
@@ -162,7 +135,8 @@ export default class Assist {
                 .attr("transform", "rotate(" + (nAngle + angle) + " " + centroid.x + " " + centroid.y + ")")
                 .attr("stroke", (i == 0 ? "red" : "darkorange"))
                 .attr("stroke-width", (i == 0 ? 2 : 1))
-                .classed("directions", true);
+                .classed("directions", true)
+                .attr('data-direction-name', data[i].name);
             nAngle += increment;
         }
     }
@@ -193,32 +167,19 @@ export default class Assist {
 
     }
 
-    async drawBackgroundGrid(layer, centroid, faceCoords, division = 8, angle = 0) {
+    drawBackgroundGrid(layer, centroid, faceCoords, division = 8, angle = 0) {
 
         layer.select('g.background-pie-chart').remove();
 
         let perpendicularPoints = Utility.getPerpendicularPoint(faceCoords[0], faceCoords[1], centroid);
         let nAngle = Utility.getAngle(centroid.x, centroid.y, perpendicularPoints.x, perpendicularPoints.y);
         let gridAngle = 360 / 8, radius = 800, data = [];
+        // console.log("drawBackgroundGrid nAngle: ",gridAngle + nAngle + angle);
 
-        //calling ajax to fetch result data from database
-        var formData = new FormData();
-        if (division == 8) { formData.append('division', 'eight'); }
-        else if (division == 16) { formData.append('division', 'sixteen'); }
-        else if (division == 32) { formData.append('division', 'thirtytwo'); }
+        if(division == 8) { data = this.DATA_EIGHT; }
+        else if(division == 16) { gridAngle += 360/division; data = this.DATA_SIXTEEN; }
+        else if(division == 32) { gridAngle += 360/16 + 360/division; data = this.DATA_THIRTYTWO; }
 
-        var url = BASE_URL + "/Main/getColor";
-
-        let content = await AjaxPostPromise(formData, url).catch(AjaxError);
-
-
-        let result = JSON.parse(content);
-console.log(result)
-        if (result.length == 8) { data.push(result) }
-        else if (result.length == 16) { gridAngle += 360 / division; data.push(result); }
-        else if (result.length == 32) { gridAngle += 360 / division; data.push(result); }
-        data = data[0]
-        // console.log(data);
         let arc = d3
             .arc()
             .outerRadius(radius - 10)
@@ -241,21 +202,20 @@ console.log(result)
             .attr("transform", "rotate(" + (gridAngle + nAngle + angle) + ")");
 
         g.append("path")
-            .attr("class", function (d, i) {
-                return "B-" + data[i].name;
-            })
+            .attr("class", function (d, i) {return "B-" + data[i].name;})
             .attr("d", arc)
-            .style('fill', function (d, i) { return data[i].mainColor })
+            .style('fill', function (d, i) { return data[i].color })
             .style("fill-opacity", "0");
     }
 
-    async drawGrid(layer, centroid, faceCoords, screenBoundariesCoords, division = 8, angle = 0) {
-
+    drawGrid(layer, centroid, faceCoords, screenBoundariesCoords, division = 8, angle = 0, type="mahavastu") {
         layer.select('g.pie-chart').remove();
 
         let perpendicularPoints = Utility.getPerpendicularPoint(faceCoords[0], faceCoords[1], centroid);
         let nAngle = Utility.getAngle(centroid.x, centroid.y, perpendicularPoints.x, perpendicularPoints.y);
         let data = [], gridAngle = 360 / 8, radius = 800, directionData, directionDetail;
+
+        // console.log("drawGrid nAngle: ",gridAngle + nAngle + angle);
 
         let directions = [{ dir: 'N', baseAng: 90 }, { dir: 'E', baseAng: 360 }, { dir: 'S', baseAng: 270 }, { dir: 'W', baseAng: 180 }]
         let activeDir;
@@ -265,23 +225,6 @@ console.log(result)
             let ip = Utility.linesIntersection(centroid.x, centroid.y, (centroid.x + Math.cos(nAngle * 0.0174533) * 3200), (centroid.y + Math.sin(nAngle * 0.0174533) * 3200), ...screenBoundariesCoords[m], ...screenBoundariesCoords[n]);
             if (ip) { activeDir = directions[m]; }
         }
-        //calling ajax to fetch result data from database
-        var formData = new FormData();
-        if (division == 8) { formData.append('grid', 'eight'); }
-        else if (division == 16) { formData.append('grid', 'sixteen'); }
-        else if (division == 32) { formData.append('grid', 'thirtytwo'); }
-
-        let url = BASE_URL + "/Main/getColorAndDetails";
-        let content = await AjaxPostPromise(formData, url).catch(AjaxError);
-
-
-        let result = JSON.parse(content);
-        console.log(result)
-        if (result.length == 8) { data.push(result) }
-        else if (result.length == 16) { gridAngle += 360 / division; data.push(result); }
-        else if (result.length == 32) { gridAngle += 360 / division; data.push(result); }
-        data = data[0];
-        
 
         let newAng;
 
@@ -293,6 +236,15 @@ console.log(result)
         }
         else {
             newAng = 56.25;
+        }
+
+        if(division == 8) { directionData = this.DATA_EIGHT; directionDetail = DIRECTION_EIGHT; }
+        else if(division == 16) { gridAngle += 360/division; directionData   = this.DATA_SIXTEEN; directionDetail = DIRECTION_SIXTEEN; }
+        else if(division == 32) { gridAngle += 360/16 + 360/division; directionData  = this.DATA_THIRTYTWO; directionDetail = DIRECTION_THIRTYTWO; }
+
+        for (let i = 0; i < division; i++) {
+            var temp = { name: directionData[i].name, value: directionData[i].value, detail: directionDetail[i] };
+            data.push(temp);
         }
 
         let arc = d3
@@ -318,31 +270,7 @@ console.log(result)
 
         g.append("path")
             .attr("class", function (d, i) { return data[i].name; })
-            .attr("data-detail", function (d, i) {
-                if (data[i].divisions == 'EIGHT') {//sending description data to show
-                    return JSON.stringify({
-                        asthalakshmi: data[i].asthalakshmi,
-                        color: data[i].color,
-                        description: data[i].description,
-                        direction: data[i].direction,
-                        dishaPalakDiety: data[i].dishaPalakDiety,
-                        dishaPalakVehicle: data[i].dishaPalakVehicle,
-                        dishaPalakWeapon: data[i].dishaPalakWeapon,
-                        dishaRulingPlanet: data[i].dishaRulingPlanet,
-                        description: data[i].description
-                    })
-                } else if (data[i].divisions == 'SIXTEEN') {
-                        return JSON.stringify({
-                            attribute : data[i].attribute,
-                            itCovers : data[i].itCovers
-                        })
-                } else {
-                    return JSON.stringify({
-                        effect : data[i].effect
-                        
-                    })
-                }
-            })
+            .attr("data-detail", function(d,i) { return data[i].detail; })
             .attr("d", arc)
             .attr("stroke", "#21252963")
             .style("fill-opacity", "0");
@@ -356,33 +284,15 @@ console.log(result)
             })
             .attr("dy", ".50em")
             .style("text-anchor", "middle")
-            .style("fill", "white")
+            .style("fill", "#000")
             .text(function (d, i) {
                 return data[i].name;
             });
 
         g.on("mouseover", function () {
+            if(type == "vedic") return false; 
             let className = d3.select(this).select("path").attr("class");
-            console.log(className);
-            let detail = d3.select(this).select("path").attr("data-detail");
-            detail = JSON.parse(detail);
-            let len = Object.keys(detail).length;           
-            
-            //formating detail object to be show on description
-            if(len == 8){
-                detail = ` DISHA RULING PLANET : ${detail.dishaRulingPlanet}
-                DISHA PALAK DIETY : ${detail.dishaPalakDiety}
-                DISHA PALAK VEHICLE : ${detail.dishaPalakVehicle}
-                DISHA PALAK WEAPON : ${detail.dishaPalakWeapon}
-                ASTHLAKSHMI : ${detail.asthalakshmi}
-                COLOUR : ${detail.color}
-                DESCRIPTION : ${detail.description} `
-            } else if(len == 2){
-                detail = ` ATTRIBUTE : ${detail.attribute}
-                IT COVERS : ${detail.itCovers} `
-            }else{
-                detail = `${detail.effect}`
-            }
+            let detail = d3.select(this).select("path").attr("data-detail");  
             
             d3.select(".B-" + className)
                 .style("fill-opacity", "0.75");
@@ -395,6 +305,7 @@ console.log(result)
             d3.select('.property.description').text(detail);
 
         }).on("mouseout", function () {
+            if(type == "vedic") return false; 
             let className = d3.select(this).select("path").attr("class");
 
             d3.select(".B-" + className)
@@ -406,8 +317,13 @@ console.log(result)
         });
     }
 
+    drawFacingLine(layer, centroid, faceCoords, active = true) {
 
-    drawFacingLine(layer, centroid, faceCoords) {
+        if(active == false) {
+            layer.select('.facing').remove();
+            layer.select('.facing-degree').remove();
+            return false;
+        }
 
         let perpendicularPointOnFacingWall = Utility.getPerpendicularPoint(faceCoords[0], faceCoords[1], centroid);
 
@@ -430,11 +346,241 @@ console.log(result)
             .attr("x", perpendicularPointOnFacingWall.x)
             .attr("y", perpendicularPointOnFacingWall.y)
             .attr("fill", "red")
-            .style('font-size', '14px')
-            .style('font-family', 'Raleway_Bold')
+            .style('font-size', '16px')
+            .style('font-family', 'Raleway-Bold')
             .attr("text-anchor", "middle")
             .attr("dy", "-0.5em")
             .text("0°");
+    }
+
+    drawPolygon({layer, points, strokeColor = "red", strokeWidth = 4}) {
+        layer.select('g.vedic-polygon').remove();
+        let g = layer.append('g')
+        .classed('vedic-polygon', true);
+
+        g.append('polygon')
+        .attr('points', points)
+        .style('stroke', strokeColor)
+        .style('stroke-width', strokeWidth)
+        .style('fill-opacity', '0');
+    }
+
+    drawPolygonDiagonals({points, color = "red", strokeWidth = 4}) {
+        d3.select('g.vedic-polygon').select('g.diagonals-container').remove();
+
+        let container = d3.select('g.vedic-polygon').append('g')
+        .classed('diagonals-container', true);
+
+        container.append('line')
+        .attr('x1',points[0][0])
+        .attr('y1',points[0][1])
+        .attr('x2',points[2][0])
+        .attr('y2',points[2][1])
+        .attr('stroke', color)
+        .attr('stroke-width', strokeWidth);
+
+        container.append('line')
+        .attr('x1',points[1][0])
+        .attr('y1',points[1][1])
+        .attr('x2',points[3][0])
+        .attr('y2',points[3][1])
+        .attr('stroke',color)
+        .attr('stroke-width', strokeWidth);
+    }
+
+    drawPolygonGrid({points , noOfLines = 3, color = "red", strokeWidth = 4}) {
+        d3.select('g.vedic-polygon').select('g.vedic-grid-container').remove();
+
+        let layer = d3.select('g.vedic-polygon').append('g').classed('vedic-grid-container', true);
+
+        let upperLine = Utility.divideIntoSegments([points[0][0],points[0][1]], [points[1][0],points[1][1]], noOfLines);
+        let bottomLine = Utility.divideIntoSegments([points[3][0],points[3][1]], [points[2][0],points[2][1]], noOfLines);
+        let leftLine = Utility.divideIntoSegments([points[0][0],points[0][1]], [points[3][0],points[3][1]], noOfLines);
+        let rightLine = Utility.divideIntoSegments([points[1][0],points[1][1]], [points[2][0],points[2][1]], noOfLines);
+
+        // FOR HORIZONTAL LINES
+        for(let i=0; i<noOfLines-1; i++){
+            layer.append('line').classed('horizontal-lines', true)
+            .attr('x1',leftLine[i].x).attr('y1',leftLine[i].y)
+            .attr('x2',rightLine[i].x).attr('y2',rightLine[i].y)
+            .style('stroke', 'red')
+            .style('stroke-width', 4);
+        }
+        // FOR VERTICAL LINES
+        for(let i=0; i<noOfLines-1; i++){
+            layer.append('line').classed('vertical-lines', true)
+            .attr('x1',upperLine[i].x).attr('y1',upperLine[i].y)
+            .attr('x2',bottomLine[i].x).attr('y2',bottomLine[i].y)
+            .style('stroke', 'red')
+            .style('stroke-width', 4);
+        }
+    }
+
+    drawDivisionOfDevtas(angle, canvas, mapBoundariesCoords, faceCoords, centroid , state = true) {
+        if(!state) {
+            canvas.select('g.division-of-devtas').remove();
+            return false;
+        }
+        let layer = canvas.append('g').classed('division-of-devtas', true);
+        let perpendicularPoints = Utility.getPerpendicularPoint(faceCoords[0], faceCoords[1], centroid);
+              
+        let nAngle = Utility.getAngle(centroid.x, centroid.y, perpendicularPoints.x, perpendicularPoints.y);
+        let increment = 360/32;
+        let ipArray = Utility.getIntersectionPoints(    angle, centroid, mapBoundariesCoords, 32, "intersectionPoints");
+        
+        let outerArray = [];
+        let len = ipArray.length;
+        console.log("ipArray",ipArray);
+        for (let i=0;i<len;i++) {
+            let j = i+1;
+            (i+1==len)? j=0:j=(i+1);
+            let farthestPoint = ipArray[i].ip;
+            if (ipArray[i].direction == ipArray[j].direction){
+                //compare distance from centroid and store the farther point in outer array
+                let d1=Utility.distanceBetweenTwoPoints(centroid, ipArray[i].ip);
+                let d2=Utility.distanceBetweenTwoPoints(centroid, ipArray[j].ip);
+                farthestPoint= (d1>d2)?ipArray[i].ip:ipArray[j].ip;
+            }
+            else {
+                //store current point as farthest point in that direction
+                outerArray.push({ip:farthestPoint});
+            }
+        }
+       
+        let brahma = outerArray.map((pts) => {
+            return [
+                (centroid.x + (pts.ip[0]- centroid.x) / 3 ),
+                (centroid.y + (pts.ip[1]- centroid.y) / 3 )
+            ]
+        });
+
+        let twoThirdArr = outerArray.map((pts) => {
+            return [
+              (centroid.x + (pts.ip[0]- centroid.x) * 2 / 3 ),
+              (centroid.y + (pts.ip[1]- centroid.y) * 2 / 3 )
+            ]
+        });
+
+        let halfOfMidCircleArr = outerArray.map((pts) => {
+            return [
+                (centroid.x + (pts.ip[0]- centroid.x) / 2 ),
+                (centroid.y + (pts.ip[1]- centroid.y) / 2 )
+            ]
+        });
+
+    
+       
+        if (outerArray.length==32){
+            console.log("good to go");
+            //Draw outer 32 devtas
+            let len = outerArray.length;
+            for (let i=0;i<len;i++) {
+                let j = i+1;
+                (i+1==len)? j=0:j=(i+1);
+                let outerPolygon = [];
+                outerPolygon.push(outerArray[i].ip);
+                outerPolygon.push(outerArray[j].ip);
+                outerPolygon.push(twoThirdArr[j]);
+                outerPolygon.push(twoThirdArr[i]);
+                layer.append('polygon').attr('points',outerPolygon).style('fill-opacity',0).style('stroke','red').style('stroke-width',2);
+            }
+
+            //Draw 2nd layer
+                let aapaha = [];
+                aapaha.push(twoThirdArr[4]);
+                aapaha.push(twoThirdArr[5]);
+                aapaha.push(twoThirdArr[6]);
+                aapaha.push(halfOfMidCircleArr[6]);
+                aapaha.push(halfOfMidCircleArr[5]);
+                aapaha.push(halfOfMidCircleArr[4]);
+                console.log("outer",aapaha);
+                layer.append('polygon').attr('points',aapaha).style('fill-opacity',0).style('stroke','blue').style('stroke-width',2);
+            
+                let aapahaVatsa = [];
+                aapahaVatsa.push(twoThirdArr[6]);
+                aapahaVatsa.push(twoThirdArr[7]);
+                aapahaVatsa.push(twoThirdArr[8]);
+                aapahaVatsa.push(halfOfMidCircleArr[8]);
+                aapahaVatsa.push(halfOfMidCircleArr[7]);
+                aapahaVatsa.push(halfOfMidCircleArr[6]);
+                console.log("outer",aapahaVatsa);
+                layer.append('polygon').attr('points',aapahaVatsa).style('fill-opacity',0).style('stroke','blue').style('stroke-width',2);
+
+                let savita = [];
+                savita.push(twoThirdArr[12]);
+                savita.push(twoThirdArr[13]);
+                savita.push(twoThirdArr[14]);
+                savita.push(halfOfMidCircleArr[14]);
+                savita.push(halfOfMidCircleArr[13]);
+                savita.push(halfOfMidCircleArr[12]);
+                console.log("outer",savita);
+                layer.append('polygon').attr('points',savita).style('fill-opacity',0).style('stroke','blue').style('stroke-width',2);
+
+                let savitra = [];
+                savitra.push(twoThirdArr[14]);
+                savitra.push(twoThirdArr[15]);
+                savitra.push(twoThirdArr[16]);
+                savitra.push(halfOfMidCircleArr[16]);
+                savitra.push(halfOfMidCircleArr[15]);
+                savitra.push(halfOfMidCircleArr[14]);
+                console.log("outer",savita);
+                layer.append('polygon').attr('points',savitra).style('fill-opacity',0).style('stroke','blue').style('stroke-width',2);
+
+                let indra = [];
+                indra.push(twoThirdArr[20]);
+                indra.push(twoThirdArr[21]);
+                indra.push(twoThirdArr[22]);
+                indra.push(halfOfMidCircleArr[22]);
+                indra.push(halfOfMidCircleArr[21]);
+                indra.push(halfOfMidCircleArr[20]);
+                console.log("outer",indra);
+                layer.append('polygon').attr('points',indra).style('fill-opacity',0).style('stroke','blue').style('stroke-width',2);
+
+                let jaya = [];
+                jaya.push(twoThirdArr[22]);
+                jaya.push(twoThirdArr[23]);
+                jaya.push(twoThirdArr[24]);
+                jaya.push(halfOfMidCircleArr[24]);
+                jaya.push(halfOfMidCircleArr[23]);
+                jaya.push(halfOfMidCircleArr[22]);
+                console.log("outer",indra);
+                layer.append('polygon').attr('points',jaya).style('fill-opacity',0).style('stroke','blue').style('stroke-width',2);
+
+                let rudra = [];
+                rudra.push(twoThirdArr[28]);
+                rudra.push(twoThirdArr[29]);
+                rudra.push(twoThirdArr[30]);
+                rudra.push(halfOfMidCircleArr[30]);
+                rudra.push(halfOfMidCircleArr[29]);
+                rudra.push(halfOfMidCircleArr[28]);
+                console.log("outer",rudra);
+                layer.append('polygon').attr('points',rudra).style('fill-opacity',0).style('stroke','blue').style('stroke-width',2);
+
+                let rajyakshama = [];
+                rajyakshama.push(twoThirdArr[30]);
+                rajyakshama.push(twoThirdArr[31]);
+                rajyakshama.push(twoThirdArr[0]);
+                rajyakshama.push(halfOfMidCircleArr[0]);
+                rajyakshama.push(halfOfMidCircleArr[31]);
+                rajyakshama.push(halfOfMidCircleArr[30]);
+                console.log("outer",rajyakshama);
+                layer.append('polygon').attr('points',rajyakshama).style('fill-opacity',0).style('stroke','blue').style('stroke-width',2);
+
+            //Draw Brahma
+            layer.append('polygon').attr('points',brahma).style('fill-opacity',0).style('stroke','red').style('stroke-width',2);
+            // layer.append('polygon').attr('points',twoThirdArr).style('fill-opacity',0).style('stroke','red').style('stroke-width',2);
+            // layer.append('polygon').attr('points',halfOfMidCircleArr).style('fill-opacity',0).style('stroke','red').style('stroke-width',2);
+        }
+        else {
+            console.log("Should select 32 zones");
+        }
+
+        
+
+    }
+
+    uniqueID(){
+        return Math.random().toString(36).slice(2);
     }
 
 }

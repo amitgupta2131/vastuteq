@@ -125,19 +125,16 @@ export default class StageFourth {
             } else {
 
             this.actionbox.clear().hide();
-            this.remove();
 
             let distance = Math.sqrt(Math.pow(this.points[0][0] - this.points[1][0], 2) + Math.pow(this.points[0][1] - this.points[1][1], 2));
 
-            // console.log(this.points,scale,unitM, distance);
+            console.log(this.points,scale,unitM, distance);
             
             that.distanceBetweenTwoPoints = {unit:unitM, distance:distance, scale:scale};
 
-            that._stage = 4;
-            that.model.editStage(that.mapId, 4);
+            that._stage = 3;
             that.model.editDimension(that.mapId, {unit:unitM, distance:distance, scale:scale});
-            
-            this.remove();
+        
             that.start();
 
             }

@@ -13,6 +13,8 @@ export default class StageThird {
       let that = REF;
       let classRef = this;
 
+      $('#pills-object-tab').removeClass('disabled');
+
       let actionBox = this.actionbox.clear().get();
 
       // d3.select('[data-menu-item="vpm"]').classed('active', true);
@@ -30,33 +32,47 @@ export default class StageThird {
       let faceSelectbox = actionBody.append('div').attr('class','col-md-6')
       .append("select").attr('name','select-face').attr("class", "form-control form-control-sm text-sm");
       faceSelectbox.append('option').html('select Face');
-  
+
+      let face = localStorage.getItem("face");
+      
       for (let i = 0; i < that.mapBoundariesCoords.length; i++) {
         let j = i < that.mapBoundariesCoords.length - 1 ? i + 1 : 0;
-        let wallPointFirst = (i + 10).toString(36).toUpperCase();
-        let wallPointSecond = (j + 10).toString(36).toUpperCase();
-        faceSelectbox.append("option").attr("value", [
+        let optionText = `Wall P${i} - P${j}`;
+        
+        if(face.trim().toLowerCase() == optionText.trim().toLowerCase()){
+          faceSelectbox.append("option").attr("value", [
+            that.mapBoundariesCoords[i],
+            that.mapBoundariesCoords[j],
+          ]).attr('selected','selected')
+          .text(optionText);         
+        }else{
+          faceSelectbox.append("option").attr("value", [
             that.mapBoundariesCoords[i],
             that.mapBoundariesCoords[j],
           ])
-          .text(`Wall ${wallPointFirst} - ${wallPointSecond}`);
+          .text(optionText);
+         
+        }
+        
       }
 
       let gridSelectbox = actionBody.append('div').attr('class','col-md-6')
-      .append("select").attr('name','select-grid').attr("class", "form-control form-control-sm text-sm").html(
+      .append("select").attr('name','select-grid').attr("class", "form-control form-control-sm text-sm")
+      .html(
         `
         <option value="8">8 Division</option>
         <option value="16" selected>16 Division</option>
         <option value="32">32 Division</option>
         `
       );
-      // gridSelectbox.append("option").attr("value", 8).html('8 Division');
-      // gridSelectbox.append("option").attr("value", 16).html('16 Division');
-      // gridSelectbox.append("option").attr("value", 32).html('32 Division');
 
-      let angleInputbox = actionBody.append('div').attr('class','col-md-12')
+      let angleInputbox = actionBody.append('div').attr('class','col-md-6')
       .append("input").attr("class", "mt-2 form-control form-control-sm text-sm")
-      .attr('type', 'number').attr('placeholder', 'Degree');
+      .attr('type', 'number').attr('placeholder', 'Degree').attr('value',Math.abs(that.angle));
+
+      let degreeUpdateBtn = actionBody.append('div').attr('class','col-md-6')
+      .append("button").attr("class", "mt-2 form-control form-control-sm text-sm")
+      .text('Update');
 
       let container = actionBox.append('div').attr('class', 'form-row justify-content-between p-2');
 
@@ -75,26 +91,33 @@ export default class StageThird {
       .style('flex-direction','column').style('height','42px').style('min-width','55px');
       let mvm = mvmContainer.attr('data-action-object', `${that.BASE_URL}assets/icons/vpm.svg`).append('img').attr('src', `${that.BASE_URL}assets/icons/vpm.svg`).attr('width', 20);
       mvmContainer.append('span').style('margin-top','1px').style('font-size','9px').text('mvpc');
+
+      let divisonOfDevtasContainer = container.append('div').attr('class', 'col-md-12 d-flex justify-content-center align-items-center border object-actions mt-2')
+      .style('flex-direction','column').style('height','42px').style('min-width','55px');
+      let divisonOfDevtas = divisonOfDevtasContainer.attr('data-action-object', `${that.BASE_URL}assets/icons/dots.svg`).append('img').attr('src', `${that.BASE_URL}assets/icons/dots.svg`).attr('width', 20);
+      divisonOfDevtasContainer.append('span').style('margin-top','1px').style('font-size','9px').text('division of devtas');
   
       faceSelectbox.on("change", function() {
         let str = d3.select(this).node().value.split(',');
         let pointA = [parseInt(str[0]),parseInt(str[1])];
         let pointB = [parseInt(str[2]),parseInt(str[3])];
-
+        let face = $('select[name = "select-face"] option:selected').text()
+        // console.log(face)
+        that.model.editFaceWall(that.mapId,face);
         that.faceCoords = [pointA, pointB];
         that.model.editFaceCoords(that.mapId, [pointA, pointB]);
 
         // that.start();
-        that.assist.drawBackgroundGrid(that.firstLayer, that.centroid, that.faceCoords, that.division, that.angle);
-        that.assist.drawMask({layer: that.firstLayer, points: that.mapBoundariesCoords, size: that.RECT_SIZE});
-        that.assist.drawBoundaries({layer: that.firstLayer, points: that.mapBoundariesCoords});
-        that.assist.drawBharamNabhi({layer: that.firstLayer, centroid: that.centroid});
-        that.assist.drawDirectionLines(that.firstLayer, that.faceCoords, that.centroid, that.division, that.angle);
-        that.assist.drawFacingLine(that.firstLayer, that.centroid, that.faceCoords);
-        that.assist.drawGrid(that.firstLayer, that.centroid, that.faceCoords, that.screenBoundariesCoords, that.division, that.angle);
+        that.assist.drawBackgroundGrid(that.canvas, that.centroid, that.faceCoords, that.division, that.angle,);
+        that.assist.drawMask({layer: that.canvas, points: that.mapBoundariesCoords, size: that.RECT_SIZE});
+        that.assist.drawBoundaries({layer: that.canvas, points: that.mapBoundariesCoords});
+        that.assist.drawBharamNabhi({layer: that.canvas, centroid: that.centroid});
+        that.assist.drawDirectionLines(that.canvas, that.faceCoords, that.centroid, that.division, that.angle);
+        that.assist.drawFacingLine(that.canvas, that.centroid, that.faceCoords);
+        that.assist.drawGrid(that.canvas, that.centroid, that.faceCoords, that.screenBoundariesCoords, that.division, that.angle,);
 
         that.screenPolygons = Utility.getIntersectionPoints(that.calNorthAngle(),that.centroid,that.screenBoundariesCoords, that.division);
-        that.mapPolygonsArray = Utility.getIntersectionPoints(that.calNorthAngle(),that.centroid,that.mapBoundariesCoords, that.division);
+        that.mapPolygonsArray = Utility.getIntersectionPoints(that.calNorthAngle()+that.angle,that.centroid,that.mapBoundariesCoords, that.division);
         that.mapPolygonsAreaArray = Utility.getPolygonsArea(that.mapPolygonsArray);
 
         // ? DRAW BAR CHART
@@ -106,97 +129,129 @@ export default class StageThird {
       gridSelectbox.on("change", function() {
         let division = d3.select(this).property('value');
         that.division = division;
-        
+
         // that.start();
-        that.assist.drawBackgroundGrid(that.firstLayer, that.centroid, that.faceCoords, that.division, that.angle);
-        that.assist.drawMask({layer: that.firstLayer, points: that.mapBoundariesCoords, size: that.RECT_SIZE});
-        that.assist.drawBoundaries({layer: that.firstLayer, points: that.mapBoundariesCoords});
-        that.assist.drawBharamNabhi({layer: that.firstLayer, centroid: that.centroid});
-        that.assist.drawDirectionLines(that.firstLayer, that.faceCoords, that.centroid, that.division, that.angle);
-        that.assist.drawFacingLine(that.firstLayer, that.centroid, that.faceCoords);
-        that.assist.drawGrid(that.firstLayer, that.centroid, that.faceCoords, that.screenBoundariesCoords, that.division, that.angle);
+        that.assist.drawBackgroundGrid(that.canvas, that.centroid, that.faceCoords, that.division, that.angle);
+        that.assist.drawMask({layer: that.canvas, points: that.mapBoundariesCoords, size: that.RECT_SIZE});
+        that.assist.drawBoundaries({layer: that.canvas, points: that.mapBoundariesCoords});
+        that.assist.drawBharamNabhi({layer: that.canvas, centroid: that.centroid});
+        that.assist.drawDirectionLines(that.canvas, that.faceCoords, that.centroid, that.division, that.angle);
+        that.assist.drawFacingLine(that.canvas, that.centroid, that.faceCoords);
+        that.assist.drawGrid(that.canvas, that.centroid, that.faceCoords, that.screenBoundariesCoords, that.division, that.angle);
 
         that.screenPolygons = Utility.getIntersectionPoints(that.calNorthAngle(),that.centroid,that.screenBoundariesCoords, that.division);
-        that.mapPolygonsArray = Utility.getIntersectionPoints(that.calNorthAngle(),that.centroid,that.mapBoundariesCoords, that.division);
+        that.mapPolygonsArray = Utility.getIntersectionPoints(that.calNorthAngle()+that.angle,that.centroid,that.mapBoundariesCoords, that.division);
         that.mapPolygonsAreaArray = Utility.getPolygonsArea(that.mapPolygonsArray);
 
         // ? DRAW BAR CHART
         that.modal.drawMap({areaArr: that.mapPolygonsAreaArray, division: that.division, dimension: that.distanceBetweenTwoPoints});
       })
 
-      angleInputbox.on("change", function() {
+      degreeUpdateBtn.on("click", function() {
+       
           let theta = (angleInputbox.property('value') == "") ? 0 : parseFloat(angleInputbox.property('value'));
           that.angle = -theta;
-
+          that.model.editDegree(that.mapId, angleInputbox.property('value'));
+          d3.select(".facing-degree").text(`${Math.abs(theta)}°`);
+  
           // that.start();
-          that.assist.drawBackgroundGrid(that.firstLayer, that.centroid, that.faceCoords, that.division, that.angle);
-          that.assist.drawMask({layer: that.firstLayer, points: that.mapBoundariesCoords, size: that.RECT_SIZE});
-          that.assist.drawBoundaries({layer: that.firstLayer, points: that.mapBoundariesCoords});
-          that.assist.drawBharamNabhi({layer: that.firstLayer, centroid: that.centroid});
-          that.assist.drawDirectionLines(that.firstLayer, that.faceCoords, that.centroid, that.division, that.angle);
-          that.assist.drawFacingLine(that.firstLayer, that.centroid, that.faceCoords);
-          that.assist.drawGrid(that.firstLayer, that.centroid, that.faceCoords, that.screenBoundariesCoords, that.division, that.angle);
-          d3.select('.facing-degree').text(`${theta}°`)
+          that.assist.drawBackgroundGrid(that.canvas, that.centroid, that.faceCoords, that.division, that.angle);
+          that.assist.drawMask({layer: that.canvas, points: that.mapBoundariesCoords, size: that.RECT_SIZE});
+          that.assist.drawBoundaries({layer: that.canvas, points: that.mapBoundariesCoords});
+          that.assist.drawBharamNabhi({layer: that.canvas, centroid: that.centroid});
+          that.assist.drawDirectionLines(that.canvas, that.faceCoords, that.centroid, that.division, that.angle);
+          that.assist.drawFacingLine(that.canvas, that.centroid, that.faceCoords);
+          that.assist.drawGrid(that.canvas, that.centroid, that.faceCoords, that.screenBoundariesCoords, that.division, that.angle);
   
           that.screenPolygons = Utility.getIntersectionPoints(that.calNorthAngle(),that.centroid,that.screenBoundariesCoords, that.division);
-          that.mapPolygonsArray = Utility.getIntersectionPoints(that.calNorthAngle(),that.centroid,that.mapBoundariesCoords, that.division);
+          that.mapPolygonsArray = Utility.getIntersectionPoints(that.calNorthAngle()+that.angle,that.centroid,that.mapBoundariesCoords, that.division);
           that.mapPolygonsAreaArray = Utility.getPolygonsArea(that.mapPolygonsArray);
-  
+
+          // for(let i in that.mapPolygonsArray){
+          //   for(let j in that.mapPolygonsArray[i])
+          //   that.secondLayer.append('polygon').attr('points',that.mapPolygonsArray[i][j]).style('fill-opacity','0').style('stroke','green').style('stroke-width','5');
+          // }
+
           // ? DRAW BAR CHART
           that.modal.drawMap({areaArr: that.mapPolygonsAreaArray, division: that.division, dimension: that.distanceBetweenTwoPoints});
       })
-
+      
       vpm.on('click', function() {
+        
         if(classRef.objectVpm == null || classRef.objectVpm == undefined) {
-          d3.select('.properties-section.opacity').style('display','block');
+          d3.select('.properties-section.opacity').classed('d-none',false);
           d3.select(this.parentNode).classed('active', true);
+          that.model.editVpmtoggle(that.mapId,true);
           let data = {
-            src: '/vastuteq/assets/images/vpm.svg',
+            name: "VPM",
+            src: that.BASE_URL+'assets/images/vpm.svg',
             width: 400,
-            height: 400
+            height: 400,
+            x: that.centroid.x - 400 / 2,
+            y: that.centroid.y - 400 / 2,
+            transfrom: "",
+            northAngle: that.calNorthAngle(),
+            angle: that.angle
           }
           classRef.objectVpm = new Object({
-            layer: that.secondLayer,
-            data: data,
-            canvasSize: that.canvasSize,
-            objectName: 'VPM',
-            attribute: that.attribute
+            layer: that.canvas,
+            data: data
           });
         } else {
-          d3.select(this.parentNode).classed('active', false);
-          classRef.objectVpm.getObject().remove();
+          that.objectDelete('VPM');
           classRef.objectVpm = null;
+        }
 
-          (classRef.objectMvm != null && classRef.objectVpm != null) ? d3.select('.properties-section.opacity').style('display','none') : null;
-        }  
+        if(classRef.objectVpm == null || classRef.objectVpm == undefined)
+          d3.select(this.parentNode).classed('active', false);
 
       })
 
       mvm.on('click', function() {
         if(classRef.objectMvm == null || classRef.objectMvm == undefined) {
-          d3.select('.properties-section.opacity').style('display','block');
+          d3.select('.color-state-wrapper').classed('d-none', false);
+          d3.select('.properties-section.opacity').classed('d-none',false);
           d3.select(this.parentNode).classed('active', true);
+          that.model.editMvpctoggle(that.mapId,true);
           let data = {
-            src: '/vastuteq/assets/images/mvm.svg',
-            width: 350,
-            height: 350
+            name: "MVM",
+            src: that.BASE_URL+'assets/images/MVPC.svg',
+            width: 400,
+            height: 400,
+            x: that.centroid.x - 400 / 2,
+            y: that.centroid.y - 400 / 2,
+            transfrom: "",
           }
           classRef.objectMvm = new Object({
-            layer: that.secondLayer,
-            data: data,
-            canvasSize: that.canvasSize,
-            objectName: 'MVM',
-            attribute: that.attribute
+            layer: that.canvas,
+            data: data
           });
         } else {
-          d3.select(this.parentNode).classed('active', false);
-          classRef.objectMvm.getObject().remove();
-          classRef.objectMvm = null;
-
-          (classRef.objectMvm != null && classRef.objectVpm != null) ? d3.select('.properties-section.opacity').style('display','none') : null;
-          
+          d3.select('.color-state-wrapper').classed('d-none', true);
+          that.objectDelete('MVM');
+          classRef.objectMvm = null; 
         }
 
+        if(classRef.objectMvm == null || classRef.objectMvm == undefined)
+          d3.select(this.parentNode).classed('active', false);
+
+      })
+
+      divisonOfDevtasContainer.on('click', function() {
+        console.log(d3.select(this).classed('active'), 'working');
+        if(d3.select(this).classed('active') == false) {
+          console.log('in');
+          if(d3.polygonContains(that.mapBoundariesCoords, [that.centroid.x,that.centroid.y])) {
+            console.log('in');
+            d3.select(this).classed('active', true);
+            that.assist.drawDivisionOfDevtas(that.angle,that.canvas, that.mapBoundariesCoords, that.faceCoords, that.centroid);
+          }else {
+            alert("Software does not cater for this requirement currently");
+          }
+        }else {
+          d3.select(this).classed('active', false);
+          that.assist.drawDivisionOfDevtas(that.angle, that.canvas, that.mapBoundariesCoords, that.faceCoords, that.centroid, false);
+        }
       })
 
 

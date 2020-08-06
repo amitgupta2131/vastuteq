@@ -28,6 +28,10 @@
     <script src="<?php echo base_url('js/d3.min.js') ?>"></script>
     <!-- CUSTOM JS -->
     <script src="<?php echo base_url('js/dashboard.js') ?>" type="module" defer></script>
+    <!-- Ajax library -->
+    <script src="<?php echo base_url('js/MyScriptLibrary.js') ?>"></script>
+    <!-- Notify library -->
+    <script src="<?php echo base_url('js/bootstrap-notify.min.js') ?>"></script>
     <script>
         const base_url = '<?php echo base_url() ?>'
     </script>
@@ -44,9 +48,12 @@
             <!-- M E N U  I T E M S -->
             <div class="menu-sidebar">
                 <ul class="nav menu" style="float:right">
-                    <li class="nav-item">
-                        <a href="#">Home</a>
+                    <!-- <li class="nav-item">
+                        <a id="createMap" href="#">Create Map</a>
                     </li>
+                    <li class="nav-item">
+                        <a id="importMap" href="#" data-behavior="import" >Import Map</a>
+                    </li> -->
                     <li class="nav-item">
                         <a href="<?php echo base_url('Main') ?>">Dashboard</a>
                     </li>
@@ -57,7 +64,7 @@
                         <a href="<?php echo base_url('Main/devtas') ?>">Devtas</a>
                     </li>
                     <li class="nav-item">
-                        <a href="<?php echo base_url('Main/propertyInfo') ?>" ><i class="fas fa-plus"></i>&nbsp;&nbsp;New Project</a>
+                        <a href="#" id="newProject"><i class="fas fa-plus"></i>&nbsp;&nbsp;New Project</a>
                     </li>
                     <li class="nav-item">
                         <img class="profile thumbnail rounded-circle" src="<?php echo base_url('assets/images/thumbnail.png') ?>" alt="user" width="20" id="profileButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -66,7 +73,7 @@
                             <a class="dropdown-item" href="<?php echo base_url('Main/logout') ?>"><i class="fas fa-sign-out-alt"></i>&nbsp;&nbsp;Sign Out</a>
                         </div>
                     </li>
-                </ul>                
+                </ul>
             </div>
         </div>
         <!-- <div id="dynamicBar">
@@ -160,6 +167,43 @@
                         </div>
                     </div>
                 </div> -->
+            <?php
+            if (isset($property) && !empty($property)) {
+                // echo "<pre>";
+                // print_r($property);
+                // die;
+                for ($i = 0; $i < count($property); $i++) {
+                    $imageResource = json_decode($property[$i]['imageData'], true);
+            ?>
+                    <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+                        <div class="card rounded bubbly-button p-1" data-map-id="<?php echo $property[$i]['mapId'] ?>"><img class="card-img-top" src="<?php echo $imageResource['src'] ?>">
+                            <div class="card-body border-top border-thick">
+                                <div class="project-name card-text">
+                                    <span class="col-sm-4">Owner:</span>
+                                    <span class="col-sm-8"><?php echo $property[$i]['name'] ?></span>
+                                </div>
+                                <div class="project-name card-text">
+                                    <span class="col-sm-4">Name:</span>
+                                    <span class="col-sm-8"><?php echo $property[$i]['propertyName'] ?></span>
+                                </div>
+                                <div class="project-name card-text">
+                                    <span class="col-sm-4">Category:</span>
+                                    <span class="col-sm-8"><?php echo $property[$i]['category'] ?></span>
+                                </div>
+                                <div class="project-name card-text">
+                                    <span class="col-sm-4">Type:</span>
+                                    <span class="col-sm-8"><?php echo $property[$i]['type'] ?></span>
+                                </div>
+                                <div class="project-name card-text">
+                                    <span class="col-sm-4">Address:</span>
+                                    <span class="col-sm-8"><?php echo $property[$i]['propertyAddress'] ?></span>
+                                </div>
+                                <!-- <div class="last-update card-text">Last edited 19 hours ago</div> -->
+                            </div>
+                        </div>
+                    </div>
+            <?php }
+            } ?>
         </div>
     </section>
 

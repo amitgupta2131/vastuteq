@@ -20,6 +20,7 @@ let ownerNakshatraData = [
     { text: "Poorva Bhadrapad", value: 25 }, { text: "Uttara Bhaprapad", value: 26 }, { text: "Revati", value: 0 }
 ];
 
+
 let options = ownerNakshatraSelect.selectAll("option")
     .data(ownerNakshatraData)
     .enter()
@@ -70,12 +71,13 @@ d3.select('.calculate-btn').on('click', () => {
                     realLength,
                     realBreadth,
                     siUnit,
-                    result['aaya'] != "" ? result['aaya']['result'] : "",
-                    result['vara'] != "" ? result['vara']['result'] : "",
-                    result['amsha'] != "" ? result['amsha']['result'] : "",
-                    result['vyaya'] != "" ? result['vyaya']['result'] : "",
-                    result['yoni'] != "" ? result['yoni']['result'] : "",
-                    result['tithi'] != "" ? result['tithi']['result'] : ""
+                    result
+                    // result['aaya'] != "" ? result['aaya']['result'] : "",
+                    // result['vara'] != "" ? result['vara']['result'] : "",
+                    // result['amsha'] != "" ? result['amsha']['result'] : "",
+                    // result['vyaya'] != "" ? result['vyaya']['result'] : "",
+                    // result['yoni'] != "" ? result['yoni']['result'] : "",
+                    // result['tithi'] != "" ? result['tithi']['result'] : ""
                                    
                 ));
 

@@ -1,42 +1,28 @@
 export default class Utility {
     
     // ! FUNCTION TO ALIGN OBJECT INSIDE CANVAS
-    static centerOfCanvas(canvasSize, radius = 0, height = 0) {
-      height = (height > 0) ? height : radius;
-      return {x: ((canvasSize.width / 2) - (radius /2)), y: ((canvasSize.height / 2) - (height /2))}
+    static centerOfCanvas(canvasSize, width = 0, height = 0) {
+      return {x: ((canvasSize.width / 2) - (width /2)), y: ((canvasSize.height / 2) - (height /2))}
     }
 
     // ! FUNCTION TO RESIZE IMAGE TO FIT IN CANVAS
     static resizeObject(canvasSize, width = 0, height = 0) {
-      let maxValue = (width > height + 1) ? {max: 'width', value: width} : {max: 'height', value: height};
-      if(maxValue.max === 'width') {
-        if(maxValue.value > canvasSize.width + 150) {
-          let percent = ((canvasSize.width - 150) * 100) / width;
-          return {
-              width: width * (percent / 100),
-              height: height * (percent / 100)
-          };
-        } else {
-            return{
-              width: width,
-              height: height
-            }
-        }
-      }else if(maxValue.max === 'height') {
-        if(maxValue.value > canvasSize.height + 150) {
-          let percent = ((canvasSize.height - 150) * 100) / height;
-          return {
-              width: width * (percent / 100),
-              height: height * (percent / 100),
-          };
-
-        } else {
-          return{
-            width: width,
-            height: height
-          }
-        }
+      let imageRatio = width/height;
+      let maxHeight = canvasSize.height*0.8;
+      let finalHeight = 0;
+      if (height > maxHeight) {
+          finalHeight = maxHeight;
       }
+      else {
+        finalHeight = height;
+      }
+
+      let finalWidth = finalHeight * imageRatio;
+
+      return {
+        width : finalWidth,
+        height : finalHeight
+      };
     }
 
     // ! FUNCTION TO FIND CENTEROID 
@@ -59,6 +45,29 @@ export default class Utility {
         x: parseFloat(x / f + first[0]),
         y: parseFloat(y / f + first[1]),
       };
+    }
+
+    // ! TO FIND VEDIC CENTEROID
+    static getVedicCenteroid(pts) {
+      return this.linesIntersection(pts[0][0],pts[0][1],pts[2][0],pts[2][1],pts[1][0],pts[1][1],pts[3][0],pts[3][1]);
+    }
+
+    // ! TO FIND VEDIC SURFACE POINTS
+    static getVedicSurfacePoints(pts) {
+      // MIN X AND MAX X
+      let minX = pts.reduce((min, p) => (p[0] < min ? p[0] : min), pts[0][0]);
+      let maxX = pts.reduce((max, p) => (p[0] > max ? p[0] : max), pts[0][0]);
+    
+      // MIN Y AND MAX Y
+      let minY = pts.reduce((min, p) => (p[1] < min ? p[1] : min), pts[0][1]);
+      let maxY = pts.reduce((max, p) => (p[1] > max ? p[1] : max), pts[0][1]);
+    
+      return [
+        [minX, minY],
+        [maxX, minY],
+        [maxX, maxY],
+        [minX, maxY],
+      ];
     }
 
     // ! TO FIND CLOSEST COORDINATE
@@ -162,7 +171,7 @@ export default class Utility {
       // FOR INTERSECTION ARRAY
       for(let j = 0; j < ang.length; j++){
         let point1 = [centroid.x,centroid.y];
-        let point2 = [centroid.x + Math.cos(ang[j].lDeg) * 3200, centroid.y + Math.sin(ang[j].lDeg) * 3200];
+        let point2 = [centroid.x + Math.cos(ang[j].lDeg) * 1300, centroid.y + Math.sin(ang[j].lDeg) * 1300];
         
         for(let m = 0,n = m+1; m < mapBoundariesCoords.length; m++,n++) {
           (m == mapBoundariesCoords.length-1) ? n = 0 : null;
@@ -180,7 +189,7 @@ export default class Utility {
     
         // FOR POLYGON ARRAY
         for(let j = 0; j < ang.length; j++){
-          let point = [centroid.x + Math.cos(ang[j].lDeg) * 3200, centroid.y + Math.sin(ang[j].lDeg) * 3200];
+          let point = [centroid.x + Math.cos(ang[j].lDeg) * 1000, centroid.y + Math.sin(ang[j].lDeg) * 1000];
           extremePoints.push(point);
         }
     
@@ -223,5 +232,33 @@ export default class Utility {
     
       return areaArr;
     }
+
+     // ! DIVIDE INTO SEGMENTS
+     static divideIntoSegments(startPoint, endPoint, segments) {
+      let x1 = startPoint[0],
+        y1 = startPoint[1],
+        x2 = endPoint[0],
+        y2 = endPoint[1];
+  
+      let dx = (x2 - x1) / segments;
+      let dy = (y2 - y1) / segments;
+  
+      let interiorPoints = [];
+  
+      for (let i = 1; i < segments; i++)
+        interiorPoints.push({
+          x: (x1 + i * dx).toFixed(1),
+          y: (y1 + i * dy).toFixed(1),
+        });
+  
+      return interiorPoints;
+    }
+    // ! GET DISTANCE BETWEEN TWO GIVEN POINTS
+    static distanceBetweenTwoPoints(startPoint, endPoint){
+        let deltaX = startPoint.x - endPoint.x;
+        let deltaY = startPoint.y - endPoint.y;
+        let dist = Math.sqrt(Math.pow(deltaX, 2) + Math.pow(deltaY, 2));
+        return (dist);
+      };
 
 }

@@ -32,7 +32,18 @@
     <script src="<?php echo base_url('js/MyScriptLibrary.js') ?>"></script>
     <!-- Notify library -->
     <script src="<?php echo base_url('js/bootstrap-notify.min.js') ?>"></script>
-
+    <style>
+         table {
+             border-collapse:collapse;
+         }
+          td,th {
+                border:1px solid #000000; 
+                text-align:center;
+                padding:8px;
+            }
+            font-family-sans-serif: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+    --font-family-monospace: SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
+    </style>
 </head>
 
 <body>
@@ -132,96 +143,96 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" checked>
-                                    <label class="form-check-label text-sm overflow-elipsis" for="defaultCheck1">
+                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck2" checked>
+                                    <label class="form-check-label text-sm overflow-elipsis" for="defaultCheck2">
                                         Vaara
                                     </label>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" checked>
-                                    <label class="form-check-label text-sm overflow-elipsis" for="defaultCheck1">
+                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck3" checked>
+                                    <label class="form-check-label text-sm overflow-elipsis" for="defaultCheck3">
                                         Amsha
                                     </label>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" checked>
-                                    <label class="form-check-label text-sm overflow-elipsis" for="defaultCheck1">
+                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck4" checked>
+                                    <label class="form-check-label text-sm overflow-elipsis" for="defaultCheck4">
                                         Dravya
                                     </label>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" checked>
-                                    <label class="form-check-label text-sm overflow-elipsis" for="defaultCheck1">
+                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck5" checked>
+                                    <label class="form-check-label text-sm overflow-elipsis" for="defaultCheck5">
                                         Rina
                                     </label>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" checked>
-                                    <label class="form-check-label text-sm overflow-elipsis" for="defaultCheck1">
+                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck6" checked>
+                                    <label class="form-check-label text-sm overflow-elipsis" for="defaultCheck6">
                                         Nakshatra
                                     </label>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" checked>
-                                    <label class="form-check-label text-sm overflow-elipsis" for="defaultCheck1">
+                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck7" checked>
+                                    <label class="form-check-label text-sm overflow-elipsis" for="defaultCheck7">
                                         Tithi
                                     </label>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" checked>
-                                    <label class="form-check-label text-sm overflow-elipsis" for="defaultCheck1">
+                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck8" checked>
+                                    <label class="form-check-label text-sm overflow-elipsis" for="defaultCheck8">
                                         Yoga
                                     </label>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" checked>
-                                    <label class="form-check-label text-sm overflow-elipsis" for="defaultCheck1">
+                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck9" checked>
+                                    <label class="form-check-label text-sm overflow-elipsis" for="defaultCheck9">
                                         Aayu
                                     </label>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" checked>
-                                    <label class="form-check-label text-sm overflow-elipsis" for="defaultCheck1">
+                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck10" checked>
+                                    <label class="form-check-label text-sm overflow-elipsis" for="defaultCheck10">
                                         Vash Mandal
                                     </label>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" checked>
-                                    <label class="form-check-label text-sm overflow-elipsis" for="defaultCheck1">
+                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck11" checked>
+                                    <label class="form-check-label text-sm overflow-elipsis" for="defaultCheck11">
                                         Vyaya
                                     </label>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" checked>
-                                    <label class="form-check-label text-sm overflow-elipsis" for="defaultCheck1">
+                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck12" checked>
+                                    <label class="form-check-label text-sm overflow-elipsis" for="defaultCheck12">
                                         Yoni
                                     </label>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" checked>
-                                    <label class="form-check-label text-sm overflow-elipsis" for="defaultCheck1">
+                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck13" checked>
+                                    <label class="form-check-label text-sm overflow-elipsis" for="defaultCheck13">
                                         Tarabala
                                     </label>
                                 </div>

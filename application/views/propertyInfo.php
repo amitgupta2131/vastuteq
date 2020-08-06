@@ -32,11 +32,18 @@
     <script src="<?php echo base_url('js/MyScriptLibrary.js') ?>"></script>
     <!-- Notify library -->
     <script src="<?php echo base_url('js/bootstrap-notify.min.js') ?>"></script>
-    <script>const base_url = '<?php echo base_url() ?>'</script>
+    <!-- Date Picker libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.1/moment.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
+    <script>
+        const base_url = '<?php echo base_url() ?>';
+        let data = ''
+    </script>
 </head>
 
 <body>
-<!-- 
+    <!-- 
     //////////////////////////////// --- H E A D E R ---  ////////////////////////////////
     -->
     <section class="header" style="position:unset">
@@ -58,7 +65,7 @@
                         <a href="<?php echo base_url('Main/devtas') ?>">Devtas</a>
                     </li>
                     <li class="nav-item">
-                        <a href="<?php echo base_url('Main/propertyInfo') ?>" ><i class="fas fa-plus"></i>&nbsp;&nbsp;New Project</a>
+                        <a href="<?php echo base_url('Main/propertyInfo') ?>"><i class="fas fa-plus"></i>&nbsp;&nbsp;New Project</a>
                     </li>
                     <li class="nav-item">
                         <img class="profile thumbnail rounded-circle" src="<?php echo base_url('assets/images/thumbnail.png') ?>" alt="user" width="20" id="profileButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -67,7 +74,7 @@
                             <a class="dropdown-item" href="<?php echo base_url('Main/logout') ?>"><i class="fas fa-sign-out-alt"></i>&nbsp;&nbsp;Sign Out</a>
                         </div>
                     </li>
-                </ul>                
+                </ul>
             </div>
         </div>
         <!-- <div id="dynamicBar">
@@ -109,10 +116,10 @@
                     </h5>
                 </div>
                 <div class="card-body">
-                    <form action="<?php echo base_url('Main/addProperty')?>" method="post">
+                    <form action="<?php echo base_url('Main/addProperty') ?>" method="post">
                         <div>
                             <div class="form-row">
-                                
+
                             </div>
                             <div class="form-row">
                                 <div class="form-group col-md-4">
@@ -121,37 +128,60 @@
                                 </div>
                                 <div class="form-group col-md-4">
                                     <label for="inputEmail4">Category</label>
-                                    <select  class="form-control form-control-sm" name="category" id="category" placeholder="property category" >
-                                    <option value="">Select Category</option>
-                                        <?php if(isset($category) && !empty($category)){
-                                            for($i=0;$i<count($category);$i++){?>
-                                            <option tId="<?php echo $category[$i]['id'];?>"" value="<?php echo $category[$i]['category'];?>"><?php echo $category[$i]['category'];?></option>
-                                        <?php }}?>
+                                    <select class="form-control form-control-sm" name="category" id="category" placeholder="property category">
+                                        <option value="">Select Category</option>
+                                        <?php if (isset($category) && !empty($category)) {
+                                            for ($i = 0; $i < count($category); $i++) { ?>
+                                                <option tId="<?php echo $category[$i]['id']; ?>"" value=" <?php echo $category[$i]['category']; ?>"><?php echo $category[$i]['category']; ?></option>
+                                        <?php }
+                                        } ?>
                                     </select>
                                 </div>
                                 <div class="form-group col-md-4">
                                     <label for="inputEmail4">Type</label>
-                                    <select  class="form-control form-control-sm" name="type" id="type" placeholder="property type" >
-                                    <option value="">Select Type</option>
+                                    <select class="form-control form-control-sm" name="type" id="type" placeholder="property type">
+                                        <option value="">Select Type</option>
 
                                     </select>
                                 </div>
                             </div>
                             <div class="form-row">
                                 <div class="form-group col-md-12">
-                                    <label for="inputAddress">Address</label>
+                                    <label for="inputAddress">Property Address</label>
                                     <textarea class="form-control form-control-sm" name="address" row='6' placeholder="property address" /></textarea>
                                 </div>
                             </div>
+
+
+
+                            <div class="form-row">
+                                <div class="form-group col-md-4">
+                                    
+                                    <label for="inputEmail4">Grah Pravesh Date</label>
+                                    <input type="date" class="form-control form-control-sm" name="gpDate"  placeholder="Grah Pravesh Date (Optional)" />
+                                    
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label for="inputEmail4">First Visit Date</label>
+                                    <input type="date" class="form-control form-control-sm" name="fvDate" placeholder="First Visit Date" required />
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label for="inputEmail4">Property Purchase/opening Date</label>
+                                    <input type="date" class="form-control form-control-sm" name="ppDate" placeholder="Property Purchase/opening Date" />
+                                </div>
+                            </div>
+
+
                             <div class="form-group col-md-6">
                                 <label for="inputEmail4">Select Client</label>
                                 <div class="form-row">
                                     <select class="form-control form-control-sm col-md-6" name="client" id="clients">
                                         <option value="">Select Owner</option>
-                                        <?php if(isset($clients) && !empty($clients)){
-                                            for($i=0;$i<count($clients);$i++){?>
-                                            <option value="<?php echo $clients[$i]['cId'];?>"><?php echo $clients[$i]['name'];?></option>
-                                        <?php }}?>
+                                        <?php if (isset($clients) && !empty($clients)) {
+                                            for ($i = 0; $i < count($clients); $i++) { ?>
+                                                <option value="<?php echo $clients[$i]['cId']; ?>"><?php echo $clients[$i]['name']; ?></option>
+                                        <?php }
+                                        } ?>
                                     </select>
                                     <button type="button" class="btn col-md-1 btn-outline-primary btn-sm addClient" data-toggle="modal" data-target="#modal1">
                                         <i class="fa fa-plus" aria-hidden="true"></i>
@@ -185,8 +215,8 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    
-                    <form  method="post" id="clientInfo">
+
+                    <form method="post" id="clientInfo">
                         <div class="form-row">
                             <div class="form-group col-md-6">
                                 <label for="inputEmail4">Full Name</label>
@@ -203,7 +233,7 @@
                                 <input type="email" class="form-control form-control-sm" name="cEmail" placeholder="Email" required />
                             </div>
                             <div class="form-group col-md-6">
-                                <label for="inputAddress">Address</label>
+                                <label for="inputAddress">Client Address</label>
                                 <input type="text" class="form-control form-control-sm" name="cAddress" placeholder="1234 Main St" required />
                             </div>
                         </div>
@@ -221,6 +251,11 @@
         </div>
     </div>
     </div>
+    <script>
+        $(function () {
+                $('#datetimepicker3').datetimepicker();
+            });
+    </script>
     <?php if (!empty($this->session->flashdata('error'))) { ?>
         <script>
             let error = '<?php echo $this->session->flashdata('error'); ?>';

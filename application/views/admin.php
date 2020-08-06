@@ -31,7 +31,7 @@
     <script>
         const base_url = '<?php echo base_url() ?>'
     </script>
-    
+
 
 </head>
 
@@ -104,7 +104,8 @@
                                             <td><?php echo $users[$i]['email'] ?></td>
                                             <td><?php echo $users[$i]['password'] ?></td>
                                             <td><?php echo $users[$i]['address'] ?></td>
-                                            <td><i class="fa fa-trash delete" aria-hidden="true" dId="<?php echo base64_encode($users[$i]['userId'])?>"></i> <i data-toggle="modal" data-target="#modal1" class="fas fa-edit edit" eId="<?php echo base64_encode($users[$i]['userId'])?>" aria-hidden="true"></i></td>
+                                            <td><i class="fa fa-trash delete" aria-hidden="true" dId="<?php echo base64_encode($users[$i]['userId']) ?>" style="cursor:pointer"></i> 
+                                            <i data-toggle="modal" data-target="#modal1" class="fas fa-edit edit" eId="<?php echo base64_encode($users[$i]['userId']) ?>" aria-hidden="true" style="cursor:pointer"></i></td>
                                         </tr>
                                 <?php }
                                 } ?>
@@ -127,7 +128,7 @@
             <div class="modal-content">
                 <div class="modal-header p-1 pl-3 pr-3">
                     <h5 class="modal-title" id="exampleModalLabel">
-                        Client Info
+                        Consultant Info
                     </h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close" data-toggle="modal" data-target="#modal1">
                         <span aria-hidden="true">&times;</span>
@@ -150,11 +151,11 @@
                                     <input type="number" class="form-control form-control-sm" id="mNumber" name="mNumber" placeholder="Consultant Phone Number" required />
 
 
-                                </div>                                
+                                </div>
 
                             </div>
                             <div class="form-row">
-                            <div class="form-group col-md-6">
+                                <div class="form-group col-md-6">
                                     <label for="inputEmail4">Email</label>
                                     <input type="email" class="form-control form-control-sm" id="email" name="email" placeholder="Consultant email address" required>
 
@@ -187,7 +188,7 @@
                 </div>
             </div>
         </div>
-    </div>    
+    </div>
     </div>
 
 

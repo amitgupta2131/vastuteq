@@ -280,4 +280,17 @@ return $this->db->trans_status();
 		$q = $this->db->query($query)->result_array();
 		return $this->db->affected_rows() ? $q : false;
 	}
+
+	public function gethouseMapsDetails($userid)
+	{
+		$query = "SELECT * FROM `propertydetails` ";
+		$query .= "LEFT JOIN housemaps ON ";
+		$query .= "housemaps.propertId=propertydetails.propertyId ";		
+		$query .= "LEFT JOIN clientdetails ON ";
+		$query .= "propertydetails.clientId=clientdetails.cId ";
+		$query .= "where propertydetails.userId = '$userid' ";
+		$query .= "order by housemaps.id DESC";
+		$q = $this->db->query($query)->result_array();
+		return $this->db->affected_rows() ? $q : false;
+	}
 }

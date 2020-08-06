@@ -11,9 +11,7 @@ export default class StageFirst {
 
         this.layer = layer;
         this.className = className;
-
         this.actionbox = new ActionBox();
-
         this.dragging = false;
         this.drawing = false;
         this.disable = false;
@@ -35,9 +33,9 @@ export default class StageFirst {
         // CLASS REFERENCE
         let that = this;
 
-        // this.layer.on("mousedown", function () {
-        //     // EMPTY
-        // })
+        this.layer.on("mousedown", function () {
+            // EMPTY
+        })
 
         this.layer.on("mousemove", function () {
             if(that.disable) return;
@@ -50,8 +48,8 @@ export default class StageFirst {
             .attr('y1', that.startPoint[1])
             .attr('x2', d3.mouse(this)[0] + 2)
             .attr('y2', d3.mouse(this)[1])
-            .attr('stroke', REF.strokeColor)
-            .attr('stroke-width', REF.strokeWidth);
+            .attr('stroke', '#6869AB')
+            .attr('stroke-width', 2);
 
         })
 
@@ -71,7 +69,7 @@ export default class StageFirst {
             that.g.select('polyline').remove();
             
             let polyline = that.g.append('polyline').attr('points', that.points)
-            .style('fill', 'none').attr('stroke', REF.strokeColor).attr('stroke-width', REF.strokeWidth);
+            .style('fill', 'none').attr('stroke', '#6869AB').attr('stroke-width', 2);
 
             that.g.append('circle')
             .attr('cx', that.startPoint[0])
@@ -178,17 +176,71 @@ export default class StageFirst {
 
             if(this.points.length > 2 && Math.abs(d3.polygonArea(this.points)) > 5000) {
 
-                this.actionbox.clear().hide();
-                this.remove();
+                swal("Please select following centroid", {
+                    buttons: {
+                      vedic : true,
+                      mahavastu : true,
+                    },
+                })
+                .then((value) => {
+                    switch (value) {
+                   
+                      case "vedic": {
 
-                // APP CLASS VARIABLES
-                that.mapBoundariesCoords = this.points;
-                that.centroid = Utility.getCentroid(this.points);
-                that._stage = 2;
-                that.model.editStage(that.mapId, 2);
-                that.model.editCustomBoundariesCoords(that.mapId, this.points);
-                that.model.editCentroid(that.mapId, that.centroid);
-                that.start();
+                        swal("Are you sure ?", {
+                            buttons: ["cancel",true]
+                        })
+                        .then((value) => {
+                            if(value) {
+                                this.actionbox.clear().hide();
+                                this.remove();
+
+                                // APP CLASS VARIABLES
+                                that.mapBoundariesCoords = this.points;
+                                that.vedicMapBoundariesCoords = Utility.getVedicSurfacePoints(this.points);
+                                that.centroid = Utility.getVedicCenteroid(that.vedicMapBoundariesCoords);
+                                that._stage = 2;
+                                that._type = "vedic";
+                                that.model.editStage(that.mapId, 2);
+                                that.model.editType(that.mapId, "vedic");
+                                that.model.editCustomBoundariesCoords(that.mapId, that.mapBoundariesCoords);
+                                that.model.editVedicBoundariesCoords(that.mapId, that.vedicMapBoundariesCoords)
+                                that.model.editCentroid(that.mapId, that.centroid);
+                                that.vedicStart();
+                            }
+                        
+                        })
+
+                      } break;
+                   
+                      case "mahavastu": {
+
+                        swal("Are you sure ?", {
+                            buttons: ["cancel",true]
+                        })
+                        .then((value) => {
+                            if(value) {
+                                this.actionbox.clear().hide();
+                                this.remove();
+
+                                // APP CLASS VARIABLES
+                                that.mapBoundariesCoords = this.points;
+                                that.centroid = Utility.getCentroid(this.points);
+                                that._stage = 2;
+                                that.model.editStage(that.mapId, 2);
+                                that.model.editCustomBoundariesCoords(that.mapId, that.mapBoundariesCoords);
+                                that.model.editCentroid(that.mapId, that.centroid);
+                                that.start();
+                            }
+                        
+                        })
+                      } break;
+                   
+                      default: break;
+                    }
+                });
+
+
 
             } else {
                 this.showToast("Warning!","Pinning is not done correctly! please try again.","Reset",this)
@@ -213,14 +265,6 @@ export default class StageFirst {
               .style('fill', 'none').attr('stroke', '#EF5350').attr('stroke-width','3');
               this.g.selectAll('circle:last-of-type').remove();
             }
-            // else if (event.metaKey && event.key === 'z'){
-            //   this.points.pop();
-            //   this.startPoint = this.points[this.points.length-1];
-            //   this.g.select('polyline').remove();
-            //   this.g.append('polyline').attr('points', this.points)
-            //   .style('fill', 'none').attr('stroke', '#EF5350').attr('stroke-width','3');
-            //   this.g.selectAll('circle:last-of-type').remove();
-            // }
         });
     }
 

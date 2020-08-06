@@ -1,244 +1,180 @@
-import Utility from './helper/utility.class.js';
+import ObjectModel from './helper/objectmodel.class.js';
 
 export default class Object {
-  constructor({layer, data, canvasSize, objectName, attribute}) {
 
-    this.attribute = attribute;
+  constructor({mapId, layer, data}) {
 
-    this.position = Utility.centerOfCanvas(canvasSize, data.width, data.height);
-    
-    this.data = [{imgSrc: data.src, x: this.position.x, y: this.position.y, width: data.width, height: data.height, name: objectName, ref: this}];
+    this.mapId = mapId;
+    this.layer = layer;
+    this.data = data;
 
-    this.MAP_HEIGHT = canvasSize.height;
-    this.MAP_WIDTH = canvasSize.width;
-  
-    this.MAX_TRANSLATE_X = this.MAP_WIDTH;
-    this.MIN_TRANSLATE_X = 0;
-  
-    this.MAX_TRANSLATE_Y = this.MAP_HEIGHT;
-    this.MIN_TRANSLATE_Y = 0;
+    this.objectModel = new ObjectModel();
 
-    this.MIN_RECT_WIDTH = 20;
-    this.MIN_RECT_HEIGHT = 20;
+    this.id = (data.id != undefined) ? data.id : this.uniqueID();
 
-    this.HANDLE_R = 5;
-    this.HANDLE_R_ACTIVE = 10;
+    d3.selectAll(`.svg-object`).classed('deactive', true);
+    d3.selectAll(`.svg-object`).classed('active', false);
+    d3.selectAll(`.sjx-svg-wrapper`).classed('d-none', true);
+    $('#myRange').val(1);
+    $('.range-value').text(1);
 
-    this.g = layer.append("g");
+    this.g = this.layer.append("g")
+    .classed('svg-object', true)
+    .classed('active', true)
+    .classed('saved', (data.id != undefined || data.saveable != undefined)? true : false)
+    .attr('data-id',this.id)
+    .attr('data-object', data.name)
+    .attr('opacity',1)
+    .attr('transform', (data.transform === "abc") ? null : data.transform );
 
-    this.update();
+    this.g.append('image')
+    .classed('object', true)
+    .attr('xmlns','http://www.w3.org/2000/svg')
+    .attr("xlink:href", data.src)
+    .attr('x', data.x)
+    .attr('y', data.y)
+    .attr("width", data.width)
+    .attr("height", data.height);
+
+    this.init();
+
   }
 
-  update() {
-    
+  init() {
     let that = this;
-    
-    let images = this.g
-    .selectAll("g.image")
-    .data(this.data, function (d) {
-      return d;
-    });
 
-    images.exit().remove();
-
-    let newImage = images.enter()
-      .append("g")
-      .classed("image", true)
-      .classed('object', true)
-      .attr('data-map-object',function(d) { return d.name })
-      .style('opacity',1)
-      .call(
-        d3.drag()
-          .on("start end", that.rectMoveStartEnd)
-          .on("drag", that.rectMoving)
-      )
-      .on('click', this._onClick);;
-
-    newImage
-      .append("image") 
-      .classed("img", true)
-      .attr("xlink:href", function(d) { return d.imgSrc })
-      .attr("width", function(d) { return d.width })
-      .attr("height", function(d) { return d.height })
-
-
-    newImage
-      .append("g")
-      .classed("control-circles", true)
-      .each(function (d) {
-        let circleG = d3.select(this);
-
-        circleG
-         .append("rect")
-         .classed("rect-border", true)
-         .style("stroke","black")
-         .style("stroke-width",1)
-         .style("fill-opacity",0)
-         .attr("width", function(d){ return d.width })
-         .attr("height", function(d){ return d.height });
-
-        circleG
-          .append("image")
-          .classed("cancel-btn", true)
-          .attr("xlink:href", '/vastuteq/assets/icons/remove.svg')
-          .attr("x", -7.5)
-          .attr("y", -7.5)
-          .attr("width", 15)
-          .attr("height", 15)
-          .style('cursor', 'pointer')
-          .on("click", function(d) {
-            d3.event.stopPropagation()
-            d.ref.g.remove();
-          });
-
-        circleG
-          .append("circle")
-          .classed("bottomright", true)
-          .attr("r", that.HANDLE_R)
-          .style("stroke","black")
-          .style("stroke-width",2)
-          .style("fill","red")
-          .on("mouseenter mouseleave", that.resizerHover)
-          .call(
-            d3
-              .drag()
-              .container(that.g.node())
-              .subject(function () {
-                return { x: d3.event.x, y: d3.event.y };
-              })
-              .on("start end", that.rectResizeStartEnd)
-              .on("drag", that.rectResizing)
-          );
-      });
-
-    let allImage = newImage.merge(images);
-
-    allImage.attr("transform", function (d) {
-      return "translate(" + d.x + "," + d.y + ")";
-    });
-
-    allImage
-      .select("image.img")
-      .attr("height", function (d) {
-        return d.height;
-      })
-      .attr("width", function (d) {
-        return d.width;
-      });
-
-    allImage
-      .select("rect.rect-border")
-      .attr("height", function (d) {
-        return d.height;
-      })
-      .attr("width", function (d) {
-        return d.width;
-      });
-
-    allImage
-      .select("circle.bottomright")
-      .attr("cx", function (d) {
-        return d.width;
-      })
-      .attr("cy", function (d) {
-        return d.height;
-      });
-  }
-
-  resizerHover(d) {
-    var el = d3.select(this),
-      isEntering = d3.event.type === "mouseenter";
-    el.classed("hovering", isEntering).attr(
-      "r",
-      isEntering || el.classed("resizing") ? d.ref.HANDLE_R_ACTIVE : d.ref.HANDLE_R
-    );
-  }
-
-  rectResizeStartEnd(d) {
-    var el = d3.select(this),
-      isStarting = d3.event.type === "start";
-    d3.select(this)
-      .classed("resizing", isStarting)
-      .attr(
-        "r",
-        isStarting || el.classed("hovering") ? d.ref.HANDLE_R_ACTIVE : d.ref.HANDLE_R
-      );
-  }
-
-  rectResizing(d) {
-    // var dragX = Math.max(
-    //   Math.min(d3.event.x, d.ref.MAX_TRANSLATE_X),
-    //   d.ref.MIN_TRANSLATE_X
-    // );
-
-    // var dragY = Math.max(
-    //   Math.min(d3.event.y, d.ref.MAX_TRANSLATE_Y),
-    //   d.ref.MIN_TRANSLATE_Y
-    // );
-    var dragX = d3.event.x;
-    var dragY = d3.event.y;
-
-    if (d3.select(this).classed("topleft")) {
-      var newWidth = Math.max(d.width + d.x - dragX, d.ref.MIN_RECT_WIDTH);
-
-      d.x += d.width - newWidth;
-      d.width = newWidth;
-
-      var newHeight = Math.max(d.height + d.y - dragY, d.ref.MIN_RECT_HEIGHT);
-
-      d.y += d.height - newHeight;
-      d.height = newHeight;
-    } else {
-      d.width = Math.max(dragX - d.x, d.ref.MIN_RECT_WIDTH);
-      d.height = Math.max(dragY - d.y, d.ref.MIN_RECT_HEIGHT);
+    let objectModelData = {
+      id: this.id,
+      name: this.data.name,
+      src: this.data.src,
+      x: this.data.x,
+      y: this.data.y,
+      width: this.data.width,
+      height: this.data.height,
+      transform: "abc",
     }
 
-    d.ref.attribute.setWidth(d.width).setHeight(d.height);
-    d.ref.update();
+    // object
+    this.svgOptions = {
+          container: '#vastuteqCanvas',
+          proportions: true,
+          rotationPoint: true,
+          snap: {
+              x: 10,
+              y: 10,
+              angle: 5
+          },
+
+          onInit(el) {
+            // fires on tool activation
+            if(that.data.saveable != undefined){
+              console.log('in');
+               that.objectModel.add(that.mapId, objectModelData)
+            }
+
+          },
+          onMove({ clientX, clientY, dx, dy, transform }) {
+            // fires on moving
+
+          },
+          onResize({ clientX, clientY, dx, dy, width, height }) {
+              // fires on resizing
+              if(d3.select('.svg-object.saved.active[data-object]').node() != null) {
+
+                let object  = d3.select('.svg-object.saved.active[data-object]');
+                let objectId = object.attr('data-id');
+                let image = object.select('image.object');
+
+                let x = image.attr('x'), y = image.attr('y');
+                let objectTransform = object.attr('transform');
+
+                that.objectModel.editProperties(
+                  objectId,
+                  {x:x, y:y, width:width, height:height, transform:objectTransform}
+                );
+              }
+          },
+          onRotate({ clientX, clientY, delta, transform }) {
+              // fires on rotation
+              if(d3.select('.svg-object.saved.active[data-object]').node() != null) {
+                let object  = d3.select('.svg-object.saved.active[data-object]');
+                let objectId = object.attr('data-id');
+                let image = object.select('image.object');
+
+                let x = image.attr('x'), y = image.attr('y');
+                let width = image.attr('width'), height = image.attr('height');
+                let objectTransform = object.attr('transform');
+
+                that.objectModel.editProperties(
+                  objectId,
+                  {x:x, y:y, width:width, height:height, transform:objectTransform}
+                );
+              }
+          },
+          onDrop({ clientX, clientY }) {
+              // fires on drop
+              if(d3.select('.svg-object.saved.active[data-object]').node() != null) {
+                let object  = d3.select('.svg-object.saved.active[data-object]');
+                let objectId = object.attr('data-id');
+                let image = object.select('image.object');
+                let x = image.attr('x'), y = image.attr('y');
+                let width = image.attr('width'), height = image.attr('height');
+                let objectTransform = object.attr('transform');
+
+                that.objectModel.editProperties(
+                  objectId,
+                  {x:x, y:y, width:width, height:height, transform:objectTransform}
+                );
+              }
+          },
+          onDestroy(el) {
+              // fires on tool deactivation
+          }
+    };
+  
+    this.object = subjx(`.svg-object[data-id="${this.id}"]`).drag(this.svgOptions);
+    this.controls = this.object[0].controls;
+    this.controls.setAttribute("data-id",this.id);
+
+    if(this.data.name == "VPM") {
+      let vpmObject = d3.select('.svg-object[data-object="VPM"]').select('image.object');
+      let x = parseFloat(vpmObject.attr('x')), y = parseFloat(vpmObject.attr('y')), 
+      width = parseFloat(vpmObject.attr('width')), height = parseFloat(vpmObject.attr('height'));
+      let vpmPolygon = [[x,y], [x+width,y], [x+width,y+height], [x,y+height]];
+      let vpmCentroid = d3.polygonCentroid(vpmPolygon);
+      let edgeAngle = this.calTopRightEdgeAngle((x+width),y,vpmCentroid[0],vpmCentroid[1])
+
+      this.object[0].exeRotate({
+        delta : this.degreesToRadians(45 + (this.data.northAngle + this.data.angle) - edgeAngle)
+      });
+    }
   }
 
-  rectMoveStartEnd(d) {
-    d3.select(this).classed("moving", d3.event.type === "start");
-  }
-
-  rectMoving(d) {
-    // var dragX = Math.max(
-    //   Math.min(d3.event.x, d.ref.MAX_TRANSLATE_X - d.width),
-    //   d.ref.MIN_TRANSLATE_X
-    // );
-
-    // var dragY = Math.max(
-    //   Math.min(d3.event.y, d.ref.MAX_TRANSLATE_Y - d.height),
-    //   d.ref.MIN_TRANSLATE_Y
-    // );
-
-    d.x = d3.event.x;
-    d.y = d3.event.y;
-
-    d.ref.attribute.setX(d3.event.x).setY(d3.event.y)
-    d.ref.update();
-  }
-
-  _onClick(d) {
-
-      // Disabling all object
-      d3.selectAll('.object[data-map-object]').classed('active', false);
-      d3.selectAll('.object[data-map-object]').select('g.control-circles').classed('active', false);
-      
-      // Abling selected object
-      d3.select(this).classed('active', true);
-      d3.select(this).select('g.control-circles').classed('active', true);
-
-      let opacity = parseFloat(d3.select('.active[data-map-object]').style('opacity'));
-
-      //Set name of active object
-      d.ref.attribute.setName(d.name);
-      d.ref.attribute.setOpacity(opacity.toFixed(1))
-
+  remove(objectName) {
+    d3.select(`.svg-object[data-object="${objectName}"]`).remove();
   }
 
   getObject() {
-    return this.g;
+    return {'objectName':this.data.name, 'controls':this.object[0].controls, 'active': true};
   }
+
+  degreesToRadians(degrees) {
+    var pi = Math.PI;
+    return degrees * (pi/180);
+  }
+
+  calTopRightEdgeAngle(ex, ey, cx, cy) {
+    var dy = ey - cy;
+    var dx = ex - cx;
+    var theta = Math.atan2(dy, dx); // range (-PI, PI]
+    theta *= 180 / Math.PI; // rads to degs, range (-180, 180]
+    //if (theta < 0) theta = 360 + theta; // range [0, 360)
+    return theta;
+  }
+
+  uniqueID(length = 12) {
+    return Math.floor(Math.pow(10, length-1) + Math.random() * (Math.pow(10, length) - Math.pow(10, length-1) - 1));
+  }
+
 
 }
