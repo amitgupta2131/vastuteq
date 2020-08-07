@@ -132,7 +132,7 @@ export default class modal {
             .enter()
             .append('g')
 
-            console.log("height=",typeof(height));
+            // console.log("height=",typeof(height));
         barGroups
             .append('rect')
             .attr('class', 'bar')

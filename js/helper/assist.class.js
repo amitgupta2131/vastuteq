@@ -487,96 +487,196 @@ export default class Assist {
 
             //Draw 2nd layer
                 let aapaha = [];
+                aapaha.push(twoThirdArr[3]);
                 aapaha.push(twoThirdArr[4]);
                 aapaha.push(twoThirdArr[5]);
-                aapaha.push(twoThirdArr[6]);
-                aapaha.push(halfOfMidCircleArr[6]);
                 aapaha.push(halfOfMidCircleArr[5]);
                 aapaha.push(halfOfMidCircleArr[4]);
-                console.log("outer",aapaha);
+                aapaha.push(halfOfMidCircleArr[3]);
+                // console.log("outer",aapaha);
                 layer.append('polygon').attr('points',aapaha).style('fill-opacity',0).style('stroke','blue').style('stroke-width',2);
             
                 let aapahaVatsa = [];
+                aapahaVatsa.push(twoThirdArr[5]);
                 aapahaVatsa.push(twoThirdArr[6]);
                 aapahaVatsa.push(twoThirdArr[7]);
-                aapahaVatsa.push(twoThirdArr[8]);
-                aapahaVatsa.push(halfOfMidCircleArr[8]);
                 aapahaVatsa.push(halfOfMidCircleArr[7]);
                 aapahaVatsa.push(halfOfMidCircleArr[6]);
-                console.log("outer",aapahaVatsa);
+                aapahaVatsa.push(halfOfMidCircleArr[5]);
+                // console.log("outer",aapahaVatsa);
                 layer.append('polygon').attr('points',aapahaVatsa).style('fill-opacity',0).style('stroke','blue').style('stroke-width',2);
 
                 let savita = [];
+                savita.push(twoThirdArr[11]);
                 savita.push(twoThirdArr[12]);
                 savita.push(twoThirdArr[13]);
-                savita.push(twoThirdArr[14]);
-                savita.push(halfOfMidCircleArr[14]);
                 savita.push(halfOfMidCircleArr[13]);
                 savita.push(halfOfMidCircleArr[12]);
-                console.log("outer",savita);
+                savita.push(halfOfMidCircleArr[11]);
+                // console.log("outer",savita);
                 layer.append('polygon').attr('points',savita).style('fill-opacity',0).style('stroke','blue').style('stroke-width',2);
 
                 let savitra = [];
+                savitra.push(twoThirdArr[13]);
                 savitra.push(twoThirdArr[14]);
                 savitra.push(twoThirdArr[15]);
-                savitra.push(twoThirdArr[16]);
-                savitra.push(halfOfMidCircleArr[16]);
                 savitra.push(halfOfMidCircleArr[15]);
                 savitra.push(halfOfMidCircleArr[14]);
-                console.log("outer",savita);
+                savitra.push(halfOfMidCircleArr[13]);
+                // console.log("outer",savita);
                 layer.append('polygon').attr('points',savitra).style('fill-opacity',0).style('stroke','blue').style('stroke-width',2);
 
                 let indra = [];
+                indra.push(twoThirdArr[19]);
                 indra.push(twoThirdArr[20]);
                 indra.push(twoThirdArr[21]);
-                indra.push(twoThirdArr[22]);
-                indra.push(halfOfMidCircleArr[22]);
                 indra.push(halfOfMidCircleArr[21]);
                 indra.push(halfOfMidCircleArr[20]);
-                console.log("outer",indra);
+                indra.push(halfOfMidCircleArr[19]);
+                // console.log("outer",indra);
                 layer.append('polygon').attr('points',indra).style('fill-opacity',0).style('stroke','blue').style('stroke-width',2);
 
                 let jaya = [];
+                jaya.push(twoThirdArr[21]);
                 jaya.push(twoThirdArr[22]);
                 jaya.push(twoThirdArr[23]);
-                jaya.push(twoThirdArr[24]);
-                jaya.push(halfOfMidCircleArr[24]);
                 jaya.push(halfOfMidCircleArr[23]);
                 jaya.push(halfOfMidCircleArr[22]);
-                console.log("outer",indra);
+                jaya.push(halfOfMidCircleArr[21]);
+                // console.log("outer",indra);
                 layer.append('polygon').attr('points',jaya).style('fill-opacity',0).style('stroke','blue').style('stroke-width',2);
 
                 let rudra = [];
+                rudra.push(twoThirdArr[27]);
                 rudra.push(twoThirdArr[28]);
                 rudra.push(twoThirdArr[29]);
-                rudra.push(twoThirdArr[30]);
-                rudra.push(halfOfMidCircleArr[30]);
                 rudra.push(halfOfMidCircleArr[29]);
                 rudra.push(halfOfMidCircleArr[28]);
-                console.log("outer",rudra);
+                rudra.push(halfOfMidCircleArr[27]);
+                // console.log("outer",rudra);
                 layer.append('polygon').attr('points',rudra).style('fill-opacity',0).style('stroke','blue').style('stroke-width',2);
 
                 let rajyakshama = [];
+                rajyakshama.push(twoThirdArr[29]);
                 rajyakshama.push(twoThirdArr[30]);
                 rajyakshama.push(twoThirdArr[31]);
-                rajyakshama.push(twoThirdArr[0]);
-                rajyakshama.push(halfOfMidCircleArr[0]);
                 rajyakshama.push(halfOfMidCircleArr[31]);
                 rajyakshama.push(halfOfMidCircleArr[30]);
-                console.log("outer",rajyakshama);
+                rajyakshama.push(halfOfMidCircleArr[29]);
+                // console.log("outer",rajyakshama);
                 layer.append('polygon').attr('points',rajyakshama).style('fill-opacity',0).style('stroke','blue').style('stroke-width',2);
 
+                let bhudhar = [];
+                bhudhar.push(brahma[29]);
+                bhudhar.push(brahma[30]);
+                bhudhar.push(brahma[31]);
+                bhudhar.push(brahma[0]);
+                bhudhar.push(brahma[1]);
+                bhudhar.push(brahma[2]);
+                bhudhar.push(brahma[3]);
+                bhudhar.push(brahma[4]);
+                bhudhar.push(brahma[5]);
+                bhudhar.push(halfOfMidCircleArr[5]);
+                bhudhar.push(halfOfMidCircleArr[4]);
+                bhudhar.push(halfOfMidCircleArr[3]);
+                bhudhar.push(twoThirdArr[3]);
+                bhudhar.push(twoThirdArr[2]);
+                bhudhar.push(twoThirdArr[1]);
+                bhudhar.push(twoThirdArr[0]);
+                bhudhar.push(twoThirdArr[31]);
+                bhudhar.push(halfOfMidCircleArr[31]);
+                bhudhar.push(halfOfMidCircleArr[30]);
+                bhudhar.push(halfOfMidCircleArr[29]);
+                
+                // console.log("outer",bhudhar);
+                layer.append('polygon').attr('points',bhudhar).style('fill-opacity',0).style('stroke','black').style('stroke-width',2);
+               
+                let aryama = [];
+                aryama.push(brahma[5]);
+                aryama.push(brahma[6]);
+                aryama.push(brahma[7]);
+                aryama.push(brahma[8]);
+                aryama.push(brahma[9]);
+                aryama.push(brahma[10]);
+                aryama.push(brahma[11]);
+                aryama.push(brahma[12]);
+                aryama.push(brahma[13]);
+                aryama.push(halfOfMidCircleArr[13]);
+                aryama.push(halfOfMidCircleArr[12]);
+                aryama.push(halfOfMidCircleArr[11]);
+                aryama.push(twoThirdArr[11]);
+                aryama.push(twoThirdArr[10]);
+                aryama.push(twoThirdArr[9]);
+                aryama.push(twoThirdArr[8]);
+                aryama.push(twoThirdArr[7]);
+                aryama.push(halfOfMidCircleArr[7]);
+                aryama.push(halfOfMidCircleArr[6]);
+                aryama.push(halfOfMidCircleArr[5]);
+                
+                // console.log("outer",aryama);
+                layer.append('polygon').attr('points',aryama).style('fill-opacity',0).style('stroke','black').style('stroke-width',2);
+
+                let viviswan = [];
+                viviswan.push(brahma[13]);
+                viviswan.push(brahma[14]);
+                viviswan.push(brahma[15]);
+                viviswan.push(brahma[16]);
+                viviswan.push(brahma[17]);
+                viviswan.push(brahma[18]);
+                viviswan.push(brahma[19]);
+                viviswan.push(brahma[20]);
+                viviswan.push(brahma[21]);
+                viviswan.push(halfOfMidCircleArr[21]);
+                viviswan.push(halfOfMidCircleArr[20]);
+                viviswan.push(halfOfMidCircleArr[19]);
+                viviswan.push(twoThirdArr[19]);
+                viviswan.push(twoThirdArr[18]);
+                viviswan.push(twoThirdArr[17]);
+                viviswan.push(twoThirdArr[16]);
+                viviswan.push(twoThirdArr[15]);
+                viviswan.push(halfOfMidCircleArr[15]);
+                viviswan.push(halfOfMidCircleArr[14]);
+                viviswan.push(halfOfMidCircleArr[13]);
+                
+                // console.log("outer",viviswan);
+                layer.append('polygon').attr('points',viviswan).style('fill-opacity',0).style('stroke','black').style('stroke-width',2);
+
+                let mitra = [];
+                mitra.push(brahma[21]);
+                mitra.push(brahma[22]);
+                mitra.push(brahma[23]);
+                mitra.push(brahma[24]);
+                mitra.push(brahma[25]);
+                mitra.push(brahma[26]);
+                mitra.push(brahma[27]);
+                mitra.push(brahma[28]);
+                mitra.push(brahma[29]);
+                mitra.push(halfOfMidCircleArr[29]);
+                mitra.push(halfOfMidCircleArr[28]);
+                mitra.push(halfOfMidCircleArr[27]);
+                mitra.push(twoThirdArr[27]);
+                mitra.push(twoThirdArr[26]);
+                mitra.push(twoThirdArr[25]);
+                mitra.push(twoThirdArr[24]);
+                mitra.push(twoThirdArr[23]);
+                mitra.push(halfOfMidCircleArr[23]);
+                mitra.push(halfOfMidCircleArr[22]);
+                mitra.push(halfOfMidCircleArr[21]);
+                
+                // console.log("outer",mitra);
+                layer.append('polygon')
+                    .attr('points',mitra)
+                    .style('fill-opacity',0)
+                    .style('stroke','black')
+                    .style('stroke-width',2);
             //Draw Brahma
-            layer.append('polygon').attr('points',brahma).style('fill-opacity',0).style('stroke','red').style('stroke-width',2);
+            // layer.append('polygon').attr('points',brahma).style('fill-opacity',0).style('stroke','red').style('stroke-width',2);
             // layer.append('polygon').attr('points',twoThirdArr).style('fill-opacity',0).style('stroke','red').style('stroke-width',2);
             // layer.append('polygon').attr('points',halfOfMidCircleArr).style('fill-opacity',0).style('stroke','red').style('stroke-width',2);
         }
         else {
             console.log("Should select 32 zones");
         }
-
-        
-
     }
 
     uniqueID(){
