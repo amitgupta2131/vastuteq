@@ -34,17 +34,23 @@ export default class StageZero {
 
     this.actionbox.show();
 
-
+//Clicking on 90 degree roation button
     this.rotator.on("click", (e) => {
-      let angles = ['matrix(0,1,-1,0,792.5,-237.5)','matrix(-1,0,0,-1,1030,555)',
-      'matrix(0,-1,1,0,237.5,792.5)','matrix(1,0,0,1,0,0)'];
+      // let angles = ['matrix(0,1,-1,0,792.5,-237.5)','matrix(-1,0,0,-1,1030,555)',
+      // 'matrix(0,-1,1,0,237.5,792.5)','matrix(1,0,0,1,0,0)'];
+
+      let angles = ['rotate(90)','rotate(180)',
+      'rotate(270)','rotate(360)'];
 
       if(angleCount == 4) angleCount = 0;
 
+      //Selecting the uploaded image and attaching a wrapper to it
       let object = d3.select('.svg-object[data-object="map"]');
       let id = object.attr('id');
       let wrapper = d3.select(`.sjx-svg-wrapper[data-id="${id}"]`);
 
+      //Saving uploaded image object properties like width, height and
+      //centre of canvas
       let objectName = object.attr('data-object');
       let src = object.select('image').attr('href');
       let width = object.select('image').attr('width');
@@ -54,6 +60,7 @@ export default class StageZero {
       object.remove();
       wrapper.remove();
 
+      //Storing image properties to recreate
       let data = {
         name: objectName,
         src: src,
@@ -72,6 +79,8 @@ export default class StageZero {
       angleCount++;
     })
 
+    //Once required rotation is done move on
+    //by saving image data into local storage and performing start() function of stage 1
     this.actionBtnYes.on("click", (e) => {
 
         this.actionbox.clear().hide();

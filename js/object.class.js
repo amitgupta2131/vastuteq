@@ -57,13 +57,17 @@ export default class Object {
     // object
     this.svgOptions = {
           container: '#vastuteqCanvas',
+          rotationPoint: false,
           proportions: true,
-          rotationPoint: true,
           snap: {
               x: 10,
               y: 10,
               angle: 5
           },
+          cursorMove: 'move',
+          cursorRotate: 'crosshair',
+          cursorResize: 'pointer',  
+      
 
           onInit(el) {
             // fires on tool activation
@@ -73,44 +77,44 @@ export default class Object {
             }
 
           },
-          onMove({ clientX, clientY, dx, dy, transform }) {
-            // fires on moving
+            onMove({ clientX, clientY, dx, dy, transform }) {
+              // fires on moving
 
-          },
-          onResize({ clientX, clientY, dx, dy, width, height }) {
-              // fires on resizing
-              if(d3.select('.svg-object.saved.active[data-object]').node() != null) {
+            },
+            onResize({ clientX, clientY, dx, dy, width, height }) {
+                // fires on resizing
+                if(d3.select('.svg-object.saved.active[data-object]').node() != null) {
 
-                let object  = d3.select('.svg-object.saved.active[data-object]');
-                let objectId = object.attr('data-id');
-                let image = object.select('image.object');
+                  let object  = d3.select('.svg-object.saved.active[data-object]');
+                  let objectId = object.attr('data-id');
+                  let image = object.select('image.object');
 
-                let x = image.attr('x'), y = image.attr('y');
-                let objectTransform = object.attr('transform');
+                  let x = image.attr('x'), y = image.attr('y');
+                  let objectTransform = object.attr('transform');
 
-                that.objectModel.editProperties(
-                  objectId,
-                  {x:x, y:y, width:width, height:height, transform:objectTransform}
-                );
-              }
-          },
-          onRotate({ clientX, clientY, delta, transform }) {
-              // fires on rotation
-              if(d3.select('.svg-object.saved.active[data-object]').node() != null) {
-                let object  = d3.select('.svg-object.saved.active[data-object]');
-                let objectId = object.attr('data-id');
-                let image = object.select('image.object');
+                  that.objectModel.editProperties(
+                    objectId,
+                    {x:x, y:y, width:width, height:height, transform:objectTransform}
+                  );
+                }
+            },
+            onRotate({ clientX, clientY, delta, transform }) {
+                // fires on rotation
+                if(d3.select('.svg-object.saved.active[data-object]').node() != null) {
+                  let object  = d3.select('.svg-object.saved.active[data-object]');
+                  let objectId = object.attr('data-id');
+                  let image = object.select('image.object');
 
-                let x = image.attr('x'), y = image.attr('y');
-                let width = image.attr('width'), height = image.attr('height');
-                let objectTransform = object.attr('transform');
+                  let x = image.attr('x'), y = image.attr('y');
+                  let width = image.attr('width'), height = image.attr('height');
+                  let objectTransform = object.attr('transform');
 
-                that.objectModel.editProperties(
-                  objectId,
-                  {x:x, y:y, width:width, height:height, transform:objectTransform}
-                );
-              }
-          },
+                  that.objectModel.editProperties(
+                    objectId,
+                    {x:x, y:y, width:width, height:height, transform:objectTransform}
+                  );
+                }
+            },
           onDrop({ clientX, clientY }) {
               // fires on drop
               if(d3.select('.svg-object.saved.active[data-object]').node() != null) {
@@ -136,6 +140,7 @@ export default class Object {
     this.controls = this.object[0].controls;
     this.controls.setAttribute("data-id",this.id);
 
+    //Code to rotate VPM to North
     if(this.data.name == "VPM") {
       let vpmObject = d3.select('.svg-object[data-object="VPM"]').select('image.object');
       let x = parseFloat(vpmObject.attr('x')), y = parseFloat(vpmObject.attr('y')), 

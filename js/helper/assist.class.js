@@ -35,7 +35,6 @@ export default class Assist {
         ];
     }
 
-
     drawMask({ layer, points, size }) {
 
         layer.select('g.mask').remove();
@@ -356,10 +355,13 @@ export default class Assist {
     drawPolygon({layer, points, strokeColor = "red", strokeWidth = 4}) {
         layer.select('g.vedic-polygon').remove();
         let g = layer.append('g')
-        .classed('vedic-polygon', true);
+        .classed('vedic-polygon', true)
+        .classed('object-item', true);
 
         g.append('polygon')
         .attr('points', points)
+        .attr('data-object-item', 'vedicRectangle')
+        .attr('data-src', 'drawing')
         .style('stroke', strokeColor)
         .style('stroke-width', strokeWidth)
         .style('fill-opacity', '0');
@@ -403,19 +405,100 @@ export default class Assist {
             layer.append('line').classed('horizontal-lines', true)
             .attr('x1',leftLine[i].x).attr('y1',leftLine[i].y)
             .attr('x2',rightLine[i].x).attr('y2',rightLine[i].y)
-            .style('stroke', 'red')
-            .style('stroke-width', 4);
+            .attr('stroke', color)
+            .attr('stroke-width', strokeWidth);
         }
         // FOR VERTICAL LINES
         for(let i=0; i<noOfLines-1; i++){
             layer.append('line').classed('vertical-lines', true)
             .attr('x1',upperLine[i].x).attr('y1',upperLine[i].y)
             .attr('x2',bottomLine[i].x).attr('y2',bottomLine[i].y)
-            .style('stroke', 'red')
-            .style('stroke-width', 4);
+            .attr('stroke', color)
+            .attr('stroke-width', strokeWidth);
         }
     }
+    
+    drawMarmSthana({points , noOfLines = 3, color = "red", strokeWidth = 4}) {
+                
+        d3.select('g.vedic-polygon').select('g.vedic-grid-container').remove();
 
+        let layer = d3.select('g.vedic-polygon').append('g').classed('vedic-grid-container', true);
+
+        let upperLine = Utility.divideIntoSegments([points[0][0],points[0][1]], [points[1][0],points[1][1]], noOfLines);
+        let bottomLine = Utility.divideIntoSegments([points[3][0],points[3][1]], [points[2][0],points[2][1]], noOfLines);
+        let leftLine = Utility.divideIntoSegments([points[0][0],points[0][1]], [points[3][0],points[3][1]], noOfLines);
+        let rightLine = Utility.divideIntoSegments([points[1][0],points[1][1]], [points[2][0],points[2][1]], noOfLines);
+ 
+        // FOR HORIZONTAL LINES
+        for(let i=0; i<noOfLines-1; i++){
+            layer.append('line').classed('horizontal-lines', true)
+            .attr('x1',leftLine[i].x).attr('y1',leftLine[i].y)
+            .attr('x2',rightLine[i].x).attr('y2',rightLine[i].y)
+            .attr('stroke',color)
+            .attr('stroke-width',color)
+            .attr('stroke-width', strokeWidth);
+            
+        }
+        // FOR VERTICAL LINES
+        for(let i=0; i<noOfLines-1; i++){
+            layer.append('line').classed('vertical-lines', true)
+            .attr('x1',upperLine[i].x).attr('y1',upperLine[i].y)
+            .attr('x2',bottomLine[i].x).attr('y2',bottomLine[i].y)
+            .attr('stroke',color)
+            .attr('stroke-width', strokeWidth);
+        }
+
+        d3.select('g.vedic-polygon').select('g.diagonals-container').remove();
+
+        let container = d3.select('g.vedic-polygon').append('g')
+        .classed('diagonals-container', true);
+
+        container.append('line')
+        .attr('x1',points[0][0])
+        .attr('y1',points[0][1])
+        .attr('x2',points[2][0])
+        .attr('y2',points[2][1])
+        .attr('stroke', color)
+        .attr('stroke-width', strokeWidth);
+
+        container.append('line')
+        .attr('x1',points[1][0])
+        .attr('y1',points[1][1])
+        .attr('x2',points[3][0])
+        .attr('y2',points[3][1])
+        .attr('stroke',color)
+        .attr('stroke-width', strokeWidth);
+
+         // FOR Slanting LINES
+         
+            layer.append('line').classed('slanting-lines', true)
+            .attr('x1',upperLine[1].x).attr('y1',upperLine[1].y)
+            .attr('x2',rightLine[6].x).attr('y2',rightLine[6].y)
+            .attr('stroke',color)
+            .attr('stroke-width',color)
+            .attr('stroke-width', strokeWidth);
+
+            layer.append('line').classed('slanting-lines', true)
+            .attr('x1',bottomLine[6].x).attr('y1',bottomLine[6].y)
+            .attr('x2',leftLine[1].x).attr('y2',leftLine[1].y)
+            .attr('stroke',color)
+            .attr('stroke-width',color)
+            .attr('stroke-width', strokeWidth);
+
+            layer.append('line').classed('slanting-lines', true)
+            .attr('x1',upperLine[6].x).attr('y1',upperLine[6].y)
+            .attr('x2',leftLine[6].x).attr('y2',leftLine[6].y)
+            .attr('stroke',color)
+            .attr('stroke-width',color)
+            .attr('stroke-width', strokeWidth);
+
+            layer.append('line').classed('slanting-lines', true)
+            .attr('x1',bottomLine[1].x).attr('y1',bottomLine[1].y)
+            .attr('x2',rightLine[1].x).attr('y2',rightLine[1].y)
+            .attr('stroke',color)
+            .attr('stroke-width',color)
+            .attr('stroke-width', strokeWidth);
+    }
     drawDivisionOfDevtas(angle, canvas, mapBoundariesCoords, faceCoords, centroid , state = true) {
         if(!state) {
             canvas.select('g.division-of-devtas').remove();

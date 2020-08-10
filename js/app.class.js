@@ -182,14 +182,11 @@ class App {
 
   _mapInit() {
 
-
-
     // INITIALIZING STAGE
     this._stage = 0;
 
     //  M O U S E  E V E N T S
     this.addMouseEvent();
-
     d3.select('.drawing-tools').classed('d-none', true);
   
   }
@@ -217,7 +214,6 @@ class App {
           this.displayMessage("Start pinning by simply clicking on map borders", "danger");
           let stageFirst = new StageFirst({ layer: this.canvas, className: "map-surface" });
           stageFirst.startDrawing(this);
-
         }
         break;
       // ? STAGE FOR FACING POINT SELECTION
@@ -248,13 +244,10 @@ class App {
             this.assist.drawDirectionLines(this.canvas, this.faceCoords, this.centroid, this.division, this.angle);
             stageSecond.startVedic(this);
           }
-
-
         }
         break;
       case 3:
         {
-
           // STAGE THIRD
           this.hideMessage();
           this.wrapperDelete('map');
@@ -284,8 +277,6 @@ class App {
 
           let stageThird = new StageThird(this.attribute);
           stageThird.startDrawing(this);
-
-
         }
         break;
       case 4:

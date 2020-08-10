@@ -722,13 +722,13 @@
                             <div class="col-md-12 mt-2 mb-2">
                                 <div class="heading text-capitalize text-sm">Sofa</div>
                                 <div class="row">
-                                    <div class="col-md-4 border d-flex flex-column justify-content-center align-items-center object-item cursor-pointer" data-object-item="sofa" data-src="<?php echo base_url('assets/objects/sofa_icon.svg') ?>" title="sofa">
+                                    <div class="col-md-4 border d-flex flex-column justify-content-center align-items-center object-item cursor-pointer" data-object-item="sofa" data-src="<?php echo base_url('assets/objects/sofa_icon.svg') ?>" title="sofa1">
                                         <img src="<?php echo base_url('assets/objects/sofa_icon.svg') ?>" alt="" width="35">
                                     </div>
-                                    <div class="col-md-4 border d-flex flex-column justify-content-center align-items-center object-item cursor-pointer" data-object-item="sofa" data-src="<?php echo base_url('assets/objects/sofa_icon.svg') ?>" title="sofa">
+                                    <div class="col-md-4 border d-flex flex-column justify-content-center align-items-center object-item cursor-pointer" data-object-item="sofa" data-src="<?php echo base_url('assets/objects/sofa_icon.svg') ?>" title="sofa2">
                                         <img src="<?php echo base_url('assets/objects/sofa_icon.svg') ?>" alt="" width="35">
                                     </div>
-                                    <div class="col-md-4 border d-flex flex-column justify-content-center align-items-center object-item cursor-pointer" data-object-item="sofa" data-src="<?php echo base_url('assets/objects/sofa_icon.svg') ?>" title="sofa">
+                                    <div class="col-md-4 border d-flex flex-column justify-content-center align-items-center object-item cursor-pointer" data-object-item="sofa" data-src="<?php echo base_url('assets/objects/sofa_icon.svg') ?>" title="sofa3">
                                         <img src="<?php echo base_url('assets/objects/sofa_icon.svg') ?>" alt="" width="35">
                                     </div>
                                 </div>

@@ -63,7 +63,7 @@ export default class modal {
         else
             DATA = this.DIRECTION_THIRTYTWO;
 
-        if(dimension == null) {
+        if ((dimension == null) || (dimension == "null")) { 
             newAreaArr = areaArr;
         } else {
             scale = Math.pow(parseFloat(dimension.scale/dimension.distance), 2);
@@ -132,7 +132,6 @@ export default class modal {
             .enter()
             .append('g')
 
-            // console.log("height=",typeof(height));
         barGroups
             .append('rect')
             .attr('class', 'bar')

@@ -26,11 +26,21 @@ export default class Vastuteq {
     this.BASE_URL = baseUrl;
 
     // ? O B J E C T S
-
+    
+    // Create new housemap i.e localstorage entry
     this.model = new Model(mapId);
+   
+    //Storing and retrieving image properties to housemap
     this.objectModel = new ObjectModel();
+    
+    //List all helper functions for Mahavastu and Vedic actions
     this.assist = new Assist();
+    
+    //Action box on right side, which is populated based on 
+    //required actions in each stage
     this.actionbox = new ActionBox();
+    
+    //Draw Bar Chart
     this.modal = new Modal();
 
     this.imageData = imageData;
@@ -89,10 +99,10 @@ export default class Vastuteq {
     this.canvas = this.svg.append("g").attr("id", "main-group");
 
     this.RECT_SIZE = {
-      x: Utility.centerOfCanvas(this.canvasSize, 1200, 1200).x,
-      y: Utility.centerOfCanvas(this.canvasSize, 1200, 1200).y,
-      width: 1200,
-      height: 1200,
+      x: Utility.centerOfCanvas(this.canvasSize, this.canvasSize.width, this.canvasSize.widthd).x,
+      y: Utility.centerOfCanvas(this.canvasSize, this.canvasSize.height, this.canvasSize.height).y,
+      width: this.canvasSize.width,
+      height: this.canvasSize.height,
     };
 
     this.screenBoundariesCoords = [
@@ -323,7 +333,7 @@ export default class Vastuteq {
 
   // ? V E D I C   S T A R T
   vedicStart() {
-    console.log("vedic stage",this._stage);
+    console.log("Vedic stage",this._stage);
     switch (this._stage) {
       case 2 : {
         // STAGE SECOND
@@ -349,6 +359,7 @@ export default class Vastuteq {
         this.assist.drawBharamNabhi({layer: this.canvas, centroid: this.centroid,});
         this.assist.drawDirectionLines(this.canvas, this.faceCoords, this.centroid, this.division, this.angle);
         this.assist.drawGrid(this.canvas, this.centroid, this.faceCoords, this.screenBoundariesCoords, this.division, this.angle, "vedic");
+        console.log("points:",this.vedicMapBoundariesCoords);
         this.assist.drawPolygon({layer: this.canvas, points: this.vedicMapBoundariesCoords});
         this.assist.drawPolygonDiagonals({points: this.vedicMapBoundariesCoords});
         this.assist.drawPolygonGrid({points: this.vedicMapBoundariesCoords});
@@ -369,25 +380,33 @@ export default class Vastuteq {
       // object
       let svgOptions = {
         container: '#vastuteqCanvas',
+        rotationPoint: false,
         proportions: true,
-        rotationPoint: true,
+    // restrict moving
+    // spreads to dragging one element 
         snap: {
           x: 10,
           y: 10,
           angle: 5
         },
+        cursorMove: 'move',
+        cursorRotate: 'crosshair',
+        cursorResize: 'pointer',  
       };
 
       let id = this.uniqueID();
 
       d3.select(selector).attr('id', id);
-
       let object = subjx(selector).drag(svgOptions);
+      console.log("object",object);
+      // console.log("selector object",object[0].getBoundingClientRect());
       let controls = object[0].controls;
+      console.log(object[0].storage);
       controls.setAttribute("data-id", id);
+      
 
       object[0].exeRotate({
-        delta : this.degreesToRadians((this.calNorthAngle() + this.angle) - this.calTopRightEdgeAngle())
+        delta : this.degreesToRadians((this.calNorthAngle() + this.angle) - this.calTopRightEdgeAngle()),
       });
   }
 
@@ -477,6 +496,7 @@ export default class Vastuteq {
     }
 
   _objectEventListener() {
+    
     $("body").on("dblclick", "g.sjx-svg-wrapper", function () {
       let wrapper = $(this);
       let id = wrapper.attr("data-id");
@@ -662,8 +682,11 @@ export default class Vastuteq {
   }
 
   calTopRightEdgeAngle() {
-    var dy = this.vedicMapBoundariesCoords[1][1] - this.centroid.y;
-    var dx = this.vedicMapBoundariesCoords[1][0] - this.centroid.x;
+    var dy = (this.vedicMapBoundariesCoords[1][1]+this.vedicMapBoundariesCoords[0][1])/2 - this.centroid.y;
+    var dx = (this.vedicMapBoundariesCoords[1][0]+this.vedicMapBoundariesCoords[0][0])/2 - this.centroid.x;
+
+    // var dy = this.vedicMapBoundariesCoords[1][1] - this.centroid.y;
+    // var dx = this.vedicMapBoundariesCoords[1][0] - this.centroid.x;
     var theta = Math.atan2(dy, dx); // range (-PI, PI]
     theta *= 180 / Math.PI; // rads to degs, range (-180, 180]
     //if (theta < 0) theta = 360 + theta; // range [0, 360)

@@ -1,6 +1,7 @@
 import ActionBox from "../helper/actionbox.class.js";
 import Utility from "../helper/utility.class.js";
 
+
 export default class Vedic {
   constructor() {
     this.actionbox = new ActionBox();
@@ -44,8 +45,15 @@ export default class Vedic {
     let mapGridType = col3
       .append('select').attr('class', 'form-control form-control-sm text-sm')
       .html(`
-        <option value="3" selected>3 X 3</option>
-        <option value="9">9 X 9</option>
+        <option value="3GL" selected>3 X 3 Grid Layout</option>
+        <option value="3GD">3 X 3 Grid Diagonal</option>
+        <option value="9DL">9 X 9 Disha Lord Numero Grid</option>
+        <option value="9GL">9 X 9 Grid Layout</option>
+        <option value="9SG">Maha Vastu Square Grid</option>
+        <option value="9MS">Marma Sthana</option>
+        <option value="9SM">Shanmahanti</option>
+        <option value="9SD">Shubh Dwar</option>
+        
     `);
 
     this.actionbox.show();
@@ -69,17 +77,85 @@ export default class Vedic {
     })
 
     mapGridType.on('change', function() {
+
       gridType = mapGridType.property('value');
 
-      if(gridType == 3) {
-        that.assist.drawPolygonGrid({points: that.vedicMapBoundariesCoords, noOfLines: 3});
+      let wrapper = $(`g.sjx-svg-wrapper`).remove();
+
+      switch (gridType){
+         case "3GL" : 
+              that.assist.drawPolygon({layer: that.canvas, points: that.vedicMapBoundariesCoords,strokeColor:"red",strokeWidth:2});
+              that.assist.drawPolygonGrid({points: that.vedicMapBoundariesCoords, color:"red", noOfLines: 3,strokeWidth:2});
+              that.createObject('g.vedic-polygon');
+              that.vedic = new Vedic(); 
+                break;
+        case "3GD" : 
+              that.assist.drawPolygon({layer: that.canvas, points: that.vedicMapBoundariesCoords,strokeColor:"blue",strokeWidth:2});
+              that.assist.drawPolygonGrid({points: that.vedicMapBoundariesCoords, color:"blue", noOfLines: 3,strokeWidth:2});
+              that.assist.drawPolygonDiagonals({points: that.vedicMapBoundariesCoords, color:"blue", noOfLines: 3,strokeWidth:2});
+              that.createObject('g.vedic-polygon');
+              that.vedic = new Vedic(); 
+              break;
+        case "9DL" : 
+              that.assist.drawPolygon({layer: that.canvas, points: that.vedicMapBoundariesCoords,strokeColor:"blue",strokeWidth:2});
+              that.assist.drawPolygonGrid({points: that.vedicMapBoundariesCoords, color:"blue", noOfLines: 9,strokeWidth:2});
+              that.assist.drawPolygonDiagonals({points: that.vedicMapBoundariesCoords, color:"blue", noOfLines: 9,strokeWidth:2});
+              that.createObject('g.vedic-polygon');
+              that.vedic = new Vedic(); 
+                break;
+        case "9GL" : 
+              that.assist.drawPolygon({layer: that.canvas, points: that.vedicMapBoundariesCoords,strokeColor:"blue",strokeWidth:2});
+              that.assist.drawPolygonGrid({points: that.vedicMapBoundariesCoords, color:"blue", noOfLines: 9,strokeWidth:2});
+              that.assist.drawPolygonDiagonals({points: that.vedicMapBoundariesCoords, color:"blue", noOfLines: 9,strokeWidth:2});
+              that.createObject('g.vedic-polygon');
+              that.vedic = new Vedic(); 
+                break;
+        case "9SG" : 
+              that.assist.drawPolygon({layer: that.canvas, points: that.vedicMapBoundariesCoords,strokeColor:"blue",strokeWidth:2});
+              that.assist.drawPolygonGrid({points: that.vedicMapBoundariesCoords, color:"blue", noOfLines: 9,strokeWidth:2});
+              that.assist.drawPolygonDiagonals({points: that.vedicMapBoundariesCoords, color:"blue", noOfLines: 9,strokeWidth:2});
+              that.createObject('g.vedic-polygon');
+              that.vedic = new Vedic(); 
+                break;
+        case "9MS" : 
+                that.assist.drawPolygon({layer: that.canvas, points: that.vedicMapBoundariesCoords,strokeColor:"blue",strokeWidth:2});
+                that.assist.drawPolygonGrid({points: that.vedicMapBoundariesCoords, color:"blue", noOfLines: 9,strokeWidth:2});
+                that.assist.drawMarmSthana({points: that.vedicMapBoundariesCoords, color:"blue", noOfLines: 9,strokeWidth:2});
+                that.createObject('g.vedic-polygon');
+                that.vedic = new Vedic(); 
+                  break;
+        case "9SM": 
+                that.assist.drawPolygon({layer: that.canvas, points: that.vedicMapBoundariesCoords,strokeColor:"blue",strokeWidth:2});
+                that.assist.drawPolygonGrid({points: that.vedicMapBoundariesCoords, color:"blue", noOfLines: 9,strokeWidth:2});
+                that.assist.drawPolygonDiagonals({points: that.vedicMapBoundariesCoords, color:"blue", noOfLines: 9,strokeWidth:2});
+                that.createObject('g.vedic-polygon');
+                that.vedic = new Vedic(); 
+                  break;
+        case "9SD" : 
+                that.assist.drawPolygon({layer: that.canvas, points: that.vedicMapBoundariesCoords,strokeColor:"blue",strokeWidth:2});
+                that.assist.drawPolygonGrid({points: that.vedicMapBoundariesCoords, color:"blue", noOfLines: 9,strokeWidth:2});
+                that.assist.drawPolygonDiagonals({points: that.vedicMapBoundariesCoords, color:"blue", noOfLines: 9,strokeWidth:2});
+                that.createObject('g.vedic-polygon');
+                that.vedic = new Vedic(); 
+                  break;
+         default: drawVedic(that,"red",3,2); break;
       }
-      else {
-        that.assist.drawPolygonGrid({points: that.vedicMapBoundariesCoords, noOfLines: 9});
-      }
+    
+      // that.vedic.startDrawing(that);
+      //   that.assist.drawPolygonGrid({points: that.vedicMapBoundariesCoords, noOfLines: gridType});
     })
 
   }
+
+  drawVedic(that,color="red",noOfLines=3,strokeWidth) {
+
+    // that.wrapperDelete("map");
+    that.assist.drawPolygon({layer: that.canvas, points: that.vedicMapBoundariesCoords,strokeColor:"blue",strokeWidth:strokeWidth});
+    // that.assist.drawPolygonDiagonals({points: that.vedicMapBoundariesCoords});
+    that.assist.drawPolygonGridWithDiagonals({points: that.vedicMapBoundariesCoords, color:"blue", noOfLines: gridType,strokeWidth:2});
+    that.createObject('g.vedic-polygon');
+    that.vedic = new Vedic();
+}
 
   showToast(heading, msg, type = "warning") {
     let toastbox = d3.select('#appToast');
