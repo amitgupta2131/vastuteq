@@ -19,20 +19,22 @@ export default class Model {
             stage: 0,
             imageData: data.image,
             type: "mahavastu",
-            vedicBoundariesCoords: [],
             customBoundariesCoords: [],
             centroid: [],
-            faceCoords: [],
-            dimension: null,
-            degree: 0,
             faceWall: '',
+            degree: 0,
+            dimension: null,
             vpmtoggle: false,
             mvpctoggle: false,
             objects: [],
             activities: [],
             complete: false,
+            vedicBoundariesCoords: [],
+            faceCoords: [],
         }
-
+        while (this.houseMaps.length) {
+            this.houseMaps.pop();
+        }
         this.houseMaps.push(houseMap);
         this._commit(this.houseMaps);
 
@@ -70,18 +72,18 @@ export default class Model {
                 stage: houseMap.stage,
                 imageData: houseMap.imageData,
                 type: updatedType,
-                vedicBoundariesCoords: houseMap.vedicBoundariesCoords,
                 customBoundariesCoords: houseMap.customBoundariesCoords,
                 centroid: houseMap.centroid,
-                faceCoords: houseMap.faceCoords,
-                dimension: houseMap.dimension,
-                degree: houseMap.degree,
                 faceWall: houseMap.faceWall,
+                degree: houseMap.degree,
+                dimension: houseMap.dimension,
                 vpmtoggle: houseMap.vpmtoggle,
                 mvpctoggle: houseMap.mvpctoggle,
                 objects: houseMap.objects,
                 activities: houseMap.activities,
-                complete: houseMap.complete
+                complete: houseMap.complete,
+                vedicBoundariesCoords: houseMap.vedicBoundariesCoords,
+                faceCoords: houseMap.faceCoords,
             } : houseMap
         )
 
@@ -98,18 +100,18 @@ export default class Model {
                 stage: houseMap.stage,
                 imageData: houseMap.imageData,
                 type: houseMap.type,
-                vedicBoundariesCoords: updatedVedicCoords,
                 customBoundariesCoords: houseMap.customBoundariesCoords,
                 centroid: houseMap.centroid,
-                faceCoords: houseMap.faceCoords,
-                dimension: houseMap.dimension,
-                degree: houseMap.degree,
                 faceWall: houseMap.faceWall,
+                degree: houseMap.degree,
+                dimension: houseMap.dimension,
                 vpmtoggle: houseMap.vpmtoggle,
                 mvpctoggle: houseMap.mvpctoggle,
                 objects: houseMap.objects,
                 activities: houseMap.activities,
-                complete: houseMap.complete
+                complete: houseMap.complete,
+                vedicBoundariesCoords: updatedVedicCoords,
+                faceCoords: houseMap.faceCoords,
             } : houseMap
         )
 
@@ -127,18 +129,18 @@ export default class Model {
                 stage: houseMap.stage,
                 imageData: houseMap.imageData,
                 type: houseMap.type,
-                vedicBoundariesCoords: houseMap.vedicBoundariesCoords,
                 customBoundariesCoords: updatedCustomCoords,
                 centroid: houseMap.centroid,
-                faceCoords: houseMap.faceCoords,
-                dimension: houseMap.dimension,
-                degree: houseMap.degree,
                 faceWall: houseMap.faceWall,
+                degree: houseMap.degree,
+                dimension: houseMap.dimension,
                 vpmtoggle: houseMap.vpmtoggle,
                 mvpctoggle: houseMap.mvpctoggle,
                 objects: houseMap.objects,
                 activities: houseMap.activities,
-                complete: houseMap.complete
+                complete: houseMap.complete,
+                vedicBoundariesCoords: houseMap.vedicBoundariesCoords,
+                faceCoords: houseMap.faceCoords,
             } : houseMap
         )
 
@@ -155,18 +157,18 @@ export default class Model {
                 stage: houseMap.stage,
                 imageData: houseMap.imageData,
                 type: houseMap.type,
-                vedicBoundariesCoords: houseMap.vedicBoundariesCoords,
                 customBoundariesCoords: houseMap.customBoundariesCoords,
                 centroid: updatedCentroid,
-                faceCoords: houseMap.faceCoords,
-                dimension: houseMap.dimension,
-                degree: houseMap.degree,
                 faceWall: houseMap.faceWall,
+                degree: houseMap.degree,
+                dimension: houseMap.dimension,
                 vpmtoggle: houseMap.vpmtoggle,
                 mvpctoggle: houseMap.mvpctoggle,
                 objects: houseMap.objects,
                 activities: houseMap.activities,
-                complete: houseMap.complete
+                complete: houseMap.complete,
+                vedicBoundariesCoords: houseMap.vedicBoundariesCoords,
+                faceCoords: houseMap.faceCoords,
             } : houseMap
         )
 
@@ -182,19 +184,19 @@ export default class Model {
                 id: houseMap.id,
                 stage: houseMap.stage,
                 imageData: houseMap.imageData,
-                type: houseMap.type,
-                vedicBoundariesCoords: houseMap.vedicBoundariesCoords,
+                type: houseMap.type,   
                 customBoundariesCoords: houseMap.customBoundariesCoords,
                 centroid: houseMap.centroid,
-                faceCoords: updatedFaceCoords,
-                dimension: houseMap.dimension,
-                degree: houseMap.degree,
                 faceWall: houseMap.faceWall,
+                degree: houseMap.degree,
+                dimension: houseMap.dimension,
                 vpmtoggle: houseMap.vpmtoggle,
                 mvpctoggle: houseMap.mvpctoggle,
                 objects: houseMap.objects,
                 activities: houseMap.activities,
-                complete: houseMap.complete
+                complete: houseMap.complete,
+                vedicBoundariesCoords: houseMap.vedicBoundariesCoords,
+                faceCoords: updatedFaceCoords,
             } : houseMap
         )
 
@@ -211,18 +213,18 @@ export default class Model {
                 stage: houseMap.stage,
                 imageData: houseMap.imageData,
                 type: houseMap.type,
-                vedicBoundariesCoords: houseMap.vedicBoundariesCoords,
                 customBoundariesCoords: houseMap.customBoundariesCoords,
                 centroid: houseMap.centroid,
-                faceCoords: houseMap.faceCoords,
-                dimension: updatedDimension,
+                faceWall: houseMap.faceWall, 
                 degree: houseMap.degree,
-                faceWall: houseMap.faceWall,
+                dimension: updatedDimension,
                 vpmtoggle: houseMap.vpmtoggle,
                 mvpctoggle: houseMap.mvpctoggle,
                 objects: houseMap.objects,
                 activities: houseMap.activities,
-                complete: houseMap.complete
+                complete: houseMap.complete,
+                vedicBoundariesCoords: houseMap.vedicBoundariesCoords,
+                faceCoords: houseMap.faceCoords,
             } : houseMap
         )
 
@@ -240,18 +242,18 @@ export default class Model {
                 stage: houseMap.stage,
                 imageData: houseMap.imageData,
                 type: houseMap.type,
-                vedicBoundariesCoords: houseMap.vedicBoundariesCoords,
                 customBoundariesCoords: houseMap.customBoundariesCoords,
                 centroid: houseMap.centroid,
-                faceCoords: houseMap.faceCoords,
-                dimension: houseMap.dimension,
-                degree: updatedDegree,
                 faceWall: houseMap.faceWall,
+                degree: updatedDegree,
+                dimension: houseMap.dimension,
                 vpmtoggle: houseMap.vpmtoggle,
                 mvpctoggle: houseMap.mvpctoggle,
                 objects: houseMap.objects,
                 activities: houseMap.activities,
-                complete: houseMap.complete
+                complete: houseMap.complete,
+                vedicBoundariesCoords: houseMap.vedicBoundariesCoords,
+                faceCoords: houseMap.faceCoords,
             } : houseMap
         )
 
@@ -270,18 +272,18 @@ export default class Model {
                 stage: houseMap.stage,
                 imageData: houseMap.imageData,
                 type: houseMap.type,
-                vedicBoundariesCoords: houseMap.vedicBoundariesCoords,
                 customBoundariesCoords: houseMap.customBoundariesCoords,
                 centroid: houseMap.centroid,
-                faceCoords: houseMap.faceCoords,
-                dimension: houseMap.dimension,
-                degree: houseMap.degree,
                 faceWall: updateFacewall,
+                degree: houseMap.degree,
+                dimension: houseMap.dimension,
                 vpmtoggle: houseMap.vpmtoggle,
                 mvpctoggle: houseMap.mvpctoggle,
                 objects: houseMap.objects,
                 activities: houseMap.activities,
-                complete: houseMap.complete
+                complete: houseMap.complete,
+                vedicBoundariesCoords: houseMap.vedicBoundariesCoords,
+                faceCoords: houseMap.faceCoords,
             } : houseMap
         )
 
@@ -300,18 +302,18 @@ export default class Model {
                 stage: houseMap.stage,
                 imageData: houseMap.imageData,
                 type: houseMap.type,
-                vedicBoundariesCoords: houseMap.vedicBoundariesCoords,
                 customBoundariesCoords: houseMap.customBoundariesCoords,
                 centroid: houseMap.centroid,
-                faceCoords: houseMap.faceCoords,
-                dimension: houseMap.dimension,
-                degree: houseMap.degree,
                 faceWall: houseMap.faceWall,
+                degree: houseMap.degree,
+                dimension: houseMap.dimension,
                 vpmtoggle: updateVpmtoggle,
                 mvpctoggle: houseMap.mvpctoggle,
                 objects: houseMap.objects,
                 activities: houseMap.activities,
-                complete: houseMap.complete
+                complete: houseMap.complete,
+                vedicBoundariesCoords: houseMap.vedicBoundariesCoords,
+                faceCoords: houseMap.faceCoords,
             } : houseMap
         )
 
@@ -330,18 +332,18 @@ export default class Model {
                 stage: houseMap.stage,
                 imageData: houseMap.imageData,
                 type: houseMap.type,
-                vedicBoundariesCoords: houseMap.vedicBoundariesCoords,
                 customBoundariesCoords: houseMap.customBoundariesCoords,
                 centroid: houseMap.centroid,
-                faceCoords: houseMap.faceCoords,
-                dimension: houseMap.dimension,
-                degree: houseMap.degree,
                 faceWall: houseMap.faceWall,
+                degree: houseMap.degree,
+                dimension: houseMap.dimension,
                 vpmtoggle: houseMap.vpmtoggle,
                 mvpctoggle: updateMvpctoggle,
                 objects: houseMap.objects,
                 activities: houseMap.activities,
-                complete: houseMap.complete
+                complete: houseMap.complete,
+                vedicBoundariesCoords: houseMap.vedicBoundariesCoords,
+                faceCoords: houseMap.faceCoords,
             } : houseMap
         )
 
@@ -359,18 +361,18 @@ export default class Model {
                 stage: updatedStage,
                 imageData: houseMap.imageData,
                 type: houseMap.type,
-                vedicBoundariesCoords: houseMap.vedicBoundariesCoords,
                 customBoundariesCoords: houseMap.customBoundariesCoords,
                 centroid: houseMap.centroid,
-                faceCoords: houseMap.faceCoords,
-                dimension: houseMap.dimension,
-                degree: houseMap.degree,
                 faceWall: houseMap.faceWall,
+                degree: houseMap.degree,
+                dimension: houseMap.dimension,
                 vpmtoggle: houseMap.vpmtoggle,
                 mvpctoggle: houseMap.mvpctoggle,
                 objects: houseMap.objects,
                 activities: houseMap.activities,
-                complete: houseMap.complete
+                complete: houseMap.complete,
+                vedicBoundariesCoords: houseMap.vedicBoundariesCoords,
+                faceCoords: houseMap.faceCoords,
             } : houseMap
         )
 
@@ -387,13 +389,19 @@ export default class Model {
                 stage: houseMap.stage,
                 imageData: updatedImageData,
                 type: houseMap.type,
-                vedicBoundariesCoords: houseMap.vedicBoundariesCoords,
+                
                 customBoundariesCoords: houseMap.customBoundariesCoords,
                 centroid: houseMap.centroid,
-                faceCoords: houseMap.faceCoords,
-                dimension: houseMap.dimension,
+                faceWall: houseMap.faceWall,
                 degree: houseMap.degree,
-                complete: houseMap.complete
+                dimension: houseMap.dimension,
+                vpmtoggle: houseMap.vpmtoggle,
+                mvpctoggle: houseMap.mvpctoggle,
+                objects: houseMap.objects,
+                activities: houseMap.activities,
+                complete: houseMap.complete,
+                vedicBoundariesCoords: houseMap.vedicBoundariesCoords,
+                faceCoords: houseMap.faceCoords,
             } : houseMap
         )
 
@@ -408,18 +416,18 @@ export default class Model {
                 stage: updatedStage,
                 imageData: houseMap.imageData,
                 type: houseMap.type,
-                vedicBoundariesCoords: houseMap.vedicBoundariesCoords,
                 customBoundariesCoords: houseMap.customBoundariesCoords,
                 centroid: houseMap.centroid,
-                faceCoords: houseMap.faceCoords,
-                dimension: updatedDimension,
-                degree: houseMap.degree,
                 faceWall: houseMap.faceWall,
+                degree: houseMap.degree,
+                dimension: updatedDimension,
                 vpmtoggle: houseMap.vpmtoggle,
                 mvpctoggle: houseMap.mvpctoggle,
                 objects: houseMap.objects,
                 activities: houseMap.activities,
-                complete: true
+                complete: true,
+                vedicBoundariesCoords: houseMap.vedicBoundariesCoords,
+                faceCoords: houseMap.faceCoords,
             } : houseMap
         )
 

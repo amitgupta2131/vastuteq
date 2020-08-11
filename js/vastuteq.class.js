@@ -384,6 +384,7 @@ export default class Vastuteq {
         proportions: true,
     // restrict moving
     // spreads to dragging one element 
+    restrict: 'selector',
         snap: {
           x: 10,
           y: 10,
@@ -398,7 +399,6 @@ export default class Vastuteq {
 
       d3.select(selector).attr('id', id);
       let object = subjx(selector).drag(svgOptions);
-      console.log("object",object);
       // console.log("selector object",object[0].getBoundingClientRect());
       let controls = object[0].controls;
       console.log(object[0].storage);

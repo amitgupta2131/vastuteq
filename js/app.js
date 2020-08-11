@@ -12,6 +12,7 @@ if(localStorage.hasOwnProperty('selectedMapId') == true) {
   let selectedMapId = localStorage.getItem("selectedMapId");
   let model = new Model();
   let houseMap = model.getHouseMap(selectedMapId)[0];
+  console.log("H",houseMap);
   if(houseMap != undefined) {
     let data = {
       name: "map",
@@ -286,9 +287,13 @@ document
               size.height
             );
 
-            let id = uniqueID();
-	          localStorage.setItem("selectedMapId", id);
-
+            localStorage.removeItem('selectedMapId');
+            localStorage.removeItem('houseMaps');
+            console.log(localStorage.getItem('selectedMapId'));
+            let mapId = uniqueID();
+            localStorage.setItem("selectedMapId", mapId);
+            let houseMap = [];
+            
             let data = {
               name: "map",
               src: img.src,
@@ -298,8 +303,11 @@ document
               height: size.height,
               transform: "abc",
             };
-
-            importMapApp = new Vastuteq(id, data, BASE_URL);
+            houseMap.push(data);
+            console.log(houseMap);
+            localStorage.setItem("houseMaps", JSON.stringify(houseMap));
+            console.log(localStorage.getItem('houseMaps'));
+            importMapApp = new Vastuteq(mapId, data, BASE_URL);
           };
 
           img.src = imageData;
@@ -370,8 +378,8 @@ document.querySelector("#drawArea").addEventListener("drop", (e) => {
 // ! FUNCTION TO ALIGN OBJECT INSIDE CANVAS
 function centerOfCanvas(canvasSize, width = 0, height = 0) {
   return {
-    x: canvasSize.width / 2 - width / 2,
-    y: canvasSize.height / 2 - height / 2,
+    x: (canvasSize.width  - width) / 2,
+    y: (canvasSize.height - height) / 2,
   };
 }
 
@@ -398,11 +406,3 @@ function uniqueID(){
 	return `P-${Math.random().toString(36).slice(2)}`;
 }
 
-// $(window).on('load', function() {
-//   // your code here
-//   if(BEHAVIOR =="create") {
-//     createMap();
-//   }else {
-//     importMap();
-//   }
-// });

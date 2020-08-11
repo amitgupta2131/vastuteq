@@ -36,11 +36,10 @@ export default class StageZero {
 
 //Clicking on 90 degree roation button
     this.rotator.on("click", (e) => {
-      // let angles = ['matrix(0,1,-1,0,792.5,-237.5)','matrix(-1,0,0,-1,1030,555)',
-      // 'matrix(0,-1,1,0,237.5,792.5)','matrix(1,0,0,1,0,0)'];
+      let angles = ['matrix(0,1,-1,0,792.5,-237.5)','matrix(-1,0,0,-1,1030,555)',
+      'matrix(0,-1,1,0,237.5,792.5)','matrix(1,0,0,1,0,0)'];
 
-      let angles = ['rotate(90)','rotate(180)',
-      'rotate(270)','rotate(360)'];
+      // let angles = ['rotate(90)','rotate(180)','rotate(270)','rotate(360)'];
 
       if(angleCount == 4) angleCount = 0;
 

@@ -186,12 +186,6 @@ export default class StageFirst {
                     switch (value) {
                    
                       case "vedic": {
-
-                        // swal("Are you sure ?", {
-                        //     buttons: ["cancel",true]
-                        // })
-                        // .then((value) => {
-                        //     if(value) {
                                 this.actionbox.clear().hide();
                                 this.remove();
 
@@ -207,19 +201,10 @@ export default class StageFirst {
                                 that.model.editVedicBoundariesCoords(that.mapId, that.vedicMapBoundariesCoords)
                                 that.model.editCentroid(that.mapId, that.centroid);
                                 that.vedicStart();
-                        //     }
-                        
-                        // })
 
                       } break;
                    
                       case "mahavastu": {
-
-                        // swal("Are you sure ?", {
-                        //     buttons: ["cancel",true]
-                        // })
-                        // .then((value) => {
-                        //     if(value) {
                                 this.actionbox.clear().hide();
                                 this.remove();
 
@@ -230,17 +215,12 @@ export default class StageFirst {
                                 that.model.editStage(that.mapId, 2);
                                 that.model.editCustomBoundariesCoords(that.mapId, that.mapBoundariesCoords);
                                 that.model.editCentroid(that.mapId, that.centroid);
-                                that.start();
-                        //     }
-                        
-                        // })
+                                that.start()
                       } break;
                    
                       default: break;
                     }
                 });
-
-
 
             } else {
                 this.showToast("Warning!","Pinning is not done correctly! please try again.","Reset",this)
