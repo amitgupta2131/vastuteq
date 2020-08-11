@@ -140,7 +140,8 @@ class Main extends CI_Controller
 	public function draw($id = null)
 	{
 		$data['propertyId'] = base64_decode($id);
-		// print_r($data);die;
+		$data['objects'] =   $this->MainModel->selectAllFromWhere('icons',array('category'=>'objects'));	
+		$data['activities'] =   $this->MainModel->selectAllFromWhere('icons',array('category'=>'activities'));	
 		$this->load->view('draw',$data);
 	}
 

@@ -164,16 +164,16 @@ export default class StageSecond {
     })
 
     degreeUpdateBtn.on("click", function() {
-      that.actionbox.clear().hide();
+      
       let theta = (angleInputbox.property('value') == "") ? 0 : parseFloat(angleInputbox.property('value'));
       that.angle = -theta;
 
-      if ((pointA == undefined && pointB == undefined) || (pointA == "" && pointB == "")) {
+      if ((pointA == undefined || pointB == undefined) || (pointA == "" || pointB == "")) {
         this.showToast("Warning!", "Please select desired wall.");
-
       } else {
         face = $(".face-select").find(":selected").text();
         localStorage.setItem("face", face);
+        that.actionbox.clear().hide();
         that.faceCoords = [pointA, pointB];
         that.model.editFaceCoords(that.mapId, [pointA, pointB]);
         that.model.editFaceWall(that.mapId,face);

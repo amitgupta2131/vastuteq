@@ -59,3 +59,6 @@ body {
 .display-report-area {
   height: 100%;
 }
+.heading{
+  font-weight: bold;
+}

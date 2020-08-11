@@ -66,17 +66,18 @@
     //////////////////////////////// --- H E A D E R ---  ////////////////////////////////
     -->
 
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-0 pr-2 pl-2">
+    <!-- <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-0 pr-2 pl-2">
         <a class="navbar-brand m-auto" href="#">VastuTeq</a>
-    </nav>
-
-    <nav class="navbar navbar-expand-lg navbar-light bg-light p-0 pl-2 border">
+    </nav> -->
+    <?php include 'topbar.php' ?>
+    <input class="import-map-file d-none" type="file">
+    <!-- <nav class="navbar navbar-expand-lg navbar-light bg-light p-0 pl-2 border" style = "z-index:100;">
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
 
                 <li class="nav-item dropdown active">
                     <a class="nav-link dropdown-toggle menu-item" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        File
+                        File 
                     </a>
                     <div class="dropdown-menu active" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="#" data-behavior="create" data-menu-item="create-map" id="open-btn">Create Map</a>
@@ -144,170 +145,22 @@
                 </li>
             </ul>
         </div>
-    </nav>
+    </nav> -->
 
 
-    <!-- <section class="header">
-        <section class="header" style="position:unset">
-            <div class="title-bar" style="justify-content:left;">
-                <img class="logo" style="margin-left:20px" src="<?php echo base_url('assets/logo/logo2.svg') ?>" alt="logo" width="130">
-                M E N U  I T E M S
-                <div class="menu-sidebar">
-                    <ul class="nav menu" style="float:right">
-                        <li class="nav-item">
-                            <a href="#">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="<?php echo base_url('Main') ?>" data-menu-item="dashboard">Dashboard</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="<?php echo base_url('Main/ayadhi') ?>" data-menu-item="aayadi-calculator">Ayadi Calculator</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="<?php echo base_url('Main/devtas') ?>" data-menu-item="devtas">Devtas</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="<?php echo base_url('Main/propertyInfo') ?>" onclick="removeHouseMap()" data-menu-item="new-project"><i class="fas fa-plus"></i>&nbsp;&nbsp;New Project</a>
-                        </li>
-                        <li class="nav-item">
-                            <img class="profile thumbnail rounded-circle" src="<?php echo base_url('assets/images/thumbnail.png') ?>" alt="user" width="20" id="profileButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="profileButton">
-                                <a class="dropdown-item modal__trigger" href="#" data-modal="#modal3"><i class="fas fa-cog"></i>&nbsp;&nbsp;Setting</a>
-                                <a class="dropdown-item" href="<?php echo base_url('Main/logout') ?>"><i class="fas fa-sign-out-alt"></i>&nbsp;&nbsp;Sign Out</a>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <div id="dynamicBar">
-            <nav aria-label="breadcrumb">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Drafts</li>
-                </ol>
-            </nav>
-            <div class="dynamicbar-right">
-                <a href="<?php echo base_url('Main/propertyInfo') ?>" class="btn btn-sm btn-outline rounded-0"><i class="fas fa-plus"></i>&nbsp;&nbsp;New Project</a>
-                <img class="profile thumbnail rounded-circle" src="<?php echo base_url('assets/images/thumbnail.png') ?>" alt="user" width="20" id="profileButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="profileButton">
-                    <a class="dropdown-item modal__trigger" href="#" data-modal="#modal3"><i class="fas fa-cog"></i>&nbsp;&nbsp;Setting</a>
-                    <a class="dropdown-item" href="<?php echo base_url('Main/logout') ?>"><i class="fas fa-sign-out-alt"></i>&nbsp;&nbsp;Sign Out</a>
-                </div>
-            </div>
-        </div>
-        </section>
-        <nav class="navbar navbar-expand-lg navbar-light border">
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active">
-                  <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-                </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link  text-dark dropdown-toggle menu-item" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            File
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="#" data-behavior="create" id="open-btn">Create Map</a>
-                            <a class="dropdown-item" href="#" data-behavior="import" >Import Map</a>
-                            <input class="import-map-file" type="file" style="display:none">
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#" data-menu-item="add image">Add Image</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#" data-menu-item="save">Save</a>
-                            <a class="dropdown-item object" href="#" data-menu-item="vpm">VPM</a>
-                            <a class="dropdown-item object" href="#" data-menu-item="mvpc">MVPC</a> 
-                        </div>
-                    </li>
-
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle text-dark menu-item" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Edit
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="#">Undo</a>
-                            <a class="dropdown-item" href="#">Redo</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Clear</a>
-                        </div>
-                    </li>
-
-                    <li class="nav-item dropdown">
-                        <a class="nav-link text-dark dropdown-toggle menu-item" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Options
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="#" data-menu-item="measuring-tape">Set measurement</a>
-                            <a class="dropdown-item" href="#" data-menu-item="get-measurement">Get measurement</a>
-                        </div>
-                    </li>
-                </ul>
-
-                <ul class="navbar-nav mr-auto drawing-tools d-none">
-                    <li class="nav-item dropdown ml-2 mr-2">
-                        <a class="nav-link tool menu-item" href="#" role="button" data-tool="select"><img src="<?php echo base_url('assets/icons/select.svg') ?>" alt="tool" width="20"></a>
-                    </li>
-                    <li class="nav-item dropdown ml-2 mr-2">
-                        <a class="nav-link tool menu-item" href="#" role="button" data-tool="select"><img src="<?php echo base_url('assets/icons/text.svg') ?>" alt="tool" width="20"></a>
-                    </li>
-                    <li class="nav-item dropdown ml-2 mr-2">
-                        <a class="nav-link tool menu-item" href="#" role="button" data-tool="select"><img src="<?php echo base_url('assets/icons/pen.svg') ?>" alt="tool" width="20"></a>
-                    </li>
-                    <li class="nav-item dropdown ml-2 mr-2">
-                        <a class="nav-link tool menu-item" href="#" role="button" data-tool="rectangle"><img src="<?php echo base_url('assets/icons/rectangle.svg') ?>" alt="tool" width="20"></a>
-                    </li>
-                    <li class="nav-item dropdown ml-2 mr-2">
-                        <a class="nav-link tool menu-item" href="#" role="button" data-tool="line"><img src="<?php echo base_url('assets/icons/line.svg') ?>" alt="tool" width="20" title="line"></a>
-                    </li>
-                    <li class="nav-item dropdown ml-2 mr-2">
-                        <a class="nav-link tool menu-item" href="#" role="button" data-tool="polygon"><img src="<?php echo base_url('assets/icons/polygon.svg') ?>" alt="tool" width="20"></a>
-                    </li>
-                </ul>
-
-                <ul class="navbar-nav mr-2 print-wrapper d-none">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#" id="print" name="print">
-                            <img src="<?php echo base_url('assets/icons/print.svg') ?>" alt="" width="20">
-                        </a>
-                    </li>
-                </ul>
-                <ul class="navbar-nav mr-1 zoom-state-wrapper d-none">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#" id="zoom-state" data-zoom-state="disable" name="zoom-state">
-                            <img src="<?php echo base_url('assets/icons/zoom-disable.svg') ?>" alt="" width="20">
-                        </a>
-                    </li>
-                </ul>
-                <ul class="navbar-nav">
-                    <li class="nav-item dropdown zoom-wrapper d-none">
-                        <div class="container mr-1">
-                            <input type="number" class="form-control form-control-sm zoom-display" value="100">
-                            <a href="#" class="dropdown-toggle zoom-options" id="navbarDropdown" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"></a>
-                            <span class="percent-icon">%</span>
-
-                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="#" data-zoom="35">35 %</a>
-                                <a class="dropdown-item" href="#" data-zoom="50">50 %</a>
-                                <a class="dropdown-item" href="#" data-zoom="100">100 %</a>
-                                <a class="dropdown-item" href="#" data-zoom="200">200 %</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#" data-zoom="fit">Fit to screen</a>
-                            </div>
-                        </div>
-
-                    </li>
-                </ul>
-            </div>
-        </nav>
-    </section> -->
-
+   
     <!-- 
     //////////////////////////////// --- D R A W  A R E A ---  ////////////////////////////////
     -->
     <section id="drawArea" class="d-flex flex-column justify-content-center align-items-center">
-        <p><span class="text-primary" data-behavior="import">Import Map</span></p>
-        <p><span class="text-primary" data-behavior="create">Create Map</span></p>
+    <div class="row col-sm-5" style="margin-top:100px;">
+       <div class="col-sm-6 text-primary" data-behavior="import">
+            <center><img src= "<?php echo base_url('assets/icons/importMap.svg')?>" width="100px" >Import Map</img></center>
+       </div>
+       <div class="col-sm-6 text-primary" data-behavior="create">
+            <center><img src= "<?php echo base_url('assets/icons/createMap.svg')?>" width="100px" >Create Map</img></center>
+       </div>
     </section>
-
 
     <!-- PAINT TOOLBOX LEFT START -->
 
@@ -637,7 +490,7 @@
                 <a class="nav-link active" id="pills-properties-tab" data-toggle="tab" href="#pills-properties" role="tab" aria-controls="properties" aria-selected="true">Properties</a>
             </li>
             <li class="nav-item" role="presentation">
-                <a class="nav-link disabled" id="pills-object-tab" data-toggle="tab" href="#pills-object" role="tab" aria-controls="object" aria-selected="false">Object/Activity</a>
+                <a class="nav-link disabled" id="pills-object-tab" data-toggle="tab" href="#pills-object-container" role="tab" aria-controls="object" aria-selected="false">Object/Activity</a>
             </li>
         </ul>
 
@@ -646,21 +499,18 @@
                 <!-- PROPERTIES SECTION -->
 
                 <div class="input-group input-group-sm mb-3 d-none zoom-functionality">
-                    <div class="input-group-prepend bg-white">
-                        <span class="input-group-text" id="inputGroup-sizing-sm">
-                            <img src="<?php echo base_url('assets/icons/zoom-in.svg') ?>" alt="" width="18">
-                        </span>
-                    </div>
                     <input type="number" class="form-control zoom-display" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" value="100">
                     <div class="input-group-append">
-                        <button type="button" class="btn btn-outline-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <span class="sr-only">Toggle Dropdown</span>
+                        <button type="button" class="btn btn-outline-secondary p-0 border-0 dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span class="input-group-text border_style" id="inputGroup-sizing-sm">
+                                <img src="<?php echo base_url('assets/icons/zoom-in.svg') ?>" alt="" width="18">
+                            </span>
                         </button>
                         <div class="dropdown-menu">
-                        <a class="dropdown-item" href="#" data-zoom="50">50%</a>
-                        <a class="dropdown-item" href="#" data-zoom="75">75%</a>
-                        <a class="dropdown-item" href="#" data-zoom="100">100%</a>
-                        <a class="dropdown-item" href="#" data-zoom="200">200%</a>
+                            <a class="dropdown-item" href="#" data-zoom="50">50%</a>
+                            <a class="dropdown-item" href="#" data-zoom="75">75%</a>
+                            <a class="dropdown-item" href="#" data-zoom="100">100%</a>
+                            <a class="dropdown-item" href="#" data-zoom="200">200%</a>
                         </div>
                     </div>
                 </div>
@@ -702,65 +552,313 @@
                 </div>
 
             </div>
-            <div class="tab-pane fade" id="pills-object" role="tabpanel" aria-labelledby="pills-object-tab">
+            <div class="tab-pane fade" id="pills-object-container" role="tabpanel" aria-labelledby="pills-object-tab">
                 <!-- OBJECT AND ACTIVITY SECTION -->
                 <ul class="nav nav-pills pb-2 pt-2" id="myTab" role="tablist">
                     <li class="nav-item" role="presentation">
-                        <a class="nav-link active" id="pills-object-tab" data-toggle="tab" href="#pills-object" role="tab" aria-controls="object" aria-selected="true">Object</a>
+                        <a class="nav-link active" id="pills-object-tab1" data-toggle="tab" href="#pills-object" role="tab" aria-controls="object" aria-selected="true">Object</a>
                     </li>
                     <li class="nav-item" role="presentation">
                         <a class="nav-link" id="pills-activity-tab" data-toggle="tab" href="#pills-activity" role="tab" aria-controls="activity" aria-selected="false">Activity</a>
                     </li>
                 </ul>
 
-                <div class="tab-content" id="pills-tabContent">
-                    <div class="tab-pane fade show active" id="pills-object" role="tabpanel" aria-labelledby="pills-object-tab">
+                <div class="tab-content" id="pills-TabContent">
+                    <div class="tab-pane fade show active" id="pills-object" role="tabpanel" aria-labelledby="pills-object-tab1">
                         <!-- OBJECT SECTION -->
 
-                        <input class="form-control form-control-sm text-sm mb-3" type="text" placeholder="Search...">
+                        <!-- <input class="form-control form-control-sm text-sm mb-3" type="text" placeholder="Search..."> -->
                         <div class="col-md-12 border p-1">
-                            <div class="col-md-12 mt-2 mb-2">
-                                <div class="heading text-capitalize text-sm">Sofa</div>
-                                <div class="row">
-                                    <div class="col-md-4 border d-flex flex-column justify-content-center align-items-center object-item cursor-pointer" data-object-item="sofa" data-src="<?php echo base_url('assets/objects/sofa_icon.svg') ?>" title="sofa1">
-                                        <img src="<?php echo base_url('assets/objects/sofa_icon.svg') ?>" alt="" width="35">
-                                    </div>
-                                    <div class="col-md-4 border d-flex flex-column justify-content-center align-items-center object-item cursor-pointer" data-object-item="sofa" data-src="<?php echo base_url('assets/objects/sofa_icon.svg') ?>" title="sofa2">
-                                        <img src="<?php echo base_url('assets/objects/sofa_icon.svg') ?>" alt="" width="35">
-                                    </div>
-                                    <div class="col-md-4 border d-flex flex-column justify-content-center align-items-center object-item cursor-pointer" data-object-item="sofa" data-src="<?php echo base_url('assets/objects/sofa_icon.svg') ?>" title="sofa3">
-                                        <img src="<?php echo base_url('assets/objects/sofa_icon.svg') ?>" alt="" width="35">
-                                    </div>
+                            <div class="col-md-12 mt-2 mb-2 border-bot">
+                                <div class="heading text-capitalize text-sm font-weight-bold" data-toggle="collapse" data-target="#collapse1" aria-expanded="false" aria-controls="collapse1">
+                                    <img class="img_pos" src="<?php echo base_url('assets/objects/') . 'single.svg' ?>" alt="" width="20">
+                                    Almirah & Cabinets</div>
+                                <div class="row collapse" id="collapse1">
+                                    <?php
+                                    $arr = array_filter($objects, function ($ar) {
+                                        return ($ar['accessories'] == 'ALMIRAH & CABINETS');
+                                    });
+                                    for ($i = 0; $i < count($arr); $i++) {
+                                    ?>
+                                        <div class="col-md-4 border d-flex flex-column justify-content-center align-items-center object-item cursor-pointer" data-object-item="<?php echo $arr[$i]['type'] ?>" data-src="<?php echo base_url('assets/objects/') . $arr[$i]['imagePath'] ?>" title="<?php echo $arr[$i]['type'] ?>">
+                                            <img src="<?php echo base_url('assets/objects/') . $arr[$i]['imagePath'] ?>" alt="" width="35">
+                                        </div>
+                                    <?php } ?>
                                 </div>
                             </div>
-                            <div class="col-md-12 mt-2 mb-2">
-                                <div class="heading text-capitalize text-sm">Bed</div>
-                                <div class="row">
-                                    <div class="col-md-4 border d-flex flex-column justify-content-center align-items-center object-item cursor-pointer" data-object-item="bed" data-src="<?php echo base_url('assets/objects/single_bed_icon.svg') ?>" title="bed">
-                                        <img src="<?php echo base_url('assets/objects/single_bed_icon.svg') ?>" alt="" width="35">
-                                    </div>
-                                    <div class="col-md-4 border d-flex flex-column justify-content-center align-items-center object-item cursor-pointer" data-object-item="bed" data-src="<?php echo base_url('assets/objects/single_bed_icon.svg') ?>" title="bed">
-                                        <img src="<?php echo base_url('assets/objects/single_bed_icon.svg') ?>" alt="" width="35">
-                                    </div>
-                                    <div class="col-md-4 border d-flex flex-column justify-content-center align-items-center object-item cursor-pointer" data-object-item="bed" data-src="<?php echo base_url('assets/objects/single_bed_icon.svg') ?>" title="bed">
-                                        <img src="<?php echo base_url('assets/objects/single_bed_icon.svg') ?>" alt="" width="35">
-                                    </div>
+                            <div class="col-md-12 mt-2 mb-2 border-bot">
+                                <div class="heading text-capitalize text-sm font-weight-bold" data-toggle="collapse" data-target="#collapse2" aria-expanded="false" aria-controls="collapse2">
+                                    <img class="img_pos" src="<?php echo base_url('assets/objects/') . 'shower.svg' ?>" alt="" width="20">
+                                    Bathroom Accessories</div>
+                                <div class="row collapse" id="collapse2">
+                                    <?php
+                                    $arr = array_filter($objects, function ($ar) {
+                                        return ($ar['accessories'] == 'BATHROOM ACCESSORIES');
+                                    });
+                                    foreach ($arr as $key => $value) {
+                                    ?>
+                                        <div class="col-md-4 border d-flex flex-column justify-content-center align-items-center object-item cursor-pointer" data-object-item="<?php echo $value['type'] ?>" data-src="<?php echo base_url('assets/objects/') . $value['imagePath'] ?>" title="<?php echo $value['type'] ?>">
+                                            <img src="<?php echo base_url('assets/objects/') . $value['imagePath'] ?>" alt="" width="35">
+                                        </div>
+                                    <?php } ?>
                                 </div>
                             </div>
-                            <div class="col-md-12 mt-2 mb-2">
-                                <div class="heading text-capitalize text-sm">Wardrobe</div>
-                                <div class="row">
-                                    <div class="col-md-4 border d-flex flex-column justify-content-center align-items-center object-item cursor-pointer" data-object-item="wardrobe" data-src="<?php echo base_url('assets/objects/wardrobe_icon.svg') ?>" title="wardrobe">
-                                        <img src="<?php echo base_url('assets/objects/wardrobe_icon.svg') ?>" alt="" width="35">
-                                    </div>
-                                    <div class="col-md-4 border d-flex flex-column justify-content-center align-items-center object-item cursor-pointer" data-object-item="wardrobe" data-src="<?php echo base_url('assets/objects/wardrobe_icon.svg') ?>" title="wardrobe">
-                                        <img src="<?php echo base_url('assets/objects/wardrobe_icon.svg') ?>" alt="" width="35">
-                                    </div>
-                                    <div class="col-md-4 border d-flex flex-column justify-content-center align-items-center object-item cursor-pointer" data-object-item="wardrobe" data-src="<?php echo base_url('assets/objects/wardrobe_icon.svg') ?>" title="wardrobe">
-                                        <img src="<?php echo base_url('assets/objects/wardrobe_icon.svg') ?>" alt="" width="35">
-                                    </div>
+                            <div class="col-md-12 mt-2 mb-2 border-bot">
+                                <div class="heading text-capitalize text-sm font-weight-bold" data-toggle="collapse" data-target="#collapse3" aria-expanded="false" aria-controls="collapse3">
+                                    <img class="img_pos" src="<?php echo base_url('assets/objects/') . 'acquarium.svg' ?>" alt="" width="20">
+                                    Decorative Items</div>
+                                <div class="row collapse" id="collapse3">
+                                    <?php
+                                    $arr = array_filter($objects, function ($ar) {
+                                        return ($ar['accessories'] == 'DECORATIVE ITEMS');
+                                    });
+                                    foreach ($arr as $key => $value) {
+                                    ?>
+                                        <div class="col-md-4 border d-flex flex-column justify-content-center align-items-center object-item cursor-pointer" data-object-item="<?php echo $value['type'] ?>" data-src="<?php echo base_url('assets/objects/') . $value['imagePath'] ?>" title="<?php echo $value['type'] ?>">
+                                            <img src="<?php echo base_url('assets/objects/') . $value['imagePath'] ?>" alt="" width="35">
+                                        </div>
+                                    <?php } ?>
                                 </div>
                             </div>
+                            <div class="col-md-12 mt-2 mb-2 border-bot">
+                                <div class="heading text-capitalize text-sm font-weight-bold" data-toggle="collapse" data-target="#collapse4" aria-expanded="false" aria-controls="collapse4">
+                                    <img class="img_pos" src="<?php echo base_url('assets/objects/') . 'transformer.svg' ?>" alt="" width="20">
+                                    Electrical Items</div>
+                                <div class="row collapse" id="collapse4">
+                                    <?php
+                                    $arr = array_filter($objects, function ($ar) {
+                                        return ($ar['accessories'] == 'ELECTRICAL ITEMS');
+                                    });
+                                    foreach ($arr as $key => $value) {
+                                    ?>
+                                        <div class="col-md-4 border d-flex flex-column justify-content-center align-items-center object-item cursor-pointer" data-object-item="<?php echo $value['type'] ?>" data-src="<?php echo base_url('assets/objects/') . $value['imagePath'] ?>" title="<?php echo $value['type'] ?>">
+                                            <img src="<?php echo base_url('assets/objects/') . $value['imagePath'] ?>" alt="" width="35">
+                                        </div>
+                                    <?php } ?>
+                                </div>
+                            </div>
+                            <div class="col-md-12 mt-2 mb-2 border-bot">
+                                <div class="heading text-capitalize text-sm font-weight-bold" data-toggle="collapse" data-target="#collapse5" aria-expanded="false" aria-controls="collapse5">
+                                    <img class="img_pos" src="<?php echo base_url('assets/objects/') . 'speaker.svg' ?>" alt="" width="20">
+                                    Electronic Item</div>
+                                <div class="row collapse" id="collapse5">
+                                    <?php
+                                    $arr = array_filter($objects, function ($ar) {
+                                        return ($ar['accessories'] == 'ELECTRONIC ITEM');
+                                    });
+                                    foreach ($arr as $key => $value) {
+                                    ?>
+                                        <div class="col-md-4 border d-flex flex-column justify-content-center align-items-center object-item cursor-pointer" data-object-item="<?php echo $value['type'] ?>" data-src="<?php echo base_url('assets/objects/') . $value['imagePath'] ?>" title="<?php echo $value['type'] ?>">
+                                            <img src="<?php echo base_url('assets/objects/') . $value['imagePath'] ?>" alt="" width="35">
+                                        </div>
+                                    <?php } ?>
+                                </div>
+                            </div>
+                            <div class="col-md-12 mt-2 mb-2 border-bot">
+                                <div class="heading text-capitalize text-sm font-weight-bold" data-toggle="collapse" data-target="#collapse6" aria-expanded="false" aria-controls="collapse6">
+                                    <img class="img_pos" src="<?php echo base_url('assets/objects/') . 'floor.svg' ?>" alt="" width="20">
+                                    Entertainment</div>
+                                <div class="row collapse" id="collapse6">
+                                    <?php
+                                    $arr = array_filter($objects, function ($ar) {
+                                        return ($ar['accessories'] == 'ENTERTAINMENT');
+                                    });
+                                    foreach ($arr as $key => $value) {
+                                    ?>
+                                        <div class="col-md-4 border d-flex flex-column justify-content-center align-items-center object-item cursor-pointer" data-object-item="<?php echo $value['type'] ?>" data-src="<?php echo base_url('assets/objects/') . $value['imagePath'] ?>" title="<?php echo $value['type'] ?>">
+                                            <img src="<?php echo base_url('assets/objects/') . $value['imagePath'] ?>" alt="" width="35">
+                                        </div>
+                                    <?php } ?>
+                                </div>
+                            </div>
+                            <div class="col-md-12 mt-2 mb-2 border-bot">
+                                <div class="heading text-capitalize text-sm font-weight-bold" data-toggle="collapse" data-target="#collapse7" aria-expanded="false" aria-controls="collapse7">
+                                    <img class="img_pos" src="<?php echo base_url('assets/objects/') . 'sofa_icon.svg' ?>" alt="" width="20">
+                                    Furniture</div>
+                                <div class="row collapse" id="collapse7">
+                                    <?php
+                                    $arr = array_filter($objects, function ($ar) {
+                                        return ($ar['accessories'] == 'FURNITURE');
+                                    });
+                                    foreach ($arr as $key => $value) {
+                                    ?>
+                                        <div class="col-md-4 border d-flex flex-column justify-content-center align-items-center object-item cursor-pointer" data-object-item="<?php echo $value['type'] ?>" data-src="<?php echo base_url('assets/objects/sofa_icon.svg') ?>" title="<?php echo $value['type'] ?>">
+                                            <img src="<?php echo base_url('assets/objects/sofa_icon.svg') ?>" alt="" width="35">
+                                        </div>
+                                    <?php } ?>
+                                </div>
+                            </div>
+                            <div class="col-md-12 mt-2 mb-2 border-bot">
+                                <div class="heading text-capitalize text-sm font-weight-bold" data-toggle="collapse" data-target="#collapse8" aria-expanded="false" aria-controls="collapse8">
+                                    <img class="img_pos" src="<?php echo base_url('assets/objects/') . 'sofa_icon.svg' ?>" alt="" width="20">
+                                    Furniture Garden</div>
+                                <div class="row collapse" id="collapse8">
+                                    <?php
+                                    $arr = array_filter($objects, function ($ar) {
+                                        return ($ar['accessories'] == 'FURNITURE (GARDEN)');
+                                    });
+                                    foreach ($arr as $key => $value) {
+                                    ?>
+                                        <div class="col-md-4 border d-flex flex-column justify-content-center align-items-center object-item cursor-pointer" data-object-item="<?php echo $value['type'] ?>" data-src="<?php echo base_url('assets/objects/sofa_icon.svg') ?>" title="<?php echo $value['type'] ?>">
+                                            <img src="<?php echo base_url('assets/objects/sofa_icon.svg') ?>" alt="" width="35">
+                                        </div>
+                                    <?php } ?>
+                                </div>
+                            </div>
+                            <div class="col-md-12 mt-2 mb-2 border-bot">
+                                <div class="heading text-capitalize text-sm font-weight-bold" data-toggle="collapse" data-target="#collapse9" aria-expanded="false" aria-controls="collapse9">
+                                    <img class="img_pos" src="<?php echo base_url('assets/objects/') . 'sofa_icon.svg' ?>" alt="" width="20">
+                                    Kitchen Accesories</div>
+                                <div class="row collapse" id="collapse9">
+                                    <?php
+                                    $arr = array_filter($objects, function ($ar) {
+                                        return ($ar['accessories'] == 'KITCHEN ACCESSORIES');
+                                    });
+                                    foreach ($arr as $key => $value) {
+                                    ?>
+                                        <div class="col-md-4 border d-flex flex-column justify-content-center align-items-center object-item cursor-pointer" data-object-item="<?php echo $value['type'] ?>" data-src="<?php echo base_url('assets/objects/sofa_icon.svg') ?>" title="<?php echo $value['type'] ?>">
+                                            <img src="<?php echo base_url('assets/objects/sofa_icon.svg') ?>" alt="" width="35">
+                                        </div>
+                                    <?php } ?>
+                                </div>
+                            </div>
+                            <div class="col-md-12 mt-2 mb-2 border-bot">
+                                <div class="heading text-capitalize text-sm font-weight-bold" data-toggle="collapse" data-target="#collapse10" aria-expanded="false" aria-controls="collapse10">
+                                    <img class="img_pos" src="<?php echo base_url('assets/objects/') . 'sofa_icon.svg' ?>" alt="" width="20">
+                                    Machinery</div>
+                                <div class="row collapse" id="collapse10">
+                                    <?php
+                                    $arr = array_filter($objects, function ($ar) {
+                                        return ($ar['accessories'] == 'MACHINERY');
+                                    });
+                                    foreach ($arr as $key => $value) {
+                                    ?>
+                                        <div class="col-md-4 border d-flex flex-column justify-content-center align-items-center object-item cursor-pointer" data-object-item="<?php echo $value['type'] ?>" data-src="<?php echo base_url('assets/objects/sofa_icon.svg') ?>" title="<?php echo $value['type'] ?>">
+                                            <img src="<?php echo base_url('assets/objects/sofa_icon.svg') ?>" alt="" width="35">
+                                        </div>
+                                    <?php } ?>
+                                </div>
+                            </div>
+                            <div class="col-md-12 mt-2 mb-2 border-bot">
+                                <div class="heading text-capitalize text-sm font-weight-bold" data-toggle="collapse" data-target="#collapse11" aria-expanded="false" aria-controls="collapse11">
+                                    <img class="img_pos" src="<?php echo base_url('assets/objects/') . 'sofa_icon.svg' ?>" alt="" width="20">
+                                    Medical</div>
+                                <div class="row collapse" id="collapse11">
+                                    <?php
+                                    $arr = array_filter($objects, function ($ar) {
+                                        return ($ar['accessories'] == 'MEDICAL');
+                                    });
+                                    foreach ($arr as $key => $value) {
+                                    ?>
+                                        <div class="col-md-4 border d-flex flex-column justify-content-center align-items-center object-item cursor-pointer" data-object-item="<?php echo $value['type'] ?>" data-src="<?php echo base_url('assets/objects/sofa_icon.svg') ?>" title="<?php echo $value['type'] ?>">
+                                            <img src="<?php echo base_url('assets/objects/sofa_icon.svg') ?>" alt="" width="35">
+                                        </div>
+                                    <?php } ?>
+                                </div>
+                            </div>
+                            <div class="col-md-12 mt-2 mb-2 border-bot">
+                                <div class="heading text-capitalize text-sm font-weight-bold" data-toggle="collapse" data-target="#collapse12" aria-expanded="false" aria-controls="collapse12">
+                                    <img class="img_pos" src="<?php echo base_url('assets/objects/') . 'sofa_icon.svg' ?>" alt="" width="20">
+                                    Miscellaneous</div>
+                                <div class="row collapse" id="collapse12">
+                                    <?php
+                                    $arr = array_filter($objects, function ($ar) {
+                                        return ($ar['accessories'] == 'MISCELLANEOUS');
+                                    });
+                                    foreach ($arr as $key => $value) {
+                                    ?>
+                                        <div class="col-md-4 border d-flex flex-column justify-content-center align-items-center object-item cursor-pointer" data-object-item="<?php echo $value['type'] ?>" data-src="<?php echo base_url('assets/objects/sofa_icon.svg') ?>" title="<?php echo $value['type'] ?>">
+                                            <img src="<?php echo base_url('assets/objects/sofa_icon.svg') ?>" alt="" width="35">
+                                        </div>
+                                    <?php } ?>
+                                </div>
+                            </div>
+                            <div class="col-md-12 mt-2 mb-2 border-bot">
+                                <div class="heading text-capitalize text-sm font-weight-bold" data-toggle="collapse" data-target="#collapse13" aria-expanded="false" aria-controls="collapse13">
+                                    <img class="img_pos" src="<?php echo base_url('assets/objects/') . 'sofa_icon.svg' ?>" alt="" width="20">
+                                    Office Accessories</div>
+                                <div class="row collapse" id="collapse13">
+                                    <?php
+                                    $arr = array_filter($objects, function ($ar) {
+                                        return ($ar['accessories'] == 'OFFICE ACCESSORIES');
+                                    });
+                                    foreach ($arr as $key => $value) {
+                                    ?>
+                                        <div class="col-md-4 border d-flex flex-column justify-content-center align-items-center object-item cursor-pointer" data-object-item="<?php echo $value['type'] ?>" data-src="<?php echo base_url('assets/objects/sofa_icon.svg') ?>" title="<?php echo $value['type'] ?>">
+                                            <img src="<?php echo base_url('assets/objects/sofa_icon.svg') ?>" alt="" width="35">
+                                        </div>
+                                    <?php } ?>
+                                </div>
+                            </div>
+                            <div class="col-md-12 mt-2 mb-2 border-bot">
+                                <div class="heading text-capitalize text-sm font-weight-bold" data-toggle="collapse" data-target="#collapse14" aria-expanded="false" aria-controls="collapse14">
+                                    <img class="img_pos" src="<?php echo base_url('assets/objects/') . 'sofa_icon.svg' ?>" alt="" width="20">
+                                    Plant Kingdom</div>
+                                <div class="row collapse" id="collapse14">
+                                    <?php
+                                    $arr = array_filter($objects, function ($ar) {
+                                        return ($ar['accessories'] == 'PLANT KINGDOM');
+                                    });
+                                    foreach ($arr as $key => $value) {
+                                    ?>
+                                        <div class="col-md-4 border d-flex flex-column justify-content-center align-items-center object-item cursor-pointer" data-object-item="<?php echo $value['type'] ?>" data-src="<?php echo base_url('assets/objects/sofa_icon.svg') ?>" title="<?php echo $value['type'] ?>">
+                                            <img src="<?php echo base_url('assets/objects/sofa_icon.svg') ?>" alt="" width="35">
+                                        </div>
+                                    <?php } ?>
+                                </div>
+                            </div>
+                            <div class="col-md-12 mt-2 mb-2 border-bot">
+                                <div class="heading text-capitalize text-sm font-weight-bold" data-toggle="collapse" data-target="#collapse15" aria-expanded="false" aria-controls="collapse15">
+                                    <img class="img_pos" src="<?php echo base_url('assets/objects/') . 'sofa_icon.svg' ?>" alt="" width="20">
+                                    Pooja Items</div>
+                                <div class="row collapse" id="collapse15">
+                                    <?php
+                                    $arr = array_filter($objects, function ($ar) {
+                                        return ($ar['accessories'] == 'POOJA ITEMS');
+                                    });
+                                    foreach ($arr as $key => $value) {
+                                    ?>
+                                        <div class="col-md-4 border d-flex flex-column justify-content-center align-items-center object-item cursor-pointer" data-object-item="<?php echo $value['type'] ?>" data-src="<?php echo base_url('assets/objects/sofa_icon.svg') ?>" title="<?php echo $value['type'] ?>">
+                                            <img src="<?php echo base_url('assets/objects/sofa_icon.svg') ?>" alt="" width="35">
+                                        </div>
+                                    <?php } ?>
+                                </div>
+                            </div>
+                            <div class="col-md-12 mt-2 mb-2 border-bot">
+                                <div class="heading text-capitalize text-sm font-weight-bold" data-toggle="collapse" data-target="#collapse16" aria-expanded="false" aria-controls="collapse16">
+                                    <img class="img_pos" src="<?php echo base_url('assets/objects/') . 'sofa_icon.svg' ?>" alt="" width="20">
+                                    Teaching Aids</div>
+                                <div class="row collapse" id="collapse16">
+                                    <?php
+                                    $arr = array_filter($objects, function ($ar) {
+                                        return ($ar['accessories'] == 'TEACHHING AIDS');
+                                    });
+                                    foreach ($arr as $key => $value) {
+                                    ?>
+                                        <div class="col-md-4 border d-flex flex-column justify-content-center align-items-center object-item cursor-pointer" data-object-item="<?php echo $value['type'] ?>" data-src="<?php echo base_url('assets/objects/sofa_icon.svg') ?>" title="<?php echo $value['type'] ?>">
+                                            <img src="<?php echo base_url('assets/objects/sofa_icon.svg') ?>" alt="" width="35">
+                                        </div>
+                                    <?php } ?>
+                                </div>
+                            </div>
+                            <div class="col-md-12 mt-2 mb-2 border-bot">
+                                <div class="heading text-capitalize text-sm font-weight-bold" data-toggle="collapse" data-target="#collapse17" aria-expanded="false" aria-controls="collapse17">
+                                    <img class="img_pos" src="<?php echo base_url('assets/objects/') . 'sofa_icon.svg' ?>" alt="" width="20">
+                                    Vehicle</div>
+                                <div class="row collapse" id="collapse17">
+                                    <?php
+                                    $arr = array_filter($objects, function ($ar) {
+                                        return ($ar['accessories'] == 'VEHICLE');
+                                    });
+                                    foreach ($arr as $key => $value) {
+                                    ?>
+                                        <div class="col-md-4 border d-flex flex-column justify-content-center align-items-center object-item cursor-pointer" data-object-item="<?php echo $value['type'] ?>" data-src="<?php echo base_url('assets/objects/sofa_icon.svg') ?>" title="<?php echo $value['type'] ?>">
+                                            <img src="<?php echo base_url('assets/objects/sofa_icon.svg') ?>" alt="" width="35">
+                                        </div>
+                                    <?php } ?>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
 
@@ -769,55 +867,221 @@
 
                         <input class="form-control form-control-sm text-sm mb-3" type="text" placeholder="Search...">
                         <div class="col-md-12 border p-1">
-                            <div class="col-md-12 mt-2 mb-2">
-                                <div class="heading text-capitalize text-sm">Sofa</div>
-                                <div class="row">
-                                    <div class="col-md-4 border d-flex flex-column justify-content-center align-items-center object-item cursor-pointer" data-object-item="sofa" data-src="<?php echo base_url('assets/objects/sofa_icon.svg') ?>" title="sofa">
-                                        <img src="<?php echo base_url('assets/objects/sofa_icon.svg') ?>" alt="" width="35">
-                                    </div>
-                                    <div class="col-md-4 border d-flex flex-column justify-content-center align-items-center object-item cursor-pointer" data-object-item="sofa" data-src="<?php echo base_url('assets/objects/sofa_icon.svg') ?>" title="sofa">
-                                        <img src="<?php echo base_url('assets/objects/sofa_icon.svg') ?>" alt="" width="35">
-                                    </div>
-                                    <div class="col-md-4 border d-flex flex-column justify-content-center align-items-center object-item cursor-pointer" data-object-item="sofa" data-src="<?php echo base_url('assets/objects/sofa_icon.svg') ?>" title="sofa">
-                                        <img src="<?php echo base_url('assets/objects/sofa_icon.svg') ?>" alt="" width="35">
-                                    </div>
+                            <div class="col-md-12 mt-2 mb-2 border-bot">
+                                <div class="heading text-capitalize text-sm font-weight-bold" data-toggle="collapse" data-target="#collapse18" aria-expanded="false" aria-controls="collapse18">
+                                    <img class="img_pos" src="<?php echo base_url('assets/objects/') . 'sofa_icon.svg' ?>" alt="" width="20">
+                                    Bedroom</div>
+                                <div class="row collapse" id="collapse18">
+                                    <?php
+                                    $arr = array_filter($activities, function ($ar) {
+                                        return ($ar['accessories'] == 'BEDROOM');
+                                    });
+                                    foreach ($arr as $key => $value) {
+                                    ?>
+                                        <div class="col-md-4 border d-flex flex-column justify-content-center align-items-center object-item cursor-pointer" data-object-item="<?php echo $value['type'] ?>" data-src="<?php echo base_url('assets/objects/sofa_icon.svg') ?>" title="<?php echo $value['type'] ?>">
+                                            <img src="<?php echo base_url('assets/objects/sofa_icon.svg') ?>" alt="" width="35">
+                                        </div>
+                                    <?php } ?>
                                 </div>
                             </div>
-                            <div class="col-md-12 mt-2 mb-2">
-                                <div class="heading text-capitalize text-sm">Bed</div>
-                                <div class="row">
-                                    <div class="col-md-4 border d-flex flex-column justify-content-center align-items-center object-item cursor-pointer" data-object-item="bed" data-src="<?php echo base_url('assets/objects/single_bed_icon.svg') ?>" title="bed">
-                                        <img src="<?php echo base_url('assets/objects/single_bed_icon.svg') ?>" alt="" width="35">
-                                    </div>
-                                    <div class="col-md-4 border d-flex flex-column justify-content-center align-items-center object-item cursor-pointer" data-object-item="bed" data-src="<?php echo base_url('assets/objects/single_bed_icon.svg') ?>" title="bed">
-                                        <img src="<?php echo base_url('assets/objects/single_bed_icon.svg') ?>" alt="" width="35">
-                                    </div>
-                                    <div class="col-md-4 border d-flex flex-column justify-content-center align-items-center object-item cursor-pointer" data-object-item="bed" data-src="<?php echo base_url('assets/objects/single_bed_icon.svg') ?>" title="bed">
-                                        <img src="<?php echo base_url('assets/objects/single_bed_icon.svg') ?>" alt="" width="35">
-                                    </div>
+                            <div class="col-md-12 mt-2 mb-2 border-bot">
+                                <div class="heading text-capitalize text-sm font-weight-bold" data-toggle="collapse" data-target="#collapse19" aria-expanded="false" aria-controls="collapse19">
+                                    <img class="img_pos" src="<?php echo base_url('assets/objects/') . 'sofa_icon.svg' ?>" alt="" width="20">
+                                    Educational</div>
+                                <div class="row collapse" id="collapse19">
+                                    <?php
+                                    $arr = array_filter($activities, function ($ar) {
+                                        return ($ar['accessories'] == 'EDUCATIONAL');
+                                    });
+                                    foreach ($arr as $key => $value) {
+                                    ?>
+                                        <div class="col-md-4 border d-flex flex-column justify-content-center align-items-center object-item cursor-pointer" data-object-item="<?php echo $value['type'] ?>" data-src="<?php echo base_url('assets/objects/sofa_icon.svg') ?>" title="<?php echo $value['type'] ?>">
+                                            <img src="<?php echo base_url('assets/objects/sofa_icon.svg') ?>" alt="" width="35">
+                                        </div>
+                                    <?php } ?>
                                 </div>
                             </div>
-                            <div class="col-md-12 mt-2 mb-2">
-                                <div class="heading text-capitalize text-sm">Wardrobe</div>
-                                <div class="row">
-                                    <div class="col-md-4 border d-flex flex-column justify-content-center align-items-center object-item cursor-pointer" data-object-item="wardrobe" data-src="<?php echo base_url('assets/objects/wardrobe_icon.svg') ?>" title="wardrobe">
-                                        <img src="<?php echo base_url('assets/objects/wardrobe_icon.svg') ?>" alt="" width="35">
-                                    </div>
-                                    <div class="col-md-4 border d-flex flex-column justify-content-center align-items-center object-item cursor-pointer" data-object-item="wardrobe" data-src="<?php echo base_url('assets/objects/wardrobe_icon.svg') ?>" title="wardrobe">
-                                        <img src="<?php echo base_url('assets/objects/wardrobe_icon.svg') ?>" alt="" width="35">
-                                    </div>
-                                    <div class="col-md-4 border d-flex flex-column justify-content-center align-items-center object-item cursor-pointer" data-object-item="wardrobe" data-src="<?php echo base_url('assets/objects/wardrobe_icon.svg') ?>" title="wardrobe">
-                                        <img src="<?php echo base_url('assets/objects/wardrobe_icon.svg') ?>" alt="" width="35">
-                                    </div>
+                            <div class="col-md-12 mt-2 mb-2 border-bot">
+                                <div class="heading text-capitalize text-sm font-weight-bold" data-toggle="collapse" data-target="#collapse20" aria-expanded="false" aria-controls="collapse20">
+                                    <img class="img_pos" src="<?php echo base_url('assets/objects/') . 'sofa_icon.svg' ?>" alt="" width="20">
+                                    Kitchen</div>
+                                <div class="row collapse" id="collapse20">
+                                    <?php
+                                    $arr = array_filter($activities, function ($ar) {
+                                        return ($ar['accessories'] == 'KITCHEN');
+                                    });
+                                    foreach ($arr as $key => $value) {
+                                    ?>
+                                        <div class="col-md-4 border d-flex flex-column justify-content-center align-items-center object-item cursor-pointer" data-object-item="<?php echo $value['type'] ?>" data-src="<?php echo base_url('assets/objects/sofa_icon.svg') ?>" title="<?php echo $value['type'] ?>">
+                                            <img src="<?php echo base_url('assets/objects/sofa_icon.svg') ?>" alt="" width="35">
+                                        </div>
+                                    <?php } ?>
                                 </div>
                             </div>
+                            <div class="col-md-12 mt-2 mb-2 border-bot">
+                                <div class="heading text-capitalize text-sm font-weight-bold" data-toggle="collapse" data-target="#collapse21" aria-expanded="false" aria-controls="collapse21">
+                                    <img class="img_pos" src="<?php echo base_url('assets/objects/') . 'sofa_icon.svg' ?>" alt="" width="20">
+                                    Machine Room</div>
+                                <div class="row collapse" id="collapse21">
+                                    <?php
+                                    $arr = array_filter($activities, function ($ar) {
+                                        return ($ar['accessories'] == 'MACHINE ROOM');
+                                    });
+                                    foreach ($arr as $key => $value) {
+                                    ?>
+                                        <div class="col-md-4 border d-flex flex-column justify-content-center align-items-center object-item cursor-pointer" data-object-item="<?php echo $value['type'] ?>" data-src="<?php echo base_url('assets/objects/sofa_icon.svg') ?>" title="<?php echo $value['type'] ?>">
+                                            <img src="<?php echo base_url('assets/objects/sofa_icon.svg') ?>" alt="" width="35">
+                                        </div>
+                                    <?php } ?>
+                                </div>
+                            </div>
+                            <div class="col-md-12 mt-2 mb-2 border-bot">
+                                <div class="heading text-capitalize text-sm font-weight-bold" data-toggle="collapse" data-target="#collapse22" aria-expanded="false" aria-controls="collapse22">
+                                    <img class="img_pos" src="<?php echo base_url('assets/objects/') . 'sofa_icon.svg' ?>" alt="" width="20">
+                                    Medical</div>
+                                <div class="row collapse" id="collapse22">
+                                    <?php
+                                    $arr = array_filter($activities, function ($ar) {
+                                        return ($ar['accessories'] == 'MEDICAL');
+                                    });
+                                    foreach ($arr as $key => $value) {
+                                    ?>
+                                        <div class="col-md-4 border d-flex flex-column justify-content-center align-items-center object-item cursor-pointer" data-object-item="<?php echo $value['type'] ?>" data-src="<?php echo base_url('assets/objects/sofa_icon.svg') ?>" title="<?php echo $value['type'] ?>">
+                                            <img src="<?php echo base_url('assets/objects/sofa_icon.svg') ?>" alt="" width="35">
+                                        </div>
+                                    <?php } ?>
+                                </div>
+                            </div>
+                            <div class="col-md-12 mt-2 mb-2 border-bot">
+                                <div class="heading text-capitalize text-sm font-weight-bold" data-toggle="collapse" data-target="#collapse23" aria-expanded="false" aria-controls="collapse23">
+                                    <img class="img_pos" src="<?php echo base_url('assets/objects/') . 'sofa_icon.svg' ?>" alt="" width="20">
+                                    Miscellaneous</div>
+                                <div class="row collapse" id="collapse23">
+                                    <?php
+                                    $arr = array_filter($activities, function ($ar) {
+                                        return ($ar['accessories'] == 'MISCELLANEOUS');
+                                    });
+                                    foreach ($arr as $key => $value) {
+                                    ?>
+                                        <div class="col-md-4 border d-flex flex-column justify-content-center align-items-center object-item cursor-pointer" data-object-item="<?php echo $value['type'] ?>" data-src="<?php echo base_url('assets/objects/sofa_icon.svg') ?>" title="<?php echo $value['type'] ?>">
+                                            <img src="<?php echo base_url('assets/objects/sofa_icon.svg') ?>" alt="" width="35">
+                                        </div>
+                                    <?php } ?>
+                                </div>
+                            </div>
+                            <div class="col-md-12 mt-2 mb-2 border-bot">
+                                <div class="heading text-capitalize text-sm font-weight-bold" data-toggle="collapse" data-target="#collapse24" aria-expanded="false" aria-controls="collapse24">
+                                    <img class="img_pos" src="<?php echo base_url('assets/objects/') . 'sofa_icon.svg' ?>" alt="" width="20">
+                                    Office Rooms</div>
+                                <div class="row collapse" id="collapse24">
+                                    <?php
+                                    $arr = array_filter($activities, function ($ar) {
+                                        return ($ar['accessories'] == 'OFFICE ROOMS');
+                                    });
+                                    foreach ($arr as $key => $value) {
+                                    ?>
+                                        <div class="col-md-4 border d-flex flex-column justify-content-center align-items-center object-item cursor-pointer" data-object-item="<?php echo $value['type'] ?>" data-src="<?php echo base_url('assets/objects/sofa_icon.svg') ?>" title="<?php echo $value['type'] ?>">
+                                            <img src="<?php echo base_url('assets/objects/sofa_icon.svg') ?>" alt="" width="35">
+                                        </div>
+                                    <?php } ?>
+                                </div>
+                            </div>
+                            <div class="col-md-12 mt-2 mb-2 border-bot">
+                                <div class="heading text-capitalize text-sm font-weight-bold" data-toggle="collapse" data-target="#collapse25" aria-expanded="false" aria-controls="collapse25">
+                                    <img class="img_pos" src="<?php echo base_url('assets/objects/') . 'sofa_icon.svg' ?>" alt="" width="20">
+                                    Other Rooms</div>
+                                <div class="row collapse" id="collapse25">
+                                    <?php
+                                    $arr = array_filter($activities, function ($ar) {
+                                        return ($ar['accessories'] == 'OTHER ROOMS');
+                                    });
+                                    foreach ($arr as $key => $value) {
+                                    ?>
+                                        <div class="col-md-4 border d-flex flex-column justify-content-center align-items-center object-item cursor-pointer" data-object-item="<?php echo $value['type'] ?>" data-src="<?php echo base_url('assets/objects/sofa_icon.svg') ?>" title="<?php echo $value['type'] ?>">
+                                            <img src="<?php echo base_url('assets/objects/sofa_icon.svg') ?>" alt="" width="35">
+                                        </div>
+                                    <?php } ?>
+                                </div>
+                            </div>
+                            <div class="col-md-12 mt-2 mb-2 border-bot">
+                                <div class="heading text-capitalize text-sm font-weight-bold" data-toggle="collapse" data-target="#collapse26" aria-expanded="false" aria-controls="collapse26">
+                                    <img class="img_pos" src="<?php echo base_url('assets/objects/') . 'sofa_icon.svg' ?>" alt="" width="20">
+                                    Recreation</div>
+                                <div class="row collapse" id="collapse26">
+                                    <?php
+                                    $arr = array_filter($activities, function ($ar) {
+                                        return ($ar['accessories'] == 'RECREATION');
+                                    });
+                                    foreach ($arr as $key => $value) {
+                                    ?>
+                                        <div class="col-md-4 border d-flex flex-column justify-content-center align-items-center object-item cursor-pointer" data-object-item="<?php echo $value['type'] ?>" data-src="<?php echo base_url('assets/objects/sofa_icon.svg') ?>" title="<?php echo $value['type'] ?>">
+                                            <img src="<?php echo base_url('assets/objects/sofa_icon.svg') ?>" alt="" width="35">
+                                        </div>
+                                    <?php } ?>
+                                </div>
+                            </div>
+                            <div class="col-md-12 mt-2 mb-2 border-bot">
+                                <div class="heading text-capitalize text-sm font-weight-bold" data-toggle="collapse" data-target="#collapse27" aria-expanded="false" aria-controls="collapse27">
+                                    <img class="img_pos" src="<?php echo base_url('assets/objects/') . 'sofa_icon.svg' ?>" alt="" width="20">
+                                    Relegious</div>
+                                <div class="row collapse" id="collapse27">
+                                    <?php
+                                    $arr = array_filter($activities, function ($ar) {
+                                        return ($ar['accessories'] == 'RELEGIOUS');
+                                    });
+                                    foreach ($arr as $key => $value) {
+                                    ?>
+                                        <div class="col-md-4 border d-flex flex-column justify-content-center align-items-center object-item cursor-pointer" data-object-item="<?php echo $value['type'] ?>" data-src="<?php echo base_url('assets/objects/sofa_icon.svg') ?>" title="<?php echo $value['type'] ?>">
+                                            <img src="<?php echo base_url('assets/objects/sofa_icon.svg') ?>" alt="" width="35">
+                                        </div>
+                                    <?php } ?>
+                                </div>
+                            </div>
+                            <div class="col-md-12 mt-2 mb-2 border-bot">
+                                <div class="heading text-capitalize text-sm font-weight-bold" data-toggle="collapse" data-target="#collapse28" aria-expanded="false" aria-controls="collapse28">
+                                    <img class="img_pos" src="<?php echo base_url('assets/objects/') . 'sofa_icon.svg' ?>" alt="" width="20">
+                                    Stores</div>
+                                <div class="row collapse" id="collapse28">
+                                    <?php
+                                    $arr = array_filter($activities, function ($ar) {
+                                        return ($ar['accessories'] == 'STORES');
+                                    });
+                                    foreach ($arr as $key => $value) {
+                                    ?>
+                                        <div class="col-md-4 border d-flex flex-column justify-content-center align-items-center object-item cursor-pointer" data-object-item="<?php echo $value['type'] ?>" data-src="<?php echo base_url('assets/objects/sofa_icon.svg') ?>" title="<?php echo $value['type'] ?>">
+                                            <img src="<?php echo base_url('assets/objects/sofa_icon.svg') ?>" alt="" width="35">
+                                        </div>
+                                    <?php } ?>
+                                </div>
+                            </div>
+                            <div class="col-md-12 mt-2 mb-2 border-bot">
+                                <div class="heading text-capitalize text-sm font-weight-bold" data-toggle="collapse" data-target="#collapse29" aria-expanded="false" aria-controls="collapse29">
+                                    <img class="img_pos" src="<?php echo base_url('assets/objects/') . 'sofa_icon.svg' ?>" alt="" width="20">
+
+                                    Tanks</div>
+                                <div class="row collapse" id="collapse29">
+                                    <?php
+                                    $arr = array_filter($activities, function ($ar) {
+                                        return ($ar['accessories'] == 'TANKS');
+                                    });
+                                    foreach ($arr as $key => $value) {
+                                    ?>
+                                        <div class="col-md-4 border d-flex flex-column justify-content-center align-items-center object-item cursor-pointer" data-object-item="<?php echo $value['type'] ?>" data-src="<?php echo base_url('assets/objects/sofa_icon.svg') ?>" title="<?php echo $value['type'] ?>">
+                                            <img src="<?php echo base_url('assets/objects/sofa_icon.svg') ?>" alt="" width="35">
+                                        </div>
+                                    <?php } ?>
+                                </div>
+                            </div>
+
                         </div>
 
                     </div>
                 </div>
 
             </div>
+
         </div>
+        
 
         <div class="mt-3 properties-section fill d-none">
             <h5 class="text-uppercase text-sm overflow-elipsis properties-title"> Fill</h5>
@@ -885,7 +1149,7 @@
         </div>
 
 
-    </section>
+    </section>  
 
 
     <!-- 

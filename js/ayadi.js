@@ -34,65 +34,68 @@ options.text(function (d) {
         return d.value;
     });
 
-d3.select('.calculate-btn').on('click', () => {
-    let realLength, realBreadth, length, breadth, hasta, siUnit, reportType, reportContainer;
-
-    realLength = d3.select('[name="length"]').property('value');
-    realBreadth = d3.select('[name="breadth"]').property('value');
-    siUnit = d3.select("[name='dimension-unit']").property('value')
-    hasta = d3.select('[name="hasta"]').property('value');
-
-
-    if (realLength == "" || realBreadth == "" || hasta == "" || siUnit == "") {
-        showAlert("Please provide all details",'danger');
-
-    } else {
-        length = convertIntoFeet(realLength, siUnit);
-        breadth = convertIntoFeet(realBreadth, siUnit);
-        let rem = {
-            aaya: calculateAaya(length, breadth, hasta, siUnit),
-            vyaya: calculateVyaya(length, breadth, hasta, siUnit),
-            amsha: calculateAmsha(length, breadth, hasta, siUnit),
-            yoni: calculateYoni(length, breadth, hasta, siUnit),
-            vara: calculateVara(length, breadth, hasta, siUnit),
-            tithi: calculateTithi(length, breadth, hasta, siUnit)
-        }
-        //calling ajax to fetch result data from database
-        var formData = new FormData();
-        formData.append('remainders', JSON.stringify(rem));
-        var url = BASE_URL + "/Main/getAyadhiResult";
-        AjaxPost(formData, url, ayadhiSuccess, AjaxError);
-
-        function ayadhiSuccess(content, targetTextarea) {
-            let result = JSON.parse(content);
-            console.log(result);
-            if(result != ""){
-                reportContainer = d3.select('.display-report-area').classed('text-center', false).html(Template.aayadiDetailedReport(
-                    realLength,
-                    realBreadth,
-                    siUnit,
-                    result
-                    // result['aaya'] != "" ? result['aaya']['result'] : "",
-                    // result['vara'] != "" ? result['vara']['result'] : "",
-                    // result['amsha'] != "" ? result['amsha']['result'] : "",
-                    // result['vyaya'] != "" ? result['vyaya']['result'] : "",
-                    // result['yoni'] != "" ? result['yoni']['result'] : "",
-                    // result['tithi'] != "" ? result['tithi']['result'] : ""
-                                   
-                ));
-
-            }else{
-                showAlert("Someting Wrong Contact to IT",'danger')
+    d3.select('.calculate-btn').on('click', () => {
+        let realLength, realBreadth, length, breadth, hasta, siUnit, reportType, reportContainer;
+        reportType = $('input[type=radio]:checked').val();
+        realLength = d3.select('[name="length"]').property('value');
+        realBreadth = d3.select('[name="breadth"]').property('value');
+        siUnit = d3.select("[name='dimension-unit']").property('value')
+        hasta = d3.select('[name="hasta"]').property('value');
+    
+    
+        if (realLength == "" || realBreadth == "" || hasta == "" || siUnit == "") {
+            showAlert("Please provide all details", 'danger');
+    
+        } else {
+            length = convertIntoFeet(realLength, siUnit);
+            breadth = convertIntoFeet(realBreadth, siUnit);
+            let rem = {
+                aaya: calculateAaya(length, breadth, hasta, siUnit),
+                vyaya: calculateVyaya(length, breadth, hasta, siUnit),
+                amsha: calculateAmsha(length, breadth, hasta, siUnit),
+                yoni: calculateYoni(length, breadth, hasta, siUnit),
+                vara: calculateVara(length, breadth, hasta, siUnit),
+                tithi: calculateTithi(length, breadth, hasta, siUnit)
             }
-            return JSON.parse(content)
-        }
+            //calling ajax to fetch result data from database
+            var formData = new FormData();
+            formData.append('remainders', JSON.stringify(rem));
+            var url = BASE_URL + "/Main/getAyadhiResult";
+            AjaxPost(formData, url, ayadhiSuccess, AjaxError);
+    
+            function ayadhiSuccess(content, targetTextarea) {
+                let result = JSON.parse(content);
+                console.log(result);
+                if (result != "") {
+                    if(reportType == 'detailed'){
+                    reportContainer = d3.select('.display-report-area').classed('text-center', false).html(Template.aayadiDetailedReport(
+                        realLength,
+                        realBreadth,
+                        siUnit,
+                        result
+    
+                    ));
+                    }else{
+                        reportContainer = d3.select('.display-report-area').classed('text-center', false).html(Template.aayadiSummeryReport(
+                            realLength,
+                            realBreadth,
+                            siUnit,
+                            result
         
-
-        console.log("Everthing in Feet :");
-        console.log("length: ", length, " | breadth: ", breadth, " | hasta: ", hasta, " | siUnit: ", siUnit);
-    }
-})
-
+                        ));
+                    }
+    
+                } else {
+                    showAlert("Someting Wrong Contact to IT", 'danger')
+                }
+                return JSON.parse(content)
+            }
+    
+    
+            console.log("Everthing in Feet :");
+            console.log("length: ", length, " | breadth: ", breadth, " | hasta: ", hasta, " | siUnit: ", siUnit);
+        }
+    })
 
 function getCircum(length, breadth) {
     return 2 * (length + breadth);
