@@ -35,7 +35,7 @@ body {
 .leftside {
 	display: grid;
 	grid-template-columns: repeat(9, 81px);
-	grid-template-rows: repeat(9, 67px);
+	grid-template-rows: repeat(9, 60px);
 	grid-gap: 0rem;
 }
 
@@ -94,5 +94,6 @@ body {
 	overflow: scroll;
 	width: 100%;
     height: 100vh;
-    margin: 0px !important;
+	margin: 0px !important;
+	padding: 0.5rem 1.5rem;
 }

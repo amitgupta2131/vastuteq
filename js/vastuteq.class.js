@@ -199,6 +199,7 @@ export default class Vastuteq {
           d3.select(".zoom-wrapper").classed("d-none", false);
           d3.select(".measurement-section").classed("d-none", false);
           d3.select('.zoom-functionality').classed('d-none',false);
+          d3.select('.tools-section').classed('d-none',false);
           this.drawCanvas.classed('d-none', true);
           $(".property.description").html("");
 
@@ -569,6 +570,7 @@ export default class Vastuteq {
     let that = this;
 
     d3.select('.object-align-center').on("click", () => {
+      
       let selectedItem = d3.select(".svg-object.active[data-object]");
         if (selectedItem.node() != null) {
             if(selectedItem.classed('saved') == false) {
@@ -593,6 +595,8 @@ export default class Vastuteq {
                 y: y,
                 width: width,
                 height: height,
+                northAngle: that.calNorthAngle(),
+                angle: that.angle
                 };
                 let objectInstance = new Object({
                 mapId: that.mapId,

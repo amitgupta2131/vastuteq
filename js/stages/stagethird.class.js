@@ -82,17 +82,19 @@ export default class StageThird {
       let barchart = barchartContainer.append('img').attr('src', `${that.BASE_URL}assets/icons/barchart.svg`).attr('width', 20);
       barchartContainer.append('span').style('margin-top','1px').style('font-size','9px').text('barchart');
 
-      let vpmContainer = container.append('div').attr('class', 'col-md-3 d-flex justify-content-center align-items-center border object-actions')
-      .style('flex-direction','column').style('height','42px').style('min-width','55px');
-      let vpm = vpmContainer.attr('data-action-object', `${that.BASE_URL}assets/icons/mvm.svg`).append('img').attr('src', `${that.BASE_URL}assets/icons/mvm.svg`).attr('width', 20);
-      vpmContainer.append('span').style('margin-top','1px').style('font-size','9px').text('vpm');
+      // let vpmContainer = container.append('div').attr('class', 'col-md-3 d-flex justify-content-center align-items-center border object-actions')
+      // .style('flex-direction','column').style('height','42px').style('min-width','55px');
+      let vpm = $('#vpm').attr('data-action-object', `${that.BASE_URL}assets/icons/mvm.svg`)
+      // .append('img').attr('src', `${that.BASE_URL}assets/icons/mvm.svg`).attr('width', 20).attr('id', 'vpmimg');
+      // vpmContainer.append('span').style('margin-top','1px').style('font-size','9px').text('vpm');
 
-      let mvmContainer = container.append('div').attr('class', 'col-md-3 d-flex justify-content-center align-items-center border object-actions')
-      .style('flex-direction','column').style('height','42px').style('min-width','55px');
-      let mvm = mvmContainer.attr('data-action-object', `${that.BASE_URL}assets/icons/vpm.svg`).append('img').attr('src', `${that.BASE_URL}assets/icons/vpm.svg`).attr('width', 20);
-      mvmContainer.append('span').style('margin-top','1px').style('font-size','9px').text('mvpc');
+      // let mvmContainer = container.append('div').attr('class', 'col-md-3 d-flex justify-content-center align-items-center border object-actions')
+      // .style('flex-direction','column').style('height','42px').style('min-width','55px');
+      let mvm = $('#mvpc').attr('data-action-object', `${that.BASE_URL}assets/icons/vpm.svg`);
+      // .append('img').attr('src', `${that.BASE_URL}assets/icons/vpm.svg`).attr('width', 20).attr('id', 'mvpcimg');
+      // mvmContainer.append('span').style('margin-top','1px').style('font-size','9px').text('mvpc');
 
-      let divisonOfDevtasContainer = container.append('div').attr('class', 'col-md-12 d-flex justify-content-center align-items-center border object-actions mt-2')
+      let divisonOfDevtasContainer = container.append('div').attr('class', 'col-md-8 d-flex justify-content-center align-items-center border object-actions')
       .style('flex-direction','column').style('height','42px').style('min-width','55px');
       let divisonOfDevtas = divisonOfDevtasContainer.attr('data-action-object', `${that.BASE_URL}assets/icons/dots.svg`).append('img').attr('src', `${that.BASE_URL}assets/icons/dots.svg`).attr('width', 20);
       divisonOfDevtasContainer.append('span').style('margin-top','1px').style('font-size','9px').text('division of devtas');
@@ -175,6 +177,16 @@ export default class StageThird {
           // ? DRAW BAR CHART
           that.modal.drawMap({areaArr: that.mapPolygonsAreaArray, division: that.division, dimension: that.distanceBetweenTwoPoints});
       })
+
+      //click from toolbar vpm event
+      // $('#vpm').on('click',function(){
+      // $('#vpmimg').click()
+      // })
+
+      //click from toolbar mvpc event
+      // $('#mvpc').on('click',function(){
+      //   $('#mvpcimg').click()
+      //   })
       
       vpm.on('click', function() {
         
