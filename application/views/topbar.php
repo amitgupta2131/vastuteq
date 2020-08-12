@@ -51,11 +51,11 @@
                             <a class="nav-link dropdown-toggle text-white menu-item" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Tools
                             </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown" id="toolMenu">
                             <a class="dropdown-item" href="#" id="vpm">Vpm</a>
                             <a class="dropdown-item" href="#" id="mvpc">Mvpc</a>
-                                <a class="dropdown-item" href="#" data-menu-item="get-marma">Marma</a>
-                                <a class="dropdown-item" href="#" data-menu-item="get-shanmahanti">Shanmahanti</a>
+                                <a class="dropdown-item d-none" href="#" data-menu-item="get-marma">Marma</a>
+                                <a class="dropdown-item d-none" href="#" data-menu-item="get-shanmahanti">Shanmahanti</a>
                             </div>
                         </li>
 

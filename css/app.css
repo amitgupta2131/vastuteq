@@ -793,12 +793,12 @@ input::-webkit-inner-spin-button {
     display: none;
   }
 
-  .modal-content {
+  /* .modal-content {
     -webkit-transform: rotate(90deg) !important;
     transform: rotate(90deg) !important;
-  }
+  } */
 
-  #drawArea {
+  /* #drawArea {
     -webkit-transform: rotate(90deg) !important;
     transform: rotate(90deg) !important;
 
@@ -808,7 +808,7 @@ input::-webkit-inner-spin-button {
     left: -40%;
     margin-top: auto;
     text-align: center;
-  }
+  } */
 
   #mapImportOption{
     display: none;

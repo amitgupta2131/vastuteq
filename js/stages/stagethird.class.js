@@ -205,6 +205,8 @@ export default class StageThird {
             northAngle: that.calNorthAngle(),
             angle: that.angle
           }
+          console.log(this)
+          console.log(that.canvas)
           classRef.objectVpm = new Object({
             layer: that.canvas,
             data: data

@@ -1229,27 +1229,15 @@
 <script src="<?php echo base_url('js/helper/sweetalert.js') ?>"></script>
 
 <script>
-    $("#fixed_image").click(function() {
-        // alert('Hello');
-        $('.refer-form-slide').toggleClass('refer-form-slide-active');
-    });
+        $('#newProject').on('click', function() {
+            // alert('runs')
+        // let id = uniqueID();
+        // localStorage.setItem("selectedMapId", id);
+        localStorage.removeItem("houseMaps");
+        window.location.href = BASE_URL + 'Main/propertyInfo';
 
-    $('.objectimg').on('click', function() {
-        let toggleId = $(this).attr('data-toggle');
-        $('.subobj-container').removeClass('active')
-        $(`${toggleId}`).addClass('active')
-    });
 
-    $('.obj-btn').on('click', function() {
-        $(this).removeClass("btn-light").addClass("btn-primary");
-        $(this).siblings().removeClass("btn-primary").addClass("btn-light");
-        let toggleId = $(this).attr('data-toggle');
-        let toggleId2 = $(this).siblings().attr('data-toggle');
-        $(`${toggleId2}`).removeClass('active')
-        $(`${toggleId}`).addClass('active')
-        $(`${toggleId} .objcontainer .subobj-container:first`).addClass('active')
-
-    });
+    })
 
     function removeHouseMap() {
         localStorage.removeItem('houseMaps');

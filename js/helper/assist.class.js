@@ -52,7 +52,7 @@ export default class Assist {
             .attr("width", size.width)
             .attr("height", size.height)
             .style("fill", "white")
-            .style("fill-opacity", 0.95);
+            .style("fill-opacity", 0.7);
 
         this.mask.append("polygon")
             .attr("points", points);
@@ -277,8 +277,11 @@ export default class Assist {
         g.append("text")
             .attr("transform", function (d) {
                 var _d = arc.centroid(d);
-                _d[0] *= 1;	//multiply by a constant factor
-                _d[1] *= 1;	//multiply by a constant factor
+                
+                // console.log(_d)
+                _d[0] *= 0.6;	//multiply by a constant factor
+                _d[1] *= 0.6;	//multiply by a constant factor
+                
                 return "translate(" + _d + ") rotate(" + (activeDir.baseAng - angle - newAng) + ")";
             })
             .attr("dy", ".50em")

@@ -9,6 +9,7 @@ export default class Vedic {
 
   startDrawing(REF) {
     let that = REF;
+    let classRef = this;
     let diagonalChecked = false, gridChecked = false, gridType = 3;
     let actionBox = this.actionbox.clear().get();
 
@@ -21,6 +22,9 @@ export default class Vedic {
     .classed('col-md-6 mb-3', true);
     let col3 = row.append('div')
     .classed('col-md-12', true);
+
+    let vpm = $('#vpm').attr('data-action-object', `${that.BASE_URL}assets/icons/mvm.svg`);
+    let mvm = $('#mvpc').attr('data-action-object', `${that.BASE_URL}assets/icons/vpm.svg`);
 
     let enableDiagonalsWrapper = col1.append('div')
      .classed('form-check', true);
@@ -38,21 +42,22 @@ export default class Vedic {
    
     enableGridWrapper.append('label').attr('class','form-check-label, text-sm').html('Grid');
 
-    let mapGridText = col3
-      .append('p').attr('class', 'text-sm')
-      .html('GRID TYPE');
+    // let mapGridText = col3
+    //   .append('p').attr('class', 'text-sm')
+    //   .html('GRID TYPE');
 
-    let mapGridType = col3
-      .append('select').attr('class', 'form-control form-control-sm text-sm')
+      
+      // toolsArea.html(`<a class="dropdown-item" value="" href="#" id="vpm">Vpm</a>`)
+    let mapGridType = $('#toolMenu')      
       .html(`
-        <option value="3GL" selected>3 X 3 Grid Layout</option>
-        <option value="3GD">3 X 3 Grid Diagonal</option>
-        <option value="9DL">9 X 9 Disha Lord Numero Grid</option>
-        <option value="9GL">9 X 9 Grid Layout</option>
-        <option value="9SG">Maha Vastu Square Grid</option>
-        <option value="9MS">Marma Sthana</option>
-        <option value="9SM">Shanmahanti</option>
-        <option value="9SD">Shubh Dwar</option>
+        <a class="dropdown-item" href="#" value="3GL" selected>3 X 3 Grid Layout</a>
+        <a class="dropdown-item" href="#" value="3GD">3 X 3 Grid Diagonal</a>
+        <a class="dropdown-item" href="#" value="9DL">9 X 9 Disha Lord Numero Grid</a>
+        <a class="dropdown-item" href="#" value="9GL">9 X 9 Grid Layout</a>
+        <a class="dropdown-item" href="#" value="9SG">Maha Vastu Square Grid</a>
+        <a class="dropdown-item" href="#" value="9MS">Marma Sthana</a>
+        <a class="dropdown-item" href="#" value="9SM">Shanmahanti</a>
+        <a class="dropdown-item" href="#" value="9SD">Shubh Dwar</a>
         
     `);
 
@@ -76,14 +81,84 @@ export default class Vedic {
       }
     })
 
-    mapGridType.on('change', function() {
+    vpm.on('click', function() {
+        
+      if(classRef.objectVpm == null || classRef.objectVpm == undefined) {
+        
+        d3.select('.properties-section.opacity').classed('d-none',false);
+        d3.select(this.parentNode).classed('active', true);
+        that.model.editVpmtoggle(that.mapId,true);
+        let data = {
+          name: "VPM",
+          src: that.BASE_URL+'assets/images/vpm.svg',
+          width: 400,
+          height: 400,
+          x: that.centroid.x - 400 / 2,
+          y: that.centroid.y - 400 / 2,
+          transfrom: "",
+          northAngle: that.calNorthAngle(),
+          angle: that.angle
+        }
+        console.log(data)
+        console.log(that.canvas)
+        console.log(this)
+        that.objectVpm = new Object({
+          layer: that.canvas,
+          data: data
+        });
 
-      gridType = mapGridType.property('value');
+        console.log(that)
+      } else {
+        that.objectDelete('VPM');
+        classRef.objectVpm = null;
+      }
+
+      if(classRef.objectVpm == null || classRef.objectVpm == undefined){      
+        d3.select(this.parentNode).classed('active', false);
+      }
+
+    })
+
+    mvm.on('click', function() {
+      if(classRef.objectMvm == null || classRef.objectMvm == undefined) {
+        d3.select('.color-state-wrapper').classed('d-none', false);
+        d3.select('.properties-section.opacity').classed('d-none',false);
+        d3.select(this.parentNode).classed('active', true);
+        that.model.editMvpctoggle(that.mapId,true);
+        let data = {
+          name: "MVM",
+          src: that.BASE_URL+'assets/images/MVPC.svg',
+          width: 400,
+          height: 400,
+          x: that.centroid.x - 400 / 2,
+          y: that.centroid.y - 400 / 2,
+          transfrom: "",
+        }
+        classRef.objectMvm = new Object({
+          layer: that.canvas,
+          data: data
+        });
+      } else {
+        d3.select('.color-state-wrapper').classed('d-none', true);
+        that.objectDelete('MVM');
+        classRef.objectMvm = null; 
+      }
+
+      if(classRef.objectMvm == null || classRef.objectMvm == undefined)
+        d3.select(this.parentNode).classed('active', false);
+
+    })
+
+
+    mapGridType.on('click','a', function() {
+
+      gridType = $(this).attr('value');
 
       let wrapper = $(`g.sjx-svg-wrapper`).remove();
 
       switch (gridType){
          case "3GL" : 
+         console.log("3GL",that.canvas)
               that.assist.drawPolygon({layer: that.canvas, points: that.vedicMapBoundariesCoords,strokeColor:"red",strokeWidth:2});
               that.assist.drawPolygonGrid({points: that.vedicMapBoundariesCoords, color:"red", noOfLines: 3,strokeWidth:2});
               that.createObject('g.vedic-polygon');
