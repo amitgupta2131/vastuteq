@@ -112,9 +112,9 @@ export default class Template {
             <td>${result['vara']['result']}</td>
         </tr>
         <tr>
-            <td>Nakshatra</td>
-            <td>TBD</td>
-            <td>TBD</td>
+            <td>${result['nakshatra']['name']}</td>
+            <td>${result['nakshatra']['remainder']}</td>
+            <td>${result['nakshatra']['result']}</td>
         </tr>
         <tr>
             <td>${result['amsha']['name']}</td>
@@ -184,9 +184,10 @@ export default class Template {
             <td>${result['vara']['result']}</td>
         </tr>
         <tr>
-            <td>Nakshatra</td>
-            <td>TBD</td>
-            <td>TBD</td>
+            
+            <td>${result['nakshatra']['name']}</td>
+            <td>${result['nakshatra']['remainder']}</td>
+            <td>${result['nakshatra']['result']}</td>
         </tr>
         <tr>
             <td>${result['amsha']['name']}</td>

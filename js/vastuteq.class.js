@@ -55,7 +55,8 @@ export default class Vastuteq {
     this.houseMap = this.model.getHouseMap(this.mapId)[0];
 
     this.mapBoundariesCoords = this.houseMap == undefined ? [] : this.houseMap.customBoundariesCoords;
-    this.vedicMapBoundariesCoords = this.houseMap == undefined ? [] : this.houseMap.vedicBoundariesCoords
+    this.vedicMapBoundariesCoords = this.houseMap == undefined ? [] : this.houseMap.vedicBoundariesCoords;
+    // console.log(`My coord ${JSON.parse(this.houseMap.vedicBoundariesCoords)}`);
     this.centroid = this.houseMap == undefined ? [] : this.houseMap.centroid;
     this.faceCoords = this.houseMap == undefined ? [] : this.houseMap.faceCoords;
     this.distanceBetweenTwoPoints = this.houseMap == undefined ? null : this.houseMap.dimension;
@@ -359,14 +360,14 @@ export default class Vastuteq {
         d3.select(".properties-section.decs").classed('d-none', true);
         d3.select(".measurement-section").classed("d-none", false);         
         d3.select('.tools-section').classed('d-none',false);
-        d3.select('#vpm').classed('d-none',true);
-        d3.select('#mvpc').classed('d-none',true);
+        // d3.select('#vpm').classed('d-none',true);
+        // d3.select('#mvpc').classed('d-none',true);
         this.assist.drawMask({layer: this.canvas, points: this.mapBoundariesCoords,size: this.RECT_SIZE,});
         this.assist.drawBoundaries({layer: this.canvas, points: this.mapBoundariesCoords});
         this.assist.drawBharamNabhi({layer: this.canvas, centroid: this.centroid,});
         this.assist.drawDirectionLines(this.canvas, this.faceCoords, this.centroid, this.division, this.angle);
         this.assist.drawGrid(this.canvas, this.centroid, this.faceCoords, this.screenBoundariesCoords, this.division, this.angle, "vedic");
-        console.log("points:",this.vedicMapBoundariesCoords);
+        
         this.assist.drawPolygon({layer: this.canvas, points: this.vedicMapBoundariesCoords});
         this.assist.drawPolygonDiagonals({points: this.vedicMapBoundariesCoords});
         this.assist.drawPolygonGrid({points: this.vedicMapBoundariesCoords});
@@ -391,7 +392,7 @@ export default class Vastuteq {
         proportions: true,
     // restrict moving
     // spreads to dragging one element 
-    restrict: 'selector',
+    // restrict: 'selector',
         snap: {
           x: 10,
           y: 10,
@@ -406,12 +407,8 @@ export default class Vastuteq {
 
       d3.select(selector).attr('id', id);
       let object = subjx(selector).drag(svgOptions);
-      // console.log("selector object",object[0].getBoundingClientRect());
       let controls = object[0].controls;
-      console.log(object[0].storage);
       controls.setAttribute("data-id", id);
-      
-
       object[0].exeRotate({
         delta : this.degreesToRadians((this.calNorthAngle() + this.angle) - this.calTopRightEdgeAngle()),
       });
@@ -665,8 +662,8 @@ export default class Vastuteq {
   objectDelete(objectName) {
     this.wrapperDelete(objectName);
     let object = $(`g.svg-object[data-object="${objectName}"]`);
-    // let wrapper = $(`g.sjx-svg-wrapper[data-id="${object.attr("id")}"]`);
-    // wrapper.remove();
+    let wrapper = $(`g.sjx-svg-wrapper[data-id="${object.attr("id")}"]`);
+    wrapper.remove();
     object.remove();
     
   }

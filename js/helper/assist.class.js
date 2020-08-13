@@ -33,6 +33,53 @@ export default class Assist {
             {name: 'W7', value: 1, color: "white"}, {name: 'W8', value: 1, color: "yellow"}, {name: 'N1', value: 1, color: "yellow"},
             {name: 'N2', value: 1, color: "white"}, {name: 'N3', value: 1, color: "blue"}
         ];
+        this.DEVTAS = [
+            {name: 'Brahma', value: 1, color: "white"},
+            {name: 'Bhudar', value: 2, color: "white"},
+            {name: 'Aryama', value: 3, color: "white"},
+            {name: 'Vivswan', value: 4, color: "white"},
+            {name: 'Mitra', value: 5, color: "white"},
+            {name: 'Bhudar', value: 6, color: "white"},
+            {name: 'Bhudar', value: 7, color: "white"},
+            {name: 'Bhudar', value: 8, color: "white"},
+            {name: 'Bhudar', value: 9, color: "white"},
+            {name: 'Bhudar', value: 10, color: "white"},
+            {name: 'Bhudar', value: 11, color: "white"},
+            {name: 'Bhudar', value: 12, color: "white"},
+            {name: 'Bhudar', value: 13, color: "white"},
+            {name: 'Bhudar', value: 14, color: "white"},
+            {name: 'Bhudar', value: 15, color: "white"},
+            {name: 'Bhudar', value: 16, color: "white"},
+            {name: 'Bhudar', value: 17, color: "white"},
+            {name: 'Bhudar', value: 18, color: "white"},
+            {name: 'Bhudar', value: 19, color: "white"},
+            {name: 'Bhudar', value: 20, color: "white"},
+            {name: 'Bhudar', value: 21, color: "white"},
+            {name: 'Bhudar', value: 22, color: "white"},
+            {name: 'Bhudar', value: 23, color: "white"},
+            {name: 'Bhudar', value: 24, color: "white"},
+            {name: 'Bhudar', value: 25, color: "white"},
+            {name: 'Bhudar', value: 26, color: "white"},
+            {name: 'Bhudar', value: 27, color: "white"},
+            {name: 'Bhudar', value: 28, color: "white"},
+            {name: 'Bhudar', value: 29, color: "white"},
+            {name: 'Bhudar', value: 30, color: "white"},
+            {name: 'Bhudar', value: 31, color: "white"},
+            {name: 'Bhudar', value: 32, color: "white"},
+            {name: 'Bhudar', value: 33, color: "white"},
+            {name: 'Bhudar', value: 34, color: "white"},
+            {name: 'Bhudar', value: 35, color: "white"},
+            {name: 'Bhudar', value: 36, color: "white"},
+            {name: 'Bhudar', value: 37, color: "white"},
+            {name: 'Bhudar', value: 38, color: "white"},
+            {name: 'Bhudar', value: 39, color: "white"},
+            {name: 'Bhudar', value: 40, color: "white"},
+            {name: 'Bhudar', value: 41, color: "white"},
+            {name: 'Bhudar', value: 42, color: "white"},
+            {name: 'Bhudar', value: 43, color: "white"},
+            {name: 'Bhudar', value: 44, color: "white"},
+            {name: 'Bhudar', value: 45, color: "white"}
+        ];
     }
 
     drawMask({ layer, points, size }) {
@@ -52,7 +99,7 @@ export default class Assist {
             .attr("width", size.width)
             .attr("height", size.height)
             .style("fill", "white")
-            .style("fill-opacity", 0.7);
+            .style("fill-opacity", 0.5);
 
         this.mask.append("polygon")
             .attr("points", points);
@@ -218,24 +265,16 @@ export default class Assist {
 
         let directions = [{ dir: 'N', baseAng: 90 }, { dir: 'E', baseAng: 360 }, { dir: 'S', baseAng: 270 }, { dir: 'W', baseAng: 180 }]
         let activeDir;
-
+    
         for (let m = 0, n = m + 1; m < screenBoundariesCoords.length; m++, n++) {
             (m == screenBoundariesCoords.length - 1) ? n = 0 : null;
             let ip = Utility.linesIntersection(centroid.x, centroid.y, (centroid.x + Math.cos(nAngle * 0.0174533) * 3200), (centroid.y + Math.sin(nAngle * 0.0174533) * 3200), ...screenBoundariesCoords[m], ...screenBoundariesCoords[n]);
             if (ip) { activeDir = directions[m]; }
+            else {activeDir = directions[0];console.log("Assist Class: No intersection point found.")}
         }
 
-        let newAng;
-
-        if (division == 8) {
-            newAng = 45;
-        }
-        else if (division == 16) {
-            newAng = 67.5;
-        }
-        else {
-            newAng = 56.25;
-        }
+        let newAng = this.getAngleBasedOnDivisions(division);
+        
 
         if(division == 8) { directionData = this.DATA_EIGHT; directionDetail = DIRECTION_EIGHT; }
         else if(division == 16) { gridAngle += 360/division; directionData   = this.DATA_SIXTEEN; directionDetail = DIRECTION_SIXTEEN; }
@@ -271,7 +310,8 @@ export default class Assist {
             .attr("class", function (d, i) { return data[i].name; })
             .attr("data-detail", function(d,i) { return data[i].detail; })
             .attr("d", arc)
-            .attr("stroke", "#21252963")
+            // .attr("stroke", "#21252963")
+            .attr("stroke", "#F7E7BD")
             .style("fill-opacity", "0");
 
         g.append("text")
@@ -355,7 +395,7 @@ export default class Assist {
             .text("0°");
     }
 
-    drawPolygon({layer, points, strokeColor = "red", strokeWidth = 4}) {
+    drawPolygon({layer, points, strokeColor = "red", strokeWidth = 2}) {
         layer.select('g.vedic-polygon').remove();
         let g = layer.append('g')
         .classed('vedic-polygon', true)
@@ -393,7 +433,7 @@ export default class Assist {
         .attr('stroke-width', strokeWidth);
     }
 
-    drawPolygonGrid({points , noOfLines = 3, color = "red", strokeWidth = 4}) {
+    drawPolygonGrid({points , noOfLines = 3, color = "red", strokeWidth = 2}) {
         d3.select('g.vedic-polygon').select('g.vedic-grid-container').remove();
 
         let layer = d3.select('g.vedic-polygon').append('g').classed('vedic-grid-container', true);
@@ -421,7 +461,7 @@ export default class Assist {
         }
     }
     
-    drawMarmSthana({points , noOfLines = 3, color = "red", strokeWidth = 4}) {
+    drawMarmSthana({points , noOfLines = 3, color = "red", strokeWidth = 2}) {
                 
         d3.select('g.vedic-polygon').select('g.vedic-grid-container').remove();
 
@@ -455,6 +495,14 @@ export default class Assist {
 
         let container = d3.select('g.vedic-polygon').append('g')
         .classed('diagonals-container', true);
+        // this.drawLine(container,
+        //               points[0][0],points[0][1],
+        //               points[2][0],points[2][1],
+        //               color,strokeWidth);
+        // this.drawLine(container,
+        //                 points[1][0],points[1][1],
+        //                 points[3][0],points[3][1],
+        //                 color,strokeWidth);
 
         container.append('line')
         .attr('x1',points[0][0])
@@ -516,7 +564,7 @@ export default class Assist {
         
         let outerArray = [];
         let len = ipArray.length;
-        console.log("ipArray",ipArray);
+        
         for (let i=0;i<len;i++) {
             let j = i+1;
             (i+1==len)? j=0:j=(i+1);
@@ -568,7 +616,8 @@ export default class Assist {
                 outerPolygon.push(outerArray[j].ip);
                 outerPolygon.push(twoThirdArr[j]);
                 outerPolygon.push(twoThirdArr[i]);
-                layer.append('polygon').attr('points',outerPolygon).style('fill-opacity',0).style('stroke','red').style('stroke-width',2);
+                layer.append('polygon')
+                .attr('points',outerPolygon).style('fill-opacity',0).style('stroke','red').style('stroke-width',2);
             }
 
             //Draw 2nd layer
@@ -755,10 +804,7 @@ export default class Assist {
                     .style('fill-opacity',0)
                     .style('stroke','black')
                     .style('stroke-width',2);
-            //Draw Brahma
-            // layer.append('polygon').attr('points',brahma).style('fill-opacity',0).style('stroke','red').style('stroke-width',2);
-            // layer.append('polygon').attr('points',twoThirdArr).style('fill-opacity',0).style('stroke','red').style('stroke-width',2);
-            // layer.append('polygon').attr('points',halfOfMidCircleArr).style('fill-opacity',0).style('stroke','red').style('stroke-width',2);
+            
         }
         else {
             console.log("Should select 32 zones");
@@ -768,5 +814,25 @@ export default class Assist {
     uniqueID(){
         return Math.random().toString(36).slice(2);
     }
+
+    getAngleBasedOnDivisions(numberOfDivisions){
+        switch (numberOfDivisions) {
+            case 8 : return 45;
+            case 16: return 67.5;
+            case 32: return 56.5;
+            default: return 67.5;
+        }
+    };
+    drawLine(container,x1,y1,x2,y2,color,strokewidth)
+    {
+        container.append('line')
+        .attr('x1',x1)
+        .attr('y1',y1)
+        .attr('x2',x2)
+        .attr('y2',y2)
+        .attr('stroke', color)
+        .attr('stroke-width', strokeWidth);
+    }
+      
 
 }

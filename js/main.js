@@ -1,4 +1,4 @@
-import Models from './helper/models.class.js';
+import Models from './helper/model.class.js';
 
 var model = new Models();
 

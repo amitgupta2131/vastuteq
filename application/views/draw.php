@@ -517,7 +517,7 @@
                     <ul class="navbar-nav mr-2">
                         <li class="nav-item">
                             <a class="nav-link object-align-center" href="#" id="abc" name="align-center">
-                                <img src="http://localhost/vastuteq5/assets/icons/chevron.svg" alt="" width="20">
+                                <img src="<?php echo base_url('assets/icons/chevron.svg')?>" alt="" width="20">
                             </a>
                         </li>
                     </ul>
@@ -525,7 +525,7 @@
                     <ul class="navbar-nav mr-2">
                         <li class="nav-item">
                             <a class="nav-link" href="#" id="print" name="print">
-                                <img src="http://localhost/vastuteq5/assets/icons/print.svg" alt="" width="20">
+                                <img src="<?php echo base_url('assets/icons/print.svg')?>" alt="" width="20">
                             </a>
                         </li>
                     </ul>

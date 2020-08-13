@@ -20,6 +20,13 @@ let ownerNakshatraData = [
     { text: "Poorva Bhadrapad", value: 25 }, { text: "Uttara Bhaprapad", value: 26 }, { text: "Revati", value: 0 }
 ];
 
+let parvayNakshatra = [
+    { text: "Janm", value: 1 }, { text: "Sampat", value: 2 }, { text: "Vipat", value: 3 },
+    { text: "Kshem", value: 4 }, { text: "Pratyari", value: 5 }, { text: "Sadhak", value: 6 },
+    { text: "Vadhak", value: 7 }, { text: "Mitra", value: 8 }, { text: "Param Mitra", value: 9 },
+    
+];
+
 
 let options = ownerNakshatraSelect.selectAll("option")
     .data(ownerNakshatraData)
@@ -35,27 +42,33 @@ options.text(function (d) {
     });
 
     d3.select('.calculate-btn').on('click', () => {
-        let realLength, realBreadth, length, breadth, hasta, siUnit, reportType, reportContainer;
+        let realLength, realBreadth, length, breadth, hasta,aayadiValue, siUnit, reportType, reportContainer,jatakNakshatra;
         reportType = $('input[type=radio]:checked').val();
         realLength = d3.select('[name="length"]').property('value');
         realBreadth = d3.select('[name="breadth"]').property('value');
         siUnit = d3.select("[name='dimension-unit']").property('value')
         hasta = d3.select('[name="hasta"]').property('value');
+        jatakNakshatra = d3.select("[name='owner-nakshatra']").property('value');
+        console.log(`jatakNakshatra ${jatakNakshatra}`);
     
     
         if (realLength == "" || realBreadth == "" || hasta == "" || siUnit == "") {
             showAlert("Please provide all details", 'danger');
     
         } else {
-            length = convertIntoFeet(realLength, siUnit);
-            breadth = convertIntoFeet(realBreadth, siUnit);
+            length = parseFloat(convertIntoFeet(realLength, siUnit));
+            breadth = parseFloat(convertIntoFeet(realBreadth, siUnit));
+            hasta = parseFloat(convertIntoFeet(hasta, "inch"));
+            aayadiValue = aayadi(length, breadth, hasta);
+            
             let rem = {
                 aaya: calculateAaya(length, breadth, hasta, siUnit),
                 vyaya: calculateVyaya(length, breadth, hasta, siUnit),
                 amsha: calculateAmsha(length, breadth, hasta, siUnit),
                 yoni: calculateYoni(length, breadth, hasta, siUnit),
                 vara: calculateVara(length, breadth, hasta, siUnit),
-                tithi: calculateTithi(length, breadth, hasta, siUnit)
+                tithi: calculateTithi(length, breadth, hasta, siUnit),
+                nakshatra: calculateNakshatra(aayadiValue,jatakNakshatra)
             }
             //calling ajax to fetch result data from database
             var formData = new FormData();
@@ -65,7 +78,7 @@ options.text(function (d) {
     
             function ayadhiSuccess(content, targetTextarea) {
                 let result = JSON.parse(content);
-                console.log(result);
+                console.log("res",result);
                 if (result != "") {
                     if(reportType == 'detailed'){
                     reportContainer = d3.select('.display-report-area').classed('text-center', false).html(Template.aayadiDetailedReport(
@@ -105,6 +118,7 @@ function calculateAaya(length, breadth, hasta) {
     let circumference = getCircum(length, breadth);
     let aayadi = Math.round(circumference / hasta);
     let result = (aayadi * 8) % 12;   
+    
     return result;
 }
 
@@ -125,7 +139,7 @@ function calculateVyaya(length, breadth, hasta) {
 function calculateYoni(length, breadth, hasta) {
     let circumference = getCircum(length, breadth);
     let aayadi = Math.round(circumference / hasta);
-    let result = (aayadi * 3) % 9;    
+    let result = (aayadi * 3) % 8;    
     return result;
 }
 
@@ -143,8 +157,30 @@ function calculateTithi(length, breadth, hasta) {
     return result;
 }
 
+function calculateAayadiNakshatra(length, breadth, hasta,jatakNakshatra) {
+    let circumference = getCircum(length, breadth);
+    let aayadi = Math.round(circumference / hasta);
+    let result = (aayadi * 8) % 27;    
+}
 
+function aayadi(length, breadth, hasta){
+    return Math.round(2*(length+breadth) / hasta);
+}
 
+function calculateNakshatra(aayadiValue, jatakNakshatra){
+    let temp = 0;
+    aayadiValue = aayadiValue*8%27;
+    console.log(`aayadiValue ${aayadiValue} jatakNakshatra ${jatakNakshatra}`);
+    if (jatakNakshatra>aayadi) {
+        temp = 27-jatakNakshatra+1+aayadiValue;
+    }
+    else {
+        temp = aayadiValue-jatakNakshatra+1;
+    }
+    console.log(`temp ${temp} `);
+    return temp % 9;    
+
+}
 function convertIntoFeet(value, siUnit) {
     if (siUnit === "inch") {
         return value / 12;

@@ -25,6 +25,7 @@ export default class Vedic {
 
     let vpm = $('#vpm').attr('data-action-object', `${that.BASE_URL}assets/icons/mvm.svg`);
     let mvm = $('#mvpc').attr('data-action-object', `${that.BASE_URL}assets/icons/vpm.svg`);
+    let mvc = $('#mvc').attr('data-action-object', `${that.BASE_URL}assets/images/mvc.png`);
 
     let enableDiagonalsWrapper = col1.append('div')
      .classed('form-check', true);
@@ -58,6 +59,7 @@ export default class Vedic {
         <a class="dropdown-item" href="#" value="9MS">Marma Sthana</a>
         <a class="dropdown-item" href="#" value="9SM">Shanmahanti</a>
         <a class="dropdown-item" href="#" value="9SD">Shubh Dwar</a>
+        <a class="dropdown-item" href="#" value="VPM">VPM</a>
         
     `);
 
@@ -83,7 +85,7 @@ export default class Vedic {
 
     vpm.on('click', function() {
         
-      if(classRef.objectVpm == null || classRef.objectVpm == undefined) {
+      if(this.objectVpm == null || this.objectVpm == undefined) {
         
         d3.select('.properties-section.opacity').classed('d-none',false);
         d3.select(this.parentNode).classed('active', true);
@@ -110,44 +112,44 @@ export default class Vedic {
         console.log(that)
       } else {
         that.objectDelete('VPM');
-        classRef.objectVpm = null;
+        this.objectVpm = null;
       }
 
-      if(classRef.objectVpm == null || classRef.objectVpm == undefined){      
+      if(this.objectVpm == null || this.objectVpm == undefined){      
         d3.select(this.parentNode).classed('active', false);
       }
 
     })
 
-    mvm.on('click', function() {
-      if(classRef.objectMvm == null || classRef.objectMvm == undefined) {
-        d3.select('.color-state-wrapper').classed('d-none', false);
-        d3.select('.properties-section.opacity').classed('d-none',false);
-        d3.select(this.parentNode).classed('active', true);
-        that.model.editMvpctoggle(that.mapId,true);
-        let data = {
-          name: "MVM",
-          src: that.BASE_URL+'assets/images/MVPC.svg',
-          width: 400,
-          height: 400,
-          x: that.centroid.x - 400 / 2,
-          y: that.centroid.y - 400 / 2,
-          transfrom: "",
-        }
-        classRef.objectMvm = new Object({
-          layer: that.canvas,
-          data: data
-        });
-      } else {
-        d3.select('.color-state-wrapper').classed('d-none', true);
-        that.objectDelete('MVM');
-        classRef.objectMvm = null; 
-      }
+    // mvm.on('click', function() {
+    //   if(classRef.objectMvm == null || classRef.objectMvm == undefined) {
+    //     d3.select('.color-state-wrapper').classed('d-none', false);
+    //     d3.select('.properties-section.opacity').classed('d-none',false);
+    //     d3.select(this.parentNode).classed('active', true);
+    //     that.model.editMvpctoggle(that.mapId,true);
+    //     let data = {
+    //       name: "MVM",
+    //       src: that.BASE_URL+'assets/images/MVPC.svg',
+    //       width: 400,
+    //       height: 400,
+    //       x: that.centroid.x - 400 / 2,
+    //       y: that.centroid.y - 400 / 2,
+    //       transfrom: "",
+    //     }
+    //     classRef.objectMvm = new Object({
+    //       layer: that.canvas,
+    //       data: data
+    //     });
+    //   } else {
+    //     d3.select('.color-state-wrapper').classed('d-none', true);
+    //     that.objectDelete('MVM');
+    //     classRef.objectMvm = null; 
+    //   }
 
-      if(classRef.objectMvm == null || classRef.objectMvm == undefined)
-        d3.select(this.parentNode).classed('active', false);
+    //   if(classRef.objectMvm == null || classRef.objectMvm == undefined)
+    //     d3.select(this.parentNode).classed('active', false);
 
-    })
+    // })
 
 
     mapGridType.on('click','a', function() {
@@ -158,13 +160,14 @@ export default class Vedic {
 
       switch (gridType){
          case "3GL" : 
-         console.log("3GL",that.canvas)
+
               that.assist.drawPolygon({layer: that.canvas, points: that.vedicMapBoundariesCoords,strokeColor:"red",strokeWidth:2});
               that.assist.drawPolygonGrid({points: that.vedicMapBoundariesCoords, color:"red", noOfLines: 3,strokeWidth:2});
               that.createObject('g.vedic-polygon');
               that.vedic = new Vedic(); 
                 break;
         case "3GD" : 
+        
               that.assist.drawPolygon({layer: that.canvas, points: that.vedicMapBoundariesCoords,strokeColor:"blue",strokeWidth:2});
               that.assist.drawPolygonGrid({points: that.vedicMapBoundariesCoords, color:"blue", noOfLines: 3,strokeWidth:2});
               that.assist.drawPolygonDiagonals({points: that.vedicMapBoundariesCoords, color:"blue", noOfLines: 3,strokeWidth:2});
@@ -172,6 +175,7 @@ export default class Vedic {
               that.vedic = new Vedic(); 
               break;
         case "9DL" : 
+        
               that.assist.drawPolygon({layer: that.canvas, points: that.vedicMapBoundariesCoords,strokeColor:"blue",strokeWidth:2});
               that.assist.drawPolygonGrid({points: that.vedicMapBoundariesCoords, color:"blue", noOfLines: 9,strokeWidth:2});
               that.assist.drawPolygonDiagonals({points: that.vedicMapBoundariesCoords, color:"blue", noOfLines: 9,strokeWidth:2});
@@ -213,7 +217,12 @@ export default class Vedic {
                 that.createObject('g.vedic-polygon');
                 that.vedic = new Vedic(); 
                   break;
-         default: drawVedic(that,"red",3,2); break;
+         default:  
+              that.assist.drawPolygon({layer: that.canvas, points: that.vedicMapBoundariesCoords,strokeColor:"red",strokeWidth:2});
+              that.assist.drawPolygonGrid({points: that.vedicMapBoundariesCoords, color:"red", noOfLines: 3,strokeWidth:2});
+              that.createObject('g.vedic-polygon');
+              that.vedic = new Vedic(); 
+                  break; 
       }
     
       // that.vedic.startDrawing(that);

@@ -38,7 +38,7 @@
                             </div>
                         </li>
 
-                        <li class="nav-item dropdown d-none measurement-section">
+                        <!-- <li class="nav-item dropdown d-none measurement-section">
                             <a class="nav-link dropdown-toggle text-white menu-item" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Options
                             </a>
@@ -57,7 +57,7 @@
                                 <a class="dropdown-item d-none" href="#" data-menu-item="get-marma">Marma</a>
                                 <a class="dropdown-item d-none" href="#" data-menu-item="get-shanmahanti">Shanmahanti</a>
                             </div>
-                        </li>
+                        </li> -->
 
                     </ul>
 
@@ -114,6 +114,27 @@
                 <li class="nav-item">
                     <a href="#" id="newProject"><i class="fas fa-plus"></i>&nbsp;&nbsp;New Project</a>
                 </li>
+                <li class="nav-item dropdown d-none measurement-section">
+                            <a class="nav-link text-white menu-item" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Options
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="#" data-menu-item="set-measurement">Set measurement</a>
+                                <a class="dropdown-item" href="#" data-menu-item="get-measurement">Get measurement</a>
+                            </div>
+                        </li>
+                        <li class="nav-item dropdown d-none tools-section">
+                            <a class="nav-link text-white menu-item" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Tools
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown" id="toolMenu">
+                            <a class="dropdown-item" href="#" id="vpm">Vpm</a>
+                            <a class="dropdown-item" href="#" id="mvpc">Shakti Chakra</a>
+                            <a class="dropdown-item" href="#" id="mvc">Maha Vastu Chakra</a>
+                            <a class="dropdown-item d-none" href="#" data-menu-item="get-marma">Marma</a>
+                            <a class="dropdown-item d-none" href="#" data-menu-item="get-shanmahanti">Shanmahanti</a>
+                            </div>
+                        </li>
                 <li class="nav-item">
                     <a href="<?php echo base_url('Main') ?>">Dashboard</a>
                 </li>
