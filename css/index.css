@@ -43,7 +43,7 @@ body {
 }
  
 .--login-page {
-    width: 100%;
+    width: 72%;
     height: 400px;
     display: flex;
     justify-content: space-between;
@@ -58,11 +58,11 @@ body {
 }
 
 .logo {
-    width: 250px;
+  width: 408px;
 }
 
 .logo-box {
-    width: 50%;
+    width: 33%;
     display: flex;
     justify-content: center;
     align-items: center;

@@ -230,7 +230,7 @@ export default class Model {
 
         this._commit(this.houseMaps);
 
-        let updatedField = { name: 'dimension', value: JSON.stringify(updatedDimension) };
+        let updatedField = { name: 'dimension', value: updatedDimension };
         this.updateHouseMapInDataBase(id, this.houseMaps, updatedField)
     }
 

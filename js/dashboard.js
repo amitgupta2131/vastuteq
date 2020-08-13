@@ -60,10 +60,13 @@ d3.selectAll('[data-map-id]').on('click', function () {
 	function HouseMapssuccess(content, targetTextarea) {
 		var result = JSON.parse(content);
 		result[0].id = result[0].mapId
-		if (result[0].centroid.trim() != "" && result[0].customBoundariesCoords.trim() != "" && result[0].faceCoords.trim() != "") {
+		if (result[0].centroid.trim() != "" && result[0].customBoundariesCoords.trim() != "" && result[0].faceCoords.trim() != "" && result[0].vedicBoundariesCoords.trim() != "" && result[0].dimension.trim() != "") {
 			result[0].centroid = JSON.parse(result[0].centroid)
 			result[0].customBoundariesCoords = JSON.parse(result[0].customBoundariesCoords)
 			result[0].faceCoords = JSON.parse(result[0].faceCoords)
+			result[0].vedicBoundariesCoords = JSON.parse(result[0].vedicBoundariesCoords)
+			result[0].dimension = JSON.parse(result[0].dimension)
+			console.log(result[0].dimension)
 		}
 
 		result[0].imageData = JSON.parse(result[0].imageData)

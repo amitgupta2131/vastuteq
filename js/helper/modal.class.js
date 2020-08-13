@@ -48,9 +48,9 @@ export default class modal {
             style('position', 'absolute').style('right', '0').text('Print');
 
         this.printBtn.on('click', () => {        
-            $('#drawArea').css('display', 'none');
+            $('#drawArea').css('display', 'none');           
             window.print();      
-            $('#drawArea').css('display', 'block');
+            $('#drawArea').css('display', 'flex');
         })
       
 

@@ -199,6 +199,7 @@ export default class Vastuteq {
           d3.select(".zoom-wrapper").classed("d-none", false);
           d3.select(".measurement-section").classed("d-none", false);
           d3.select('.zoom-functionality').classed('d-none',false);
+          d3.select('.tools-section').classed('d-none',false);
           this.drawCanvas.classed('d-none', true);
           $(".property.description").html("");
 
@@ -285,6 +286,8 @@ export default class Vastuteq {
               height: objects[i].image.height,
               transform: objects[i].image.transform,
             };
+            console.log(objectData)
+            console.log(this.mapBoundariesCoords)
             new Object({mapId: this.mapId,layer: objectLayer,data: objectData });
           }
 
@@ -354,6 +357,10 @@ export default class Vastuteq {
         this.wrapperDelete("map");
         d3.select('.zoom-functionality').classed('d-none',false);
         d3.select(".properties-section.decs").classed('d-none', true);
+        d3.select(".measurement-section").classed("d-none", false);         
+        d3.select('.tools-section').classed('d-none',false);
+        d3.select('#vpm').classed('d-none',true);
+        d3.select('#mvpc').classed('d-none',true);
         this.assist.drawMask({layer: this.canvas, points: this.mapBoundariesCoords,size: this.RECT_SIZE,});
         this.assist.drawBoundaries({layer: this.canvas, points: this.mapBoundariesCoords});
         this.assist.drawBharamNabhi({layer: this.canvas, centroid: this.centroid,});
@@ -465,9 +472,16 @@ export default class Vastuteq {
         if (that.zoomState == false) return false;
   
         let zoom = d3.select(this).attr('data-zoom');
+        let mVariable = parseFloat(`.${zoom}`);
+        if(zoom >= 100 ){
+          mVariable = mVariable * 10;
+        }
+        console.log(mVariable)
         let newK = parseInt(zoom)/100;
-        let newX = Utility.centerOfCanvas(that.canvasSize, (that.canvasSize.width * 0.75), (that.canvasSize.height * 0.75)).x;
-            let newY = Utility.centerOfCanvas(that.canvasSize, (that.canvasSize.width * 0.75), (that.canvasSize.height * 0.75)).y;
+        // let newX = Utility.centerOfCanvas(that.canvasSize, (that.canvasSize.width * mVariable), (that.canvasSize.height * mVariable)).x;
+            // let newY = Utility.centerOfCanvas(that.canvasSize, (that.canvasSize.width * mVariable), (that.canvasSize.height * mVariable)).y;
+            let newX = Utility.centerOfCanvas(that.canvasSize, (that.canvasSize.width * mVariable), (that.canvasSize.height * mVariable)).x;
+            let newY = Utility.centerOfCanvas(that.canvasSize, (that.canvasSize.width * mVariable), (that.canvasSize.height * mVariable)).y;
             // let newK = 0.75
             that.svg.call(that.zoom.transform, d3.zoomIdentity.translate(newX, newY).scale(newK));
             that.zoomData.x = newX, that.zoomData.y = newY, that.zoomData.k = newK;
@@ -569,6 +583,7 @@ export default class Vastuteq {
     let that = this;
 
     d3.select('.object-align-center').on("click", () => {
+      
       let selectedItem = d3.select(".svg-object.active[data-object]");
         if (selectedItem.node() != null) {
             if(selectedItem.classed('saved') == false) {
@@ -593,6 +608,8 @@ export default class Vastuteq {
                 y: y,
                 width: width,
                 height: height,
+                northAngle: that.calNorthAngle(),
+                angle: that.angle
                 };
                 let objectInstance = new Object({
                 mapId: that.mapId,

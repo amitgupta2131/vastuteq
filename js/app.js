@@ -8,12 +8,12 @@ var isCreateMap = false,
 
 var importMapApp, createMapApp, canvasRuler;
 
-if(localStorage.hasOwnProperty('selectedMapId') == true) {
+if (localStorage.hasOwnProperty('selectedMapId') == true) {
   let selectedMapId = localStorage.getItem("selectedMapId");
   let model = new Model();
   let houseMap = model.getHouseMap(selectedMapId)[0];
-  console.log("H",houseMap);
-  if(houseMap != undefined) {
+  // console.log("H", houseMap);
+  if (houseMap != undefined) {
     let data = {
       name: "map",
       src: houseMap.imageData.src,
@@ -30,45 +30,45 @@ if(localStorage.hasOwnProperty('selectedMapId') == true) {
 }
 
 function createMap() {
-    // ENABLING TOOLBOXES
-    d3.select(".toolbox.right").classed("d-none", false);
-    d3.select(".toolbox.left").classed("d-none", false);
+  // ENABLING TOOLBOXES
+  d3.select(".toolbox.right").classed("d-none", false);
+  d3.select(".toolbox.left").classed("d-none", false);
 
-    let canvasSize = drawAreaSize(35, 35);
+  let canvasSize = drawAreaSize(35, 35);
 
-    let canvasArea = d3
-      .select("#drawArea")
-      .append("div")
-      .attr("id", "canvasArea")
-      .classed("border", true);
+  let canvasArea = d3
+    .select("#drawArea")
+    .append("div")
+    .attr("id", "canvasArea")
+    .classed("border", true);
 
-    let backgroundGridCanvas = d3
-      .select("#drawArea")
-      .append("svg")
-      .attr("id", "paintCanvasBackground");
+  let backgroundGridCanvas = d3
+    .select("#drawArea")
+    .append("svg")
+    .attr("id", "paintCanvasBackground");
 
-    let canvas = d3
-      .select("#drawArea")
-      .append("canvas")
-      .attr("id", "paintCanvas")
-      .classed("border", true);
+  let canvas = d3
+    .select("#drawArea")
+    .append("canvas")
+    .attr("id", "paintCanvas")
+    .classed("border", true);
 
-    backgroundGridCanvas.attr("width", canvasSize.width);
-    backgroundGridCanvas.attr("height", canvasSize.height);
-    canvas.attr("width", canvasSize.width);
-    canvas.attr("height", canvasSize.height);
+  backgroundGridCanvas.attr("width", canvasSize.width);
+  backgroundGridCanvas.attr("height", canvasSize.height);
+  canvas.attr("width", canvasSize.width);
+  canvas.attr("height", canvasSize.height);
 
-    canvasRuler = new ruler({
-      container: document.querySelector("#canvasArea"),
-    });
+  canvasRuler = new ruler({
+    container: document.querySelector("#canvasArea"),
+  });
 
-    createMapApp = new Paint("paintCanvas");
+  createMapApp = new Paint("paintCanvas");
 
-    isCreateMap = true;
+  isCreateMap = true;
 }
 
 function importMap() {
-    $("input.import-map-file[type='file']").click();
+  $("input.import-map-file[type='file']").click();
 }
 
 function initImportMap() {
@@ -214,12 +214,12 @@ $('[data-menu-item]').on("click", function () {
 
   let menuItem = $(this).attr('data-menu-item');
 
-  if(menuItem == "save") {
+  if (menuItem == "save") {
     // SAVE IMAGE LOCALLY
     var canvas = document.getElementById("paintCanvas");
     var image = canvas
-        .toDataURL("housemap_by_vastuteq/png", 1.0)
-        .replace("housemap_by_vastuteq/png", "image/octet-stream");
+      .toDataURL("housemap_by_vastuteq/png", 1.0)
+      .replace("housemap_by_vastuteq/png", "image/octet-stream");
     var link = document.createElement("a");
     link.download = "my-image.png";
     link.href = image;
@@ -229,26 +229,26 @@ $('[data-menu-item]').on("click", function () {
     clearCanvas(document.getElementById("paintCanvas"));
 
     swal("Your drawing is exported successfully.", {
-        icon: "success",
+      icon: "success",
     });
 
-  } else if(menuItem == "exit") {
+  } else if (menuItem == "exit") {
 
     swal({
-        title: "Are you sure?",
-        text: "Once removed, you will not be able to recover!",
-        icon: "warning",
-        buttons: true,
-        dangerMode: true,
-      }).then((willDo) => {
-        if (willDo) {
-          
-          createMapApp = null;
-          window.location.href = BASE_URL+'/Main/draw/'+btoa(selectedMapId);
-          return true;
-        } else {
-          return false;
-        }
+      title: "Are you sure?",
+      text: "Once removed, you will not be able to recover!",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+    }).then((willDo) => {
+      if (willDo) {
+
+        createMapApp = null;
+        window.location.href = BASE_URL + '/Main/draw/' + btoa(selectedMapId);
+        return true;
+      } else {
+        return false;
+      }
     });
   }
 
@@ -293,7 +293,7 @@ document
             let mapId = uniqueID();
             localStorage.setItem("selectedMapId", mapId);
             let houseMap = [];
-            
+
             let data = {
               name: "map",
               src: img.src,
@@ -378,7 +378,7 @@ document.querySelector("#drawArea").addEventListener("drop", (e) => {
 // ! FUNCTION TO ALIGN OBJECT INSIDE CANVAS
 function centerOfCanvas(canvasSize, width = 0, height = 0) {
   return {
-    x: (canvasSize.width  - width) / 2,
+    x: (canvasSize.width - width) / 2,
     y: (canvasSize.height - height) / 2,
   };
 }
@@ -402,7 +402,14 @@ function resizeObject(canvasSize, width = 0, height = 0) {
   };
 }
 
-function uniqueID(){
-	return `P-${Math.random().toString(36).slice(2)}`;
+function uniqueID() {
+  return `P-${Math.random().toString(36).slice(2)}`;
 }
+
+//For Print
+d3.select('#print').on('click', function () {
+  window.print();
+})
+
+
 

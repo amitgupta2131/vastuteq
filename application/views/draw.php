@@ -62,7 +62,7 @@
 </head>
 
 <body>
-       <!-- 
+    <!-- 
     //////////////////////////////// --- H E A D E R ---  ////////////////////////////////
     -->
 
@@ -148,18 +148,19 @@
     </nav> -->
 
 
-   
+
     <!-- 
     //////////////////////////////// --- D R A W  A R E A ---  ////////////////////////////////
     -->
-    <section id="drawArea" class="d-flex flex-column justify-content-center align-items-center">
-    <div class="row col-sm-5" style="margin-top:100px;">
-       <div class="col-sm-6 text-primary" data-behavior="import">
-            <center><img src= "<?php echo base_url('assets/icons/importMap.svg')?>" width="100px" >Import Map</img></center>
-       </div>
-       <div class="col-sm-6 text-primary" data-behavior="create">
-            <center><img src= "<?php echo base_url('assets/icons/createMap.svg')?>" width="100px" >Create Map</img></center>
-       </div>
+    <section id="drawArea" class="flex flex-column justify-content-center align-items-center">
+        <div class="row col-sm-5" style="margin-top:100px;" id="mapImportOption">
+            <div class="col-sm-6 text-primary" data-behavior="import" style="cursor:pointer">
+                <center><img src="<?php echo base_url('assets/icons/importMap.svg') ?>" width="100px">Import Map</img></center>
+            </div>
+            <div class="col-sm-6 text-primary" data-behavior="create" style="cursor:pointer">
+                <center><img src="<?php echo base_url('assets/icons/createMap.svg') ?>" width="100px">Create Map</img></center>
+            </div>
+        </div>
     </section>
 
     <!-- PAINT TOOLBOX LEFT START -->
@@ -513,6 +514,21 @@
                             <a class="dropdown-item" href="#" data-zoom="200">200%</a>
                         </div>
                     </div>
+                    <ul class="navbar-nav mr-2">
+                        <li class="nav-item">
+                            <a class="nav-link object-align-center" href="#" id="abc" name="align-center">
+                                <img src="http://localhost/vastuteq5/assets/icons/chevron.svg" alt="" width="20">
+                            </a>
+                        </li>
+                    </ul>
+
+                    <ul class="navbar-nav mr-2">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" id="print" name="print">
+                                <img src="http://localhost/vastuteq5/assets/icons/print.svg" alt="" width="20">
+                            </a>
+                        </li>
+                    </ul>
                 </div>
 
                 <!-- ACTION ATTRIBUTE -->
@@ -1081,7 +1097,7 @@
             </div>
 
         </div>
-        
+
 
         <div class="mt-3 properties-section fill d-none">
             <h5 class="text-uppercase text-sm overflow-elipsis properties-title"> Fill</h5>
@@ -1149,7 +1165,7 @@
         </div>
 
 
-    </section>  
+    </section>
 
 
     <!-- 
@@ -1213,27 +1229,15 @@
 <script src="<?php echo base_url('js/helper/sweetalert.js') ?>"></script>
 
 <script>
-    $("#fixed_image").click(function() {
-        // alert('Hello');
-        $('.refer-form-slide').toggleClass('refer-form-slide-active');
-    });
+        $('#newProject').on('click', function() {
+            // alert('runs')
+        // let id = uniqueID();
+        // localStorage.setItem("selectedMapId", id);
+        localStorage.removeItem("houseMaps");
+        window.location.href = BASE_URL + 'Main/propertyInfo';
 
-    $('.objectimg').on('click', function() {
-        let toggleId = $(this).attr('data-toggle');
-        $('.subobj-container').removeClass('active')
-        $(`${toggleId}`).addClass('active')
-    });
 
-    $('.obj-btn').on('click', function() {
-        $(this).removeClass("btn-light").addClass("btn-primary");
-        $(this).siblings().removeClass("btn-primary").addClass("btn-light");
-        let toggleId = $(this).attr('data-toggle');
-        let toggleId2 = $(this).siblings().attr('data-toggle');
-        $(`${toggleId2}`).removeClass('active')
-        $(`${toggleId}`).addClass('active')
-        $(`${toggleId} .objcontainer .subobj-container:first`).addClass('active')
-
-    });
+    })
 
     function removeHouseMap() {
         localStorage.removeItem('houseMaps');
