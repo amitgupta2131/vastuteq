@@ -270,7 +270,7 @@ export default class Assist {
             (m == screenBoundariesCoords.length - 1) ? n = 0 : null;
             let ip = Utility.linesIntersection(centroid.x, centroid.y, (centroid.x + Math.cos(nAngle * 0.0174533) * 3200), (centroid.y + Math.sin(nAngle * 0.0174533) * 3200), ...screenBoundariesCoords[m], ...screenBoundariesCoords[n]);
             if (ip) { activeDir = directions[m]; }
-            else {activeDir = directions[0];console.log("Assist Class: No intersection point found.")}
+            else {console.log("Assist Class: No intersection point found.")}
         }
 
         let newAng = this.getAngleBasedOnDivisions(division);
@@ -560,7 +560,7 @@ export default class Assist {
               
         let nAngle = Utility.getAngle(centroid.x, centroid.y, perpendicularPoints.x, perpendicularPoints.y);
         let increment = 360/32;
-        let ipArray = Utility.getIntersectionPoints(    angle, centroid, mapBoundariesCoords, 32, "intersectionPoints");
+        let ipArray = Utility.getIntersectionPoints(angle, centroid, mapBoundariesCoords, 32, "intersectionPoints");
         
         let outerArray = [];
         let len = ipArray.length;
@@ -833,6 +833,7 @@ export default class Assist {
         .attr('stroke', color)
         .attr('stroke-width', strokeWidth);
     }
+
       
 
 }

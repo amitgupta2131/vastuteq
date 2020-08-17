@@ -63,7 +63,7 @@ export default class Vastuteq {
     this.angle = this.houseMap == undefined ? 0 : -parseFloat(this.houseMap.degree);
     this._stage = this.houseMap == undefined ? 0 : this.houseMap.stage;
     this._type = this.houseMap == undefined ? 0 : this.houseMap.type;
-    this.division = 16;
+    // this.division = 8;
 
     // ?  A P P  F U N C T I O N A L I T Y
 
@@ -155,9 +155,9 @@ export default class Vastuteq {
             "Start pinning by simply clicking on map borders",
             "danger"
           );
-          $(".property.description").html(
-            "Start pinning by simply clicking on map borders"
-          );
+         let htmlText="Start pinning by clicking on map borders. <br/><br/>Press \" CTRL + Z \" keys to undo";
+
+          $(".property.description").html(htmlText);
           let stageFirst = new StageFirst({
             layer: this.canvas,
             className: "map-surface",
@@ -171,7 +171,8 @@ export default class Vastuteq {
           // STAGE SECOND
           this.wrapperDelete("map");
           this.displayMessage("Select facing wall", "danger");
-          $(".property.description").html("Select facing wall");
+          let htmlText= "Select facing wall from the Dropdown box";
+          $(".property.description").html(htmlText);
           this.assist.drawMask({
             layer: this.canvas,
             points: this.mapBoundariesCoords,
@@ -287,8 +288,25 @@ export default class Vastuteq {
               height: objects[i].image.height,
               transform: objects[i].image.transform,
             };
-            console.log(objectData)
-            console.log(this.mapBoundariesCoords)
+
+            //Check if Object is in any of the directions
+            console.log(objectData);
+            this.mapPolygonsArrayWithDirections = Utility.getIntersectionPoints(
+              this.calNorthAngle() + this.angle,
+              this.centroid,
+              this.mapBoundariesCoords,
+              this.division,
+              "polygonDirections"
+            );
+            
+            // console.log("Map:",this.mapPolygonsArrayWithDirections);
+            let testPoint = [objectData.x,objectData.y];
+            this.mapPolygonsArrayWithDirections.forEach(element => {
+              // console.log("testPoint",testPoint);
+              // console.log("element",element);
+              console.log("res",element.direction,d3.polygonContains(element.polygon[0],testPoint));
+            });
+            
             new Object({mapId: this.mapId,layer: objectLayer,data: objectData });
           }
 

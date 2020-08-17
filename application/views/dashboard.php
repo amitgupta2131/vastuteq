@@ -125,29 +125,29 @@
                 for ($i = 0; $i < count($property); $i++) {
                     $imageResource = json_decode($property[$i]['imageData'], true);
             ?>
-                    <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+                    <div class="col-lg-3 col-md-4 col-sm-12 mb-4">
                         <div class="card rounded bubbly-button p-1" data-map-id="<?php echo $property[$i]['mapId'] ?>"><img class="card-img-top" src="<?php echo $imageResource['src'] ?>">
                             <div class="card-body border-top border-thick">
+                                <!--<div class="project-name card-text">
+                                    <span class="col-sm-5">Owner</span>
+                                    <span class="col-sm-7"><?php //echo $property[$i]['name'] ?></span>
+                                </div> -->
                                 <div class="project-name card-text">
-                                    <span class="col-sm-4">Owner:</span>
-                                    <span class="col-sm-8"><?php echo $property[$i]['name'] ?></span>
+                                    <span class="col-sm-5">Name</span>
+                                    <span class="col-sm-7"><?php echo $property[$i]['propertyName'] ?></span>
                                 </div>
                                 <div class="project-name card-text">
-                                    <span class="col-sm-4">Name:</span>
-                                    <span class="col-sm-8"><?php echo $property[$i]['propertyName'] ?></span>
+                                    <span class="col-sm-5">Category</span>
+                                    <span class="col-sm-7"><?php echo $property[$i]['category'] ?></span>
                                 </div>
                                 <div class="project-name card-text">
-                                    <span class="col-sm-4">Category:</span>
-                                    <span class="col-sm-8"><?php echo $property[$i]['category'] ?></span>
+                                    <span class="col-sm-5">Type</span>
+                                    <span class="col-sm-7"><?php echo $property[$i]['type'] ?></span>
                                 </div>
-                                <div class="project-name card-text">
-                                    <span class="col-sm-4">Type:</span>
-                                    <span class="col-sm-8"><?php echo $property[$i]['type'] ?></span>
-                                </div>
-                                <div class="project-name card-text">
-                                    <span class="col-sm-4">Address:</span>
-                                    <span class="col-sm-8"><?php echo $property[$i]['propertyAddress'] ?></span>
-                                </div>
+                                <!--<div class="project-name card-text">
+                                    <span class="col-sm-4">Address</span>
+                                    <span class="col-sm-8"><?php //echo $property[$i]['propertyAddress'] ?></span>
+                                </div> -->
                                 <!-- <div class="last-update card-text">Last edited 19 hours ago</div> -->
                             </div>
                         </div>

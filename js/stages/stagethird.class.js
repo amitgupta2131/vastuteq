@@ -60,8 +60,8 @@ export default class StageThird {
       .append("select").attr('name','select-grid').attr("class", "form-control form-control-sm text-sm")
       .html(
         `
-        <option value="8">8 Division</option>
-        <option value="16" selected>16 Division</option>
+        <option value="8" selected>8 Division</option>
+        <option value="16">16 Division</option>
         <option value="32">32 Division</option>
         `
       );

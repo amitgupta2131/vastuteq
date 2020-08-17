@@ -182,12 +182,12 @@ export default class Utility {
           if(ip) ipArray.push({direction:ang[j].ang, wall:[mapBoundariesCoords[m],mapBoundariesCoords[n]], ip:[ip.x,ip.y]})
         }
       }
-    
+     
       // d3.select('#eightLayer').append('line').attr('x1',centroid.x).attr('y1',centroid.y)
       // .attr('x2',(centroid.x + Math.cos(ang[0].lDeg) * 1000)).attr('y2',(centroid.y + Math.sin(ang[0].lDeg) * 1000))
       // .style('stroke','red').style('stroke-width', 3);
-    
-      if(type == "polygon") {
+     
+      if ((type == "polygon") || (type == "polygonDirections")) {
     
         // FOR POLYGON ARRAY
         for(let j = 0; j < ang.length; j++){
@@ -199,12 +199,19 @@ export default class Utility {
               let k = (j == division-1) ? 0 : j + 1 ;
               outerPolygons.push({direction: directions[j], points: [extremePoints[j],extremePoints[k],[centroid.x,centroid.y]]});
         }
-        polygons = Utility.getPolygonsArray(outerPolygons,mapBoundariesCoords);
+        if (type == "polygon") {
+            polygons = Utility.getPolygonsArray(outerPolygons,mapBoundariesCoords);
+        }
+        else {
+          console.log("type=",type);
+            polygons = Utility.getPolygonsArrayAndDirection(outerPolygons,mapBoundariesCoords);
+            // console.log("polygons: ",polygons);
+          }
         // console.log("polygons: ",polygons);
         // console.log("outer polygons: ",outerPolygons);
       }
     
-      return (type == "polygon") ? polygons : ipArray;
+      return (type == "polygon" || type == "polygonDirections") ? polygons : ipArray;
     
     }
 
@@ -233,6 +240,21 @@ export default class Utility {
       }
     
       return areaArr;
+    }
+
+    // ! GET POLYGON ARRAY WITH DIRECTIONS
+    //   TO IDENTIFY WHERE THE OBJECTS HAVE BEEN PLACED
+    static getPolygonsArrayAndDirection(source, clip) {
+      let intersectionArr = [];
+      for(let i = 0; i < source.length; i++) {
+       let  data = {
+            direction: source[i].direction, 
+            polygon: greinerHormann.intersection(source[i].points, clip)
+          }
+      //  console.log("data",data);
+        intersectionArr.push(data);
+      }
+      return intersectionArr;
     }
 
      // ! DIVIDE INTO SEGMENTS
