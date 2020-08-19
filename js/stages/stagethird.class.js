@@ -60,8 +60,8 @@ export default class StageThird {
     let gridSelectbox = actionBody.append('div').attr('class', 'col-md-6')
       .append("select").attr('name', 'select-grid').attr("class", "form-control form-control-sm text-sm")
       .html(
-        `
-        <option value="8" selected>8 Division</option>
+        `<option value="" selected>Selet Grid</option>
+        <option value="8">8 Division</option>
         <option value="16">16 Division</option>
         <option value="32">32 Division</option>
         `
@@ -130,23 +130,26 @@ export default class StageThird {
     gridSelectbox.on("change", function () {
       let division = d3.select(this).property('value');
       that.division = division;
+      if (division != "") {
+        // that.start();
+        that.assist.drawBackgroundGrid(that.canvas, that.centroid, that.faceCoords, that.division, that.angle);
+        that.assist.drawMask({ layer: that.canvas, points: that.mapBoundariesCoords, size: that.RECT_SIZE });
+        that.assist.drawBoundaries({ layer: that.canvas, points: that.mapBoundariesCoords });
+        that.assist.drawBharamNabhi({ layer: that.canvas, centroid: that.centroid });
+        that.assist.drawDirectionLines(that.canvas, that.faceCoords, that.centroid, that.division, that.angle);
+        that.assist.drawFacingLine(that.canvas, that.centroid, that.faceCoords);
+        that.assist.drawGrid(that.canvas, that.centroid, that.faceCoords, that.screenBoundariesCoords, that.division, that.angle);
 
-      // that.start();
-      that.assist.drawBackgroundGrid(that.canvas, that.centroid, that.faceCoords, that.division, that.angle);
-      that.assist.drawMask({ layer: that.canvas, points: that.mapBoundariesCoords, size: that.RECT_SIZE });
-      that.assist.drawBoundaries({ layer: that.canvas, points: that.mapBoundariesCoords });
-      that.assist.drawBharamNabhi({ layer: that.canvas, centroid: that.centroid });
-      that.assist.drawDirectionLines(that.canvas, that.faceCoords, that.centroid, that.division, that.angle);
-      that.assist.drawFacingLine(that.canvas, that.centroid, that.faceCoords);
-      that.assist.drawGrid(that.canvas, that.centroid, that.faceCoords, that.screenBoundariesCoords, that.division, that.angle);
+        that.screenPolygons = Utility.getIntersectionPoints(that.calNorthAngle(), that.centroid, that.screenBoundariesCoords, that.division);
+        that.mapPolygonsArray = Utility.getIntersectionPoints(that.calNorthAngle() + that.angle, that.centroid, that.mapBoundariesCoords, that.division);
+        that.mapPolygonsAreaArray = Utility.getPolygonsArea(that.mapPolygonsArray);
 
-      that.screenPolygons = Utility.getIntersectionPoints(that.calNorthAngle(), that.centroid, that.screenBoundariesCoords, that.division);
-      that.mapPolygonsArray = Utility.getIntersectionPoints(that.calNorthAngle() + that.angle, that.centroid, that.mapBoundariesCoords, that.division);
-      that.mapPolygonsAreaArray = Utility.getPolygonsArea(that.mapPolygonsArray);
-
-      // ? DRAW BAR CHART
-      that.modal.drawMap({ areaArr: that.mapPolygonsAreaArray, division: that.division, dimension: that.distanceBetweenTwoPoints });
-      getObjectDirection(that.calNorthAngle(), that.centroid, that.angle, that.mapBoundariesCoords, that.division)
+        // ? DRAW BAR CHART
+        that.modal.drawMap({ areaArr: that.mapPolygonsAreaArray, division: that.division, dimension: that.distanceBetweenTwoPoints });
+        getObjectDirection(that.calNorthAngle(), that.centroid, that.angle, that.mapBoundariesCoords, that.division)
+      }else{
+        showAlert('Please select any grid','danger')
+      }
     })
 
     degreeUpdateBtn.on("click", function () {
@@ -278,6 +281,8 @@ export default class StageThird {
       let objectModel = new ObjectModel();
       let objects = objectModel.getObject(localStorage.getItem('selectedMapId'));
       let objectData;
+      let div = $('select[name="select-grid"]').val();
+      let objectReport = [];
       for (let i in objects) {
         objectData = {
           id: objects[i].image.id,
@@ -298,11 +303,11 @@ export default class StageThird {
           division,
           "polygonDirections"
         );
-        let data = [];
+        let data = {};
         let testPoint = Utility.getPoints(objectData.x, objectData.y, objectData.height, objectData.width);
         // console.log("Map:",mapPolygonsArrayWithDirections);
 
-        
+
         mapPolygonsArrayWithDirections.forEach(element => {
           // console.log("testPoint",testPoint);
           // console.log("element",element);
@@ -314,13 +319,20 @@ export default class StageThird {
               data[dir] = d3.polygonContains(element.polygon[0], point);
             }
           });
-         
-         
+
+
 
           // console.log("res", element.direction, d3.polygonContains(element.polygon[0], testPoint3))
         });
-        console.log(data)
+
+        objectReport.push(data)
+        // console.log(data)
       }
+      // console.log(objectReport)
+      localStorage.removeItem('objectReport');
+      localStorage.removeItem('reportDivision');
+      localStorage.setItem('objectReport', JSON.stringify(objectReport));
+      localStorage.setItem('reportDivision', div);
     }
 
     divisonOfDevtasContainer.on('click', function () {

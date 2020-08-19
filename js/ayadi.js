@@ -49,7 +49,7 @@ options.text(function (d) {
         siUnit = d3.select("[name='dimension-unit']").property('value')
         hasta = d3.select('[name="hasta"]').property('value');
         jatakNakshatra = d3.select("[name='owner-nakshatra']").property('value');
-        
+        console.log(`jatakNakshatra ${jatakNakshatra}`);
     
     
         if (realLength == "" || realBreadth == "" || hasta == "" || siUnit == "") {
@@ -70,7 +70,6 @@ options.text(function (d) {
                 tithi: calculateTithi(length, breadth, hasta, siUnit),
                 nakshatra: calculateNakshatra(aayadiValue,jatakNakshatra)
             }
-            
             //calling ajax to fetch result data from database
             var formData = new FormData();
             formData.append('remainders', JSON.stringify(rem));
@@ -79,7 +78,7 @@ options.text(function (d) {
     
             function ayadhiSuccess(content, targetTextarea) {
                 let result = JSON.parse(content);
-                // console.log("res",result);
+                console.log("res",result);
                 if (result != "") {
                     if(reportType == 'detailed'){
                     reportContainer = d3.select('.display-report-area').classed('text-center', false).html(Template.aayadiDetailedReport(
@@ -106,8 +105,8 @@ options.text(function (d) {
             }
     
     
-            // console.log("Everthing in Feet :");
-            // console.log("length: ", length, " | breadth: ", breadth, " | hasta: ", hasta, " | siUnit: ", siUnit);
+            console.log("Everthing in Feet :");
+            console.log("length: ", length, " | breadth: ", breadth, " | hasta: ", hasta, " | siUnit: ", siUnit);
         }
     })
 
@@ -170,15 +169,16 @@ function aayadi(length, breadth, hasta){
 
 function calculateNakshatra(aayadiValue, jatakNakshatra){
     let temp = 0;
-    aayadiValue = aayadiValue*8%27;
-    // console.log(`aayadiValue ${aayadiValue} jatakNakshatra ${jatakNakshatra}`);
-    if (jatakNakshatra>aayadi) {
+    aayadiValue = parseInt(aayadiValue)*8%27;
+    jatakNakshatra = parseInt(jatakNakshatra);
+    console.log(`aayadiValue ${aayadiValue} jatakNakshatra ${jatakNakshatra}`);
+    if (jatakNakshatra>aayadiValue) {
         temp = 27-jatakNakshatra+1+aayadiValue;
     }
     else {
         temp = aayadiValue-jatakNakshatra+1;
     }
-    // console.log(`temp ${temp} `);
+    console.log(`temp ${temp} `);
     return temp % 9;    
 
 }

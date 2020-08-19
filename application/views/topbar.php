@@ -115,26 +115,26 @@
                     <a href="#" id="newProject"><i class="fas fa-plus"></i>&nbsp;&nbsp;New Project</a>
                 </li>
                 <li class="nav-item dropdown d-none measurement-section">
-                            <a class="nav-link text-white menu-item" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Options
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="#" data-menu-item="set-measurement">Set measurement</a>
-                                <a class="dropdown-item" href="#" data-menu-item="get-measurement">Get measurement</a>
-                            </div>
-                        </li>
-                        <li class="nav-item dropdown d-none tools-section">
-                            <a class="nav-link text-white menu-item" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Tools
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown" id="toolMenu">
-                            <a class="dropdown-item" href="#" id="vpm">Vpm</a>
-                            <a class="dropdown-item" href="#" id="mvpc">Shakti Chakra</a>
-                            <a class="dropdown-item" href="#" id="mvc">Maha Vastu Chakra</a>
-                            <a class="dropdown-item d-none" href="#" data-menu-item="get-marma">Marma</a>
-                            <a class="dropdown-item d-none" href="#" data-menu-item="get-shanmahanti">Shanmahanti</a>
-                            </div>
-                        </li>
+                    <a class="nav-link text-white menu-item" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Options
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="#" data-menu-item="set-measurement">Set measurement</a>
+                        <a class="dropdown-item" href="#" data-menu-item="get-measurement">Get measurement</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown d-none tools-section">
+                    <a class="nav-link text-white menu-item" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Tools
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown" id="toolMenu">
+                        <a class="dropdown-item" href="#" id="vpm">Vpm</a>
+                        <a class="dropdown-item" href="#" id="mvpc">Shakti Chakra</a>
+                        <a class="dropdown-item" href="#" id="mvc">Maha Vastu Chakra</a>
+                        <a class="dropdown-item d-none" href="#" data-menu-item="get-marma">Marma</a>
+                        <a class="dropdown-item d-none" href="#" data-menu-item="get-shanmahanti">Shanmahanti</a>
+                    </div>
+                </li>
                 <li class="nav-item">
                     <a href="<?php echo base_url('Main') ?>">Dashboard</a>
                 </li>
@@ -144,10 +144,18 @@
                 <li class="nav-item">
                     <a href="<?php echo base_url('Main/devtas') ?>">Devtas</a>
                 </li>
+                <li class="nav-item d-none dropdown getReport">
+                    <a class="nav-link text-white menu-item" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Get Report</a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="#" id="inlineRadio1">Object wise report</a>
+                        <a class="dropdown-item" href="#" id="inlineRadio2">Zone wise object</a>
+                    </div>
+                </li>
                 <li class="nav-item">
                     <img class="profile thumbnail rounded-circle" src="<?php echo base_url('assets/images/thumbnail.png') ?>" alt="user" width="20" id="profileButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="profileButton">
-                        <a class="dropdown-item modal__trigger" href="#" data-modal="#modal3"><i class="fas fa-cog"></i>&nbsp;&nbsp;Setting</a>
+                        <a class="dropdown-item modal__trigger" href="#" data-toggle="modal" data-target="#settingModal"><i class="fas fa-cog"></i>&nbsp;&nbsp;Setting</a>
                         <a class="dropdown-item" href="<?php echo base_url('Main/logout') ?>"><i class="fas fa-sign-out-alt"></i>&nbsp;&nbsp;Sign Out</a>
                     </div>
                 </li>
@@ -155,3 +163,62 @@
         </div>
     </div>
 </section>
+
+<!-- 
+    //////////////////////////////// --- Setting  M O D A L ---  ////////////////////////////////
+    -->
+
+<div class="modal fade bd-example-modal-lg" id="settingModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document" style="max-width:450px">
+        <div class="modal-content" style="min-height:460px">
+            <div class="modal-header p-1 pl-3 pr-3">
+                <h5 class="modal-title" id="settingTitle">Settings</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="<?php echo base_url('Main/updateUser') ?>" method='post'>
+                    <?php $user = $this->MainModel->selectAllFromWhere("login", array("userId" => $_SESSION['userInfo']['userId']))[0]; ?>
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" hidden class="form-control" name = 'id' value="<?php echo $user['userId']?>">
+                        <input type="text" hidden class="form-control" name = 'method' value="<?php echo current_url()?>">
+                        <input type="text" class="form-control" name="name" value="<?php echo $user['name']?>">
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone No.</label>
+                        <input type="number" class="form-control" name="phone" value="<?php echo $user['mobileNo']?>">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleFormControlInput1">Email address</label>
+                        <input type="email" class="form-control" name="exampleFormControlInput1" placeholder="name@example.com" readonly value="<?php echo $user['email']?>">
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="text" class="form-control" name="password" value="<?php echo $user['password']?>">
+                    </div>
+                    <div class="form-group">
+                        <label for="address">Address</label>
+                        <textarea class="form-control" name="address" value="<?php echo $user['address']?>"><?php echo $user['address']?></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary align-right" style="float:right">Update</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Message pop up -->
+<?php if (!empty($this->session->flashdata('error'))) { ?>
+        <script>
+            let error = '<?php echo $this->session->flashdata('error'); ?>';
+            showAlert(error, 'danger');
+        </script>
+    <?php } ?>
+    <?php if (!empty($this->session->flashdata('success'))) { ?>
+        <script>
+            let error = '<?php echo $this->session->flashdata('success'); ?>';
+            showAlert(error, 'success');
+        </script>
+    <?php } ?>

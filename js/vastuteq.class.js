@@ -202,6 +202,7 @@ export default class Vastuteq {
           d3.select(".measurement-section").classed("d-none", false);
           d3.select('.zoom-functionality').classed('d-none',false);
           d3.select('.tools-section').classed('d-none',false);
+          d3.select('.getReport').classed('d-none',false);
           this.drawCanvas.classed('d-none', true);
           $(".property.description").html("");
 

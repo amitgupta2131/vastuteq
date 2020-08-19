@@ -228,6 +228,35 @@ class Main extends CI_Controller
 		}
 	}
 
+
+	public function updateUser()
+	{
+		
+		if (isset($_POST) && !empty($_POST)) {
+
+			$insertData = array(
+				'password' => validateInput($_POST['password']),
+				'isAdmin' => 0,
+				'name'	=> validateInput($_POST['name']),
+				'mobileNo' => validateInput($_POST['phone']),
+				'email'	=> validateInput($_POST['email']),
+				'address' => validateInput($_POST['address']),
+			);
+			$result = $this->MainModel->updateWhere('login', $insertData, array('userId' => validateInput($_POST['id'])));
+
+			if ($result) {
+				$this->session->set_flashdata("success", "Client successfully updated");
+				redirect($_POST['method']);
+			} else {
+				$this->session->set_flashdata("error", "Something went wrong contact to IT");
+				redirect($_POST['method']);
+			}
+		} else {
+			$this->session->set_flashdata("error", "Something went wrong contact to IT");
+			redirect(base_url('Main/admin'));
+		}
+	}
+
 	public function addhouseMaps()
 	{
 		if (isset($_POST) && !empty($_POST)) {

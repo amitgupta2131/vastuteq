@@ -803,7 +803,7 @@ export default class Assist {
                     .attr('points',mitra)
                     .style('fill-opacity',0)
                     .style('stroke','black')
-                    .style('stroke-width',2);
+                    .style('stroke-width',2).text('2');
             
         }
         else {

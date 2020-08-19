@@ -32,10 +32,10 @@ export default class modal {
     }
 
     // DRAW MAP
-    drawMap({ areaArr, division, dimension}) {
+    drawMap({ areaArr, division, dimension }) {
 
         const width = 1080 - 120, height = 500 - 120, margin = 80;
-        
+
         this.modal = d3.select('#appModal');
         this.modal.select('.modal-body').selectAll('*').remove();
         this.modal.select('.modal-dialog').style('min-width', '1150px');
@@ -45,14 +45,23 @@ export default class modal {
 
         this.printBtnContainer = this.modalBody.append('div').style('position', 'relative');
         this.printBtn = this.printBtnContainer.append('button').attr('class', 'btn btn-outline-primary btn-sm text-sm pl-3 pr-3').attr('id', 'barPrint').
-            style('position', 'absolute').style('right', '0').text('Print');
+            style('position', 'absolute').style('right', '0').text('Landscape Print');
 
-        this.printBtn.on('click', () => {        
-            $('#drawArea').css('display', 'none');           
-            window.print();      
+        this.printBtn2 = this.printBtnContainer.append('button').attr('class', 'btn btn-outline-primary btn-sm text-sm pl-3 pr-3').attr('id', 'porPrint').
+            style('position', 'absolute').style('right', '150px').text('Portrait Print');
+        this.printBtn.on('click', () => {
+            $('#drawArea').css('display', 'none');
+            $('#appModal .modal-content').css('transform','rotate(90deg)')
+            window.print();
+            $('#appModal .modal-content').css('transform','rotate(0deg)')
             $('#drawArea').css('display', 'flex');
         })
-      
+        this.printBtn2.on('click', () => {
+            $('#drawArea').css('display', 'none');
+            window.print();
+            $('#drawArea').css('display', 'flex');
+        })
+
 
         var DATA, newAreaArr, scale;
 
@@ -63,11 +72,11 @@ export default class modal {
         else
             DATA = this.DIRECTION_THIRTYTWO;
 
-        if ((dimension == null) || (dimension == "null")) { 
+        if ((dimension == null) || (dimension == "null")) {
             newAreaArr = areaArr;
         } else {
-            scale = Math.pow(parseFloat(dimension.scale/dimension.distance), 2);
-            newAreaArr = areaArr.map(function(d){
+            scale = Math.pow(parseFloat(dimension.scale / dimension.distance), 2);
+            newAreaArr = areaArr.map(function (d) {
                 return d * scale;
             })
         }
@@ -94,7 +103,7 @@ export default class modal {
 
         // console.log("LOB UP LB :",LOB,UB,LB);
 
-        
+
         const svg = this.modalBody.append('svg')
             .attr('width', `${width + margin + 75}`)
             .attr('height', `${height + margin + 75}`);
@@ -119,7 +128,7 @@ export default class modal {
 
         const makeYLines = () => d3.axisLeft()
             .scale(yScale)
-        
+
         chart.append('g')
             .attr('transform', `translate(0, ${height})`)
             .call(d3.axisBottom(xScale));
@@ -267,11 +276,21 @@ export default class modal {
     }
 
     isEmpty(obj) {
-        for(var key in obj) {
-            if(obj.hasOwnProperty(key))
+        for (var key in obj) {
+            if (obj.hasOwnProperty(key))
                 return false;
         }
         return true;
+    }
+
+    getDivData(div) {
+        if (div == 8) {
+            return this.DIRECTION_EIGHT
+        } else if (div == 16) {
+            return this.DIRECTION_SIXTEEN
+        } else {
+            return this.DIRECTION_THIRTYTWO
+        }
     }
 
 }

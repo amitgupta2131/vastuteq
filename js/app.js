@@ -2,6 +2,7 @@ import Paint from "./paint/paint.class.js";
 import Behavior from "./behavior.class.js";
 import Vastuteq from "./vastuteq.class.js";
 import Model from "./helper/model.class.js";
+import Modal from "./helper/modal.class.js";
 
 var isCreateMap = false,
   isImportMap = false;
@@ -411,5 +412,128 @@ d3.select('#print').on('click', function () {
   window.print();
 })
 
+//For REPORT GENERATE
 
+function objectWiseReport() {
+  $('#reportModal .modal-body').empty();
+  $('#reportModal .modal-dialog').css('min-width', '1150px');
+  $('#reportModal .modal-content').css('min-height', '460px');
+  $('#reportModal .modal-title').text('Object Wise Report');
+  $('#reportModal .modal-body').attr('id', 'ReportPrintableContent');  
+  let reportData = JSON.parse(localStorage.getItem('objectReport'));
+
+//Add Print Button
+  $('#reportModal .modal-body').append(`<div style="position:relative">
+  <button class="btn btn-outline-primary btn-sm text-sm pl-3 pr-3" id="rPrint" style="position:absolute;right:60px;top:-49px">Print</button>
+  </div>`) 
+
+  $('#reportModal .modal-body').append('<div id="rtable"></div>')
+  let reportTable = `<table class="table table-bordered table-hover mt-2">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Object Name</th>
+      <th scope="col">Object Direction</th>
+      
+    </tr>
+  </thead>
+  <tbody>`
+  let count = 1;
+  for (let data of reportData) {
+    let keys = Object.keys(data)
+    // console.log(keys)
+    for (let i = 2; i < keys.length; i++) {
+      reportTable += `<tr>
+      <th scope="row">${count++}</th>
+      <td>${data.name}</td>
+      <td>${keys[i]}</td>      
+      
+    </tr>`
+    }
+  }
+  reportTable += `</tbody>
+</table>`
+  $('#rtable').html(reportTable)   
+  $('#reportModal .modal-body').append(`<div class="form-group">
+  <label for="exampleFormControlTextarea1">Recommendation</label>
+  <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+</div>`) 
+  $('#reportModal').modal('show')
+}
+
+function zoneWiseReport() {
+  $('#reportModal .modal-body').empty();
+  $('#reportModal .modal-dialog').css('min-width', '1150px');
+  $('#reportModal .modal-content').css('min-height', '460px');
+  $('#reportModal .modal-title').text('Zone Wise Report');
+  $('#reportModal .modal-body').attr('id', 'ReportPrintableContent');
+  
+
+//Add Print Button
+$('#reportModal .modal-body').append(`<div style="position:relative">
+<button class="btn btn-outline-primary btn-sm text-sm pl-3 pr-3" id="rPrint" style="position:absolute;right:60px;top:-49px">Print</button>
+</div>`) 
+
+$('#reportModal .modal-body').append('<div id="rtable"></div>')
+  let div = localStorage.getItem('reportDivision');
+  let modal = new Modal()
+  let directions = modal.getDivData(div)
+  let reportData = JSON.parse(localStorage.getItem('objectReport'));
+
+  let reportTable = `<table class="table table-bordered table-hover mt-2">
+                     <thead>
+                     <tr>
+                     <th scope="col">#</th>
+                     <th scope="col">Directions</th>
+                     <th scope="col">Objects</th>
+                     </tr>
+                 </thead>
+                 <tbody>`
+  let count = 1;
+  for (let data of directions) {
+
+    reportTable += `<tr id="${data.name}">
+        <th scope="row">${count++}</th>
+        <td>${data.name}</td><td>`
+    for (let dData of reportData) {
+      let keys = Object.keys(dData)
+      // console.log(dData);
+      // console.log(keys)
+      for (let i = 2; i < keys.length; i++) {
+        if (keys[i] == data.name) {
+          reportTable += dData.name + ','
+        }
+      }
+
+     console.log($(`#reportModal .modal-body #rtable #${data.name}`).find('td:eq(2)').text());
+
+    }
+    reportTable += `</td></tr>`
+
+  }
+  reportTable += `</tbody>
+</table>`
+  $('#rtable').html(reportTable)
+  $('#reportModal .modal-body').append(`<div class="form-group">
+  <label for="exampleFormControlTextarea1">Recommendation</label>
+  <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+</div>`) 
+  $('#reportModal').modal('show')
+}
+
+$('#inlineRadio1').on('click', function () {
+  objectWiseReport()
+
+})
+
+$('#inlineRadio2').on('click', function () {
+  zoneWiseReport()
+
+})
+
+$('#reportModal').on('click', '#rPrint', () => {
+  $('#drawArea').css('display', 'none');  
+  window.print();  
+  $('#drawArea').css('display', 'flex');
+})
 
