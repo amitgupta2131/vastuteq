@@ -34,7 +34,7 @@ function createMap() {
   // ENABLING TOOLBOXES
   d3.select(".toolbox.right").classed("d-none", false);
   d3.select(".toolbox.left").classed("d-none", false);
-
+  d3.select(".mousePos").classed("d-none", false);
   let canvasSize = drawAreaSize(35, 35);
 
   let canvasArea = d3
@@ -184,9 +184,9 @@ function clearCanvas(canvas) {
 
 // MOUSE POSITION
 
-$("body").mousemove(function (e) {
-  $(".mouse-position-x").html(`X: ${e.pageX}`);
-  $(".mouse-position-y").html(`Y: ${e.pageY}`);
+$("#drawArea").mousemove(function (e) {
+  $(".mouse-position-x").html(`X: ${e.pageX - 50}`);
+  $(".mouse-position-y").html(`Y: ${e.pageY - 80}`);
 });
 
 // DECIDE BEHAVIOR OF APP
@@ -290,6 +290,7 @@ document
 
             localStorage.removeItem('selectedMapId');
             localStorage.removeItem('houseMaps');
+            localStorage.removeItem('objectReport');
             console.log(localStorage.getItem('selectedMapId'));
             let mapId = uniqueID();
             localStorage.setItem("selectedMapId", mapId);
@@ -415,12 +416,14 @@ d3.select('#print').on('click', function () {
 //For REPORT GENERATE
 
 function objectWiseReport() {
+  let reportData = JSON.parse(localStorage.getItem('objectReport'));  
+  if(reportData != null){
   $('#reportModal .modal-body').empty();
   $('#reportModal .modal-dialog').css('min-width', '1150px');
   $('#reportModal .modal-content').css('min-height', '460px');
   $('#reportModal .modal-title').text('Object Wise Report');
   $('#reportModal .modal-body').attr('id', 'ReportPrintableContent');  
-  let reportData = JSON.parse(localStorage.getItem('objectReport'));
+  
 
 //Add Print Button
   $('#reportModal .modal-body').append(`<div style="position:relative">
@@ -460,8 +463,14 @@ function objectWiseReport() {
 </div>`) 
   $('#reportModal').modal('show')
 }
+else{
+  showAlert('Select the grid first','danger')
+}
+}
 
 function zoneWiseReport() {
+  let reportData = JSON.parse(localStorage.getItem('objectReport'));  
+  if(reportData != null){
   $('#reportModal .modal-body').empty();
   $('#reportModal .modal-dialog').css('min-width', '1150px');
   $('#reportModal .modal-content').css('min-height', '460px');
@@ -478,7 +487,7 @@ $('#reportModal .modal-body').append('<div id="rtable"></div>')
   let div = localStorage.getItem('reportDivision');
   let modal = new Modal()
   let directions = modal.getDivData(div)
-  let reportData = JSON.parse(localStorage.getItem('objectReport'));
+  
 
   let reportTable = `<table class="table table-bordered table-hover mt-2">
                      <thead>
@@ -492,9 +501,9 @@ $('#reportModal .modal-body').append('<div id="rtable"></div>')
   let count = 1;
   for (let data of directions) {
 
-    reportTable += `<tr id="${data.name}">
+    reportTable += `<tr >
         <th scope="row">${count++}</th>
-        <td>${data.name}</td><td>`
+        <td>${data.name}</td><td id="${data.name}">`
     for (let dData of reportData) {
       let keys = Object.keys(dData)
       // console.log(dData);
@@ -502,14 +511,20 @@ $('#reportModal .modal-body').append('<div id="rtable"></div>')
       for (let i = 2; i < keys.length; i++) {
         if (keys[i] == data.name) {
           reportTable += dData.name + ','
+          reportTable.replace(/,\s*$/, "");
         }
       }
 
-     console.log($(`#reportModal .modal-body #rtable #${data.name}`).find('td:eq(2)').text());
+     
 
     }
     reportTable += `</td></tr>`
+    console.log($(`#reportModal .modal-body #rtable #${data.name}`).html());
+  }
 
+  for (let data of directions) {
+    console.log(data.name)
+    console.log($(`#${data.name}`).attr('id'))
   }
   reportTable += `</tbody>
 </table>`
@@ -519,6 +534,9 @@ $('#reportModal .modal-body').append('<div id="rtable"></div>')
   <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
 </div>`) 
   $('#reportModal').modal('show')
+}else{
+  showAlert('Select the grid first','danger')
+}
 }
 
 $('#inlineRadio1').on('click', function () {

@@ -819,4 +819,14 @@ input::-webkit-inner-spin-button {
   }
 }
 
+.mousePos{
+  color: white;
+  margin-left: 50px;
+}
+
+.mousePos span:nth-child(2){
+  position: relative;
+  left: 20px;
+}
+
 /*# sourceMappingURL=app.css.map */

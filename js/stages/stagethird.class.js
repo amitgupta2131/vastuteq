@@ -81,11 +81,7 @@ export default class StageThird {
       .attr('data-action-object', 'barchart').attr('data-toggle', 'modal').attr('data-target', '#appModal')
       .style('flex-direction', 'column').style('height', '42px').style('min-width', '55px');
     let barchart = barchartContainer.append('img').attr('src', `${that.BASE_URL}assets/icons/barchart.svg`).attr('width', 20);
-    barchartContainer.append('span').style('margin-top', '1px').style('font-size', '9px').text('barchart');
-
-    let vpm = $('#vpm').attr('data-action-object', `${that.BASE_URL}assets/icons/mvm.svg`)
-    let mvm = $('#mvpc').attr('data-action-object', `${that.BASE_URL}assets/icons/vpm.svg`);
-    let mvc = $('#mvc').attr('data-action-object', `${that.BASE_URL}assets/images/mvc.png`);
+    barchartContainer.append('span').style('margin-top', '1px').style('font-size', '9px').text('barchart');    
 
 
     let divisonOfDevtasContainer = container.append('div').attr('class', 'col-md-8 d-flex justify-content-center align-items-center border object-actions')
@@ -181,6 +177,8 @@ export default class StageThird {
       that.modal.drawMap({ areaArr: that.mapPolygonsAreaArray, division: that.division, dimension: that.distanceBetweenTwoPoints });
     })
 
+    let vpm = $('#vpm');   
+
     vpm.on('click', function () {
 
       if (classRef.objectVpm == null || classRef.objectVpm == undefined) {
@@ -214,6 +212,8 @@ export default class StageThird {
 
     })
 
+    let mvm = $('#mvpc');    
+
     mvm.on('click', function () {
       if (classRef.objectMvm == null || classRef.objectMvm == undefined) {
         d3.select('.color-state-wrapper').classed('d-none', false);
@@ -243,6 +243,8 @@ export default class StageThird {
         d3.select(this.parentNode).classed('active', false);
 
     })
+
+    let mvc = $('#mvc');
 
     mvc.on('click', function () {
 

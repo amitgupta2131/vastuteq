@@ -100,7 +100,7 @@ class Main extends CI_Controller
 
 		$result = $this->MainModel->insertInto('propertydetails', $insertData);
 		if ($result) {
-				$this->session->set_flashdata("success", "Client successfully added");
+				// $this->session->set_flashdata("success", "Client successfully added");
 				redirect(base_url('Main/draw/') . base64_encode($insertData['propertyId']));
 		} else {
 				$this->session->set_flashdata("error", "Something went wrong contact to IT");

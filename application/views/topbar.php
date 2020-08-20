@@ -9,7 +9,10 @@
             <nav class="navbar navbar-expand-lg navbar-light  p-0 pl-2" style="z-index:100;">
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav mr-auto">
-
+                    <li class="nav-item dropdown mousePos d-none">
+                        <span class="mouse-position-x"></span>
+                        <span class="mouse-position-y"></span>
+                    </li>
                         <li class="nav-item dropdown active d-none">
                             <a class="nav-link dropdown-toggle menu-item" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 File
@@ -192,7 +195,7 @@
                     </div>
                     <div class="form-group">
                         <label for="exampleFormControlInput1">Email address</label>
-                        <input type="email" class="form-control" name="exampleFormControlInput1" placeholder="name@example.com" readonly value="<?php echo $user['email']?>">
+                        <input type="email" class="form-control" name="email" placeholder="name@example.com" readonly value="<?php echo $user['email']?>">
                     </div>
                     <div class="form-group">
                         <label for="password">Password</label>
