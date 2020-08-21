@@ -354,6 +354,22 @@ export default class Utility {
     localStorage.removeItem('reportDivision');
     localStorage.setItem('objectReport', JSON.stringify(objectReport));
     localStorage.setItem('reportDivision', div);
+    
+    //update Report data in database
+      console.log(localStorage.getItem('selectedMapId'))
+      var formData = new FormData();
+      formData.append('id', localStorage.getItem('selectedMapId'));
+      formData.append('reportData', JSON.stringify(objectReport));
+      var url = BASE_URL + "/Main/updateReportData";
+      AjaxPost(formData, url, updateReportDatasuccess, AjaxError);
+
+
+
+      function updateReportDatasuccess(content, targetTextarea) {
+          var result = JSON.parse(content);
+          return content;
+      }
+  
   }
 
 

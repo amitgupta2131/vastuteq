@@ -288,33 +288,14 @@ export default class Vastuteq {
               width: objects[i].image.width,
               height: objects[i].image.height,
               transform: objects[i].image.transform,
-            };
-
-            // //Check if Object is in any of the directions
-            // console.log(objectData);
-            // this.mapPolygonsArrayWithDirections = Utility.getIntersectionPoints(
-            //   this.calNorthAngle() + this.angle,
-            //   this.centroid,
-            //   this.mapBoundariesCoords,
-            //   this.division,
-            //   "polygonDirections"
-            // );
-
-            // // console.log("Map:",this.mapPolygonsArrayWithDirections);
-            // let testPoint = [objectData.x,objectData.y];
-            // this.mapPolygonsArrayWithDirections.forEach(element => {
-            //   // console.log("testPoint",testPoint);
-            //   // console.log("element",element);
-            //   console.log("res",element.direction,d3.polygonContains(element.polygon[0],testPoint));
-            // });
-            // let utility = new StageThird();
+            };           
 
 
             new Object({ mapId: this.mapId, layer: objectLayer, data: objectData });            
             
-            // Utility.getObjectDirection(this.calNorthAngle(), this.centroid, this.angle, this.mapBoundariesCoords, this.division)
+            
           }
-          // console.log('objects1', objects);
+          
 
           let stageThird = new StageThird(this.attribute);
           stageThird.startDrawing(this);

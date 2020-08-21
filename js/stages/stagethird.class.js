@@ -212,6 +212,7 @@ export default class StageThird {
       } else {
         that.objectDelete('VPM');
         classRef.objectVpm = null;
+        d3.select('.properties-section.opacity').classed('d-none', true);
       }
 
       if (classRef.objectVpm == null || classRef.objectVpm == undefined)
@@ -244,6 +245,7 @@ export default class StageThird {
         d3.select('.color-state-wrapper').classed('d-none', true);
         that.objectDelete('MVM');
         classRef.objectMvm = null;
+        d3.select('.properties-section.opacity').classed('d-none', true);
       }
 
       if (classRef.objectMvm == null || classRef.objectMvm == undefined)
@@ -279,70 +281,13 @@ export default class StageThird {
       } else {
         that.objectDelete('MVC');
         classRef.objectMVC = null;
+        d3.select('.properties-section.opacity').classed('d-none', true);
       }
 
       if (classRef.objectMVC == null || classRef.objectMVC == undefined)
         d3.select(this.parentNode).classed('active', false);
 
-    });
-
-    // function getObjectDirection(calNorthAngle, centroid, angle, mapBoundariesCoords, division) {
-    //   let objectModel = new ObjectModel();
-    //   let objects = objectModel.getObject(localStorage.getItem('selectedMapId'));
-    //   let objectData;
-    //   let div = $('select[name="select-grid"]').val();
-    //   let objectReport = [];
-    //   for (let i in objects) {
-    //     objectData = {
-    //       id: objects[i].image.id,
-    //       name: objects[i].image.name,
-    //       src: objects[i].image.src,
-    //       x: objects[i].image.x,
-    //       y: objects[i].image.y,
-    //       width: objects[i].image.width,
-    //       height: objects[i].image.height,
-    //       transform: objects[i].image.transform,
-    //     };
-    //     //Check if Object is in any of the directions
-    //     // console.log(objectData);
-    //     let mapPolygonsArrayWithDirections = Utility.getIntersectionPoints(
-    //       calNorthAngle + angle,
-    //       centroid,
-    //       mapBoundariesCoords,
-    //       division,
-    //       "polygonDirections"
-    //     );
-    //     let data = {};
-    //     let testPoint = Utility.getPoints(objectData.x, objectData.y, objectData.height, objectData.width);
-    //     // console.log("Map:",mapPolygonsArrayWithDirections);
-
-
-    //     mapPolygonsArrayWithDirections.forEach(element => {
-    //       // console.log("testPoint",testPoint);
-    //       // console.log("element",element);
-    //       let dir = element.direction
-    //       testPoint.forEach(point => {
-    //         if (d3.polygonContains(element.polygon[0], point)) {
-    //           data['id'] = objectData.id;
-    //           data['name'] = objectData.name;
-    //           data[dir] = d3.polygonContains(element.polygon[0], point);
-    //         }
-    //       });
-
-
-
-    //       // console.log("res", element.direction, d3.polygonContains(element.polygon[0], testPoint3))
-    //     });
-
-    //     objectReport.push(data)
-    //     // console.log(data)
-    //   }
-    //   // console.log(objectReport)
-    //   localStorage.removeItem('objectReport');
-    //   localStorage.removeItem('reportDivision');
-    //   localStorage.setItem('objectReport', JSON.stringify(objectReport));
-    //   localStorage.setItem('reportDivision', div);
-    // }
+    });   
 
     divisonOfDevtasContainer.on('click', function () {
       console.log(d3.select(this).classed('active'), 'working');

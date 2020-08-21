@@ -66,86 +66,9 @@
     //////////////////////////////// --- H E A D E R ---  ////////////////////////////////
     -->
 
-    <!-- <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-0 pr-2 pl-2">
-        <a class="navbar-brand m-auto" href="#">VastuTeq</a>
-    </nav> -->
     <?php include 'topbar.php' ?>
     <input class="import-map-file d-none" type="file">
-    <!-- <nav class="navbar navbar-expand-lg navbar-light bg-light p-0 pl-2 border" style = "z-index:100;">
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-
-                <li class="nav-item dropdown active">
-                    <a class="nav-link dropdown-toggle menu-item" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        File 
-                    </a>
-                    <div class="dropdown-menu active" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#" data-behavior="create" data-menu-item="create-map" id="open-btn">Create Map</a>
-                        <a class="dropdown-item" href="#" data-behavior="import" data-menu-item="import-map">Import Map</a>
-                        <input class="import-map-file d-none" type="file">
-                        <div class="dropdown-divider d-none"></div>
-                        <a class="dropdown-item d-none" href="#" data-menu-item="add-image">Add Image</a>
-                        <div class="dropdown-divider d-none"></div>
-                        <a class="dropdown-item d-none" href="#" data-menu-item="save">Save As</a>
-                        <a class="dropdown-item d-none" href="#" data-menu-item="exit">Exit</a>
-                    </div>
-                </li>
-
-                <li class="nav-item dropdown d-none">
-                    <a class="nav-link dropdown-toggle menu-item" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Edit
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#">Undo</a>
-                        <a class="dropdown-item" href="#">Redo</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Clear</a>
-                    </div>
-                </li>
-
-                <li class="nav-item dropdown d-none measurement-section">
-                    <a class="nav-link dropdown-toggle menu-item" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Options
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#" data-menu-item="set-measurement">Set measurement</a>
-                        <a class="dropdown-item" href="#" data-menu-item="get-measurement">Get measurement</a>
-                    </div>
-                </li>
-                <li class="nav-item dropdown tools-section">
-                    <a class="nav-link dropdown-toggle menu-item" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Tools
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#" data-menu-item="get-marma">Marma</a>
-                        <a class="dropdown-item" href="#" data-menu-item="get-shanmahanti">Shanmahanti</a>
-                    </div>
-                </li>
-                
-            </ul>
-
-            <ul class="navbar-nav mr-auto drawing-tools d-none">
-                <li class="nav-item dropdown ml-2 mr-2">
-                    <a class="nav-link tool menu-item" href="#" role="button" data-tool="select"><img class="drawing-tool" src="<?php echo base_url('assets/icons/select.svg') ?>" alt="tool"></a>
-                </li>
-                <li class="nav-item dropdown ml-2 mr-2">
-                    <a class="nav-link tool menu-item" href="#" role="button" data-tool="select"><img class="drawing-tool" src="<?php echo base_url('assets/icons/text.svg') ?>" alt="tool"></a>
-                </li>
-                <li class="nav-item dropdown ml-2 mr-2">
-                    <a class="nav-link tool menu-item" href="#" role="button" data-tool="select"><img class="drawing-tool" src="<?php echo base_url('assets/icons/pen.svg') ?>" alt="tool"></a>
-                </li>
-                <li class="nav-item dropdown ml-2 mr-2">
-                    <a class="nav-link tool menu-item" href="#" role="button" data-tool="rectangle"><img class="drawing-tool" src="<?php echo base_url('assets/icons/rectangle.svg') ?>" alt="tool"></a>
-                </li>
-                <li class="nav-item dropdown ml-2 mr-2">
-                    <a class="nav-link tool menu-item" href="#" role="button" data-tool="line"><img class="drawing-tool" src="<?php echo base_url('assets/icons/line.svg') ?>" alt="tool" title="line"></a>
-                </li>
-                <li class="nav-item dropdown ml-2 mr-2">
-                    <a class="nav-link tool menu-item" href="#" role="button" data-tool="polygon"><img class="drawing-tool" src="<?php echo base_url('assets/icons/polygon.svg') ?>" alt="tool"></a>
-                </li>
-            </ul>
-        </div>
-    </nav> -->
+    
 
 
 
@@ -515,13 +438,13 @@
                         </div>
                     </div>
 
-                    <ul class="navbar-nav mr-2">
+                    <!-- <ul class="navbar-nav mr-2">
                         <li class="nav-item">
                             <a class="nav-link object-align-center" href="#" id="abc" name="align-center" title="Align to center">
                                 <img src="<?php echo base_url('assets/icons/chevron.svg')?>" alt="" width="20">
                             </a>
                         </li>
-                    </ul>
+                    </ul> -->
 
                     <ul class="navbar-nav mr-2">
                         <li class="nav-item">
@@ -536,7 +459,7 @@
                 <div class="actionbox container p-2 border mb-3"></div>
 
                 <!-- ADDITIONAL ATTRIBUTES -->
-                <div class="additional container p-2 border mb-3 d-none">
+                <!-- <div class="additional container p-2 border mb-3">
                     <div class="col-md-12">
                         <div class="row">
                             <div class="col-md-6 p-1 border d-flex flex-column justify-content-center align-items-center object-align-center">
@@ -549,7 +472,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> -->
 
                 <!-- OPACITY ATTRIBUTE -->
                 <div class="properties-section opacity structure p-2  border d-none mb-2">
@@ -559,7 +482,21 @@
                             <input type="range" min="0.1" max="1" step="0.1" value="1" class="slider" id="myRange">
                             <span class="range-value">1</span>
                         </div>
-                    </div>                    
+                    </div>
+                    <div class="additional container p-2 border mb-3">
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-md-6 p-1 border d-flex flex-column justify-content-center align-items-center object-align-center">
+                                <img src="<?php echo base_url('assets/icons/chevron.svg') ?>" alt="" width="20">
+                                <div class="name text-xs">align-center</div>
+                            </div>
+                            <div class="col-md-6 p-1 border d-flex flex-column d-none justify-content-center align-items-center object-color-toggle" data-color-state="colorless">
+                                <img src="<?php echo base_url('assets/icons/colorless.svg') ?>" alt="" width="20">
+                                <div class="name text-xs">color toggle</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>                   
                 </div>
 
                 <!-- DESCRIPTION ATTRIBUTE -->

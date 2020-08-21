@@ -595,9 +595,10 @@ export default class Assist {
 
 
         if (outerArray.length == 32) {
-            console.log(outerArray);
-            tooltip(brahma, '1', 'Brahma,Building Purpose,Created services of products');
-        console.log(brahma)
+            // console.log(outerArray);
+            tooltip(brahma, '1', 'Brahma');
+            // tooltip(brahma, '1', 'Brahma,Building Purpose,Created services of products');
+        // console.log(brahma)
             //Draw outer 32 devtas
             let len = outerArray.length;
             for (let i = 0; i < len; i++) {
@@ -610,7 +611,7 @@ export default class Assist {
                 outerPolygon.push(twoThirdArr[i]);
                 layer.append('polygon')
                     .attr('points', outerPolygon).style('fill-opacity', 0).style('stroke', 'red').style('stroke-width', 2);
-                    tooltip(outerPolygon, devtas[i].value, devtas[i].name+','+devtas[i].text);
+                    tooltip(outerPolygon, devtas[i].value, devtas[i].name);
             }
 
             //Draw 2nd layer
@@ -623,7 +624,8 @@ export default class Assist {
             aapaha.push(halfOfMidCircleArr[3]);
             // console.log("outer",aapaha);
             layer.append('polygon').attr('points', aapaha).attr('id', 'aapaha').style('fill-opacity', 0).style('stroke', 'blue').style('stroke-width', 2);
-            tooltip(aapaha, '6', 'Aapaha,Distributor,Kapha');
+            tooltip(aapaha, '6', 'Aapaha');
+            // tooltip(aapaha, '6', 'Aapaha,Distributor,Kapha');
             
 
 
@@ -636,7 +638,8 @@ export default class Assist {
             aapahaVatsa.push(halfOfMidCircleArr[5]);
             // console.log("outer",aapahaVatsa);
             layer.append('polygon').attr('points', aapahaVatsa).style('fill-opacity', 0).style('stroke', 'blue').style('stroke-width', 2);
-            tooltip(aapahaVatsa, '7', 'AapahaVatsa,Nutrients,Nutritionist');
+            tooltip(aapahaVatsa, '7', 'AapahaVatsa');
+            // tooltip(aapahaVatsa, '7', 'AapahaVatsa,Nutrients,Nutritionist');
             let savita = [];
             savita.push(twoThirdArr[11]);
             savita.push(twoThirdArr[12]);
@@ -646,7 +649,8 @@ export default class Assist {
             savita.push(halfOfMidCircleArr[11]);
             // console.log("outer",savita);
             layer.append('polygon').attr('points', savita).style('fill-opacity', 0).style('stroke', 'blue').style('stroke-width', 2);
-            tooltip(savita, '8', 'Savita,Motivature,Venture Capitalist');
+            tooltip(savita, '8', 'Savita');
+            // tooltip(savita, '8', 'Savita,Motivature,Venture Capitalist');
 
             let savitra = [];
             savitra.push(twoThirdArr[13]);
@@ -657,7 +661,8 @@ export default class Assist {
             savitra.push(halfOfMidCircleArr[13]);
             // console.log("outer",savita);
             layer.append('polygon').attr('points', savitra).style('fill-opacity', 0).style('stroke', 'blue').style('stroke-width', 2);
-            tooltip(savitra, '9', 'Savitra,Money Finance');
+            tooltip(savitra, '9', 'Savitra');
+            // tooltip(savitra, '9', 'Savitra,Money Finance');
 
             let indra = [];
             indra.push(twoThirdArr[19]);
@@ -668,7 +673,8 @@ export default class Assist {
             indra.push(halfOfMidCircleArr[19]);
             // console.log("outer",indra);
             layer.append('polygon').attr('points', indra).style('fill-opacity', 0).style('stroke', 'blue').style('stroke-width', 2);
-            tooltip(indra, '10', 'Indra,Bussiness Developer');
+            tooltip(indra, '10', 'Indra');
+            // tooltip(indra, '10', 'Indra,Bussiness Developer');
 
             let jaya = [];
             jaya.push(twoThirdArr[21]);
@@ -679,7 +685,8 @@ export default class Assist {
             jaya.push(halfOfMidCircleArr[21]);
             // console.log("outer",indra);
             layer.append('polygon').attr('points', jaya).style('fill-opacity', 0).style('stroke', 'blue').style('stroke-width', 2);
-            tooltip(jaya, '11', 'Jaya,Instrumental');
+            tooltip(jaya, '11', 'Jaya');
+            // tooltip(jaya, '11', 'Jaya,Instrumental');
 
             let rudra = [];
             rudra.push(twoThirdArr[27]);
@@ -690,7 +697,8 @@ export default class Assist {
             rudra.push(halfOfMidCircleArr[27]);
             // console.log("outer",rudra);
             layer.append('polygon').attr('points', rudra).style('fill-opacity', 0).style('stroke', 'blue').style('stroke-width', 2);
-            tooltip(rudra, '12', 'Rudra,Controller');
+            tooltip(rudra, '12', 'Rudra');
+            // tooltip(rudra, '12', 'Rudra,Controller');
 
             let rajyakshama = [];
             rajyakshama.push(twoThirdArr[29]);
@@ -701,7 +709,8 @@ export default class Assist {
             rajyakshama.push(halfOfMidCircleArr[29]);
             // console.log("outer",rajyakshama);
             layer.append('polygon').attr('points', rajyakshama).style('fill-opacity', 0).style('stroke', 'blue').style('stroke-width', 2);
-            tooltip(rajyakshama, '13', 'Rajyakshama,Law Enforcement Officer');
+            tooltip(rajyakshama, '13', 'Rajyakshama');
+            // tooltip(rajyakshama, '13', 'Rajyakshama,Law Enforcement Officer');
 
             let bhudhar = [];
             bhudhar.push(brahma[29]);
@@ -728,7 +737,8 @@ export default class Assist {
 
             // console.log("outer",bhudhar);
             layer.append('polygon').attr('points', bhudhar).style('fill-opacity', 0).style('stroke', 'black').style('stroke-width', 2);
-            tooltip(bhudhar, '2', 'Bhudhar,Regular Activities Task Master');
+            tooltip(bhudhar, '2', 'Bhudhar');
+            // tooltip(bhudhar, '2', 'Bhudhar,Regular Activities Task Master');
 
             let aryama = [];
             aryama.push(brahma[5]);
@@ -754,7 +764,8 @@ export default class Assist {
 
             // console.log("outer",aryama);
             layer.append('polygon').attr('points', aryama).style('fill-opacity', 0).style('stroke', 'black').style('stroke-width', 2);
-            tooltip(aryama, '3', 'Aryama,Networker,Connector');
+            tooltip(aryama, '3', 'Aryama');
+            // tooltip(aryama, '3', 'Aryama,Networker,Connector');
 
             let viviswan = [];
             viviswan.push(brahma[13]);
@@ -780,7 +791,8 @@ export default class Assist {
 
             // console.log("outer",viviswan);
             layer.append('polygon').attr('points', viviswan).style('fill-opacity', 0).style('stroke', 'black').style('stroke-width', 2);
-            tooltip(viviswan, '4', 'Viviswan,Celebrity,Well Positioned');
+            tooltip(viviswan, '4', 'Viviswan');
+            // tooltip(viviswan, '4', 'Viviswan,Celebrity,Well Positioned');
 
             let mitra = [];
             mitra.push(brahma[21]);
@@ -810,7 +822,8 @@ export default class Assist {
                 .style('fill-opacity', 0)
                 .style('stroke', 'black')
                 .style('stroke-width', 2);
-            tooltip(mitra, '5', 'Mitra,Friend,Arbitrator');
+                tooltip(mitra, '5', 'Mitra');
+            // tooltip(mitra, '5', 'Mitra,Friend,Arbitrator');
 
             // let centerPoint = d3.polygonCentroid(mitra);
             // layer.append('text')

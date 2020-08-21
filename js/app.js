@@ -418,7 +418,7 @@ d3.select('#print').on('click', function () {
 function objectWiseReport() {
   let reportData = JSON.parse(localStorage.getItem('objectReport'));
   let objects = JSON.parse(localStorage.getItem('objects'));
-  if (reportData != null) {
+  if (reportData != null && reportData != '') {
     $('#reportModal .modal-body').empty();
     $('#reportModal .modal-dialog').css('min-width', '1150px');
     $('#reportModal .modal-content').css('min-height', '460px');
@@ -472,14 +472,14 @@ function objectWiseReport() {
     $('#reportModal').modal('show')
   }
   else {
-    showAlert('Select the grid first', 'danger')
+    showAlert('Add objects and then Select the grid Before generate the report', 'danger')
   }
 }
 
 function zoneWiseReport() {
   let reportData = JSON.parse(localStorage.getItem('objectReport'));
   let objects = JSON.parse(localStorage.getItem('objects'));
-  if (reportData != null) {
+  if (reportData != null && reportData != '') {
     $('#reportModal .modal-body').empty();
     $('#reportModal .modal-dialog').css('min-width', '1150px');
     $('#reportModal .modal-content').css('min-height', '460px');
@@ -493,7 +493,11 @@ function zoneWiseReport() {
                                           </div>`)
     //create table for report showing
     $('#reportModal .modal-body').append('<div id="rtable"></div>')
-    let div = localStorage.getItem('reportDivision');
+    let div = localStorage.getItem('reportDivision')
+    if(div == null || div == ""){
+      div = 8;
+    }
+    console.log(div)
     let modal = new Modal()
     let directions = modal.getDivData(div)
 
@@ -564,7 +568,7 @@ function zoneWiseReport() {
     //Show report Modal
     $('#reportModal').modal('show')
   } else {
-    showAlert('Select the grid first', 'danger')
+    showAlert('Add objects and then Select the grid Before generate the report', 'danger')
   }
 }
 
