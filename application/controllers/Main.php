@@ -322,6 +322,24 @@ class Main extends CI_Controller
 		}
 	}
 
+	public function updateObjects()
+	{
+		if (isset($_POST) && !empty($_POST)) {
+			$insertData = array(				
+				'objects' => ($_POST['objects']),				
+			);
+
+			$result = $this->MainModel->updateWhere('housemaps', $insertData, array('mapId'	=> ($_POST['id'])));
+			if ($result) {
+				echo json_encode(array("success", "Details Updated"));
+			} else {
+				echo json_encode(array("error", "Details are not saved contact to IT"));
+			}
+		} else {
+			echo json_encode(array("error", "Something went wrong contact to IT"));
+		}
+	}
+
 	public function deletehouseMaps(){
 		$result = $this->MainModel->deleteFromTable('housemaps', array('mapId' => $_POST['id']));
 		if ($result) {

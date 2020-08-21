@@ -70,9 +70,9 @@
                                 <img src="http://localhost/vastuteq5/assets/icons/chevron.svg" alt="" width="20">
                             </a>
                         </li>
-                    </ul>
+                    </ul> -->
 
-                    <ul class="navbar-nav mr-2">
+                   <!--  <ul class="navbar-nav mr-2">
                         <li class="nav-item">
                             <a class="nav-link" href="#" id="print" name="print">
                                 <img src="http://localhost/vastuteq5/assets/icons/print.svg" alt="" width="20">
@@ -151,7 +151,7 @@
                     <a class="nav-link text-white menu-item" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Get Report</a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#" id="inlineRadio1">Object wise report</a>
+                        <a class="dropdown-item" href="#" id="inlineRadio1">Object/Activity wise report</a>
                         <a class="dropdown-item" href="#" id="inlineRadio2">Zone wise object</a>
                     </div>
                 </li>

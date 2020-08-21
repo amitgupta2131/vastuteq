@@ -1,3 +1,4 @@
+import ObjectModel from "../helper/objectmodel.class.js";
 export default class Utility {
 
   // ! FUNCTION TO ALIGN OBJECT INSIDE CANVAS
@@ -294,5 +295,66 @@ export default class Utility {
     let dist = Math.sqrt(Math.pow(deltaX, 2) + Math.pow(deltaY, 2));
     return (dist);
   };
+
+
+  static getObjectDirection(calNorthAngle, centroid, angle, mapBoundariesCoords, division) {
+    let objectModel = new ObjectModel();
+    let objects = objectModel.getObject(localStorage.getItem('selectedMapId'));
+    console.log('objects',objects);
+    let objectData;
+    let div = $('select[name="select-grid"]').val();
+    let objectReport = [];
+    for (let i in objects) {
+      objectData = {
+        id: objects[i].image.id,
+        name: objects[i].image.name,
+        src: objects[i].image.src,
+        x: objects[i].image.x,
+        y: objects[i].image.y,
+        width: objects[i].image.width,
+        height: objects[i].image.height,
+        transform: objects[i].image.transform,
+      };
+      //Check if Object is in any of the directions
+      // console.log(objectData);
+      let mapPolygonsArrayWithDirections = Utility.getIntersectionPoints(
+        calNorthAngle + angle,
+        centroid,
+        mapBoundariesCoords,
+        division,
+        "polygonDirections"
+      );
+      let data = {};
+      let testPoint = Utility.getPoints(objectData.x, objectData.y, objectData.height, objectData.width);
+      // console.log("Map:",mapPolygonsArrayWithDirections);
+
+
+      mapPolygonsArrayWithDirections.forEach(element => {
+        // console.log("testPoint",testPoint);
+        // console.log("element",element);
+        let dir = element.direction
+        testPoint.forEach(point => {
+          if (d3.polygonContains(element.polygon[0], point)) {
+            data['id'] = objectData.id;
+            data['name'] = objectData.name;
+            data[dir] = d3.polygonContains(element.polygon[0], point);
+          }
+        });
+
+
+
+        // console.log("res", element.direction, d3.polygonContains(element.polygon[0], testPoint3))
+      });
+
+      objectReport.push(data)
+      // console.log(data)
+    }
+    // console.log(objectReport)
+    localStorage.removeItem('objectReport');
+    localStorage.removeItem('reportDivision');
+    localStorage.setItem('objectReport', JSON.stringify(objectReport));
+    localStorage.setItem('reportDivision', div);
+  }
+
 
 }

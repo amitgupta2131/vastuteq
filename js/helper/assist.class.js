@@ -34,51 +34,38 @@ export default class Assist {
             { name: 'N2', value: 1, color: "white" }, { name: 'N3', value: 1, color: "blue" }
         ];
         this.DEVTAS = [
-            { name: 'Brahma', value: 1, color: "white" },
-            { name: 'Bhudar', value: 2, color: "white" },
-            { name: 'Aryama', value: 3, color: "white" },
-            { name: 'Vivswan', value: 4, color: "white" },
-            { name: 'Mitra', value: 5, color: "white" },
-            { name: 'Bhudar', value: 6, color: "white" },
-            { name: 'Bhudar', value: 7, color: "white" },
-            { name: 'Bhudar', value: 8, color: "white" },
-            { name: 'Bhudar', value: 9, color: "white" },
-            { name: 'Bhudar', value: 10, color: "white" },
-            { name: 'Bhudar', value: 11, color: "white" },
-            { name: 'Bhudar', value: 12, color: "white" },
-            { name: 'Bhudar', value: 13, color: "white" },
-            { name: 'Bhudar', value: 14, color: "white" },
-            { name: 'Bhudar', value: 15, color: "white" },
-            { name: 'Bhudar', value: 16, color: "white" },
-            { name: 'Bhudar', value: 17, color: "white" },
-            { name: 'Bhudar', value: 18, color: "white" },
-            { name: 'Bhudar', value: 19, color: "white" },
-            { name: 'Bhudar', value: 20, color: "white" },
-            { name: 'Bhudar', value: 21, color: "white" },
-            { name: 'Bhudar', value: 22, color: "white" },
-            { name: 'Bhudar', value: 23, color: "white" },
-            { name: 'Bhudar', value: 24, color: "white" },
-            { name: 'Bhudar', value: 25, color: "white" },
-            { name: 'Bhudar', value: 26, color: "white" },
-            { name: 'Bhudar', value: 27, color: "white" },
-            { name: 'Bhudar', value: 28, color: "white" },
-            { name: 'Bhudar', value: 29, color: "white" },
-            { name: 'Bhudar', value: 30, color: "white" },
-            { name: 'Bhudar', value: 31, color: "white" },
-            { name: 'Bhudar', value: 32, color: "white" },
-            { name: 'Bhudar', value: 33, color: "white" },
-            { name: 'Bhudar', value: 34, color: "white" },
-            { name: 'Bhudar', value: 35, color: "white" },
-            { name: 'Bhudar', value: 36, color: "white" },
-            { name: 'Bhudar', value: 37, color: "white" },
-            { name: 'Bhudar', value: 38, color: "white" },
-            { name: 'Bhudar', value: 39, color: "white" },
-            { name: 'Bhudar', value: 40, color: "white" },
-            { name: 'Bhudar', value: 41, color: "white" },
-            { name: 'Bhudar', value: 42, color: "white" },
-            { name: 'Bhudar', value: 43, color: "white" },
-            { name: 'Bhudar', value: 44, color: "white" },
-            { name: 'Bhudar', value: 45, color: "white" }
+            { name: 'Shikhi', value: 14, text: "Subject Expert,Bhram Gyani" },
+            { name: 'Parjanya', value: 15, text: "Producer,Fertilizer" },
+            { name: 'Jayant', value: 16, text: "Excellent Performer,Achiever" },
+            { name: 'Mahendra', value: 17, text: "Top Boss,King" },
+            { name: 'Surya', value: 18, text: "Executer,Awakener" },
+            { name: 'Satya', value: 19, text: "Court,Dharma" },
+            { name: 'Bhrisha', value: 20, text: "Researher,Grinder" },
+            { name: 'Antriksh', value: 21, text: "Market Space,Bandwidth" },
+            { name: 'Anil', value: 22, text: "Elevator,Fire" },
+            { name: 'Pusha', value: 23, text: "HighWay Security,Recoverer" },
+            { name: 'Vitasta', value: 24, text: "Ancimory Service Provider" },
+            { name: 'Griha Spatya', value: 25, text: "Binder,Commander" },
+            { name: 'Yama', value: 26, text: "Finer,Sortor" },
+            { name: 'Gandharva', value: 27, text: "whActor,Performing Artist" },
+            { name: 'Bhriangraj', value: 28, text: "Cleasner,Drainer" },
+            { name: 'Mrigah', value: 29, text: "Shooter,Hunter" },
+            { name: 'Pitra', value: 30, text: "Anctestors Legacy" },
+            { name: 'Dauwarik', value: 31, text: "Gaurd Security System" },
+            { name: 'Sugreev', value: 32, text: "Capturer,Gainer" },
+            { name: 'Puspdant', value: 33, text: "Grammarian,Ustaad,maestro" },
+            { name: 'Varun', value: 34, text: "Ed,CBI,Vigilance" },
+            { name: 'Asur', value: 35, text: "Informer,Secret Agent" },
+            { name: 'Shosha', value: 36, text: "Depressive,Dryer" },
+            { name: 'Papyakshma', value: 37, text: "Alcoholic,Addicted" },
+            { name: 'Roga', value: 38, text: "Vyeakent,Fatigue" },
+            { name: 'Ahir', value: 39, text: "Shaker,Attacker" },
+            { name: 'Mukhya', value: 40, text: "Designer,System Maker" },
+            { name: 'Bhallat', value: 41, text: "Discriminator,Parkhi" },
+            { name: 'Soma', value: 42, text: "Solution,Drive" },
+            { name: 'Bhujang', value: 43, text: "Doctor,Healer" },
+            { name: 'Aditi', value: 44, text: "Caretaker,Councellor" },
+            { name: 'Diti', value: 45, text: "Instructor,Pt Teacher" },            { name: 'Bhudar', value: 45, text: "white" }
         ];
     }
 
@@ -564,6 +551,7 @@ export default class Assist {
 
         let outerArray = [];
         let len = ipArray.length;
+        let devtas = this.DEVTAS
 
         for (let i = 0; i < len; i++) {
             let j = i + 1;
@@ -588,6 +576,8 @@ export default class Assist {
             ]
         });
 
+        
+
         let twoThirdArr = outerArray.map((pts) => {
             return [
                 (centroid.x + (pts.ip[0] - centroid.x) * 2 / 3),
@@ -605,7 +595,9 @@ export default class Assist {
 
 
         if (outerArray.length == 32) {
-            console.log("good to go");
+            console.log(outerArray);
+            tooltip(brahma, '1', 'Brahma,Building Purpose,Created services of products');
+        console.log(brahma)
             //Draw outer 32 devtas
             let len = outerArray.length;
             for (let i = 0; i < len; i++) {
@@ -618,6 +610,7 @@ export default class Assist {
                 outerPolygon.push(twoThirdArr[i]);
                 layer.append('polygon')
                     .attr('points', outerPolygon).style('fill-opacity', 0).style('stroke', 'red').style('stroke-width', 2);
+                    tooltip(outerPolygon, devtas[i].value, devtas[i].name+','+devtas[i].text);
             }
 
             //Draw 2nd layer
@@ -629,7 +622,10 @@ export default class Assist {
             aapaha.push(halfOfMidCircleArr[4]);
             aapaha.push(halfOfMidCircleArr[3]);
             // console.log("outer",aapaha);
-            layer.append('polygon').attr('points', aapaha).style('fill-opacity', 0).style('stroke', 'blue').style('stroke-width', 2);
+            layer.append('polygon').attr('points', aapaha).attr('id', 'aapaha').style('fill-opacity', 0).style('stroke', 'blue').style('stroke-width', 2);
+            tooltip(aapaha, '6', 'Aapaha,Distributor,Kapha');
+            
+
 
             let aapahaVatsa = [];
             aapahaVatsa.push(twoThirdArr[5]);
@@ -640,7 +636,7 @@ export default class Assist {
             aapahaVatsa.push(halfOfMidCircleArr[5]);
             // console.log("outer",aapahaVatsa);
             layer.append('polygon').attr('points', aapahaVatsa).style('fill-opacity', 0).style('stroke', 'blue').style('stroke-width', 2);
-
+            tooltip(aapahaVatsa, '7', 'AapahaVatsa,Nutrients,Nutritionist');
             let savita = [];
             savita.push(twoThirdArr[11]);
             savita.push(twoThirdArr[12]);
@@ -650,6 +646,7 @@ export default class Assist {
             savita.push(halfOfMidCircleArr[11]);
             // console.log("outer",savita);
             layer.append('polygon').attr('points', savita).style('fill-opacity', 0).style('stroke', 'blue').style('stroke-width', 2);
+            tooltip(savita, '8', 'Savita,Motivature,Venture Capitalist');
 
             let savitra = [];
             savitra.push(twoThirdArr[13]);
@@ -660,6 +657,7 @@ export default class Assist {
             savitra.push(halfOfMidCircleArr[13]);
             // console.log("outer",savita);
             layer.append('polygon').attr('points', savitra).style('fill-opacity', 0).style('stroke', 'blue').style('stroke-width', 2);
+            tooltip(savitra, '9', 'Savitra,Money Finance');
 
             let indra = [];
             indra.push(twoThirdArr[19]);
@@ -670,6 +668,7 @@ export default class Assist {
             indra.push(halfOfMidCircleArr[19]);
             // console.log("outer",indra);
             layer.append('polygon').attr('points', indra).style('fill-opacity', 0).style('stroke', 'blue').style('stroke-width', 2);
+            tooltip(indra, '10', 'Indra,Bussiness Developer');
 
             let jaya = [];
             jaya.push(twoThirdArr[21]);
@@ -680,6 +679,7 @@ export default class Assist {
             jaya.push(halfOfMidCircleArr[21]);
             // console.log("outer",indra);
             layer.append('polygon').attr('points', jaya).style('fill-opacity', 0).style('stroke', 'blue').style('stroke-width', 2);
+            tooltip(jaya, '11', 'Jaya,Instrumental');
 
             let rudra = [];
             rudra.push(twoThirdArr[27]);
@@ -690,6 +690,7 @@ export default class Assist {
             rudra.push(halfOfMidCircleArr[27]);
             // console.log("outer",rudra);
             layer.append('polygon').attr('points', rudra).style('fill-opacity', 0).style('stroke', 'blue').style('stroke-width', 2);
+            tooltip(rudra, '12', 'Rudra,Controller');
 
             let rajyakshama = [];
             rajyakshama.push(twoThirdArr[29]);
@@ -700,6 +701,7 @@ export default class Assist {
             rajyakshama.push(halfOfMidCircleArr[29]);
             // console.log("outer",rajyakshama);
             layer.append('polygon').attr('points', rajyakshama).style('fill-opacity', 0).style('stroke', 'blue').style('stroke-width', 2);
+            tooltip(rajyakshama, '13', 'Rajyakshama,Law Enforcement Officer');
 
             let bhudhar = [];
             bhudhar.push(brahma[29]);
@@ -722,9 +724,11 @@ export default class Assist {
             bhudhar.push(halfOfMidCircleArr[31]);
             bhudhar.push(halfOfMidCircleArr[30]);
             bhudhar.push(halfOfMidCircleArr[29]);
+            
 
             // console.log("outer",bhudhar);
             layer.append('polygon').attr('points', bhudhar).style('fill-opacity', 0).style('stroke', 'black').style('stroke-width', 2);
+            tooltip(bhudhar, '2', 'Bhudhar,Regular Activities Task Master');
 
             let aryama = [];
             aryama.push(brahma[5]);
@@ -750,6 +754,7 @@ export default class Assist {
 
             // console.log("outer",aryama);
             layer.append('polygon').attr('points', aryama).style('fill-opacity', 0).style('stroke', 'black').style('stroke-width', 2);
+            tooltip(aryama, '3', 'Aryama,Networker,Connector');
 
             let viviswan = [];
             viviswan.push(brahma[13]);
@@ -775,6 +780,7 @@ export default class Assist {
 
             // console.log("outer",viviswan);
             layer.append('polygon').attr('points', viviswan).style('fill-opacity', 0).style('stroke', 'black').style('stroke-width', 2);
+            tooltip(viviswan, '4', 'Viviswan,Celebrity,Well Positioned');
 
             let mitra = [];
             mitra.push(brahma[21]);
@@ -804,14 +810,41 @@ export default class Assist {
                 .style('fill-opacity', 0)
                 .style('stroke', 'black')
                 .style('stroke-width', 2);
-            let centerPoint = d3.polygonCentroid(mitra);
-console.log(centerPoint);
-            layer.append('text')
-                .attr('class', 'barsEndlineText')
-                .attr('text-anchor', 'middle')
-                .attr("x", centerPoint[0])
-                .attr("y", centerPoint[1])
-                .text('2').style('fill', 'black')
+            tooltip(mitra, '5', 'Mitra,Friend,Arbitrator');
+
+            // let centerPoint = d3.polygonCentroid(mitra);
+            // layer.append('text')
+            //     .attr('class', 'barsEndlineText')
+            //     .attr('text-anchor', 'middle')
+            //     .attr("x", centerPoint[0])
+            //     .attr("y", centerPoint[1])
+            //     .text('2').style('fill', 'black')
+
+
+            function tooltip(centerpoint, text1, text2) {
+                let centerPoint = d3.polygonCentroid(centerpoint);
+                let toolTipText = text2.split(',');
+                let tooltip;
+                // for(let i=0; i<toolTipText.length;i++){
+                tooltip = layer.append("text")
+                    .attr('class', 'barsEndlineText')
+                    .attr('text-anchor', 'middle')
+                    .attr("x", centerPoint[0])
+                    .attr("y", centerPoint[1]+15)
+                    .style("position", "absolute")
+                    .style("visibility", "hidden")
+                    .style('fill', 'blue')
+                    // .style("filter", "url(#solid)")
+                    .text(text2);
+                // }
+                layer.append('text')
+                    .attr('class', 'barsEndlineText')
+                    .attr('text-anchor', 'middle')
+                    .attr("x", centerPoint[0])
+                    .attr("y", centerPoint[1])
+                    .text(text1).on("mouseover", function () { return tooltip.style("visibility", "visible"); })
+                    .on("mouseout", function () { return tooltip.style("visibility", "hidden"); });
+            }
 
 
         }

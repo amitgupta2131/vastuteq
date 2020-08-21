@@ -52,6 +52,7 @@ export default class Object {
       width: this.data.width,
       height: this.data.height,
       transform: "abc",
+      type: this.data.type
     }
 
     // object

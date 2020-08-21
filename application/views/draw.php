@@ -514,9 +514,10 @@
                             <a class="dropdown-item" href="#" data-zoom="200">200%</a>
                         </div>
                     </div>
+
                     <ul class="navbar-nav mr-2">
                         <li class="nav-item">
-                            <a class="nav-link object-align-center" href="#" id="abc" name="align-center">
+                            <a class="nav-link object-align-center" href="#" id="abc" name="align-center" title="Align to center">
                                 <img src="<?php echo base_url('assets/icons/chevron.svg')?>" alt="" width="20">
                             </a>
                         </li>
@@ -524,7 +525,7 @@
 
                     <ul class="navbar-nav mr-2">
                         <li class="nav-item">
-                            <a class="nav-link" href="#" id="print" name="print">
+                            <a class="nav-link" href="#" id="print" name="print" title="Print">
                                 <img src="<?php echo base_url('assets/icons/print.svg')?>" alt="" width="20">
                             </a>
                         </li>
@@ -558,7 +559,7 @@
                             <input type="range" min="0.1" max="1" step="0.1" value="1" class="slider" id="myRange">
                             <span class="range-value">1</span>
                         </div>
-                    </div>
+                    </div>                    
                 </div>
 
                 <!-- DESCRIPTION ATTRIBUTE -->
@@ -596,7 +597,7 @@
                                     });
                                     for ($i = 0; $i < count($arr); $i++) {
                                     ?>
-                                        <div class="col-md-4 border d-flex flex-column justify-content-center align-items-center object-item cursor-pointer" data-object-item="<?php echo $arr[$i]['type'] ?>" data-src="<?php echo base_url('assets/objects/') . $arr[$i]['imagePath'] ?>" title="<?php echo $arr[$i]['type'] ?>">
+                                        <div class="col-md-4 border d-flex flex-column justify-content-center align-items-center object-item cursor-pointer" data-object-item="<?php echo $arr[$i]['type'] ?>" data-src="<?php echo base_url('assets/objects/') . $arr[$i]['imagePath'] ?>" type="object" title="<?php echo $arr[$i]['type'] ?>">
                                             <img src="<?php echo base_url('assets/objects/') . $arr[$i]['imagePath'] ?>" alt="" width="35">
                                         </div>
                                     <?php } ?>
@@ -613,7 +614,7 @@
                                     });
                                     foreach ($arr as $key => $value) {
                                     ?>
-                                        <div class="col-md-4 border d-flex flex-column justify-content-center align-items-center object-item cursor-pointer" data-object-item="<?php echo $value['type'] ?>" data-src="<?php echo base_url('assets/objects/') . $value['imagePath'] ?>" title="<?php echo $value['type'] ?>">
+                                        <div class="col-md-4 border d-flex flex-column justify-content-center align-items-center object-item cursor-pointer" data-object-item="<?php echo $value['type'] ?>" data-src="<?php echo base_url('assets/objects/') . $value['imagePath'] ?>" title="<?php echo $value['type'] ?>" type="object">
                                             <img src="<?php echo base_url('assets/objects/') . $value['imagePath'] ?>" alt="" width="35">
                                         </div>
                                     <?php } ?>
@@ -630,7 +631,7 @@
                                     });
                                     foreach ($arr as $key => $value) {
                                     ?>
-                                        <div class="col-md-4 border d-flex flex-column justify-content-center align-items-center object-item cursor-pointer" data-object-item="<?php echo $value['type'] ?>" data-src="<?php echo base_url('assets/objects/') . $value['imagePath'] ?>" title="<?php echo $value['type'] ?>">
+                                        <div class="col-md-4 border d-flex flex-column justify-content-center align-items-center object-item cursor-pointer" data-object-item="<?php echo $value['type'] ?>" data-src="<?php echo base_url('assets/objects/') . $value['imagePath'] ?>" title="<?php echo $value['type'] ?>" type="object">
                                             <img src="<?php echo base_url('assets/objects/') . $value['imagePath'] ?>" alt="" width="35">
                                         </div>
                                     <?php } ?>
@@ -647,7 +648,7 @@
                                     });
                                     foreach ($arr as $key => $value) {
                                     ?>
-                                        <div class="col-md-4 border d-flex flex-column justify-content-center align-items-center object-item cursor-pointer" data-object-item="<?php echo $value['type'] ?>" data-src="<?php echo base_url('assets/objects/') . $value['imagePath'] ?>" title="<?php echo $value['type'] ?>">
+                                        <div class="col-md-4 border d-flex flex-column justify-content-center align-items-center object-item cursor-pointer" data-object-item="<?php echo $value['type'] ?>" data-src="<?php echo base_url('assets/objects/') . $value['imagePath'] ?>" title="<?php echo $value['type'] ?>" type="object">
                                             <img src="<?php echo base_url('assets/objects/') . $value['imagePath'] ?>" alt="" width="35">
                                         </div>
                                     <?php } ?>
@@ -664,7 +665,7 @@
                                     });
                                     foreach ($arr as $key => $value) {
                                     ?>
-                                        <div class="col-md-4 border d-flex flex-column justify-content-center align-items-center object-item cursor-pointer" data-object-item="<?php echo $value['type'] ?>" data-src="<?php echo base_url('assets/objects/') . $value['imagePath'] ?>" title="<?php echo $value['type'] ?>">
+                                        <div class="col-md-4 border d-flex flex-column justify-content-center align-items-center object-item cursor-pointer" data-object-item="<?php echo $value['type'] ?>" data-src="<?php echo base_url('assets/objects/') . $value['imagePath'] ?>" title="<?php echo $value['type'] ?>" type="object">
                                             <img src="<?php echo base_url('assets/objects/') . $value['imagePath'] ?>" alt="" width="35">
                                         </div>
                                     <?php } ?>
@@ -681,7 +682,7 @@
                                     });
                                     foreach ($arr as $key => $value) {
                                     ?>
-                                        <div class="col-md-4 border d-flex flex-column justify-content-center align-items-center object-item cursor-pointer" data-object-item="<?php echo $value['type'] ?>" data-src="<?php echo base_url('assets/objects/') . $value['imagePath'] ?>" title="<?php echo $value['type'] ?>">
+                                        <div class="col-md-4 border d-flex flex-column justify-content-center align-items-center object-item cursor-pointer" data-object-item="<?php echo $value['type'] ?>" data-src="<?php echo base_url('assets/objects/') . $value['imagePath'] ?>" title="<?php echo $value['type'] ?>" type="object">
                                             <img src="<?php echo base_url('assets/objects/') . $value['imagePath'] ?>" alt="" width="35">
                                         </div>
                                     <?php } ?>
@@ -698,7 +699,7 @@
                                     });
                                     foreach ($arr as $key => $value) {
                                     ?>
-                                        <div class="col-md-4 border d-flex flex-column justify-content-center align-items-center object-item cursor-pointer" data-object-item="<?php echo $value['type'] ?>" data-src="<?php echo base_url('assets/objects/sofa_icon.svg') ?>" title="<?php echo $value['type'] ?>">
+                                        <div class="col-md-4 border d-flex flex-column justify-content-center align-items-center object-item cursor-pointer" data-object-item="<?php echo $value['type'] ?>" data-src="<?php echo base_url('assets/objects/sofa_icon.svg') ?>" title="<?php echo $value['type'] ?>" type="object">
                                             <img src="<?php echo base_url('assets/objects/sofa_icon.svg') ?>" alt="" width="35">
                                         </div>
                                     <?php } ?>
@@ -715,7 +716,7 @@
                                     });
                                     foreach ($arr as $key => $value) {
                                     ?>
-                                        <div class="col-md-4 border d-flex flex-column justify-content-center align-items-center object-item cursor-pointer" data-object-item="<?php echo $value['type'] ?>" data-src="<?php echo base_url('assets/objects/sofa_icon.svg') ?>" title="<?php echo $value['type'] ?>">
+                                        <div class="col-md-4 border d-flex flex-column justify-content-center align-items-center object-item cursor-pointer" data-object-item="<?php echo $value['type'] ?>" data-src="<?php echo base_url('assets/objects/sofa_icon.svg') ?>" title="<?php echo $value['type'] ?>" type="object">
                                             <img src="<?php echo base_url('assets/objects/sofa_icon.svg') ?>" alt="" width="35">
                                         </div>
                                     <?php } ?>
@@ -732,7 +733,7 @@
                                     });
                                     foreach ($arr as $key => $value) {
                                     ?>
-                                        <div class="col-md-4 border d-flex flex-column justify-content-center align-items-center object-item cursor-pointer" data-object-item="<?php echo $value['type'] ?>" data-src="<?php echo base_url('assets/objects/sofa_icon.svg') ?>" title="<?php echo $value['type'] ?>">
+                                        <div class="col-md-4 border d-flex flex-column justify-content-center align-items-center object-item cursor-pointer" data-object-item="<?php echo $value['type'] ?>" data-src="<?php echo base_url('assets/objects/sofa_icon.svg') ?>" title="<?php echo $value['type'] ?>" type="object">
                                             <img src="<?php echo base_url('assets/objects/sofa_icon.svg') ?>" alt="" width="35">
                                         </div>
                                     <?php } ?>
@@ -749,7 +750,7 @@
                                     });
                                     foreach ($arr as $key => $value) {
                                     ?>
-                                        <div class="col-md-4 border d-flex flex-column justify-content-center align-items-center object-item cursor-pointer" data-object-item="<?php echo $value['type'] ?>" data-src="<?php echo base_url('assets/objects/sofa_icon.svg') ?>" title="<?php echo $value['type'] ?>">
+                                        <div class="col-md-4 border d-flex flex-column justify-content-center align-items-center object-item cursor-pointer" data-object-item="<?php echo $value['type'] ?>" data-src="<?php echo base_url('assets/objects/sofa_icon.svg') ?>" title="<?php echo $value['type'] ?>" type="object">
                                             <img src="<?php echo base_url('assets/objects/sofa_icon.svg') ?>" alt="" width="35">
                                         </div>
                                     <?php } ?>
@@ -766,7 +767,7 @@
                                     });
                                     foreach ($arr as $key => $value) {
                                     ?>
-                                        <div class="col-md-4 border d-flex flex-column justify-content-center align-items-center object-item cursor-pointer" data-object-item="<?php echo $value['type'] ?>" data-src="<?php echo base_url('assets/objects/sofa_icon.svg') ?>" title="<?php echo $value['type'] ?>">
+                                        <div class="col-md-4 border d-flex flex-column justify-content-center align-items-center object-item cursor-pointer" data-object-item="<?php echo $value['type'] ?>" data-src="<?php echo base_url('assets/objects/sofa_icon.svg') ?>" title="<?php echo $value['type'] ?>" type="object">
                                             <img src="<?php echo base_url('assets/objects/sofa_icon.svg') ?>" alt="" width="35">
                                         </div>
                                     <?php } ?>
@@ -783,7 +784,7 @@
                                     });
                                     foreach ($arr as $key => $value) {
                                     ?>
-                                        <div class="col-md-4 border d-flex flex-column justify-content-center align-items-center object-item cursor-pointer" data-object-item="<?php echo $value['type'] ?>" data-src="<?php echo base_url('assets/objects/sofa_icon.svg') ?>" title="<?php echo $value['type'] ?>">
+                                        <div class="col-md-4 border d-flex flex-column justify-content-center align-items-center object-item cursor-pointer" data-object-item="<?php echo $value['type'] ?>" data-src="<?php echo base_url('assets/objects/sofa_icon.svg') ?>" title="<?php echo $value['type'] ?>" type="object">
                                             <img src="<?php echo base_url('assets/objects/sofa_icon.svg') ?>" alt="" width="35">
                                         </div>
                                     <?php } ?>
@@ -800,7 +801,7 @@
                                     });
                                     foreach ($arr as $key => $value) {
                                     ?>
-                                        <div class="col-md-4 border d-flex flex-column justify-content-center align-items-center object-item cursor-pointer" data-object-item="<?php echo $value['type'] ?>" data-src="<?php echo base_url('assets/objects/sofa_icon.svg') ?>" title="<?php echo $value['type'] ?>">
+                                        <div class="col-md-4 border d-flex flex-column justify-content-center align-items-center object-item cursor-pointer" data-object-item="<?php echo $value['type'] ?>" data-src="<?php echo base_url('assets/objects/sofa_icon.svg') ?>" title="<?php echo $value['type'] ?>" type="object">
                                             <img src="<?php echo base_url('assets/objects/sofa_icon.svg') ?>" alt="" width="35">
                                         </div>
                                     <?php } ?>
@@ -817,7 +818,7 @@
                                     });
                                     foreach ($arr as $key => $value) {
                                     ?>
-                                        <div class="col-md-4 border d-flex flex-column justify-content-center align-items-center object-item cursor-pointer" data-object-item="<?php echo $value['type'] ?>" data-src="<?php echo base_url('assets/objects/sofa_icon.svg') ?>" title="<?php echo $value['type'] ?>">
+                                        <div class="col-md-4 border d-flex flex-column justify-content-center align-items-center object-item cursor-pointer" data-object-item="<?php echo $value['type'] ?>" data-src="<?php echo base_url('assets/objects/sofa_icon.svg') ?>" title="<?php echo $value['type'] ?>" type="object">
                                             <img src="<?php echo base_url('assets/objects/sofa_icon.svg') ?>" alt="" width="35">
                                         </div>
                                     <?php } ?>
@@ -834,7 +835,7 @@
                                     });
                                     foreach ($arr as $key => $value) {
                                     ?>
-                                        <div class="col-md-4 border d-flex flex-column justify-content-center align-items-center object-item cursor-pointer" data-object-item="<?php echo $value['type'] ?>" data-src="<?php echo base_url('assets/objects/sofa_icon.svg') ?>" title="<?php echo $value['type'] ?>">
+                                        <div class="col-md-4 border d-flex flex-column justify-content-center align-items-center object-item cursor-pointer" data-object-item="<?php echo $value['type'] ?>" data-src="<?php echo base_url('assets/objects/sofa_icon.svg') ?>" title="<?php echo $value['type'] ?>" type="object">
                                             <img src="<?php echo base_url('assets/objects/sofa_icon.svg') ?>" alt="" width="35">
                                         </div>
                                     <?php } ?>
@@ -851,7 +852,7 @@
                                     });
                                     foreach ($arr as $key => $value) {
                                     ?>
-                                        <div class="col-md-4 border d-flex flex-column justify-content-center align-items-center object-item cursor-pointer" data-object-item="<?php echo $value['type'] ?>" data-src="<?php echo base_url('assets/objects/sofa_icon.svg') ?>" title="<?php echo $value['type'] ?>">
+                                        <div class="col-md-4 border d-flex flex-column justify-content-center align-items-center object-item cursor-pointer" data-object-item="<?php echo $value['type'] ?>" data-src="<?php echo base_url('assets/objects/sofa_icon.svg') ?>" title="<?php echo $value['type'] ?>" type="object">
                                             <img src="<?php echo base_url('assets/objects/sofa_icon.svg') ?>" alt="" width="35">
                                         </div>
                                     <?php } ?>
@@ -868,7 +869,7 @@
                                     });
                                     foreach ($arr as $key => $value) {
                                     ?>
-                                        <div class="col-md-4 border d-flex flex-column justify-content-center align-items-center object-item cursor-pointer" data-object-item="<?php echo $value['type'] ?>" data-src="<?php echo base_url('assets/objects/sofa_icon.svg') ?>" title="<?php echo $value['type'] ?>">
+                                        <div class="col-md-4 border d-flex flex-column justify-content-center align-items-center object-item cursor-pointer" data-object-item="<?php echo $value['type'] ?>" data-src="<?php echo base_url('assets/objects/sofa_icon.svg') ?>" title="<?php echo $value['type'] ?>" type="object">
                                             <img src="<?php echo base_url('assets/objects/sofa_icon.svg') ?>" alt="" width="35">
                                         </div>
                                     <?php } ?>
@@ -894,7 +895,7 @@
                                     });
                                     foreach ($arr as $key => $value) {
                                     ?>
-                                        <div class="col-md-4 border d-flex flex-column justify-content-center align-items-center object-item cursor-pointer" data-object-item="<?php echo $value['type'] ?>" data-src="<?php echo base_url('assets/objects/sofa_icon.svg') ?>" title="<?php echo $value['type'] ?>">
+                                        <div class="col-md-4 border d-flex flex-column justify-content-center align-items-center object-item cursor-pointer" data-object-item="<?php echo $value['type'] ?>" data-src="<?php echo base_url('assets/objects/sofa_icon.svg') ?>" title="<?php echo $value['type'] ?>" type="activity" type="activity">
                                             <img src="<?php echo base_url('assets/objects/sofa_icon.svg') ?>" alt="" width="35">
                                         </div>
                                     <?php } ?>
@@ -911,7 +912,7 @@
                                     });
                                     foreach ($arr as $key => $value) {
                                     ?>
-                                        <div class="col-md-4 border d-flex flex-column justify-content-center align-items-center object-item cursor-pointer" data-object-item="<?php echo $value['type'] ?>" data-src="<?php echo base_url('assets/objects/sofa_icon.svg') ?>" title="<?php echo $value['type'] ?>">
+                                        <div class="col-md-4 border d-flex flex-column justify-content-center align-items-center object-item cursor-pointer" data-object-item="<?php echo $value['type'] ?>" data-src="<?php echo base_url('assets/objects/sofa_icon.svg') ?>" title="<?php echo $value['type'] ?>" type="activity">
                                             <img src="<?php echo base_url('assets/objects/sofa_icon.svg') ?>" alt="" width="35">
                                         </div>
                                     <?php } ?>
@@ -928,7 +929,7 @@
                                     });
                                     foreach ($arr as $key => $value) {
                                     ?>
-                                        <div class="col-md-4 border d-flex flex-column justify-content-center align-items-center object-item cursor-pointer" data-object-item="<?php echo $value['type'] ?>" data-src="<?php echo base_url('assets/objects/sofa_icon.svg') ?>" title="<?php echo $value['type'] ?>">
+                                        <div class="col-md-4 border d-flex flex-column justify-content-center align-items-center object-item cursor-pointer" data-object-item="<?php echo $value['type'] ?>" data-src="<?php echo base_url('assets/objects/sofa_icon.svg') ?>" title="<?php echo $value['type'] ?>" type="activity">
                                             <img src="<?php echo base_url('assets/objects/sofa_icon.svg') ?>" alt="" width="35">
                                         </div>
                                     <?php } ?>
@@ -945,7 +946,7 @@
                                     });
                                     foreach ($arr as $key => $value) {
                                     ?>
-                                        <div class="col-md-4 border d-flex flex-column justify-content-center align-items-center object-item cursor-pointer" data-object-item="<?php echo $value['type'] ?>" data-src="<?php echo base_url('assets/objects/sofa_icon.svg') ?>" title="<?php echo $value['type'] ?>">
+                                        <div class="col-md-4 border d-flex flex-column justify-content-center align-items-center object-item cursor-pointer" data-object-item="<?php echo $value['type'] ?>" data-src="<?php echo base_url('assets/objects/sofa_icon.svg') ?>" title="<?php echo $value['type'] ?>" type="activity">
                                             <img src="<?php echo base_url('assets/objects/sofa_icon.svg') ?>" alt="" width="35">
                                         </div>
                                     <?php } ?>
@@ -962,7 +963,7 @@
                                     });
                                     foreach ($arr as $key => $value) {
                                     ?>
-                                        <div class="col-md-4 border d-flex flex-column justify-content-center align-items-center object-item cursor-pointer" data-object-item="<?php echo $value['type'] ?>" data-src="<?php echo base_url('assets/objects/sofa_icon.svg') ?>" title="<?php echo $value['type'] ?>">
+                                        <div class="col-md-4 border d-flex flex-column justify-content-center align-items-center object-item cursor-pointer" data-object-item="<?php echo $value['type'] ?>" data-src="<?php echo base_url('assets/objects/sofa_icon.svg') ?>" title="<?php echo $value['type'] ?>" type="activity">
                                             <img src="<?php echo base_url('assets/objects/sofa_icon.svg') ?>" alt="" width="35">
                                         </div>
                                     <?php } ?>
@@ -979,7 +980,7 @@
                                     });
                                     foreach ($arr as $key => $value) {
                                     ?>
-                                        <div class="col-md-4 border d-flex flex-column justify-content-center align-items-center object-item cursor-pointer" data-object-item="<?php echo $value['type'] ?>" data-src="<?php echo base_url('assets/objects/sofa_icon.svg') ?>" title="<?php echo $value['type'] ?>">
+                                        <div class="col-md-4 border d-flex flex-column justify-content-center align-items-center object-item cursor-pointer" data-object-item="<?php echo $value['type'] ?>" data-src="<?php echo base_url('assets/objects/sofa_icon.svg') ?>" title="<?php echo $value['type'] ?>" type="activity">
                                             <img src="<?php echo base_url('assets/objects/sofa_icon.svg') ?>" alt="" width="35">
                                         </div>
                                     <?php } ?>
@@ -996,7 +997,7 @@
                                     });
                                     foreach ($arr as $key => $value) {
                                     ?>
-                                        <div class="col-md-4 border d-flex flex-column justify-content-center align-items-center object-item cursor-pointer" data-object-item="<?php echo $value['type'] ?>" data-src="<?php echo base_url('assets/objects/sofa_icon.svg') ?>" title="<?php echo $value['type'] ?>">
+                                        <div class="col-md-4 border d-flex flex-column justify-content-center align-items-center object-item cursor-pointer" data-object-item="<?php echo $value['type'] ?>" data-src="<?php echo base_url('assets/objects/sofa_icon.svg') ?>" title="<?php echo $value['type'] ?>" type="activity">
                                             <img src="<?php echo base_url('assets/objects/sofa_icon.svg') ?>" alt="" width="35">
                                         </div>
                                     <?php } ?>
@@ -1013,7 +1014,7 @@
                                     });
                                     foreach ($arr as $key => $value) {
                                     ?>
-                                        <div class="col-md-4 border d-flex flex-column justify-content-center align-items-center object-item cursor-pointer" data-object-item="<?php echo $value['type'] ?>" data-src="<?php echo base_url('assets/objects/sofa_icon.svg') ?>" title="<?php echo $value['type'] ?>">
+                                        <div class="col-md-4 border d-flex flex-column justify-content-center align-items-center object-item cursor-pointer" data-object-item="<?php echo $value['type'] ?>" data-src="<?php echo base_url('assets/objects/sofa_icon.svg') ?>" title="<?php echo $value['type'] ?>" type="activity">
                                             <img src="<?php echo base_url('assets/objects/sofa_icon.svg') ?>" alt="" width="35">
                                         </div>
                                     <?php } ?>
@@ -1030,7 +1031,7 @@
                                     });
                                     foreach ($arr as $key => $value) {
                                     ?>
-                                        <div class="col-md-4 border d-flex flex-column justify-content-center align-items-center object-item cursor-pointer" data-object-item="<?php echo $value['type'] ?>" data-src="<?php echo base_url('assets/objects/sofa_icon.svg') ?>" title="<?php echo $value['type'] ?>">
+                                        <div class="col-md-4 border d-flex flex-column justify-content-center align-items-center object-item cursor-pointer" data-object-item="<?php echo $value['type'] ?>" data-src="<?php echo base_url('assets/objects/sofa_icon.svg') ?>" title="<?php echo $value['type'] ?>" type="activity">
                                             <img src="<?php echo base_url('assets/objects/sofa_icon.svg') ?>" alt="" width="35">
                                         </div>
                                     <?php } ?>
@@ -1047,7 +1048,7 @@
                                     });
                                     foreach ($arr as $key => $value) {
                                     ?>
-                                        <div class="col-md-4 border d-flex flex-column justify-content-center align-items-center object-item cursor-pointer" data-object-item="<?php echo $value['type'] ?>" data-src="<?php echo base_url('assets/objects/sofa_icon.svg') ?>" title="<?php echo $value['type'] ?>">
+                                        <div class="col-md-4 border d-flex flex-column justify-content-center align-items-center object-item cursor-pointer" data-object-item="<?php echo $value['type'] ?>" data-src="<?php echo base_url('assets/objects/sofa_icon.svg') ?>" title="<?php echo $value['type'] ?>" type="activity">
                                             <img src="<?php echo base_url('assets/objects/sofa_icon.svg') ?>" alt="" width="35">
                                         </div>
                                     <?php } ?>
@@ -1064,7 +1065,7 @@
                                     });
                                     foreach ($arr as $key => $value) {
                                     ?>
-                                        <div class="col-md-4 border d-flex flex-column justify-content-center align-items-center object-item cursor-pointer" data-object-item="<?php echo $value['type'] ?>" data-src="<?php echo base_url('assets/objects/sofa_icon.svg') ?>" title="<?php echo $value['type'] ?>">
+                                        <div class="col-md-4 border d-flex flex-column justify-content-center align-items-center object-item cursor-pointer" data-object-item="<?php echo $value['type'] ?>" data-src="<?php echo base_url('assets/objects/sofa_icon.svg') ?>" title="<?php echo $value['type'] ?>" type="activity">
                                             <img src="<?php echo base_url('assets/objects/sofa_icon.svg') ?>" alt="" width="35">
                                         </div>
                                     <?php } ?>
@@ -1082,7 +1083,7 @@
                                     });
                                     foreach ($arr as $key => $value) {
                                     ?>
-                                        <div class="col-md-4 border d-flex flex-column justify-content-center align-items-center object-item cursor-pointer" data-object-item="<?php echo $value['type'] ?>" data-src="<?php echo base_url('assets/objects/sofa_icon.svg') ?>" title="<?php echo $value['type'] ?>">
+                                        <div class="col-md-4 border d-flex flex-column justify-content-center align-items-center object-item cursor-pointer" data-object-item="<?php echo $value['type'] ?>" data-src="<?php echo base_url('assets/objects/sofa_icon.svg') ?>" title="<?php echo $value['type'] ?>" type="activity">
                                             <img src="<?php echo base_url('assets/objects/sofa_icon.svg') ?>" alt="" width="35">
                                         </div>
                                     <?php } ?>

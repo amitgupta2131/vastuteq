@@ -73,15 +73,15 @@ class MainModel extends ci_model
 	}
 
 	public function updateWhere($tableName=null,$data=null,$condition=null)
-	{	$this->db->trans_start();
+	{	//$this->db->trans_start();
 		$this->db->where($condition);
 		$this->db->update($tableName, $data); 
-		$this->db->trans_complete();
+// 		$this->db->trans_complete();
 		
-return $this->db->trans_status();
+// return $this->db->trans_status();
 	//	$this->db->where($condition);
 	//	$this->db->update($tableName, $data); 
-	//	return $this->db->affected_rows()?TRUE:FALSE;
+		return $this->db->affected_rows()?TRUE:FALSE;
 	}
 
 	public function selectAllFromTableWhere($tableName=null,$condition=null,$getColumn=null)

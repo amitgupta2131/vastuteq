@@ -81,7 +81,7 @@ export default class StageThird {
       .attr('data-action-object', 'barchart').attr('data-toggle', 'modal').attr('data-target', '#appModal')
       .style('flex-direction', 'column').style('height', '42px').style('min-width', '55px');
     let barchart = barchartContainer.append('img').attr('src', `${that.BASE_URL}assets/icons/barchart.svg`).attr('width', 20);
-    barchartContainer.append('span').style('margin-top', '1px').style('font-size', '9px').text('barchart');    
+    barchartContainer.append('span').style('margin-top', '1px').style('font-size', '9px').text('barchart');
 
 
     let divisonOfDevtasContainer = container.append('div').attr('class', 'col-md-8 d-flex justify-content-center align-items-center border object-actions')
@@ -142,10 +142,16 @@ export default class StageThird {
 
         // ? DRAW BAR CHART
         that.modal.drawMap({ areaArr: that.mapPolygonsAreaArray, division: that.division, dimension: that.distanceBetweenTwoPoints });
-        getObjectDirection(that.calNorthAngle(), that.centroid, that.angle, that.mapBoundariesCoords, that.division)
-      }else{
-        showAlert('Please select any grid','danger')
+        Utility.getObjectDirection(that.calNorthAngle(), that.centroid, that.angle, that.mapBoundariesCoords, that.division)
+      } else {
+        showAlert('Please select any grid', 'danger')
       }
+    })
+
+    $('[data-object-item]').on('click',function(){
+      // alert('hello');
+      Utility.getObjectDirection(that.calNorthAngle(), that.centroid, that.angle, that.mapBoundariesCoords, 8)
+
     })
 
     degreeUpdateBtn.on("click", function () {
@@ -177,7 +183,8 @@ export default class StageThird {
       that.modal.drawMap({ areaArr: that.mapPolygonsAreaArray, division: that.division, dimension: that.distanceBetweenTwoPoints });
     })
 
-    let vpm = $('#vpm');   
+    let vpm = $('#vpm')
+
 
     vpm.on('click', function () {
 
@@ -212,7 +219,7 @@ export default class StageThird {
 
     })
 
-    let mvm = $('#mvpc');    
+    let mvm = $('#mvpc')
 
     mvm.on('click', function () {
       if (classRef.objectMvm == null || classRef.objectMvm == undefined) {
@@ -244,7 +251,7 @@ export default class StageThird {
 
     })
 
-    let mvc = $('#mvc');
+    let mvc = $('#mvc')
 
     mvc.on('click', function () {
 
@@ -279,63 +286,63 @@ export default class StageThird {
 
     });
 
-    function getObjectDirection(calNorthAngle, centroid, angle, mapBoundariesCoords, division) {
-      let objectModel = new ObjectModel();
-      let objects = objectModel.getObject(localStorage.getItem('selectedMapId'));
-      let objectData;
-      let div = $('select[name="select-grid"]').val();
-      let objectReport = [];
-      for (let i in objects) {
-        objectData = {
-          id: objects[i].image.id,
-          name: objects[i].image.name,
-          src: objects[i].image.src,
-          x: objects[i].image.x,
-          y: objects[i].image.y,
-          width: objects[i].image.width,
-          height: objects[i].image.height,
-          transform: objects[i].image.transform,
-        };
-        //Check if Object is in any of the directions
-        // console.log(objectData);
-        let mapPolygonsArrayWithDirections = Utility.getIntersectionPoints(
-          calNorthAngle + angle,
-          centroid,
-          mapBoundariesCoords,
-          division,
-          "polygonDirections"
-        );
-        let data = {};
-        let testPoint = Utility.getPoints(objectData.x, objectData.y, objectData.height, objectData.width);
-        // console.log("Map:",mapPolygonsArrayWithDirections);
+    // function getObjectDirection(calNorthAngle, centroid, angle, mapBoundariesCoords, division) {
+    //   let objectModel = new ObjectModel();
+    //   let objects = objectModel.getObject(localStorage.getItem('selectedMapId'));
+    //   let objectData;
+    //   let div = $('select[name="select-grid"]').val();
+    //   let objectReport = [];
+    //   for (let i in objects) {
+    //     objectData = {
+    //       id: objects[i].image.id,
+    //       name: objects[i].image.name,
+    //       src: objects[i].image.src,
+    //       x: objects[i].image.x,
+    //       y: objects[i].image.y,
+    //       width: objects[i].image.width,
+    //       height: objects[i].image.height,
+    //       transform: objects[i].image.transform,
+    //     };
+    //     //Check if Object is in any of the directions
+    //     // console.log(objectData);
+    //     let mapPolygonsArrayWithDirections = Utility.getIntersectionPoints(
+    //       calNorthAngle + angle,
+    //       centroid,
+    //       mapBoundariesCoords,
+    //       division,
+    //       "polygonDirections"
+    //     );
+    //     let data = {};
+    //     let testPoint = Utility.getPoints(objectData.x, objectData.y, objectData.height, objectData.width);
+    //     // console.log("Map:",mapPolygonsArrayWithDirections);
 
 
-        mapPolygonsArrayWithDirections.forEach(element => {
-          // console.log("testPoint",testPoint);
-          // console.log("element",element);
-          let dir = element.direction
-          testPoint.forEach(point => {
-            if (d3.polygonContains(element.polygon[0], point)) {
-              data['id'] = objectData.id;
-              data['name'] = objectData.name;
-              data[dir] = d3.polygonContains(element.polygon[0], point);
-            }
-          });
+    //     mapPolygonsArrayWithDirections.forEach(element => {
+    //       // console.log("testPoint",testPoint);
+    //       // console.log("element",element);
+    //       let dir = element.direction
+    //       testPoint.forEach(point => {
+    //         if (d3.polygonContains(element.polygon[0], point)) {
+    //           data['id'] = objectData.id;
+    //           data['name'] = objectData.name;
+    //           data[dir] = d3.polygonContains(element.polygon[0], point);
+    //         }
+    //       });
 
 
 
-          // console.log("res", element.direction, d3.polygonContains(element.polygon[0], testPoint3))
-        });
+    //       // console.log("res", element.direction, d3.polygonContains(element.polygon[0], testPoint3))
+    //     });
 
-        objectReport.push(data)
-        // console.log(data)
-      }
-      // console.log(objectReport)
-      localStorage.removeItem('objectReport');
-      localStorage.removeItem('reportDivision');
-      localStorage.setItem('objectReport', JSON.stringify(objectReport));
-      localStorage.setItem('reportDivision', div);
-    }
+    //     objectReport.push(data)
+    //     // console.log(data)
+    //   }
+    //   // console.log(objectReport)
+    //   localStorage.removeItem('objectReport');
+    //   localStorage.removeItem('reportDivision');
+    //   localStorage.setItem('objectReport', JSON.stringify(objectReport));
+    //   localStorage.setItem('reportDivision', div);
+    // }
 
     divisonOfDevtasContainer.on('click', function () {
       console.log(d3.select(this).classed('active'), 'working');
