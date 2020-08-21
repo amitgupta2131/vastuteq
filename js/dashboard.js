@@ -75,8 +75,11 @@ d3.selectAll('[data-map-id]').on('click', function () {
 		delete result[0].propertId;
 		localStorage.removeItem("houseMaps");
 		localStorage.setItem("houseMaps", JSON.stringify(result));
-		localStorage.removeItem("objects");
-		localStorage.setItem("objects", result[0].objects);
+		if(result[0].objects != ""){
+			localStorage.removeItem("objects");
+			localStorage.setItem("objects", result[0].objects);
+		}
+		
 		console.log(result[0].objects)
 	}
 
