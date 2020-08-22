@@ -192,10 +192,10 @@ export default class Paint {
 				} else if (command == "download") {
 					var canvas = document.getElementById("paintCanvas");
 					var image = canvas
-						.toDataURL("image/png", 1.0)
-						.replace("image/png", "image/octet-stream");
+						.toDataURL("image/jpg", 1.0)
+						.replace("image/jpg", "image/octet-stream");
 					var link = document.createElement("a");
-					link.download = "my-image.png";
+					link.download = "my-image.jpg";
 					link.href = image;
 					link.click();
 				}

@@ -62,6 +62,7 @@ function devtaSuccess(content, targetTextarea) {
     $('#devta-color').text(table.color);
     $('#devta-sloka').text(result['sloka']);
     $('#devta-description').text(desc.p1);
+    $('#other-details').empty()
     for (let i in points) {
         $('#other-details').append(`<li>${points[i]}</li>`)
     }

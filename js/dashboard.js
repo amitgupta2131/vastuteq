@@ -8,18 +8,6 @@ let maps = model.getMaps();
 localStorage.hasOwnProperty('selectedMapId') == true ? localStorage.removeItem("selectedMapId") : null;
 
 let mainArea = d3.select('#mapsContainer');
-// console.log(data);
-// for (let i in maps) {
-
-// 	var container = mainArea.append('div').attr('class', 'col-lg-4 col-md-6 col-sm-12 mb-4')
-// 	var cardContainer = container.append('div').attr('class', 'card rounded bubbly-button p-1')
-// 		.attr('data-map-id', maps[i].id);
-// 	cardContainer.append('img').attr('class', 'card-img-top').attr('src', maps[i].imageData.src)
-// 	var cardBody = cardContainer.append('div').attr('class', 'card-body border-top border-thick')
-// 	cardBody.append('div').attr('class', 'project-name card-text').text(`Property ID: ${maps[i].id}`)
-// 	cardBody.append('div').attr('class', 'last-update card-text').text('Last edited 19 hours ago')
-
-// }
 
 d3.select('#createMap').on('click', function() {
 	// let id = uniqueID();
@@ -59,6 +47,7 @@ d3.selectAll('[data-map-id]').on('click', function () {
 	AjaxPost(formData, url, HouseMapssuccess, AjaxError);
 	function HouseMapssuccess(content, targetTextarea) {
 		var result = JSON.parse(content);
+		//creating housemap data for localstorage
 		result[0].id = result[0].mapId
 		if (result[0].centroid.trim() != "" && result[0].customBoundariesCoords.trim() != "" && result[0].faceCoords.trim() != "" && result[0].vedicBoundariesCoords.trim() != "" && result[0].dimension.trim() != "") {
 			result[0].centroid = JSON.parse(result[0].centroid)
@@ -74,8 +63,22 @@ d3.selectAll('[data-map-id]').on('click', function () {
 		delete result[0].mapId;
 		delete result[0].propertId;
 		localStorage.removeItem("houseMaps");
+		localStorage.removeItem("reportDivision");
 		localStorage.setItem("houseMaps", JSON.stringify(result));
-		console.log(result)
+
+		//creating object data for localstorage
+		if(result[0].objects != ""){
+			localStorage.removeItem("objects");
+			localStorage.setItem("objects", result[0].objects);
+		}
+
+		//creating reportData for local storage
+		if(result[0].reportData != ""){
+			localStorage.removeItem("objectReport");
+			localStorage.setItem("objectReport", result[0].reportData);
+		}
+		
+		console.log(result[0].objects)
 	}
 
 	window.location.href = base_url+'/Main/draw/'+btoa(id);

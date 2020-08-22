@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="<?php echo base_url('css/devtas.css')?>">
     <!-- CUSTOM CSS -->
     <link rel="stylesheet" href="<?php echo base_url('css/main.css') ?>">
-    <script>const base_url = '<?php echo base_url()?>'</script>
+    <script>const base_url = '<?php echo base_url();?>';</script>
    
      
 </head>

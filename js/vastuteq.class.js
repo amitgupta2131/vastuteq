@@ -26,20 +26,20 @@ export default class Vastuteq {
     this.BASE_URL = baseUrl;
 
     // ? O B J E C T S
-    
+
     // Create new housemap i.e localstorage entry
     this.model = new Model(mapId);
-   
+
     //Storing and retrieving image properties to housemap
     this.objectModel = new ObjectModel();
-    
+
     //List all helper functions for Mahavastu and Vedic actions
     this.assist = new Assist();
-    
+
     //Action box on right side, which is populated based on 
     //required actions in each stage
     this.actionbox = new ActionBox();
-    
+
     //Draw Bar Chart
     this.modal = new Modal();
 
@@ -89,13 +89,13 @@ export default class Vastuteq {
       .attr("width", this.canvasSize.width)
       .attr("height", this.canvasSize.height);
 
-    this.drawCanvas =  d3
-    .select("#drawArea")
-    .append("svg")
-    .attr("id", "drawCanvas")
-    .classed('d-none', true)
-    .attr("width", this.canvasSize.width)
-    .attr("height", this.canvasSize.height); 
+    this.drawCanvas = d3
+      .select("#drawArea")
+      .append("svg")
+      .attr("id", "drawCanvas")
+      .classed('d-none', true)
+      .attr("width", this.canvasSize.width)
+      .attr("height", this.canvasSize.height);
 
     this.canvas = this.svg.append("g").attr("id", "main-group");
 
@@ -155,7 +155,7 @@ export default class Vastuteq {
             "Start pinning by simply clicking on map borders",
             "danger"
           );
-         let htmlText="Start pinning by clicking on map borders. <br/><br/>Press \" CTRL + Z \" keys to undo";
+          let htmlText = "Start pinning by clicking on map borders. <br/><br/>Press \" CTRL + Z \" keys to undo";
 
           $(".property.description").html(htmlText);
           let stageFirst = new StageFirst({
@@ -171,7 +171,7 @@ export default class Vastuteq {
           // STAGE SECOND
           this.wrapperDelete("map");
           this.displayMessage("Select facing wall", "danger");
-          let htmlText= "Select facing wall from the Dropdown box";
+          let htmlText = "Select facing wall from the Dropdown box";
           $(".property.description").html(htmlText);
           this.assist.drawMask({
             layer: this.canvas,
@@ -200,8 +200,9 @@ export default class Vastuteq {
           d3.select(".zoom-state-wrapper").classed("d-none", false);
           d3.select(".zoom-wrapper").classed("d-none", false);
           d3.select(".measurement-section").classed("d-none", false);
-          d3.select('.zoom-functionality').classed('d-none',false);
-          d3.select('.tools-section').classed('d-none',false);
+          d3.select('.zoom-functionality').classed('d-none', false);
+          d3.select('.tools-section').classed('d-none', false);
+          d3.select('.getReport').classed('d-none', false);
           this.drawCanvas.classed('d-none', true);
           $(".property.description").html("");
 
@@ -287,28 +288,14 @@ export default class Vastuteq {
               width: objects[i].image.width,
               height: objects[i].image.height,
               transform: objects[i].image.transform,
-            };
+            };           
 
-            //Check if Object is in any of the directions
-            console.log(objectData);
-            this.mapPolygonsArrayWithDirections = Utility.getIntersectionPoints(
-              this.calNorthAngle() + this.angle,
-              this.centroid,
-              this.mapBoundariesCoords,
-              this.division,
-              "polygonDirections"
-            );
+
+            new Object({ mapId: this.mapId, layer: objectLayer, data: objectData });            
             
-            // console.log("Map:",this.mapPolygonsArrayWithDirections);
-            let testPoint = [objectData.x,objectData.y];
-            this.mapPolygonsArrayWithDirections.forEach(element => {
-              // console.log("testPoint",testPoint);
-              // console.log("element",element);
-              console.log("res",element.direction,d3.polygonContains(element.polygon[0],testPoint));
-            });
             
-            new Object({mapId: this.mapId,layer: objectLayer,data: objectData });
           }
+          
 
           let stageThird = new StageThird(this.attribute);
           stageThird.startDrawing(this);
@@ -355,40 +342,40 @@ export default class Vastuteq {
 
   // ? V E D I C   S T A R T
   vedicStart() {
-    console.log("Vedic stage",this._stage);
+    console.log("Vedic stage", this._stage);
     switch (this._stage) {
-      case 2 : {
+      case 2: {
         // STAGE SECOND
         this.wrapperDelete("map");
         this.displayMessage("Select facing wall", "danger");
         $(".property.description").html("Select facing wall");
-        this.assist.drawMask({layer: this.canvas, points: this.mapBoundariesCoords,size: this.RECT_SIZE,});
-        this.assist.drawBoundaries({layer: this.canvas, points: this.mapBoundariesCoords});
-        this.assist.drawBharamNabhi({layer: this.canvas, centroid: this.centroid,});
-        this.assist.drawPolygon({layer: this.canvas, points: this.vedicMapBoundariesCoords});
+        this.assist.drawMask({ layer: this.canvas, points: this.mapBoundariesCoords, size: this.RECT_SIZE, });
+        this.assist.drawBoundaries({ layer: this.canvas, points: this.mapBoundariesCoords });
+        this.assist.drawBharamNabhi({ layer: this.canvas, centroid: this.centroid, });
+        this.assist.drawPolygon({ layer: this.canvas, points: this.vedicMapBoundariesCoords });
 
         let stageSecond = new StageSecond();
         stageSecond.startDrawing(this);
       } break;
 
-      case 3 : {
+      case 3: {
         this.hideMessage();
         this.wrapperDelete("map");
-        d3.select('.zoom-functionality').classed('d-none',false);
+        d3.select('.zoom-functionality').classed('d-none', false);
         d3.select(".properties-section.decs").classed('d-none', true);
-        d3.select(".measurement-section").classed("d-none", false);         
-        d3.select('.tools-section').classed('d-none',false);
+        d3.select(".measurement-section").classed("d-none", false);
+        d3.select('.tools-section').classed('d-none', false);
         // d3.select('#vpm').classed('d-none',true);
         // d3.select('#mvpc').classed('d-none',true);
-        this.assist.drawMask({layer: this.canvas, points: this.mapBoundariesCoords,size: this.RECT_SIZE,});
-        this.assist.drawBoundaries({layer: this.canvas, points: this.mapBoundariesCoords});
-        this.assist.drawBharamNabhi({layer: this.canvas, centroid: this.centroid,});
+        this.assist.drawMask({ layer: this.canvas, points: this.mapBoundariesCoords, size: this.RECT_SIZE, });
+        this.assist.drawBoundaries({ layer: this.canvas, points: this.mapBoundariesCoords });
+        this.assist.drawBharamNabhi({ layer: this.canvas, centroid: this.centroid, });
         this.assist.drawDirectionLines(this.canvas, this.faceCoords, this.centroid, this.division, this.angle);
         this.assist.drawGrid(this.canvas, this.centroid, this.faceCoords, this.screenBoundariesCoords, this.division, this.angle, "vedic");
-        
-        this.assist.drawPolygon({layer: this.canvas, points: this.vedicMapBoundariesCoords});
-        this.assist.drawPolygonDiagonals({points: this.vedicMapBoundariesCoords});
-        this.assist.drawPolygonGrid({points: this.vedicMapBoundariesCoords});
+
+        this.assist.drawPolygon({ layer: this.canvas, points: this.vedicMapBoundariesCoords });
+        this.assist.drawPolygonDiagonals({ points: this.vedicMapBoundariesCoords });
+        this.assist.drawPolygonGrid({ points: this.vedicMapBoundariesCoords });
         this.createObject('g.vedic-polygon');
         this.vedic = new Vedic();
         this.vedic.startDrawing(this);
@@ -403,38 +390,38 @@ export default class Vastuteq {
   }
 
   createObject(selector) {
-      // object
-      let svgOptions = {
-        container: '#vastuteqCanvas',
-        rotationPoint: false,
-        proportions: true,
-    // restrict moving
-    // spreads to dragging one element 
-    // restrict: 'selector',
-        snap: {
-          x: 10,
-          y: 10,
-          angle: 5
-        },
-        cursorMove: 'move',
-        cursorRotate: 'crosshair',
-        cursorResize: 'pointer',  
-      };
+    // object
+    let svgOptions = {
+      container: '#vastuteqCanvas',
+      rotationPoint: false,
+      proportions: true,
+      // restrict moving
+      // spreads to dragging one element 
+      // restrict: 'selector',
+      snap: {
+        x: 10,
+        y: 10,
+        angle: 5
+      },
+      cursorMove: 'move',
+      cursorRotate: 'crosshair',
+      cursorResize: 'pointer',
+    };
 
-      let id = this.uniqueID();
+    let id = this.uniqueID();
 
-      d3.select(selector).attr('id', id);
-      let object = subjx(selector).drag(svgOptions);
-      let controls = object[0].controls;
-      controls.setAttribute("data-id", id);
-      object[0].exeRotate({
-        delta : this.degreesToRadians((this.calNorthAngle() + this.angle) - this.calTopRightEdgeAngle()),
-      });
+    d3.select(selector).attr('id', id);
+    let object = subjx(selector).drag(svgOptions);
+    let controls = object[0].controls;
+    controls.setAttribute("data-id", id);
+    object[0].exeRotate({
+      delta: this.degreesToRadians((this.calNorthAngle() + this.angle) - this.calTopRightEdgeAngle()),
+    });
   }
 
   _menuItemEventListener() {
     let that = this;
-    $('[data-menu-item]').on('click', function() {
+    $('[data-menu-item]').on('click', function () {
       let menuItem = d3.select(this).attr('data-menu-item');
       switch (menuItem) {
         case "set-measurement": {
@@ -466,66 +453,66 @@ export default class Vastuteq {
     })
   }
 
-    // ?  Z O O M  E V E N T  L I S T E N E R
-    _zoomEventListener() {
-      // CLASS REFERENCE
-      let that = this;
-  
-      // ZOOM LISTENER
-      d3.select('.zoom-display').on('keyup', function () {
-        if (that.zoomState == false) return false;
-        let zoom = d3.select(this).property('value') / 100;
-        let newX = Utility.centerOfCanvas(that.canvasSize, (that.canvasSize.width * zoom), (that.canvasSize.height * zoom)).x;
-        let newY = Utility.centerOfCanvas(that.canvasSize, (that.canvasSize.width * zoom), (that.canvasSize.height * zoom)).y;
-        let newK = zoom
-        that.svg.call(that.zoom.transform, d3.zoomIdentity.translate(newX, newY).scale(newK));
-        that.zoomData.x = newX, that.zoomData.y = newY, that.zoomData.k = newK;
-      })
-  
-  
-      d3.selectAll('[data-zoom]').on('click', function () {
-        if (that.zoomState == false) return false;
-  
-        let zoom = d3.select(this).attr('data-zoom');
-        let mVariable = parseFloat(`.${zoom}`);
-        if(zoom >= 100 ){
-          mVariable = mVariable * 10;
-        }
-        console.log(mVariable)
-        let newK = parseInt(zoom)/100;
-        // let newX = Utility.centerOfCanvas(that.canvasSize, (that.canvasSize.width * mVariable), (that.canvasSize.height * mVariable)).x;
-            // let newY = Utility.centerOfCanvas(that.canvasSize, (that.canvasSize.width * mVariable), (that.canvasSize.height * mVariable)).y;
-            let newX = Utility.centerOfCanvas(that.canvasSize, (that.canvasSize.width * mVariable), (that.canvasSize.height * mVariable)).x;
-            let newY = Utility.centerOfCanvas(that.canvasSize, (that.canvasSize.width * mVariable), (that.canvasSize.height * mVariable)).y;
-            // let newK = 0.75
-            that.svg.call(that.zoom.transform, d3.zoomIdentity.translate(newX, newY).scale(newK));
-            that.zoomData.x = newX, that.zoomData.y = newY, that.zoomData.k = newK;
-            $(".zoom-display").val(newK*100);
-        
-      })
-  
-      // ZOOM STATE
-      d3.select('#zoom-state').on('click', function () {
-        let element = d3.select(this);
-        let state = element.attr('data-zoom-state');
-        if (state === 'enable') {
-          that.zoomState = false;
-          that.svg.on('.zoom', null);
-          element.attr('data-zoom-state', 'disable');
-          element.select('img').attr('src', `${that.BASE_URL}assets/icons/zoom-disable.svg`);
-        } else {
-          that.zoomState = true;
-          that.svg.call(that.zoom)
-          that.zoom.transform(that.canvas, d3.zoomIdentity.translate(that.zoomData.x, that.zoomData.y).scale(that.zoomData.k));
-          element.attr('data-zoom-state', 'enable');
-          element.select('img').attr('src', `${that.BASE_URL}assets/icons/zoom-enable.svg`);
-        }
-      })
-  
-    }
+  // ?  Z O O M  E V E N T  L I S T E N E R
+  _zoomEventListener() {
+    // CLASS REFERENCE
+    let that = this;
+
+    // ZOOM LISTENER
+    d3.select('.zoom-display').on('keyup', function () {
+      if (that.zoomState == false) return false;
+      let zoom = d3.select(this).property('value') / 100;
+      let newX = Utility.centerOfCanvas(that.canvasSize, (that.canvasSize.width * zoom), (that.canvasSize.height * zoom)).x;
+      let newY = Utility.centerOfCanvas(that.canvasSize, (that.canvasSize.width * zoom), (that.canvasSize.height * zoom)).y;
+      let newK = zoom
+      that.svg.call(that.zoom.transform, d3.zoomIdentity.translate(newX, newY).scale(newK));
+      that.zoomData.x = newX, that.zoomData.y = newY, that.zoomData.k = newK;
+    })
+
+
+    d3.selectAll('[data-zoom]').on('click', function () {
+      if (that.zoomState == false) return false;
+
+      let zoom = d3.select(this).attr('data-zoom');
+      let mVariable = parseFloat(`.${zoom}`);
+      if (zoom >= 100) {
+        mVariable = mVariable * 10;
+      }
+      console.log(mVariable)
+      let newK = parseInt(zoom) / 100;
+      // let newX = Utility.centerOfCanvas(that.canvasSize, (that.canvasSize.width * mVariable), (that.canvasSize.height * mVariable)).x;
+      // let newY = Utility.centerOfCanvas(that.canvasSize, (that.canvasSize.width * mVariable), (that.canvasSize.height * mVariable)).y;
+      let newX = Utility.centerOfCanvas(that.canvasSize, (that.canvasSize.width * mVariable), (that.canvasSize.height * mVariable)).x;
+      let newY = Utility.centerOfCanvas(that.canvasSize, (that.canvasSize.width * mVariable), (that.canvasSize.height * mVariable)).y;
+      // let newK = 0.75
+      that.svg.call(that.zoom.transform, d3.zoomIdentity.translate(newX, newY).scale(newK));
+      that.zoomData.x = newX, that.zoomData.y = newY, that.zoomData.k = newK;
+      $(".zoom-display").val(newK * 100);
+
+    })
+
+    // ZOOM STATE
+    d3.select('#zoom-state').on('click', function () {
+      let element = d3.select(this);
+      let state = element.attr('data-zoom-state');
+      if (state === 'enable') {
+        that.zoomState = false;
+        that.svg.on('.zoom', null);
+        element.attr('data-zoom-state', 'disable');
+        element.select('img').attr('src', `${that.BASE_URL}assets/icons/zoom-disable.svg`);
+      } else {
+        that.zoomState = true;
+        that.svg.call(that.zoom)
+        that.zoom.transform(that.canvas, d3.zoomIdentity.translate(that.zoomData.x, that.zoomData.y).scale(that.zoomData.k));
+        element.attr('data-zoom-state', 'enable');
+        element.select('img').attr('src', `${that.BASE_URL}assets/icons/zoom-enable.svg`);
+      }
+    })
+
+  }
 
   _objectEventListener() {
-    
+
     $("body").on("dblclick", "g.sjx-svg-wrapper", function () {
       let wrapper = $(this);
       let id = wrapper.attr("data-id");
@@ -564,6 +551,7 @@ export default class Vastuteq {
     $(".object-item[data-object-item]").on("click", function () {
       let name = $(this).attr("data-object-item");
       let src = $(this).attr("data-src");
+      let type = $(this).attr("type");
 
       let size = { width: 60, height: 60 };
       let position = Utility.centerOfCanvas(
@@ -579,6 +567,7 @@ export default class Vastuteq {
         y: position.y,
         width: size.width,
         height: size.height,
+        type: type,
         transform: "",
         saveable: true,
       };
@@ -598,41 +587,41 @@ export default class Vastuteq {
     let that = this;
 
     d3.select('.object-align-center').on("click", () => {
-      
+
       let selectedItem = d3.select(".svg-object.active[data-object]");
-        if (selectedItem.node() != null) {
-            if(selectedItem.classed('saved') == false) {
-                let object = d3.select(".svg-object.active[data-object]");
-                let id = object.attr("data-id");
-                let wrapper = d3.select(`.sjx-svg-wrapper[data-id="${id}"]`);
+      if (selectedItem.node() != null) {
+        if (selectedItem.classed('saved') == false) {
+          let object = d3.select(".svg-object.active[data-object]");
+          let id = object.attr("data-id");
+          let wrapper = d3.select(`.sjx-svg-wrapper[data-id="${id}"]`);
 
-                let objectName = object.attr("data-object");
-                let src = object.select("image").attr("href");
-                let width = object.select("image").attr("width");
-                let height = object.select("image").attr("height");
-                let x = this.centroid.x - width / 2;
-                let y = this.centroid.y - height / 2;
+          let objectName = object.attr("data-object");
+          let src = object.select("image").attr("href");
+          let width = object.select("image").attr("width");
+          let height = object.select("image").attr("height");
+          let x = this.centroid.x - width / 2;
+          let y = this.centroid.y - height / 2;
 
-                object.remove();
-                wrapper.remove();
+          object.remove();
+          wrapper.remove();
 
-                let data = {
-                name: objectName,
-                src: src,
-                x: x,
-                y: y,
-                width: width,
-                height: height,
-                northAngle: that.calNorthAngle(),
-                angle: that.angle
-                };
-                let objectInstance = new Object({
-                mapId: that.mapId,
-                layer: that.canvas,
-                data: data,
-                });
-            }
+          let data = {
+            name: objectName,
+            src: src,
+            x: x,
+            y: y,
+            width: width,
+            height: height,
+            northAngle: that.calNorthAngle(),
+            angle: that.angle
+          };
+          let objectInstance = new Object({
+            mapId: that.mapId,
+            layer: that.canvas,
+            data: data,
+          });
         }
+      }
     });
   }
 
@@ -683,7 +672,7 @@ export default class Vastuteq {
     let wrapper = $(`g.sjx-svg-wrapper[data-id="${object.attr("id")}"]`);
     wrapper.remove();
     object.remove();
-    
+
   }
 
   wrapperDelete(objectName) {
@@ -710,12 +699,12 @@ export default class Vastuteq {
 
   degreesToRadians(degrees) {
     var pi = Math.PI;
-    return degrees * (pi/180);
+    return degrees * (pi / 180);
   }
 
   calTopRightEdgeAngle() {
-    var dy = (this.vedicMapBoundariesCoords[1][1]+this.vedicMapBoundariesCoords[0][1])/2 - this.centroid.y;
-    var dx = (this.vedicMapBoundariesCoords[1][0]+this.vedicMapBoundariesCoords[0][0])/2 - this.centroid.x;
+    var dy = (this.vedicMapBoundariesCoords[1][1] + this.vedicMapBoundariesCoords[0][1]) / 2 - this.centroid.y;
+    var dx = (this.vedicMapBoundariesCoords[1][0] + this.vedicMapBoundariesCoords[0][0]) / 2 - this.centroid.x;
 
     // var dy = this.vedicMapBoundariesCoords[1][1] - this.centroid.y;
     // var dx = this.vedicMapBoundariesCoords[1][0] - this.centroid.x;
@@ -725,7 +714,7 @@ export default class Vastuteq {
     return theta;
   }
 
-  uniqueID(){
+  uniqueID() {
     return Math.random().toString(36).slice(2);
   }
 

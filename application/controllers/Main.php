@@ -100,7 +100,7 @@ class Main extends CI_Controller
 
 		$result = $this->MainModel->insertInto('propertydetails', $insertData);
 		if ($result) {
-				$this->session->set_flashdata("success", "Client successfully added");
+				// $this->session->set_flashdata("success", "Client successfully added");
 				redirect(base_url('Main/draw/') . base64_encode($insertData['propertyId']));
 		} else {
 				$this->session->set_flashdata("error", "Something went wrong contact to IT");
@@ -228,6 +228,35 @@ class Main extends CI_Controller
 		}
 	}
 
+
+	public function updateUser()
+	{
+		
+		if (isset($_POST) && !empty($_POST)) {
+
+			$insertData = array(
+				'password' => validateInput($_POST['password']),
+				'isAdmin' => 0,
+				'name'	=> validateInput($_POST['name']),
+				'mobileNo' => validateInput($_POST['phone']),
+				'email'	=> validateInput($_POST['email']),
+				'address' => validateInput($_POST['address']),
+			);
+			$result = $this->MainModel->updateWhere('login', $insertData, array('userId' => validateInput($_POST['id'])));
+
+			if ($result) {
+				$this->session->set_flashdata("success", "Client successfully updated");
+				redirect($_POST['method']);
+			} else {
+				$this->session->set_flashdata("error", "Something went wrong contact to IT");
+				redirect($_POST['method']);
+			}
+		} else {
+			$this->session->set_flashdata("error", "Something went wrong contact to IT");
+			redirect(base_url('Main/admin'));
+		}
+	}
+
 	public function addhouseMaps()
 	{
 		if (isset($_POST) && !empty($_POST)) {
@@ -248,6 +277,7 @@ class Main extends CI_Controller
 				'mvpctoggle' => ($_POST['mvpctoggle']),
 				'objects' => ($_POST['objects']),
 				'activities' => ($_POST['activities']),
+				'reportData' => ''
 			);
 
 			$result = $this->MainModel->insertInto('housemaps', $insertData);
@@ -280,6 +310,43 @@ class Main extends CI_Controller
 				'mvpctoggle' => ($_POST['mvpctoggle']),
 				'objects' => ($_POST['objects']),
 				'activities' => ($_POST['activities']),
+				'reportData' => ''
+			);
+
+			$result = $this->MainModel->updateWhere('housemaps', $insertData, array('mapId'	=> ($_POST['id'])));
+			if ($result) {
+				echo json_encode(array("success", "Details Updated"));
+			} else {
+				echo json_encode(array("error", "Details are not saved contact to IT"));
+			}
+		} else {
+			echo json_encode(array("error", "Something went wrong contact to IT"));
+		}
+	}
+
+	public function updateObjects()
+	{
+		if (isset($_POST) && !empty($_POST)) {
+			$insertData = array(				
+				'objects' => ($_POST['objects']),				
+			);
+
+			$result = $this->MainModel->updateWhere('housemaps', $insertData, array('mapId'	=> ($_POST['id'])));
+			if ($result) {
+				echo json_encode(array("success", "Details Updated"));
+			} else {
+				echo json_encode(array("error", "Details are not saved contact to IT"));
+			}
+		} else {
+			echo json_encode(array("error", "Something went wrong contact to IT"));
+		}
+	}
+
+	public function updateReportData()
+	{
+		if (isset($_POST) && !empty($_POST)) {
+			$insertData = array(				
+				'reportData' => ($_POST['reportData']),				
 			);
 
 			$result = $this->MainModel->updateWhere('housemaps', $insertData, array('mapId'	=> ($_POST['id'])));

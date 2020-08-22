@@ -789,11 +789,11 @@ input::-webkit-inner-spin-button {
     display: none;
   }
 
-  #barPrint {
+  #barPrint,#porPrint {
     display: none;
   }
 
-  /* .modal-content {
+  /* #appModal .modal-content {
     -webkit-transform: rotate(90deg) !important;
     transform: rotate(90deg) !important;
   } */
@@ -817,6 +817,16 @@ input::-webkit-inner-spin-button {
   #fixed_image {
     display: none;
   }
+}
+
+.mousePos{
+  color: white;
+  margin-left: 50px;
+}
+
+.mousePos span:nth-child(2){
+  position: relative;
+  left: 20px;
 }
 
 /*# sourceMappingURL=app.css.map */

@@ -169,9 +169,10 @@ function aayadi(length, breadth, hasta){
 
 function calculateNakshatra(aayadiValue, jatakNakshatra){
     let temp = 0;
-    aayadiValue = aayadiValue*8%27;
+    aayadiValue = parseInt(aayadiValue)*8%27;
+    jatakNakshatra = parseInt(jatakNakshatra);
     console.log(`aayadiValue ${aayadiValue} jatakNakshatra ${jatakNakshatra}`);
-    if (jatakNakshatra>aayadi) {
+    if (jatakNakshatra>aayadiValue) {
         temp = 27-jatakNakshatra+1+aayadiValue;
     }
     else {

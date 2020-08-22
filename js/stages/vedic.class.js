@@ -1,5 +1,6 @@
 import ActionBox from "../helper/actionbox.class.js";
 import Utility from "../helper/utility.class.js";
+import Object from "../object.class.js";
 
 
 export default class Vedic {

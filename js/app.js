@@ -2,6 +2,7 @@ import Paint from "./paint/paint.class.js";
 import Behavior from "./behavior.class.js";
 import Vastuteq from "./vastuteq.class.js";
 import Model from "./helper/model.class.js";
+import Modal from "./helper/modal.class.js";
 
 var isCreateMap = false,
   isImportMap = false;
@@ -33,7 +34,7 @@ function createMap() {
   // ENABLING TOOLBOXES
   d3.select(".toolbox.right").classed("d-none", false);
   d3.select(".toolbox.left").classed("d-none", false);
-
+  d3.select(".mousePos").classed("d-none", false);
   let canvasSize = drawAreaSize(35, 35);
 
   let canvasArea = d3
@@ -183,9 +184,9 @@ function clearCanvas(canvas) {
 
 // MOUSE POSITION
 
-$("body").mousemove(function (e) {
-  $(".mouse-position-x").html(`X: ${e.pageX}`);
-  $(".mouse-position-y").html(`Y: ${e.pageY}`);
+$("#drawArea").mousemove(function (e) {
+  $(".mouse-position-x").html(`X: ${e.pageX - 50}`);
+  $(".mouse-position-y").html(`Y: ${e.pageY - 80}`);
 });
 
 // DECIDE BEHAVIOR OF APP
@@ -289,6 +290,7 @@ document
 
             localStorage.removeItem('selectedMapId');
             localStorage.removeItem('houseMaps');
+            localStorage.removeItem('objectReport');
             console.log(localStorage.getItem('selectedMapId'));
             let mapId = uniqueID();
             localStorage.setItem("selectedMapId", mapId);
@@ -411,5 +413,178 @@ d3.select('#print').on('click', function () {
   window.print();
 })
 
+//For REPORT GENERATE
 
+function objectWiseReport() {
+  let reportData = JSON.parse(localStorage.getItem('objectReport'));
+  let objects = JSON.parse(localStorage.getItem('objects'));
+  if (reportData != null && reportData != '') {
+    $('#reportModal .modal-body').empty();
+    $('#reportModal .modal-dialog').css('min-width', '1150px');
+    $('#reportModal .modal-content').css('min-height', '460px');
+    $('#reportModal .modal-title').text('Object/Activity Wise Report');
+    $('#reportModal .modal-body').attr('id', 'ReportPrintableContent');
+
+
+    //Add Print Button
+    $('#reportModal .modal-body').
+      append(`<div style="position:relative">
+              <button class="btn btn-outline-primary btn-sm text-sm pl-3 pr-3" id="rPrint" style="position:absolute;right:60px;top:-49px">Print</button>
+            </div>`)
+    //Creating Report table
+    $('#reportModal .modal-body').append('<div id="rtable"></div>')
+    let reportTable = `<table class="table table-bordered table-hover mt-2">
+                        <thead>
+                          <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Object/Activity Name</th>
+                            <th scope="col">Direction</th>
+                            <th scope="col">Type</th>      
+                          </tr>
+                        </thead>
+                        <tbody>`
+    let count = 1;
+    for (let data of reportData) {
+      let type = '';
+      objects.map(object => object.image.id == data.id ?
+        type = object.image.type
+        : object)
+      let keys = Object.keys(data)
+      for (let i = 2; i < keys.length; i++) {
+        reportTable += `<tr>
+                          <th scope="row">${count++}</th>
+                          <td>${data.name}</td>
+                          <td>${keys[i]}</td>      
+                          <td>${type}</td> 
+                        </tr>`
+      }
+    }
+    reportTable += `</tbody></table>`
+    //appending table to modal body
+    $('#rtable').html(reportTable)
+    //adding text area after report table for custom report
+    $('#reportModal .modal-body').
+      append(`<div class="form-group">
+              <label for="exampleFormControlTextarea1">Recommendation</label>
+              <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+              </div>`)
+    //Show modal
+    $('#reportModal').modal('show')
+  }
+  else {
+    showAlert('Add objects and then Select the grid Before generate the report', 'danger')
+  }
+}
+
+function zoneWiseReport() {
+  let reportData = JSON.parse(localStorage.getItem('objectReport'));
+  let objects = JSON.parse(localStorage.getItem('objects'));
+  if (reportData != null && reportData != '') {
+    $('#reportModal .modal-body').empty();
+    $('#reportModal .modal-dialog').css('min-width', '1150px');
+    $('#reportModal .modal-content').css('min-height', '460px');
+    $('#reportModal .modal-title').text('Zone Wise Report');
+    $('#reportModal .modal-body').attr('id', 'ReportPrintableContent');
+
+
+    //Add Print Button
+    $('#reportModal .modal-body').append(`<div style="position:relative">
+                                          <button class="btn btn-outline-primary btn-sm text-sm pl-3 pr-3" id="rPrint" style="position:absolute;right:60px;top:-49px">Print</button>
+                                          </div>`)
+    //create table for report showing
+    $('#reportModal .modal-body').append('<div id="rtable"></div>')
+    let div = localStorage.getItem('reportDivision')
+    if(div == null || div == ""){
+      div = 8;
+    }
+    console.log(div)
+    let modal = new Modal()
+    let directions = modal.getDivData(div)
+
+
+    let reportTable = `<table class="table table-bordered table-hover mt-2">
+                     <thead>
+                     <tr>
+                     <th scope="col">#</th>
+                     <th scope="col">Directions</th>
+                     <th scope="col">Objects</th>
+                     <th scope="col">Activities</th>
+                     </tr>
+                 </thead>
+                 <tbody>`
+    let count = 1;
+    for (let data of directions) {
+      reportTable += `<tr>
+                    <th scope="row">${count++}</th>
+                    <td>${data.name}</td>
+                    <td class="${data.name}">`
+      for (let dData of reportData) {
+        let keys = Object.keys(dData)
+        let type = '';
+        objects.map(object => object.image.id == dData.id ?
+          type = object.image.type
+          : object)
+
+        for (let i = 2; i < keys.length; i++) {
+          if (keys[i] == data.name && type == 'object') {
+            reportTable += dData.name + ',';
+          }
+        }
+      }
+      reportTable += `</td><td class="${data.name}1">`
+      for (let dData of reportData) {
+        let keys = Object.keys(dData)
+        let type = '';
+        objects.map(object => object.image.id == dData.id ?
+          type = object.image.type
+          : object)
+
+        for (let i = 2; i < keys.length; i++) {
+          if (keys[i] == data.name && type == 'activity') {
+            reportTable += dData.name + ',';
+          }
+        }
+      }
+
+      reportTable += `</td></tr>`
+    }
+    reportTable += `</tbody></table>`
+    //Append report table to modal body  
+    $('#rtable').html(reportTable)
+    //Append text area after report table for any custom information
+    $('#reportModal .modal-body').
+      append(`<div class="form-group">
+              <label for="exampleFormControlTextarea1">Recommendation</label>
+              <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+            </div>`)
+
+    //Remove last comma from Report table td
+    for (let data of directions) {
+      let txt = $(`.${data.name}`).text().replace(/,\s*$/, "");
+      let txt1 = $(`.${data.name}1`).text().replace(/,\s*$/, "");
+      $(`.${data.name}`).text(txt);
+      $(`.${data.name}1`).text(txt1);
+    }
+    //Show report Modal
+    $('#reportModal').modal('show')
+  } else {
+    showAlert('Add objects and then Select the grid Before generate the report', 'danger')
+  }
+}
+
+$('#inlineRadio1').on('click', function () {
+  objectWiseReport()
+
+})
+
+$('#inlineRadio2').on('click', function () {
+  zoneWiseReport()
+
+})
+
+$('#reportModal').on('click', '#rPrint', () => {
+  $('#drawArea').css('display', 'none');
+  window.print();
+  $('#drawArea').css('display', 'flex');
+})
 
