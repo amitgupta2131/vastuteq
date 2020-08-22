@@ -1,6 +1,6 @@
 import ActionBox from "../helper/actionbox.class.js";
+import Object from '../object.class.js';
 import Utility from "../helper/utility.class.js";
-import Object from "../object.class.js";
 
 
 export default class Vedic {
@@ -24,9 +24,7 @@ export default class Vedic {
     let col3 = row.append('div')
     .classed('col-md-12', true);
 
-    let vpm = $('#vpm').attr('data-action-object', `${that.BASE_URL}assets/icons/mvm.svg`);
-    let mvm = $('#mvpc').attr('data-action-object', `${that.BASE_URL}assets/icons/vpm.svg`);
-    let mvc = $('#mvc').attr('data-action-object', `${that.BASE_URL}assets/images/mvc.png`);
+    
 
     let enableDiagonalsWrapper = col1.append('div')
      .classed('form-check', true);
@@ -43,7 +41,7 @@ export default class Vedic {
      .attr('type', 'checkbox');
    
     enableGridWrapper.append('label').attr('class','form-check-label, text-sm').html('Grid');
-
+    this.actionbox.show();
     // let mapGridText = col3
     //   .append('p').attr('class', 'text-sm')
     //   .html('GRID TYPE');
@@ -60,11 +58,13 @@ export default class Vedic {
         <a class="dropdown-item" href="#" value="9MS">Marma Sthana</a>
         <a class="dropdown-item" href="#" value="9SM">Shanmahanti</a>
         <a class="dropdown-item" href="#" value="9SD">Shubh Dwar</a>
-        <a class="dropdown-item" href="#" value="VPM">VPM</a>
+        <a class="dropdown-item" href="#" id ="vpm1" value="VPM">VPM</a>
         
     `);
-
-    this.actionbox.show();
+    let vpm = $('#vpm1').attr('data-src', `${that.BASE_URL}assets/images/vpm.svg`);
+    // let mvm = $('#mvpc').attr('data-action-object', `${that.BASE_URL}assets/icons/vpm.svg`);
+    // let mvc = $('#mvc').attr('data-action-object', `${that.BASE_URL}assets/images/mvc.png`);
+    
 
     enableDiagonals.on('click', function(){
       diagonalChecked = d3.select(this).property("checked");
@@ -73,7 +73,7 @@ export default class Vedic {
       } else {
           d3.select('.diagonals-container').classed('d-none',true);
       }
-    })
+    });
 
     enableGrid.on('click', function(){
       gridChecked = d3.select(this).property("checked");
@@ -82,75 +82,7 @@ export default class Vedic {
       } else {
         d3.select('.vedic-grid-container').classed('d-none',true);
       }
-    })
-
-    vpm.on('click', function() {
-        
-      if(this.objectVpm == null || this.objectVpm == undefined) {
-        
-        d3.select('.properties-section.opacity').classed('d-none',false);
-        d3.select(this.parentNode).classed('active', true);
-        that.model.editVpmtoggle(that.mapId,true);
-        let data = {
-          name: "VPM",
-          src: that.BASE_URL+'assets/images/vpm.svg',
-          width: 400,
-          height: 400,
-          x: that.centroid.x - 400 / 2,
-          y: that.centroid.y - 400 / 2,
-          transfrom: "",
-          northAngle: that.calNorthAngle(),
-          angle: that.angle
-        }
-        console.log(data)
-        console.log(that.canvas)
-        console.log(this)
-        that.objectVpm = new Object({
-          layer: that.canvas,
-          data: data
-        });
-
-        console.log(that)
-      } else {
-        that.objectDelete('VPM');
-        this.objectVpm = null;
-      }
-
-      if(this.objectVpm == null || this.objectVpm == undefined){      
-        d3.select(this.parentNode).classed('active', false);
-      }
-
-    })
-
-    // mvm.on('click', function() {
-    //   if(classRef.objectMvm == null || classRef.objectMvm == undefined) {
-    //     d3.select('.color-state-wrapper').classed('d-none', false);
-    //     d3.select('.properties-section.opacity').classed('d-none',false);
-    //     d3.select(this.parentNode).classed('active', true);
-    //     that.model.editMvpctoggle(that.mapId,true);
-    //     let data = {
-    //       name: "MVM",
-    //       src: that.BASE_URL+'assets/images/MVPC.svg',
-    //       width: 400,
-    //       height: 400,
-    //       x: that.centroid.x - 400 / 2,
-    //       y: that.centroid.y - 400 / 2,
-    //       transfrom: "",
-    //     }
-    //     classRef.objectMvm = new Object({
-    //       layer: that.canvas,
-    //       data: data
-    //     });
-    //   } else {
-    //     d3.select('.color-state-wrapper').classed('d-none', true);
-    //     that.objectDelete('MVM');
-    //     classRef.objectMvm = null; 
-    //   }
-
-    //   if(classRef.objectMvm == null || classRef.objectMvm == undefined)
-    //     d3.select(this.parentNode).classed('active', false);
-
-    // })
+    });
 
 
     mapGridType.on('click','a', function() {
@@ -218,7 +150,44 @@ export default class Vedic {
                 that.createObject('g.vedic-polygon');
                 that.vedic = new Vedic(); 
                   break;
-         default:  
+         case "VPM":  
+         console.log(that.objectVpm);
+               if(that.objectVpm == null || that.objectVpm == undefined) {
+                console.log("Create");
+                  d3.select('.properties-section.opacity').classed('d-none',false);
+                  d3.select(this.parentNode).classed('active', true);
+                  that.model.editVpmtoggle(that.mapId,true);
+                  
+                  let data = {
+                    name: "VPM",
+                    src: that.BASE_URL+'assets/images/vpm.svg',
+                    width: 400,
+                    height: 400,
+                    x: that.centroid.x - 400 / 2,
+                    y: that.centroid.y - 400 / 2,
+                    transfrom: "",
+                    northAngle: that.calNorthAngle(),
+                    angle: that.angle
+                  }
+                  that.objectVpm = new Object({
+                    layer: that.canvas,
+                    data: data
+                  });
+                  console.log(that.objectVpm);
+                } else {
+                  console.log("Delete");
+                  that.objectDelete('VPM');
+                  that.objectVpm = null;
+                }
+
+                if(that.objectVpm == null || that.objectVpm == undefined){     
+                  d3.select(this.parentNode).classed('active', false);
+                }
+
+                
+                
+                  break; 
+        default:  
               that.assist.drawPolygon({layer: that.canvas, points: that.vedicMapBoundariesCoords,strokeColor:"red",strokeWidth:2});
               that.assist.drawPolygonGrid({points: that.vedicMapBoundariesCoords, color:"red", noOfLines: 3,strokeWidth:2});
               that.createObject('g.vedic-polygon');
