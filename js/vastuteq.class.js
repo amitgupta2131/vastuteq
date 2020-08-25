@@ -155,7 +155,7 @@ export default class Vastuteq {
             "Start pinning by simply clicking on map borders",
             "danger"
           );
-          let htmlText = "Start pinning by clicking on map borders. <br/><br/>Press \" CTRL + Z \" keys to undo";
+          let htmlText = "<span style='font-weight:bold'>Start pinning by clicking on map borders. <br/><br/>Press \" CTRL + Z \" keys to undo</span>";
 
           $(".property.description").html(htmlText);
           let stageFirst = new StageFirst({

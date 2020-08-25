@@ -1,7 +1,7 @@
 /***
 -------------------- A P P  F O N T S --------------------
 ***/
-@font-face {
+/* @font-face {
   font-family: "Raleway-Thin";
   src: url("/assets/fonts/Raleway-Thin.ttf");
 }
@@ -13,7 +13,7 @@
 
 @font-face {
   font-family: "Raleway-Regular";
-  src: url("/assets/fonts/Raleway-Regular.ttf");
+  src: url("/vastuteq/assets/fonts/Raleway-Regular.ttf");
 }
 
 @font-face {
@@ -24,7 +24,7 @@
 @font-face {
   font-family: "Raleway-Bold";
   src: url("assets/fonts/Raleway-Bold.ttf");
-}
+} */
 
 /***
 -------------------- B A S I C  C L A S S E S --------------------
@@ -58,7 +58,7 @@
 }
 
 .text-sm {
-  font-size: 12px !important;
+  font-size: 14px !important;
 }
 
 .text-xs {
@@ -182,11 +182,12 @@ body {
   margin: 0;
   padding: 0;
   letter-spacing: 2px;
-  font-family: "Raleway-Regular";
+  font-family: 'Playfair Display', serif;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
   background-color: #efeff0;
-  color: #4f4f4f;
+  /* color: #4f4f4f; */
+  color: #191919;
   overflow: hidden;
 }
 
@@ -1237,6 +1238,24 @@ ul.menu {
   width: calc(100vw - 80px);
   height: calc(100vh - 68px);
   background-color: white;
+}
+
+#DataTables_Table_0_filter label,#DataTables_Table_0_length label{
+  margin-right: 10px;
+  margin-top: 5px;
+}
+
+#DataTables_Table_0_filter label input{
+  border: 0.5px solid #dee2e6 !important;
+  border-radius: 5px !important;
+}
+
+#DataTables_Table_0_filter label input:focus{
+  /* color: #495057; */
+  background-color: #fff;
+  border-color: #80bdff;
+  outline: 0;
+  box-shadow: 0 0 0 0.1rem rgba(0, 123, 255, 0.25);
 }
 
 /********** PAINT CSS END ********************************************/

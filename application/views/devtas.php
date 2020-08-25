@@ -55,16 +55,16 @@
                         </div>
                         <div class="bottom container mt-3">
                             <div class="row">
-                                <div class="col-md-4 text-uppercase text-sm" style="font-family: 'Raleway-SemiBold'">name:</div>
-                                <div id="devta-name" class="col-md-7 text-uppercase text-sm"></div>
+                                <div class="col-md-4 desc text-uppercase text-sm">name:</div>
+                                <div id="devta-name" class="col-md-7 desc text-uppercase text-sm"></div>
                             </div>
                             <div class="row">
-                                <div class="col-md-4 text-uppercase text-sm" style="font-family: 'Raleway-SemiBold'">direction:</div>
-                                <div id="devta-direction" class="col-md-7 text-uppercase text-sm"></div>
+                                <div class="col-md-4 text-uppercase desc text-sm">direction:</div>
+                                <div id="devta-direction" class="col-md-7 desc text-uppercase text-sm"></div>
                             </div>
                             <div class="row">
-                                <div class="col-md-4 text-uppercase text-sm" style="font-family: 'Raleway-SemiBold'">color:</div>
-                                <div id="devta-color" class="col-md-7 text-uppercase text-sm"></div>
+                                <div class="col-md-4 text-uppercase desc text-sm">color:</div>
+                                <div id="devta-color" class="col-md-7 desc text-uppercase text-sm"></div>
                             </div>
                         </div>
                     </div>

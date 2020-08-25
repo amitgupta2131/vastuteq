@@ -63,7 +63,8 @@ export default class StageFirst {
             that.startPoint = [d3.mouse(this)[0], d3.mouse(this)[1]];
             let closeCoord = (that.points != undefined && that.points.length > 2) ? Utility.isClosestCoord(that.points[0], d3.mouse(this)) : null;
             if(that.layer.select(`g.${that.className}`).empty()) that.g = that.layer.append('g').attr('class', that.className);
-            if(d3.event.target.hasAttribute('is-handle') || closeCoord) { that.closePolygon(REF); return true; }
+            // if(d3.event.target.hasAttribute('is-handle') || closeCoord) { that.closePolygon(REF); return true; }
+            if(closeCoord) { that.closePolygon(REF); return true; }
     
             that.points.push(d3.mouse(this));
             that.g.select('polyline').remove();
@@ -75,7 +76,7 @@ export default class StageFirst {
             .attr('cx', that.startPoint[0])
             .attr('cy', that.startPoint[1])
             .attr('r', 4)
-            .attr('fill', 'yellow')
+            .attr('fill', 'black')
             .attr('stroke', '#000')
             .attr('is-handle', 'true')
             .style('cursor', 'pointer');            
@@ -107,7 +108,7 @@ export default class StageFirst {
             .attr('cx', this.points[i][0])
             .attr('cy', this.points[i][1])
             .attr('r', 4)
-            .attr('fill', '#FDBC07')
+            .attr('fill', 'black')
             .attr('stroke', '#000')
             .attr('is-handle', 'true')
             .call(that.dragger)

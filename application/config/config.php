@@ -386,6 +386,7 @@ $config['sess_save_path'] = APPPATH.'sessions';
 $config['sess_match_ip'] = FALSE;
 $config['sess_time_to_update'] = 300;
 $config['sess_regenerate_destroy'] = FALSE;
+$config['sess_expire_on_close'] = TRUE;
 
 /*
 |--------------------------------------------------------------------------
