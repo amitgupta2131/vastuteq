@@ -67,7 +67,7 @@ options.text(function (d) {
             breadth = parseFloat(convertIntoFeet(realBreadth, siUnit));
             hasta = parseFloat(convertIntoFeet(hasta, "inch"));
             aayadiValue = aayadi(length, breadth, hasta);
-            
+            let aayu = (aayadiValue * 27) % 100;
             let rem = {
                 aaya:  (aayadiValue * 8) % 12, //calculateAaya(length, breadth, hasta, siUnit),
                 vyaya: (aayadiValue * 9) % 10, //calculateVyaya(length, breadth, hasta, siUnit),
@@ -93,7 +93,8 @@ options.text(function (d) {
                         realLength,
                         realBreadth,
                         siUnit,
-                        result
+                        result,
+                        aayu
     
                     ));
                     }else{
@@ -101,7 +102,8 @@ options.text(function (d) {
                             realLength,
                             realBreadth,
                             siUnit,
-                            result
+                            result,
+                            aayu
         
                         ));
                     }

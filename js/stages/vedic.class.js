@@ -161,11 +161,12 @@ export default class Vedic {
 
           break;
         case "9SM":
-          that.assist.drawPolygon({ layer: that.canvas, points: that.vedicMapBoundariesCoords, strokeColor: "blue", strokeWidth: 2 });
-          that.assist.drawPolygonGrid({ points: that.vedicMapBoundariesCoords, color: "blue", noOfLines: 9, strokeWidth: 2 });
-          that.assist.drawPolygonDiagonals({ points: that.vedicMapBoundariesCoords, color: "blue", noOfLines: 9, strokeWidth: 2 });
-          that.createObject('g.vedic-polygon');
-          that.vedic = new Vedic();
+          // that.assist.drawPolygon({ layer: that.canvas, points: that.vedicMapBoundariesCoords, strokeColor: "blue", strokeWidth: 2 });
+          // that.assist.drawPolygonGrid({ points: that.vedicMapBoundariesCoords, color: "blue", noOfLines: 9, strokeWidth: 2 });
+          // that.assist.drawPolygonDiagonals({ points: that.vedicMapBoundariesCoords, color: "blue", noOfLines: 9, strokeWidth: 2 });
+          // that.createObject('g.vedic-polygon');
+          // that.vedic = new Vedic();
+          drawVedicImages('9SM', 'Subh Dwar.png')
           break;
         case "9SD":
           // that.assist.drawPolygon({layer: that.canvas, points: that.vedicMapBoundariesCoords,strokeColor:"blue",strokeWidth:2});
