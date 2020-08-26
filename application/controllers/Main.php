@@ -21,7 +21,7 @@ class Main extends CI_Controller
 		$userId = $_SESSION['userInfo']['userId'];
 		$data['property'] = $this->MainModel->gethouseMapsDetails($userId);
 		// echo "<pre>"; print_r($data['property']);die;
-		$this->load->view('dashboard',$data);
+		$this->load->view('dashboard', $data);
 	}
 
 	public function propertyInfo()
@@ -32,15 +32,17 @@ class Main extends CI_Controller
 		// $this->load->view('propertyInfo', $data);
 	}
 
-	public function createMap() {
+	public function createMap()
+	{
 		$data['behavior'] = "create";
-		$this->load->view('draw.php',$data);
+		$this->load->view('draw.php', $data);
 	}
 
-	public function importMap() {
+	public function importMap()
+	{
 		$data['propertyId'] =   $this->MainModel->getNewIDorNo("P-", 'propertydetails');
 		$data['behavior'] = "import";
-		$this->load->view('draw.php',$data);
+		$this->load->view('draw.php', $data);
 	}
 
 	public function getType()
@@ -100,11 +102,11 @@ class Main extends CI_Controller
 
 		$result = $this->MainModel->insertInto('propertydetails', $insertData);
 		if ($result) {
-				// $this->session->set_flashdata("success", "Client successfully added");
-				redirect(base_url('Main/draw/') . base64_encode($insertData['propertyId']));
+			// $this->session->set_flashdata("success", "Client successfully added");
+			redirect(base_url('Main/draw/') . base64_encode($insertData['propertyId']));
 		} else {
-				$this->session->set_flashdata("error", "Something went wrong contact to IT");
-				redirect(base_url('Main/propertyInfo'));
+			$this->session->set_flashdata("error", "Something went wrong contact to IT");
+			redirect(base_url('Main/propertyInfo'));
 		}
 
 
@@ -140,9 +142,9 @@ class Main extends CI_Controller
 	public function draw($id = null)
 	{
 		$data['propertyId'] = base64_decode($id);
-		$data['objects'] =   $this->MainModel->selectAllFromWhere('icons',array('category'=>'objects'));	
-		$data['activities'] =   $this->MainModel->selectAllFromWhere('icons',array('category'=>'activities'));	
-		$this->load->view('draw',$data);
+		$data['objects'] =   $this->MainModel->selectAllFromWhere('icons', array('category' => 'objects'));
+		$data['activities'] =   $this->MainModel->selectAllFromWhere('icons', array('category' => 'activities'));
+		$this->load->view('draw', $data);
 	}
 
 	public function devtas()
@@ -228,28 +230,73 @@ class Main extends CI_Controller
 		}
 	}
 
+	public function uploadImage($FILES,$POST)
+	{
+		// print_r($_FILES["usrImage"]);die;
+		$target_dir = "uploads/";
+		$target_file = $target_dir . basename($FILES["usrImage"]["name"]);
+		$imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
+		// Check if image file is a actual image or fake image
+
+
+		// Check if file already exists
+		if (file_exists($target_file)) {
+			$this->session->set_flashdata("error", "Sorry, file already exists.");
+			redirect($POST['method']);
+		}
+
+		// Check file size
+		if ($FILES["usrImage"]["size"] > 500000) {
+			$this->session->set_flashdata("error", "Sorry, your file is too large.");
+			redirect($POST['method']);
+		}
+
+		// Allow certain file formats
+		if (
+			$imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
+			&& $imageFileType != "gif"
+		) {
+			$this->session->set_flashdata("error", "Sorry, only JPG, JPEG, PNG & GIF files are allowed.");
+			redirect($POST['method']);
+		}
+
+		if (move_uploaded_file($FILES["usrImage"]["tmp_name"], $target_file)) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
 
 	public function updateUser()
 	{
-		
+
+
 		if (isset($_POST) && !empty($_POST)) {
 
-			$insertData = array(
-				'password' => validateInput($_POST['password']),
-				'isAdmin' => 0,
-				'name'	=> validateInput($_POST['name']),
-				'mobileNo' => validateInput($_POST['phone']),
-				'email'	=> validateInput($_POST['email']),
-				'address' => validateInput($_POST['address']),
-			);
-			$result = $this->MainModel->updateWhere('login', $insertData, array('userId' => validateInput($_POST['id'])));
+			$uploadResult =	$this->uploadImage($_FILES,$_POST);
+			if ($uploadResult) {
+				$insertData = array(
+					'password' => validateInput($_POST['password']),
+					'isAdmin' => 0,
+					'name'	=> validateInput($_POST['name']),
+					'mobileNo' => validateInput($_POST['phone']),
+					'email'	=> validateInput($_POST['email']),
+					'address' => validateInput($_POST['address']),
+					'userImg' => $_FILES["usrImage"]["name"]
+				);
+				$result = $this->MainModel->updateWhere('login', $insertData, array('userId' => validateInput($_POST['id'])));
 
-			if ($result) {
-				$this->session->set_flashdata("success", "Client successfully updated");
-				redirect($_POST['method']);
-			} else {
-				$this->session->set_flashdata("error", "Something went wrong contact to IT");
-				redirect($_POST['method']);
+				if ($result) {
+					$this->session->set_flashdata("success", "Client successfully updated");
+					redirect($_POST['method']);
+				} else {
+					$this->session->set_flashdata("error", "Something went wrong contact to IT");
+					redirect($_POST['method']);
+				}
+			}else{
+				$this->session->set_flashdata("error", "Sorry, there was an error uploading your file.");
+					redirect($_POST['method']);
 			}
 		} else {
 			$this->session->set_flashdata("error", "Something went wrong contact to IT");
@@ -327,8 +374,8 @@ class Main extends CI_Controller
 	public function updateObjects()
 	{
 		if (isset($_POST) && !empty($_POST)) {
-			$insertData = array(				
-				'objects' => ($_POST['objects']),				
+			$insertData = array(
+				'objects' => ($_POST['objects']),
 			);
 
 			$result = $this->MainModel->updateWhere('housemaps', $insertData, array('mapId'	=> ($_POST['id'])));
@@ -345,8 +392,8 @@ class Main extends CI_Controller
 	public function updateReportData()
 	{
 		if (isset($_POST) && !empty($_POST)) {
-			$insertData = array(				
-				'reportData' => ($_POST['reportData']),				
+			$insertData = array(
+				'reportData' => ($_POST['reportData']),
 			);
 
 			$result = $this->MainModel->updateWhere('housemaps', $insertData, array('mapId'	=> ($_POST['id'])));
@@ -360,7 +407,8 @@ class Main extends CI_Controller
 		}
 	}
 
-	public function deletehouseMaps(){
+	public function deletehouseMaps()
+	{
 
 		$result1 = $this->MainModel->deleteFromTable('housemaps', array('propertId' => $_POST['id']));
 		$result2 = $this->MainModel->deleteFromTable('propertydetails', array('propertyId' => $_POST['id']));
@@ -562,9 +610,8 @@ class Main extends CI_Controller
 	}
 
 
-	public function getDate(){
-		echo(Date('yy-m-d'));
-		
+	public function getDate()
+	{
+		echo (Date('yy-m-d'));
 	}
-
 }

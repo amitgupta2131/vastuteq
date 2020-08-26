@@ -4,15 +4,16 @@
 
         <!-- Tool Menus -->
         <?php $method = $this->router->fetch_method();
+        $userImg = $_SESSION['userInfo']['userImg'];
         if ($method == 'draw') {
         ?>
             <nav class="navbar navbar-expand-lg navbar-light  p-0 pl-2" style="z-index:100;">
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav mr-auto">
-                    <li class="nav-item dropdown mousePos d-none">
-                        <span class="mouse-position-x"></span>
-                        <span class="mouse-position-y"></span>
-                    </li>
+                        <li class="nav-item dropdown mousePos d-none">
+                            <span class="mouse-position-x"></span>
+                            <span class="mouse-position-y"></span>
+                        </li>
                         <li class="nav-item dropdown active d-none">
                             <a class="nav-link dropdown-toggle menu-item" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 File
@@ -72,7 +73,7 @@
                         </li>
                     </ul> -->
 
-                   <!--  <ul class="navbar-nav mr-2">
+                    <!--  <ul class="navbar-nav mr-2">
                         <li class="nav-item">
                             <a class="nav-link" href="#" id="print" name="print">
                                 <img src="http://localhost/vastuteq5/assets/icons/print.svg" alt="" width="20">
@@ -156,7 +157,7 @@
                     </div>
                 </li>
                 <li class="nav-item">
-                    <img class="profile thumbnail rounded-circle" src="<?php echo base_url('assets/images/thumbnail.png') ?>" alt="user" width="20" id="profileButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <img class="profile thumbnail rounded-circle" src="<?php echo $userImg != '' ? base_url('uploads/') . $userImg : base_url('assets/images/thumbnail.png') ?>" alt="user" width="20" id="profileButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="profileButton">
                         <a class="dropdown-item modal__trigger" href="#" data-toggle="modal" data-target="#settingModal"><i class="fas fa-cog"></i>&nbsp;&nbsp;Setting</a>
                         <a class="dropdown-item" href="<?php echo base_url('Main/logout') ?>"><i class="fas fa-sign-out-alt"></i>&nbsp;&nbsp;Sign Out</a>
@@ -172,7 +173,7 @@
     -->
 
 <div class="modal fade bd-example-modal-lg" id="settingModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog modal-lg modal-dialog-centered" role="document" style="max-width:450px">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document" style="max-width:765px">
         <div class="modal-content" style="min-height:460px">
             <div class="modal-header p-1 pl-3 pr-3">
                 <h5 class="modal-title" id="settingTitle">Settings</h5>
@@ -181,31 +182,42 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form action="<?php echo base_url('Main/updateUser') ?>" method='post'>
+                <form  style="margin:0px" action="<?php echo base_url('Main/updateUser') ?>" method='post' enctype="multipart/form-data">
                     <?php $user = $this->MainModel->selectAllFromWhere("login", array("userId" => $_SESSION['userInfo']['userId']))[0]; ?>
-                    <div class="form-group">
+                    <div class="row">
+                    <div class="form-group col-sm-6">
                         <label for="name">Name</label>
-                        <input type="text" hidden class="form-control" name = 'id' value="<?php echo $user['userId']?>">
-                        <input type="text" hidden class="form-control" name = 'method' value="<?php echo current_url()?>">
-                        <input type="text" class="form-control" name="name" value="<?php echo $user['name']?>">
+                        <input type="text" hidden class="form-control" name='id' value="<?php echo $user['userId'] ?>">
+                        <input type="text" hidden class="form-control" name='method' value="<?php echo current_url() ?>">
+                        <input type="text" class="form-control" name="name" value="<?php echo $user['name'] ?>">
                     </div>
-                    <div class="form-group">
+                    <div class="form-group col-sm-6">
                         <label for="phone">Phone No.</label>
-                        <input type="number" class="form-control" name="phone" value="<?php echo $user['mobileNo']?>">
+                        <input type="number" class="form-control" name="phone" value="<?php echo $user['mobileNo'] ?>">
                     </div>
-                    <div class="form-group">
+                    <div class="form-group col-sm-6">
                         <label for="exampleFormControlInput1">Email address</label>
-                        <input type="email" class="form-control" name="email" placeholder="name@example.com" readonly value="<?php echo $user['email']?>">
+                        <input type="email" class="form-control" name="email" placeholder="name@example.com" readonly value="<?php echo $user['email'] ?>">
                     </div>
-                    <div class="form-group">
+                    <div class="form-group col-sm-6">
                         <label for="password">Password</label>
-                        <input type="text" class="form-control" name="password" value="<?php echo $user['password']?>">
+                        <input type="text" class="form-control" name="password" value="<?php echo $user['password'] ?>">
                     </div>
-                    <div class="form-group">
+                    <div class="form-group col-sm-6">
                         <label for="address">Address</label>
-                        <textarea class="form-control" name="address" value="<?php echo $user['address']?>"><?php echo $user['address']?></textarea>
+                        <textarea class="form-control" name="address" value="<?php echo $user['address'] ?>"><?php echo $user['address'] ?></textarea>
                     </div>
-                    <button type="submit" class="btn btn-primary align-right" style="float:right">Update</button>
+                    <div class="form-group col-sm-6">
+                        <label for="image">User Image</label>
+                        <div class="row">
+                            <img class="col-sm-4" src="<?php echo $userImg != '' ? base_url('uploads/') . $userImg : '' ?>" height="50" width="50">
+                            <input class="col-sm-8" type="file" class="form-control" name="usrImage">
+                        </div>
+                    </div>
+                    </div>
+                    <div>
+                        <button type="submit" class="btn btn-primary" style="float:right;">Update</button>
+                    </div>
                 </form>
             </div>
         </div>
@@ -214,14 +226,14 @@
 
 <!-- Message pop up -->
 <?php if (!empty($this->session->flashdata('error'))) { ?>
-        <script>
-            let error = '<?php echo $this->session->flashdata('error'); ?>';
-            showAlert(error, 'danger');
-        </script>
-    <?php } ?>
-    <?php if (!empty($this->session->flashdata('success'))) { ?>
-        <script>
-            let error = '<?php echo $this->session->flashdata('success'); ?>';
-            showAlert(error, 'success');
-        </script>
-    <?php } ?>
+    <script>
+        let error = '<?php echo $this->session->flashdata('error'); ?>';
+        showAlert(error, 'danger');
+    </script>
+<?php } ?>
+<?php if (!empty($this->session->flashdata('success'))) { ?>
+    <script>
+        let error = '<?php echo $this->session->flashdata('success'); ?>';
+        showAlert(error, 'success');
+    </script>
+<?php } ?>
