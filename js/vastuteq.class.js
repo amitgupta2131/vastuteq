@@ -684,6 +684,7 @@ export default class Vastuteq {
   }
 
   wrapperDelete(objectName) {
+    
     let object = $(`g.svg-object[data-object="${objectName}"]`);
     object.removeClass("active");
     object.removeClass("sjx-drag");
