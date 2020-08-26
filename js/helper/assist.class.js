@@ -136,7 +136,7 @@ export default class Assist {
                 g.append('text').text(`P${i}`)
                     .attr('x', points[i][0] - 5)
                     .attr('y', points[i][1] - 7)
-                    .attr('fill', '#FFE13E')
+                    .attr('fill', 'black')
                     .attr('font-weight', '700');
 
             }

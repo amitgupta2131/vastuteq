@@ -7,14 +7,16 @@ export default class Object {
     this.mapId = mapId;
     this.layer = layer;
     this.data = data;
+    
 
     this.objectModel = new ObjectModel();
 
     this.id = (data.id != undefined) ? data.id : this.uniqueID();
-
+// window.location.reload()
     d3.selectAll(`.svg-object`).classed('deactive', true);
     d3.selectAll(`.svg-object`).classed('active', false);
     d3.selectAll(`.sjx-svg-wrapper`).classed('d-none', true);
+    
     $('#myRange').val(1);
     $('.range-value').text(1);
 
@@ -56,6 +58,7 @@ export default class Object {
     }
 
     // object
+    
     this.svgOptions = {
           container: '#vastuteqCanvas',
           rotationPoint: false,
@@ -136,14 +139,15 @@ export default class Object {
               // fires on tool deactivation
           }
     };
-  
+         
     this.object = subjx(`.svg-object[data-id="${this.id}"]`).drag(this.svgOptions);
     this.controls = this.object[0].controls;
     this.controls.setAttribute("data-id",this.id);
+    
 
     //Code to rotate VPM to North
-    if(this.data.name == "VPM") {
-      let vpmObject = d3.select('.svg-object[data-object="VPM"]').select('image.object');
+    if(this.data.name == "VPM" || this.data.name == "9MS") {
+      let vpmObject = d3.select(`.svg-object[data-object='${this.data.name}']`).select('image.object');
       let x = parseFloat(vpmObject.attr('x')), y = parseFloat(vpmObject.attr('y')), 
       width = parseFloat(vpmObject.attr('width')), height = parseFloat(vpmObject.attr('height'));
       let vpmPolygon = [[x,y], [x+width,y], [x+width,y+height], [x,y+height]];

@@ -67,14 +67,15 @@ options.text(function (d) {
             breadth = parseFloat(convertIntoFeet(realBreadth, siUnit));
             hasta = parseFloat(convertIntoFeet(hasta, "inch"));
             aayadiValue = aayadi(length, breadth, hasta);
-            
+            let aayu = (aayadiValue * 27) % 100;
             let rem = {
                 aaya:  (aayadiValue * 8) % 12, //calculateAaya(length, breadth, hasta, siUnit),
                 vyaya: (aayadiValue * 9) % 10, //calculateVyaya(length, breadth, hasta, siUnit),
                 amsha: (aayadiValue * 4) % 9,  //calculateAmsha(length, breadth, hasta, siUnit),
                 yoni:  (aayadiValue * 3) % 8,  //calculateYoni(length, breadth, hasta, siUnit),
                 vara:  (aayadiValue * 9) % 7,  //calculateVara(length, breadth, hasta, siUnit),
-                tithi: (aayadiValue * 9) % 30, //calculateTithi(length, breadth, hasta, siUnit),
+                tithi: (aayadiValue * 9) % 30,//calculateTithi(length, breadth, hasta, siUnit),
+                aayu:  (aayadiValue * 27) % 100,
                 nakshatra: calculateNakshatra(aayadiValue,jatakNakshatra)
             }
             //calling ajax to fetch result data from database
@@ -92,7 +93,8 @@ options.text(function (d) {
                         realLength,
                         realBreadth,
                         siUnit,
-                        result
+                        result,
+                        aayu
     
                     ));
                     }else{
@@ -100,7 +102,8 @@ options.text(function (d) {
                             realLength,
                             realBreadth,
                             siUnit,
-                            result
+                            result,
+                            aayu
         
                         ));
                     }

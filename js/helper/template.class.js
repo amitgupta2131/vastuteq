@@ -1,6 +1,6 @@
 export default class Template {
 
-    static aayadiDetailedReport(length, breadth, siUnit, result) {
+    static aayadiDetailedReport(length, breadth, siUnit, result,aayu) {
 
             return `The Aayadi calculation is a matrix of architecture and astrological calculations that 
             are done to check the energy suitability of the plot and its relationship with the owner. 
@@ -74,7 +74,7 @@ export default class Template {
             <br>
             <span class="aayu heading">Aayu:</span>
             <br>
-            <span class="aayu desc"></span>
+            <span class="aayu desc">The Aayu calculation for your layout gives a value of ${aayu}.</span>
             <br>
             <br>
             Here is a summary of all the above given factors:
@@ -122,9 +122,9 @@ export default class Template {
             <td>${result['amsha']['result']}</td>
         </tr>
         <tr>
-            <td>AAYU</td>
-            <td>TBD</td>
-            <td>TBD</td>
+        <td>Aayu</td>
+        <td>${aayu}</td>
+        <td>Your propety age is : ${aayu}</td>
         </tr>
         </table>
            `;

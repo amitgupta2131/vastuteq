@@ -132,7 +132,8 @@ export default class Vastuteq {
 
   // ? M A H A V A S T U   S T A R T
 
-  start() {
+  start(flag = '') {
+    
     switch (this._stage) {
       // ? STAGE FOR TRANSFORM MAP
       case 0:
@@ -155,7 +156,7 @@ export default class Vastuteq {
             "Start pinning by simply clicking on map borders",
             "danger"
           );
-          let htmlText = "Start pinning by clicking on map borders. <br/><br/>Press \" CTRL + Z \" keys to undo";
+          let htmlText = "<span style='font-weight:bold'>Start pinning by clicking on map borders. <br/><br/>Press \" CTRL + Z \" keys to undo</span>";
 
           $(".property.description").html(htmlText);
           let stageFirst = new StageFirst({
@@ -288,14 +289,21 @@ export default class Vastuteq {
               width: objects[i].image.width,
               height: objects[i].image.height,
               transform: objects[i].image.transform,
-            };           
+            };
 
+            if (flag == '') {
+              new Object({ mapId: this.mapId, layer: objectLayer, data: objectData,flag: flag });
+            } else {
+              // d3.selectAll(`.svg-object`).classed('deactive', false);
+              // d3.selectAll(`.svg-object`).classed('active', true);
+            //  let objGroup = $(`.objects-group`).html();
+            //  console.log(objGroup);
+            //  d3.select(`.objects-group`).remove();
+            //  $(`#main-group`).append(`<g class="objects-group">${objGroup}</g>`);
+            }
 
-            new Object({ mapId: this.mapId, layer: objectLayer, data: objectData });            
-            
-            
           }
-          
+
 
           let stageThird = new StageThird(this.attribute);
           stageThird.startDrawing(this);
@@ -424,30 +432,25 @@ export default class Vastuteq {
     $('[data-menu-item]').on('click', function () {
       let menuItem = d3.select(this).attr('data-menu-item');
       switch (menuItem) {
-        case "set-measurement": {
-          console.log('set-measurement');
+        case "set-measurement": {          
           that._stage = 4;
           that.start();
 
         } break;
         case "get-measurement": {
-          console.log('get-measurement');
+
+         let map = JSON.parse(localStorage.getItem('houseMaps'));         
+         if(map[0].dimension != undefined || map[0].dimension != null){          
           that._stage = 5;
           that.start();
+         }else{
+           showAlert('Please set measurement first');
+           return false;
+         }
+          
 
         } break;
-        case "get-marma": {
-          console.log('get-marma');
-          // that._stage = 5;
-          // that.start();
-
-        } break;
-        case "get-shanmahanti": {
-          console.log('get-shanmahanti');
-          // that._stage = 5;
-          // that.start();
-
-        } break;
+        
         default: break;
       }
     })
@@ -676,6 +679,7 @@ export default class Vastuteq {
   }
 
   wrapperDelete(objectName) {
+    
     let object = $(`g.svg-object[data-object="${objectName}"]`);
     object.removeClass("active");
     object.removeClass("sjx-drag");

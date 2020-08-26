@@ -14,7 +14,8 @@
     <link rel="stylesheet" href="<?php echo base_url('assets/fontawesome/css/all.min.css') ?>">
     <!-- CUSTOM CSS -->
     <link rel="stylesheet" href="<?php echo base_url('css/main.css') ?>">
-
+<!-- google fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap" rel="stylesheet">
 
     <!-- JQUERY -->
     <script src="<?php echo base_url('js/helper/jquery.min.js') ?>"></script>
@@ -53,85 +54,21 @@
     <!-- 
     //////////////////////////////// --- D R A W  A R E A ---  ////////////////////////////////
     -->
-    <section id="mainArea" class="p-4">
+    <!-- <section id="mainArea" class="p-4">
         <div id="mapsContainer" class="row justify-content-md-start">
-            <!-- <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
-                <div class="card rounded border border-primary bubbly-button" data-toggle="modal" data-target="#modal">
-                    <div class="card-body d-flex justify-content-center align-items-center">
-                        <h5 class="text-small text-primary create-new">
-                            Create New Project
-                        </h5>
-                    </div>
-                </div>
-            </div> -->
-
-            <!-- <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
-                    <div class="card rounded bubbly-button p-1">
-                        <img class="card-img-top" src="/assets/images/swastika.svg" alt="Card image cap">
-                        <div class="card-body">
-                            <div class="project-name card-text">
-                                Project Name
-                            </div>
-                            <div class="last-update card-text">
-                                Last edited 19 hours ago
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
-                    <div class="card rounded bubbly-button p-1">
-                        <img class="card-img-top" src="/assets/images/om.svg" alt="Card image cap">
-                        <div class="card-body">
-                            <div class="project-name card-text">
-                                Project Name
-                            </div>
-                            <div class="last-update card-text">
-                                Last edited 19 hours ago
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
-                    <div class="card rounded bubbly-button p-1">
-                        <img class="card-img-top" src="/assets/images/swastika.svg" alt="Card image cap">
-                        <div class="card-body">
-                            <div class="project-name card-text">
-                                Project Name
-                            </div>
-                            <div class="last-update card-text">
-                                Last edited 19 hours ago
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
-                    <div class="card rounded bubbly-button p-1">
-                        <img class="card-img-top" src="/assets/images/om.svg" alt="Card image cap">
-                        <div class="card-body">
-                            <div class="project-name card-text">
-                                Project Name
-                            </div>
-                            <div class="last-update card-text">
-                                Last edited 19 hours ago
-                            </div>
-                        </div>
-                    </div>
-                </div> -->
+         
             <?php
             if (isset($property) && !empty($property)) {
                 // echo "<pre>";
                 // print_r($property);
                 // die;
                 for ($i = 0; $i < count($property); $i++) {
+
                     $imageResource = json_decode($property[$i]['imageData'], true);
             ?>
                     <div class="col-lg-3 col-md-4 col-sm-12 mb-4">
                         <div class="card rounded bubbly-button p-1" data-map-id="<?php echo $property[$i]['mapId'] ?>"><img class="card-img-top" src="<?php echo $imageResource['src'] ?>">
-                            <div class="card-body border-top border-thick">
-                                <!--<div class="project-name card-text">
-                                    <span class="col-sm-5">Owner</span>
-                                    <span class="col-sm-7"><?php //echo $property[$i]['name'] ?></span>
-                                </div> -->
+                            <div class="card-body border-top border-thick">                                
                                 <div class="project-name card-text">
                                     <span class="col-sm-5">Name</span>
                                     <span class="col-sm-7"><?php echo $property[$i]['propertyName'] ?></span>
@@ -143,126 +80,74 @@
                                 <div class="project-name card-text">
                                     <span class="col-sm-5">Type</span>
                                     <span class="col-sm-7"><?php echo $property[$i]['type'] ?></span>
-                                </div>
-                                <!--<div class="project-name card-text">
-                                    <span class="col-sm-4">Address</span>
-                                    <span class="col-sm-8"><?php //echo $property[$i]['propertyAddress'] ?></span>
-                                </div> -->
-                                <!-- <div class="last-update card-text">Last edited 19 hours ago</div> -->
+                                </div>                               
                             </div>
                         </div>
                     </div>
             <?php }
             } ?>
         </div>
-    </section>
+    </section> -->
 
-
-    <!-- 
-    //////////////////////////////// --- R I G H T  S I D E B A R ---  ////////////////////////////////
-    -->
-    <!-- <section class="right-sidebar"></section> -->
-
-
-    <!-- 
-    //////////////////////////////// --- A P P  M O D A L ---  ////////////////////////////////
-    -->
-
-    <!-- <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-            <div class="modal-content">
-                <div class="modal-header p-1 pl-3 pr-3">
-                    <h5 class="modal-title" id="exampleModalLabel">
-                        Client & Property
-                    </h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
+    <div class="p-4 container" style="max-width:1340px;">
+        <div class="row">
+            <div class="card" style="width:100%">
+                <div class="card-header row m-0">
+                    <h4 class="dash-h col-sm-11">House Maps</h4>
                     
-                        <div class="form-group">
-                            <label for="inputEmail4">Select Client</label>
-                            <div class="form-row">
-                            <select class="form-control form-control-sm col-md-6" id="clients">
-                                <option value="">Selet Owner</option>
-                                <option value="">Client 1</option>
-                                <option value="">Client 2</option>
-                                <option value="">Client 3</option>
-                            </select>                            
-                            <button type="button" class="btn col-md-2 btn-sm rounded-0 addClient" data-toggle="modal" data-target="#modal1">
-                                Add Client
-                            </button>
-                            </div>
-                        </div>
-                        
-                   
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table dataTable table-bordered">
+                            <thead class="bg-light">
+                                <tr >
+                                    <th>#</th>
+                                    <th>Name</th>
+                                    <th>Category</th>
+                                    <th>Type</th>
+                                    <th>Map Image</th>   
+                                    <th style="text-align:center">Action</th>                 
 
-                    <!-- <form id="propertyForm"></form>
-                    <div class="modal-footer p-1 pl-3 pr-3">
-                        <button type="button" class="btn btn-outline-primary btn-sm rounded-0" id="addMore">
-                            Add More Property
-                        </button>
-                        <button type="button" class="btn btn-outline-secondary btn-sm rounded-0" data-dismiss="modal">
-                            Close
-                        </button>
-                        <button type="button" class="btn btn-outline-primary btn-sm rounded-0 save-info">
-                            Save Info
-                        </button>
+                                </tr>
+                            </thead>
+                            <tbody id="houseMaps">
+                                <?php if (isset($property) && !empty($property)) {
+                                    // echo "<pre>";
+                                    // print_r($property);
+                                    // die;
+                                    for ($i = 0; $i < count($property); $i++) { 
+                                        $imageResource = json_decode($property[$i]['imageData'], true);?>
+                                    
+                                        <tr>
+                                            <!-- <td><?php echo $i + 1 ?></td> -->
+                                            <td><?php echo $property[$i]['mapId'] ?></td>
+                                            <td><?php echo $property[$i]['propertyName'] ?></td>
+                                            <td><?php echo $property[$i]['category'] ?></td>
+                                            <td><?php echo $property[$i]['type'] ?></td>
+                                            <td><img src="<?php echo $imageResource['src'] ?>" width="100"></td>
+                                            <td style="text-align:center">
+                                            <button class="btn btn-danger deleteMap"  style="text-align:center"  dId="<?php echo $property[$i]['propertyId'] ?>" style="cursor:pointer">Delete</button> 
+                                            <button class="btn btn-primary" data-map-id="<?php echo $property[$i]['mapId'] ?>" aria-hidden="true" style="cursor:pointer">Edit</button></td>
+                                        </tr>
+                                <?php }
+                                } ?>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
+
         </div>
     </div>
 
-    <div class="modal fade" id="modal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="margin-left: 1px;">
-        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-            <div class="modal-content">
-                <div class="modal-header p-1 pl-3 pr-3">
-                    <h5 class="modal-title" id="exampleModalLabel">
-                        Client & Property
-                    </h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" data-toggle="modal" data-target="#modal1">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <h5 class="mb-4">Client Info</h5>
-                    <form>
-                        <div class="form-row">
-                            <div class="form-group col-md-6">
-                                <label for="inputEmail4">Full Name</label>
-                                <input type="text" class="form-control form-control-sm" id="cName" placeholder="Name" />
-                            </div>
-                            <div class="form-group col-md-6">
-                                <label for="inputEmail4">Mobile No.</label>
-                                <input type="number" class="form-control form-control-sm" id="mNumber" placeholder="Mobile No." />
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group col-md-6">
-                                <label for="inputEmail4">Email</label>
-                                <input type="email" class="form-control form-control-sm" id="cEmail" placeholder="Email" />
-                            </div>
-                            <div class="form-group col-md-6">
-                                <label for="inputAddress">Address</label>
-                                <input type="text" class="form-control form-control-sm" id="cAddress" placeholder="1234 Main St" />
-                            </div>
-                        </div>
-                    </form>
-                    <div class="modal-footer p-1 pl-3 pr-3">
-                        <button type="button" class="btn btn-outline-secondary btn-sm rounded-0" data-dismiss="modal">
-                            Close
-                        </button>
-                        <button type="button" class="btn btn-outline-primary btn-sm rounded-0 save-client-info">
-                            Save Info
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div> -->
+    <!-- data table -->
+    <link rel="stylesheet" href="<?php echo base_url('assets/custom/jquery.dataTables.min.css') ?>">
+    <script src="<?php echo base_url('assets/custom/jquery.dataTables.min.js') ?>"></script>
 
+    <script>
+        $('.dataTable').dataTable();
+    </script>
+  
 </body>
 
 </html>

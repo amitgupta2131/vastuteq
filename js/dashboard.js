@@ -84,7 +84,24 @@ d3.selectAll('[data-map-id]').on('click', function () {
 	window.location.href = base_url+'/Main/draw/'+btoa(id);
 })
 
-
+$('#houseMaps').on('click','.deleteMap',function(){
+	let id = $(this).attr('dId');
+	//saving data in backend through ajax
+	var formData = new FormData();
+	formData.append('id', id);
+	var url = base_url + "/Main/deletehouseMaps";
+	AjaxPost(formData, url, deleteSuccess, AjaxError);
+	function deleteSuccess(content, targetTextarea) {
+		var result = JSON.parse(content);
+		if(result[0] == 'success'){
+			showAlert(result[1],'success')
+			window.location.reload()
+		}else{
+			window.location.reload()
+		}
+		
+	}
+})
 
 
 $(document).ready(function () {
