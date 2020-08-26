@@ -72,14 +72,27 @@ export default class modal {
         else
             DATA = this.DIRECTION_THIRTYTWO;
 
-        if ((dimension == null) || (dimension == "null")) {
-            newAreaArr = areaArr;
-        } else {
-            scale = Math.pow(parseFloat(dimension.scale / dimension.distance), 2);
+        // if ((dimension == null) || (dimension == "null")) {
+        //     newAreaArr = areaArr;
+        // } else {
+        //     scale = Math.pow(parseFloat(dimension.scale / dimension.distance), 2);
+        //     newAreaArr = areaArr.map(function (d) {
+        //         return d * scale;
+        //     })
+        // }
+
+        let dScale = 100;
+        let dDistance = 1000;
+        if ((dimension != null) && (dimension != "null")) {
+            dScale=dimension.scale ;
+            dDistance= dimension.distance;
+        }
+        
+            scale = Math.pow(parseFloat(dScale / dDistance), 2);
             newAreaArr = areaArr.map(function (d) {
                 return d * scale;
             })
-        }
+      
 
         let data = newAreaArr.map(function (d, i) {
             return {

@@ -432,30 +432,25 @@ export default class Vastuteq {
     $('[data-menu-item]').on('click', function () {
       let menuItem = d3.select(this).attr('data-menu-item');
       switch (menuItem) {
-        case "set-measurement": {
-          console.log('set-measurement');
+        case "set-measurement": {          
           that._stage = 4;
           that.start();
 
         } break;
         case "get-measurement": {
-          console.log('get-measurement');
+
+         let map = JSON.parse(localStorage.getItem('houseMaps'));         
+         if(map[0].dimension != undefined || map[0].dimension != null){          
           that._stage = 5;
           that.start();
+         }else{
+           showAlert('Please set measurement first');
+           return false;
+         }
+          
 
         } break;
-        case "get-marma": {
-          console.log('get-marma');
-          // that._stage = 5;
-          // that.start();
-
-        } break;
-        case "get-shanmahanti": {
-          console.log('get-shanmahanti');
-          // that._stage = 5;
-          // that.start();
-
-        } break;
+        
         default: break;
       }
     })
