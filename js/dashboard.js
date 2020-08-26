@@ -37,7 +37,7 @@ d3.select('#newProject').on('click', function() {
 })
 
 d3.selectAll('[data-map-id]').on('click', function () {
-	alert('running')
+	// alert('running')
 	let id = d3.select(this).attr('data-map-id');
 	localStorage.setItem("selectedMapId", id);
 	console.log(id)

@@ -142,8 +142,8 @@ export default class Object {
     this.controls.setAttribute("data-id",this.id);
 
     //Code to rotate VPM to North
-    if(this.data.name == "VPM") {
-      let vpmObject = d3.select('.svg-object[data-object="VPM"]').select('image.object');
+    if(this.data.name == "VPM" || this.data.name == "9MS") {
+      let vpmObject = d3.select(`.svg-object[data-object='${this.data.name}']`).select('image.object');
       let x = parseFloat(vpmObject.attr('x')), y = parseFloat(vpmObject.attr('y')), 
       width = parseFloat(vpmObject.attr('width')), height = parseFloat(vpmObject.attr('height'));
       let vpmPolygon = [[x,y], [x+width,y], [x+width,y+height], [x,y+height]];
