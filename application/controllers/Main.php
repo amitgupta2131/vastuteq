@@ -361,10 +361,9 @@ class Main extends CI_Controller
 	}
 
 	public function deletehouseMaps(){
-		$property = $this->MainModel->selectAllFromWhere("housemaps", array("mapId" => $_POST['id']));
-		// print_r($property);die;
-		$result1 = $this->MainModel->deleteFromTable('housemaps', array('mapId' => $_POST['id']));
-		$result2 = $this->MainModel->deleteFromTable('propertydetails', array('propertyId' => $property[0]['propertId']));
+
+		$result1 = $this->MainModel->deleteFromTable('housemaps', array('propertId' => $_POST['id']));
+		$result2 = $this->MainModel->deleteFromTable('propertydetails', array('propertyId' => $_POST['id']));
 		if ($result1 && $result2) {
 			echo json_encode(array('success', 'Successfully Deleted'));
 		} else {

@@ -63,6 +63,7 @@
                 // print_r($property);
                 // die;
                 for ($i = 0; $i < count($property); $i++) {
+
                     $imageResource = json_decode($property[$i]['imageData'], true);
             ?>
                     <div class="col-lg-3 col-md-4 col-sm-12 mb-4">
@@ -111,6 +112,9 @@
                             </thead>
                             <tbody id="houseMaps">
                                 <?php if (isset($property) && !empty($property)) {
+                                    // echo "<pre>";
+                                    // print_r($property);
+                                    // die;
                                     for ($i = 0; $i < count($property); $i++) { 
                                         $imageResource = json_decode($property[$i]['imageData'], true);?>
                                     
@@ -122,7 +126,7 @@
                                             <td><?php echo $property[$i]['type'] ?></td>
                                             <td><img src="<?php echo $imageResource['src'] ?>" width="100"></td>
                                             <td style="text-align:center">
-                                            <button class="btn btn-danger deleteMap"  style="text-align:center"  dId="<?php echo $property[$i]['mapId'] ?>" style="cursor:pointer">Delete</button> 
+                                            <button class="btn btn-danger deleteMap"  style="text-align:center"  dId="<?php echo $property[$i]['propertyId'] ?>" style="cursor:pointer">Delete</button> 
                                             <button class="btn btn-primary" data-map-id="<?php echo $property[$i]['mapId'] ?>" aria-hidden="true" style="cursor:pointer">Edit</button></td>
                                         </tr>
                                 <?php }

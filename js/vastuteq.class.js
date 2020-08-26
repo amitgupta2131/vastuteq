@@ -132,7 +132,8 @@ export default class Vastuteq {
 
   // ? M A H A V A S T U   S T A R T
 
-  start() {
+  start(flag = '') {
+    
     switch (this._stage) {
       // ? STAGE FOR TRANSFORM MAP
       case 0:
@@ -288,14 +289,21 @@ export default class Vastuteq {
               width: objects[i].image.width,
               height: objects[i].image.height,
               transform: objects[i].image.transform,
-            };           
+            };
 
+            if (flag == '') {
+              new Object({ mapId: this.mapId, layer: objectLayer, data: objectData,flag: flag });
+            } else {
+              // d3.selectAll(`.svg-object`).classed('deactive', false);
+              // d3.selectAll(`.svg-object`).classed('active', true);
+            //  let objGroup = $(`.objects-group`).html();
+            //  console.log(objGroup);
+            //  d3.select(`.objects-group`).remove();
+            //  $(`#main-group`).append(`<g class="objects-group">${objGroup}</g>`);
+            }
 
-            new Object({ mapId: this.mapId, layer: objectLayer, data: objectData });            
-            
-            
           }
-          
+
 
           let stageThird = new StageThird(this.attribute);
           stageThird.startDrawing(this);

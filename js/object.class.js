@@ -7,14 +7,16 @@ export default class Object {
     this.mapId = mapId;
     this.layer = layer;
     this.data = data;
+    
 
     this.objectModel = new ObjectModel();
 
     this.id = (data.id != undefined) ? data.id : this.uniqueID();
-
+// window.location.reload()
     d3.selectAll(`.svg-object`).classed('deactive', true);
     d3.selectAll(`.svg-object`).classed('active', false);
     d3.selectAll(`.sjx-svg-wrapper`).classed('d-none', true);
+    
     $('#myRange').val(1);
     $('.range-value').text(1);
 
@@ -56,6 +58,7 @@ export default class Object {
     }
 
     // object
+    
     this.svgOptions = {
           container: '#vastuteqCanvas',
           rotationPoint: false,
@@ -136,10 +139,11 @@ export default class Object {
               // fires on tool deactivation
           }
     };
-  
+         
     this.object = subjx(`.svg-object[data-id="${this.id}"]`).drag(this.svgOptions);
     this.controls = this.object[0].controls;
     this.controls.setAttribute("data-id",this.id);
+    
 
     //Code to rotate VPM to North
     if(this.data.name == "VPM") {
