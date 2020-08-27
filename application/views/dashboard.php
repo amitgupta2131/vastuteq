@@ -124,7 +124,7 @@
                                             <td><?php echo $property[$i]['propertyName'] ?></td>
                                             <td><?php echo $property[$i]['category'] ?></td>
                                             <td><?php echo $property[$i]['type'] ?></td>
-                                            <td><img src="<?php echo $imageResource['src'] ?>" width="100"></td>
+                                            <td><a href = "<?php echo $imageResource['src'] ?>" download><img src="<?php echo $imageResource['src'] ?>" width="100" ></a></td>
                                             <td style="text-align:center">
                                             <button class="btn btn-danger deleteMap"  style="text-align:center"  dId="<?php echo $property[$i]['propertyId'] ?>" style="cursor:pointer">Delete</button> 
                                             <button class="btn btn-primary" data-map-id="<?php echo $property[$i]['mapId'] ?>" aria-hidden="true" style="cursor:pointer">Edit</button></td>

@@ -63,6 +63,12 @@ options.text(function (d) {
             return false;
     
         } else {
+
+            let checkedArray = []
+            $('.form-check-input:checkbox:checked').each(function(){
+               checkedArray[$(this).val()] = true;
+            });
+            // console.log(checkedArray)
             length = parseFloat(convertIntoFeet(realLength, siUnit));
             breadth = parseFloat(convertIntoFeet(realBreadth, siUnit));
             hasta = parseFloat(convertIntoFeet(hasta, "inch"));
@@ -94,7 +100,8 @@ options.text(function (d) {
                         realBreadth,
                         siUnit,
                         result,
-                        aayu
+                        aayu,
+                        checkedArray
     
                     ));
                     }else{
@@ -103,7 +110,8 @@ options.text(function (d) {
                             realBreadth,
                             siUnit,
                             result,
-                            aayu
+                            aayu,
+                            checkedArray
         
                         ));
                     }

@@ -9,18 +9,18 @@ localStorage.hasOwnProperty('selectedMapId') == true ? localStorage.removeItem("
 
 let mainArea = d3.select('#mapsContainer');
 
-d3.select('#createMap').on('click', function() {
+d3.select('#createMap').on('click', function () {
 	// let id = uniqueID();
 	// localStorage.setItem("selectedMapId", id);
-	window.location.href = base_url+'Main/createMap';
+	window.location.href = base_url + 'Main/createMap';
 
 
 })
 
-d3.select('#importMap').on('click', function() {
+d3.select('#importMap').on('click', function () {
 	// // let id = uniqueID();
 	// // localStorage.setItem("selectedMapId", id);
-	window.location.href = base_url+'Main/importMap';
+	window.location.href = base_url + 'Main/importMap';
 
 
 
@@ -28,10 +28,10 @@ d3.select('#importMap').on('click', function() {
 
 
 
-d3.select('#newProject').on('click', function() {
+d3.select('#newProject').on('click', function () {
 	// let id = uniqueID();
 	// localStorage.setItem("selectedMapId", id);
-	window.location.href = base_url+'Main/propertyInfo';
+	window.location.href = base_url + 'Main/propertyInfo';
 
 
 })
@@ -67,39 +67,44 @@ d3.selectAll('[data-map-id]').on('click', function () {
 		localStorage.setItem("houseMaps", JSON.stringify(result));
 
 		//creating object data for localstorage
-		if(result[0].objects != ""){
+		if (result[0].objects != "") {
 			localStorage.removeItem("objects");
 			localStorage.setItem("objects", result[0].objects);
 		}
 
 		//creating reportData for local storage
-		if(result[0].reportData != ""){
+		if (result[0].reportData != "") {
 			localStorage.removeItem("objectReport");
 			localStorage.setItem("objectReport", result[0].reportData);
 		}
-		
+
 		console.log(result[0].objects)
 	}
 
-	window.location.href = base_url+'/Main/draw/'+btoa(id);
+	window.location.href = base_url + '/Main/draw/' + btoa(id);
 })
 
-$('#houseMaps').on('click','.deleteMap',function(){
-	let id = $(this).attr('dId');
-	//saving data in backend through ajax
-	var formData = new FormData();
-	formData.append('id', id);
-	var url = base_url + "/Main/deletehouseMaps";
-	AjaxPost(formData, url, deleteSuccess, AjaxError);
-	function deleteSuccess(content, targetTextarea) {
-		var result = JSON.parse(content);
-		if(result[0] == 'success'){
-			showAlert(result[1],'success')
-			window.location.reload()
-		}else{
-			window.location.reload()
+$('#houseMaps').on('click', '.deleteMap', function () {
+	let result = confirm("Are you sure to delete this housemap");
+	if (result) {
+		let id = $(this).attr('dId');
+		//saving data in backend through ajax
+		var formData = new FormData();
+		formData.append('id', id);
+		var url = base_url + "/Main/deletehouseMaps";
+		AjaxPost(formData, url, deleteSuccess, AjaxError);
+		function deleteSuccess(content, targetTextarea) {
+			var result = JSON.parse(content);
+			if (result[0] == 'success') {
+				showAlert(result[1], 'success')
+				window.location.reload()
+			} else {
+				window.location.reload()
+			}
+
 		}
-		
+	} else {
+		return false;
 	}
 })
 

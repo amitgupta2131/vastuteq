@@ -101,7 +101,7 @@
                         <div class="form-row">
                             <div class="col-md-6">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" checked>
+                                    <input class="form-check-input" type="checkbox" value="Aaya" id="defaultCheck1" checked>
                                     <label class="form-check-label text-sm overflow-elipsis" for="defaultCheck1">
                                         Aaya
                                     </label>
@@ -109,7 +109,7 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck2" checked>
+                                    <input class="form-check-input" type="checkbox" value="Vaara" id="defaultCheck2" checked>
                                     <label class="form-check-label text-sm overflow-elipsis" for="defaultCheck2">
                                         Vaara
                                     </label>
@@ -117,7 +117,7 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck3" checked>
+                                    <input class="form-check-input" type="checkbox" value="Amsha" id="defaultCheck3" checked>
                                     <label class="form-check-label text-sm overflow-elipsis" for="defaultCheck3">
                                         Amsha
                                     </label>
@@ -141,7 +141,7 @@
                             <!--</div>-->
                             <div class="col-md-6">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck6" checked>
+                                    <input class="form-check-input" type="checkbox" value="Nakshatra" id="defaultCheck6" checked>
                                     <label class="form-check-label text-sm overflow-elipsis" for="defaultCheck6">
                                         Nakshatra
                                     </label>
@@ -149,7 +149,7 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck7" checked>
+                                    <input class="form-check-input" type="checkbox" value="Tithi" id="defaultCheck7" checked>
                                     <label class="form-check-label text-sm overflow-elipsis" for="defaultCheck7">
                                         Tithi
                                     </label>
@@ -165,7 +165,7 @@
                             <!--</div>-->
                             <div class="col-md-6">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck9" checked>
+                                    <input class="form-check-input" type="checkbox" value="Aayu" id="defaultCheck9" checked>
                                     <label class="form-check-label text-sm overflow-elipsis" for="defaultCheck9">
                                         Aayu
                                     </label>
@@ -181,7 +181,7 @@
                             <!--</div>-->
                             <div class="col-md-6">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck11" checked>
+                                    <input class="form-check-input" type="checkbox" value="Vyaya" id="defaultCheck11" checked>
                                     <label class="form-check-label text-sm overflow-elipsis" for="defaultCheck11">
                                         Vyaya
                                     </label>
@@ -189,7 +189,7 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck12" checked>
+                                    <input class="form-check-input" type="checkbox" value="Yoni" id="defaultCheck12" checked>
                                     <label class="form-check-label text-sm overflow-elipsis" for="defaultCheck12">
                                         Yoni
                                     </label>
