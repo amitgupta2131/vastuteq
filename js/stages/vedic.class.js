@@ -104,6 +104,7 @@ export default class Vedic {
         that.objectDelete(imgName);
         that.objectVpm = null
         localStorage.removeItem('vedicImgObj')
+        d3.select('.properties-section.opacity').classed('d-none', true);
       }
       console.log(imgName)
       switch (gridType) {
@@ -262,6 +263,7 @@ export default class Vedic {
           that.objectDelete(objName);
           that.objectVpm = null
           localStorage.removeItem('vedicImgObj')
+          d3.select('.properties-section.opacity').classed('d-none', true);
 
         }
 
@@ -279,6 +281,7 @@ export default class Vedic {
           that.objectDelete(imgName);
           that.objectVpm = null
           localStorage.removeItem('vedicImgObj')
+          d3.select('.properties-section.opacity').classed('d-none', true);
         }
       })
       // that.vedic.startDrawing(that);
