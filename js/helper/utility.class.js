@@ -337,6 +337,8 @@ export default class Utility {
           if (d3.polygonContains(element.polygon[0], point)) {
             data['id'] = objectData.id;
             data['name'] = objectData.name;
+            data['color'] = '';
+            data['recomColor'] = '';
             data[dir] = d3.polygonContains(element.polygon[0], point);
           }
         });

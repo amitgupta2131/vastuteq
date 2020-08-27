@@ -25,13 +25,13 @@
     <!-- D3 JS SCRIPT -->
     <script src="<?php echo base_url('js/d3.min.js') ?>"></script>
     <!-- FONTAWESOME JS -->
-    <script src="<?php echo base_url('assets/fontawesome/js/all.min.js') ?>"></script>
+    <script src="<?php echo base_url('assets/fontawesome/js/all.min.js'); ?>"></script>
     <!-- CUSTOM JS -->
-    <script>const BASE_URL = '<?php echo base_url()?>'</script>
+    <script>const BASE_URL = '<?php echo base_url()?>';</script>
     <!-- Ajax library -->
-    <script src="<?php echo base_url('js/MyScriptLibrary.js') ?>"></script>
+    <script src="<?php echo base_url('js/MyScriptLibrary.js'); ?>"></script>
     <!-- Notify library -->
-    <script src="<?php echo base_url('js/bootstrap-notify.min.js') ?>"></script>
+    <script src="<?php echo base_url('js/bootstrap-notify.min.js'); ?>"></script>
     <style>
          table {
              border-collapse:collapse;
@@ -41,8 +41,8 @@
                 text-align:center;
                 padding:8px;
             }
-            font-family-sans-serif: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
-    --font-family-monospace: SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
+            /* font-family-sans-serif: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+    --font-family-monospace: SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace; */
     </style>
 </head>
 
@@ -53,7 +53,7 @@
     -->
 
     <?php include 'topbar.php' ?>
-    <section class="ayadi-container p-4">
+    <section class="ayadi-container p-4" style="margin-top:3rem">
         <div class="card p-2 pb-4">
             <h4 class="text-center">Ayadi Calculator</h4>
             <div class="container d-flex justify-content-center overflow-auto" style="max-width:1337px">

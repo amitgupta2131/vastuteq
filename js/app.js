@@ -431,6 +431,8 @@ function objectWiseReport() {
       append(`<div style="position:relative">
               <button class="btn btn-outline-primary btn-sm text-sm pl-3 pr-3" id="rPrint" style="position:absolute;right:60px;top:-49px">Print</button>
             </div>`)
+    
+
     //Creating Report table
     $('#reportModal .modal-body').append('<div id="rtable"></div>')
     let reportTable = `<table class="table table-bordered table-hover mt-2">
@@ -439,7 +441,9 @@ function objectWiseReport() {
                             <th scope="col">#</th>
                             <th scope="col">Object/Activity Name</th>
                             <th scope="col">Direction</th>
-                            <th scope="col">Type</th>      
+                            <th scope="col">Type</th> 
+                            <th scope="col">Object Colour</th>
+                            <th scope="col">Recommended Colour</th>        
                           </tr>
                         </thead>
                         <tbody>`
@@ -450,12 +454,14 @@ function objectWiseReport() {
         type = object.image.type
         : object)
       let keys = Object.keys(data)
-      for (let i = 2; i < keys.length; i++) {
+      for (let i = 4; i < keys.length; i++) {
         reportTable += `<tr>
                           <th scope="row">${count++}</th>
                           <td>${data.name}</td>
                           <td>${keys[i]}</td>      
                           <td>${type}</td> 
+                          <td>${data.color != undefined ? data.color : ""}</td>
+                          <td>${data.recommendedColor != undefined ? data.recommendedColor : ""}</td>
                         </tr>`
       }
     }
@@ -494,7 +500,7 @@ function zoneWiseReport() {
     //create table for report showing
     $('#reportModal .modal-body').append('<div id="rtable"></div>')
     let div = localStorage.getItem('reportDivision')
-    if(div == null || div == ""){
+    if (div == null || div == "") {
       div = 8;
     }
     console.log(div)
@@ -572,6 +578,71 @@ function zoneWiseReport() {
   }
 }
 
+function setObjColor() {
+  let reportData = JSON.parse(localStorage.getItem('objectReport'));
+  let objects = JSON.parse(localStorage.getItem('objects'));
+  if (reportData != null && reportData != '') {
+    $('#reportModal .modal-body').empty();
+    $('#reportModal .modal-dialog').css('min-width', '1150px');
+    $('#reportModal .modal-content').css('min-height', '460px');
+    $('#reportModal .modal-title').text('Set object colour');
+    $('#reportModal .modal-body').attr('id', 'setObjColor');
+
+
+
+    //creating object color selection box
+    let objColor = `<div class="form-group">
+                  <select class="form-control objColor" >
+                    <option>Red</option>
+                    <option>Blue</option>
+                    <option>Green</option>
+                    <option>Orange</option>
+                    <option>Black</option>
+                  </select>
+                </div>`
+
+    //Creating Report table
+    $('#reportModal .modal-body').append('<div id="rtable"></div>')
+    let reportTable = `<table id="colorTable" class="table table-bordered table-hover mt-2">
+                        <thead>
+                          <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Object/Activity Name</th>                            
+                            <th scope="col">Type</th> 
+                            <th scope="col">Object Colour</th>
+                            <th scope="col">Recommended Colour</th>        
+                          </tr>
+                        </thead>
+                        <tbody>`
+    let count = 1;
+    for (let data of reportData) {
+      let type = '';
+      objects.map(object => object.image.id == data.id ?
+        type = object.image.type
+        : object)
+
+      reportTable += `<tr>
+                          <th scope="row">${count++}</th>
+                          <td>${data.name}</td>                              
+                          <td>${type}</td> 
+                          <td>${objColor}</td>
+                          <td>${objColor}</td>
+                        </tr>`
+    }
+
+    reportTable += `</tbody></table>`
+    //appending table to modal body
+    $('#rtable').html(reportTable)
+    $('#rtable').append(`<button class="btn btn-primary" id="setColor" data-dismiss="modal" aria-label="Close" style="float:right">Set</button>`)
+    
+    //Show modal
+    $('#reportModal').modal('show')
+  }
+  else {
+    showAlert('Sorry, There is no object please add object first', 'danger')
+  }
+}
+
 $('#inlineRadio1').on('click', function () {
   objectWiseReport()
 
@@ -580,6 +651,45 @@ $('#inlineRadio1').on('click', function () {
 $('#inlineRadio2').on('click', function () {
   zoneWiseReport()
 
+})
+
+$('#objColor').on('click', function () {
+  setObjColor()
+
+})
+
+$('#reportModal').on('click','#setColor',function(){
+
+  //creating report data with color
+  let colorArr = [];
+  let newReportData = [];
+  let reportData = JSON.parse(localStorage.getItem('objectReport'));
+  $('#reportModal #rtable table tbody tr').each(function() {
+    let name = $(this).find('td:eq(0)').html();
+    let color = $(this).find('td:eq(2)').find('option:selected').html();
+    let recomColor = $(this).find('td:eq(3)').find('option:selected').html();
+    colorArr.push({name:name,color:color,recommendedColor:recomColor});
+  });
+  for(let i=0;i<colorArr.length;i++){
+    newReportData.push($.extend({}, colorArr[i], reportData[i]));
+  }
+  //update data in localstorage
+  localStorage.removeItem('objectReport')
+  localStorage.setItem('objectReport',JSON.stringify(newReportData))
+
+  //update Report data in database
+  console.log(localStorage.getItem('selectedMapId'))
+  var formData = new FormData();
+  formData.append('id', localStorage.getItem('selectedMapId'));
+  formData.append('reportData', JSON.stringify(newReportData));
+  var url = BASE_URL + "/Main/updateReportData";
+  AjaxPost(formData, url, updateReportDatasuccess, AjaxError);
+
+  function updateReportDatasuccess(content, targetTextarea) {
+      var result = JSON.parse(content);
+      showAlert(result[1],result[0]);
+  }
+  
 })
 
 $('#reportModal').on('click', '#rPrint', () => {

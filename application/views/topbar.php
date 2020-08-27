@@ -1,4 +1,4 @@
-<section class="header" style="position:unset">
+<section class="header" style="position:fixed;z-index:10">
     <div class="title-bar" style="justify-content:left;">
         <img class="logo" style="margin-left:20px" src="<?php echo base_url('assets/images/logo.jpg') ?>" alt="logo" width="50">
 
@@ -150,8 +150,9 @@
                 </li>
                 <li class="nav-item d-none dropdown getReport">
                     <a class="nav-link text-white menu-item" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Get Report</a>
+                       Report</a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="#" id="objColor">Set Object Colour</a>
                         <a class="dropdown-item" href="#" id="inlineRadio1">Object/Activity wise report</a>
                         <a class="dropdown-item" href="#" id="inlineRadio2">Zone wise object</a>
                     </div>
@@ -182,38 +183,38 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form  style="margin:0px" action="<?php echo base_url('Main/updateUser') ?>" method='post' enctype="multipart/form-data">
+                <form style="margin:0px" action="<?php echo base_url('Main/updateUser') ?>" method='post' enctype="multipart/form-data">
                     <?php $user = $this->MainModel->selectAllFromWhere("login", array("userId" => $_SESSION['userInfo']['userId']))[0]; ?>
                     <div class="row">
-                    <div class="form-group col-sm-6">
-                        <label for="name">Name</label>
-                        <input type="text" hidden class="form-control" name='id' value="<?php echo $user['userId'] ?>">
-                        <input type="text" hidden class="form-control" name='method' value="<?php echo current_url() ?>">
-                        <input type="text" class="form-control" name="name" value="<?php echo $user['name'] ?>">
-                    </div>
-                    <div class="form-group col-sm-6">
-                        <label for="phone">Phone No.</label>
-                        <input type="number" class="form-control" name="phone" value="<?php echo $user['mobileNo'] ?>">
-                    </div>
-                    <div class="form-group col-sm-6">
-                        <label for="exampleFormControlInput1">Email address</label>
-                        <input type="email" class="form-control" name="email" placeholder="name@example.com" readonly value="<?php echo $user['email'] ?>">
-                    </div>
-                    <div class="form-group col-sm-6">
-                        <label for="password">Password</label>
-                        <input type="text" class="form-control" name="password" value="<?php echo $user['password'] ?>">
-                    </div>
-                    <div class="form-group col-sm-6">
-                        <label for="address">Address</label>
-                        <textarea class="form-control" name="address" value="<?php echo $user['address'] ?>"><?php echo $user['address'] ?></textarea>
-                    </div>
-                    <div class="form-group col-sm-6">
-                        <label for="image">User Image</label>
-                        <div class="row">
-                            <img class="col-sm-4" src="<?php echo $userImg != '' ? base_url('uploads/') . $userImg : '' ?>" height="50" width="50">
-                            <input class="col-sm-8" type="file" class="form-control" name="usrImage">
+                        <div class="form-group col-sm-6">
+                            <label for="name">Name</label>
+                            <input type="text" hidden class="form-control" name='id' value="<?php echo $user['userId'] ?>">
+                            <input type="text" hidden class="form-control" name='method' value="<?php echo current_url() ?>">
+                            <input type="text" class="form-control" name="name" value="<?php echo $user['name'] ?>">
                         </div>
-                    </div>
+                        <div class="form-group col-sm-6">
+                            <label for="phone">Phone No.</label>
+                            <input type="number" class="form-control" name="phone" value="<?php echo $user['mobileNo'] ?>">
+                        </div>
+                        <div class="form-group col-sm-6">
+                            <label for="exampleFormControlInput1">Email address</label>
+                            <input type="email" class="form-control" name="email" placeholder="name@example.com" readonly value="<?php echo $user['email'] ?>">
+                        </div>
+                        <div class="form-group col-sm-6">
+                            <label for="password">Password</label>
+                            <input type="text" class="form-control" name="password" value="<?php echo $user['password'] ?>">
+                        </div>
+                        <div class="form-group col-sm-6">
+                            <label for="address">Address</label>
+                            <textarea class="form-control" name="address" value="<?php echo $user['address'] ?>"><?php echo $user['address'] ?></textarea>
+                        </div>
+                        <div class="form-group col-sm-6">
+                            <label for="image">User Image</label>
+                            <div class="row">
+                                <img class="col-sm-4" src="<?php echo $userImg != '' ? base_url('uploads/') . $userImg : '' ?>" height="50" width="50">
+                                <input class="col-sm-8" type="file" class="form-control" name="usrImage">
+                            </div>
+                        </div>
                     </div>
                     <div>
                         <button type="submit" class="btn btn-primary" style="float:right;">Update</button>

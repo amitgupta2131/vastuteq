@@ -490,10 +490,10 @@
                                 <img src="<?php echo base_url('assets/icons/chevron.svg') ?>" alt="" width="20">
                                 <div class="name text-xs">align-center</div>
                             </div>
-                            <div class="col-md-6 p-1 border d-flex flex-column d-none justify-content-center align-items-center object-color-toggle" data-color-state="colorless">
+                            <!-- <div class="col-md-6 p-1 border d-flex flex-column d-none justify-content-center align-items-center object-color-toggle" data-color-state="colorless">
                                 <img src="<?php echo base_url('assets/icons/colorless.svg') ?>" alt="" width="20">
                                 <div class="name text-xs">color toggle</div>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                 </div>                   

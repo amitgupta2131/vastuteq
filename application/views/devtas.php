@@ -24,7 +24,7 @@
     -->
     
     <?php include 'topbar.php' ?>
-    <section class="devtas-main justify-content-between align-items-center row devtas_container">
+    <section class="devtas-main justify-content-between align-items-center row devtas_container" style="margin-top:4rem !important">
         <div class="leftside">
         </div>
         <div class="rightside">

@@ -154,7 +154,7 @@ export default class Vedic {
           // that.createObject('g.vedic-polygon');
           // that.vedic = new Vedic();              
 
-          drawVedicImages('9MS', 'Marma Sthana.jpeg')
+          drawVedicImages('9MS', 'marmSthana.png')
           //  if(result == null){
           //   that.objectVpm = null
           //  }
@@ -177,7 +177,7 @@ export default class Vedic {
           drawVedicImages('9SD', 'Subh Dwar.png')
           break;
         case "KSGP":
-          drawVedicImages('KSGP', 'Karna Sutra Golden points.jpeg')
+          drawVedicImages('KSGP', 'karma.png')
           break;
 
         case "KSMP":
@@ -185,7 +185,7 @@ export default class Vedic {
           break;        
 
         case "CG":
-              drawVedicImages('CG', 'circle grid.jpeg')
+              drawVedicImages('CG', 'degreeCircleTransparent.png')
               break;
 
         case "VPM":

@@ -789,9 +789,18 @@ input::-webkit-inner-spin-button {
     display: none;
   }
 
-  #barPrint,#porPrint {
+  #barPrint,#porPrint,#rPrint {
     display: none;
   }
+
+  select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    text-indent: 1px;
+    text-overflow: '';
+    border: none;
+    outline: none;
+}
 
   /* #appModal .modal-content {
     -webkit-transform: rotate(90deg) !important;

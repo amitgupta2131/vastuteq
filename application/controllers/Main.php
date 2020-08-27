@@ -247,7 +247,7 @@ class Main extends CI_Controller
 
 		// Check file size
 		if ($FILES["usrImage"]["size"] > 500000) {
-			$this->session->set_flashdata("error", "Sorry, your file is too large.");
+			$this->session->set_flashdata("error", "Sorry, your file is too large, file size will be 500kb");
 			redirect($POST['method']);
 		}
 
@@ -398,7 +398,7 @@ class Main extends CI_Controller
 
 			$result = $this->MainModel->updateWhere('housemaps', $insertData, array('mapId'	=> ($_POST['id'])));
 			if ($result) {
-				echo json_encode(array("success", "Details Updated"));
+				echo json_encode(array("success", "Report Details Saved"));
 			} else {
 				echo json_encode(array("error", "Details are not saved contact to IT"));
 			}

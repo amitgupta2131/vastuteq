@@ -90,7 +90,7 @@
     </section> -->
 
     <div class="p-4 container" style="max-width:1340px;">
-        <div class="row">
+        <div class="row" style="margin-top:3rem">
             <div class="card" style="width:100%">
                 <div class="card-header row m-0">
                     <h4 class="dash-h col-sm-11">House Maps</h4>
