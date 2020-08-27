@@ -336,9 +336,7 @@ export default class Utility {
         testPoint.forEach(point => {
           if (d3.polygonContains(element.polygon[0], point)) {
             data['id'] = objectData.id;
-            data['name'] = objectData.name;
-            data['color'] = '';
-            data['recomColor'] = '';
+            data['name'] = objectData.name;            
             data[dir] = d3.polygonContains(element.polygon[0], point);
           }
         });

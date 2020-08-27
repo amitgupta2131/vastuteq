@@ -431,7 +431,7 @@ function objectWiseReport() {
       append(`<div style="position:relative">
               <button class="btn btn-outline-primary btn-sm text-sm pl-3 pr-3" id="rPrint" style="position:absolute;right:60px;top:-49px">Print</button>
             </div>`)
-    
+
 
     //Creating Report table
     $('#reportModal .modal-body').append('<div id="rtable"></div>')
@@ -454,8 +454,9 @@ function objectWiseReport() {
         type = object.image.type
         : object)
       let keys = Object.keys(data)
-      for (let i = 4; i < keys.length; i++) {
-        reportTable += `<tr>
+      for (let i = 2; i < keys.length; i++) {
+        if (keys[i] != 'color' && keys[i] != 'recommendedColor') {
+          reportTable += `<tr>
                           <th scope="row">${count++}</th>
                           <td>${data.name}</td>
                           <td>${keys[i]}</td>      
@@ -463,6 +464,7 @@ function objectWiseReport() {
                           <td>${data.color != undefined ? data.color : ""}</td>
                           <td>${data.recommendedColor != undefined ? data.recommendedColor : ""}</td>
                         </tr>`
+        }
       }
     }
     reportTable += `</tbody></table>`
@@ -634,7 +636,7 @@ function setObjColor() {
     //appending table to modal body
     $('#rtable').html(reportTable)
     $('#rtable').append(`<button class="btn btn-primary" id="setColor" data-dismiss="modal" aria-label="Close" style="float:right">Set</button>`)
-    
+
     //Show modal
     $('#reportModal').modal('show')
   }
@@ -658,24 +660,26 @@ $('#objColor').on('click', function () {
 
 })
 
-$('#reportModal').on('click','#setColor',function(){
+$('#reportModal').on('click', '#setColor', function () {
 
   //creating report data with color
   let colorArr = [];
   let newReportData = [];
   let reportData = JSON.parse(localStorage.getItem('objectReport'));
-  $('#reportModal #rtable table tbody tr').each(function() {
+  $('#reportModal #rtable table tbody tr').each(function () {
     let name = $(this).find('td:eq(0)').html();
     let color = $(this).find('td:eq(2)').find('option:selected').html();
     let recomColor = $(this).find('td:eq(3)').find('option:selected').html();
-    colorArr.push({name:name,color:color,recommendedColor:recomColor});
+    colorArr.push({ name: name, color: color, recommendedColor: recomColor });
   });
-  for(let i=0;i<colorArr.length;i++){
-    newReportData.push($.extend({}, colorArr[i], reportData[i]));
+  for (let i = 0; i < colorArr.length; i++) {
+    newReportData.push($.extend({}, reportData[i], colorArr[i]));
   }
+
+  console.log(newReportData)
   //update data in localstorage
   localStorage.removeItem('objectReport')
-  localStorage.setItem('objectReport',JSON.stringify(newReportData))
+  localStorage.setItem('objectReport', JSON.stringify(newReportData))
 
   //update Report data in database
   console.log(localStorage.getItem('selectedMapId'))
@@ -686,10 +690,10 @@ $('#reportModal').on('click','#setColor',function(){
   AjaxPost(formData, url, updateReportDatasuccess, AjaxError);
 
   function updateReportDatasuccess(content, targetTextarea) {
-      var result = JSON.parse(content);
-      showAlert(result[1],result[0]);
+    var result = JSON.parse(content);
+    showAlert(result[1], result[0]);
   }
-  
+
 })
 
 $('#reportModal').on('click', '#rPrint', () => {
