@@ -148,7 +148,7 @@ export default class StageThird {
       }
     })
 
-    $('[data-object-item]').on('click',function(){
+    $('[data-object-item]').on('click', function () {
       // alert('hello');
       Utility.getObjectDirection(that.calNorthAngle(), that.centroid, that.angle, that.mapBoundariesCoords, 8)
 
@@ -287,7 +287,28 @@ export default class StageThird {
       if (classRef.objectMVC == null || classRef.objectMVC == undefined)
         d3.select(this.parentNode).classed('active', false);
 
-    });   
+    });
+
+
+    //delete tools images
+    $('.object-delete-toggle').on('click', function () {
+      // alert('hello')
+      if (classRef.objectVpm != null || classRef.objectVpm != undefined) {
+        that.objectDelete('VPM');
+        classRef.objectVpm = null;
+        d3.select('.properties-section.opacity').classed('d-none', true);
+      }
+      if (classRef.objectMvm != null || classRef.objectMvm != undefined) {        
+        that.objectDelete('MVM');
+        classRef.objectMvm = null;
+        d3.select('.properties-section.opacity').classed('d-none', true);
+      }
+      if (classRef.objectMVC != null || classRef.objectMVC != undefined) {
+        that.objectDelete('MVC');
+        classRef.objectMVC = null;
+        d3.select('.properties-section.opacity').classed('d-none', true);
+      }
+    });
 
     divisonOfDevtasContainer.on('click', function () {
       console.log(d3.select(this).classed('active'), 'working');

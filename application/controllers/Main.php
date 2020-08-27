@@ -288,7 +288,7 @@ class Main extends CI_Controller
 				$result = $this->MainModel->updateWhere('login', $insertData, array('userId' => validateInput($_POST['id'])));
 
 				if ($result) {
-					$this->session->set_flashdata("success", "Client successfully updated");
+					$this->session->set_flashdata("success", "Client successfully updated");					
 					redirect($_POST['method']);
 				} else {
 					$this->session->set_flashdata("error", "Something went wrong contact to IT");

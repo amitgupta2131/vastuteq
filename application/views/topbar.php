@@ -3,8 +3,9 @@
         <img class="logo" style="margin-left:20px" src="<?php echo base_url('assets/images/logo.jpg') ?>" alt="logo" width="50">
 
         <!-- Tool Menus -->
-        <?php $method = $this->router->fetch_method();
-        $userImg = $_SESSION['userInfo']['userImg'];
+        <?php $method = $this->router->fetch_method();        
+        $user = $this->MainModel->selectAllFromWhere("login", array("userId" => $_SESSION['userInfo']['userId']));        
+        $userImg = $user[0]['userImg'];
         if ($method == 'draw') {
         ?>
             <nav class="navbar navbar-expand-lg navbar-light  p-0 pl-2" style="z-index:100;">

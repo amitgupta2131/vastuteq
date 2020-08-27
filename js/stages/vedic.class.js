@@ -100,10 +100,10 @@ export default class Vedic {
 
       //remove vedic image
       let imgName = localStorage.getItem('vedicImgObj')
-      if(imgName != null || imgName != ''){
+      if (imgName != null || imgName != '') {
         that.objectDelete(imgName);
-          that.objectVpm = null
-          localStorage.removeItem('vedicImgObj')
+        that.objectVpm = null
+        localStorage.removeItem('vedicImgObj')
       }
       console.log(imgName)
       switch (gridType) {
@@ -182,11 +182,11 @@ export default class Vedic {
 
         case "KSMP":
           drawVedicImages('KSMP', 'Karna Sutra Marma Points.jpeg')
-          break;        
+          break;
 
         case "CG":
-              drawVedicImages('CG', 'degreeCircleTransparent.png')
-              break;
+          drawVedicImages('CG', 'degreeCircleTransparent.png')
+          break;
 
         case "VPM":
           //  console.log(that.objectVpm);
@@ -234,7 +234,7 @@ export default class Vedic {
       }
 
       function drawVedicImages(objName, objImageSrc, object) {
-        localStorage.setItem('vedicImgObj',objName)
+        localStorage.setItem('vedicImgObj', objName)
         if (that.objectVpm == null || that.objectVpm == undefined) {
           console.log("Create");
           d3.select('.properties-section.opacity').classed('d-none', false);
@@ -270,6 +270,17 @@ export default class Vedic {
         }
 
       }
+
+      //delete tools images
+      $('.object-delete-toggle').on('click', function () {
+        // alert('hello')
+        let imgName = localStorage.getItem('vedicImgObj')
+        if (imgName != null || imgName != '') {
+          that.objectDelete(imgName);
+          that.objectVpm = null
+          localStorage.removeItem('vedicImgObj')
+        }
+      })
       // that.vedic.startDrawing(that);
       //   that.assist.drawPolygonGrid({points: that.vedicMapBoundariesCoords, noOfLines: gridType});
     })
