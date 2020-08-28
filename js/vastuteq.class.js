@@ -223,6 +223,7 @@ export default class Vastuteq {
             layer: this.canvas,
             points: this.mapBoundariesCoords,
           });
+         
           this.assist.drawBharamNabhi({
             layer: this.canvas,
             centroid: this.centroid,
@@ -359,6 +360,7 @@ export default class Vastuteq {
         $(".property.description").html("Select facing wall");
         this.assist.drawMask({ layer: this.canvas, points: this.mapBoundariesCoords, size: this.RECT_SIZE, });
         this.assist.drawBoundaries({ layer: this.canvas, points: this.mapBoundariesCoords });
+        
         this.assist.drawBharamNabhi({ layer: this.canvas, centroid: this.centroid, });
         this.assist.drawPolygon({ layer: this.canvas, points: this.vedicMapBoundariesCoords });
 
@@ -375,9 +377,12 @@ export default class Vastuteq {
         d3.select('.tools-section').classed('d-none', false);
         // d3.select('#vpm').classed('d-none',true);
         // d3.select('#mvpc').classed('d-none',true);
+        
         this.assist.drawMask({ layer: this.canvas, points: this.mapBoundariesCoords, size: this.RECT_SIZE, });
         this.assist.drawBoundaries({ layer: this.canvas, points: this.mapBoundariesCoords });
+        
         this.assist.drawBharamNabhi({ layer: this.canvas, centroid: this.centroid, });
+        this.assist.drawFacingLine(this.canvas, this.centroid, this.faceCoords);
         this.assist.drawDirectionLines(this.canvas, this.faceCoords, this.centroid, this.division, this.angle);
         this.assist.drawGrid(this.canvas, this.centroid, this.faceCoords, this.screenBoundariesCoords, this.division, this.angle, "vedic");
 

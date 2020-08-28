@@ -26,6 +26,63 @@ export default class StageThird {
       .attr("class", "text-uppercase text-sm actionbox-text")
       .text("");
 
+
+
+                //Adding radio buttons
+                this.actionBox = this.actionbox.clear().get();                               
+        
+                this.actionBody = this.actionBox.append('div')
+                    .attr('class', 'row actionbox-body')
+                    .style('margin','0px');
+        
+                this.actionsdiv = this.actionBody.append('div')
+                    .attr('class', 'form-check mb-3').style('margin-left','auto');
+                    
+        
+                this.actionBtnVedic = this.actionsdiv.append('input')
+                    .attr('class', 'form-check-input text-sm')
+                    .attr('type', 'radio')
+                    .attr('name', 'vedic')
+                    .attr('id', 'vedicRadio')
+                    .attr('value', 'vedic');
+                this.actionLabelVedic = this.actionsdiv.append('label')
+                .attr('class', 'form-check-label text-sm')
+                .attr('for', 'vedicRadio')
+                .html('Vedic');
+
+
+                this.actionsdiv2 = this.actionBody.append('div')
+                    .attr('class', 'form-check').style('margin-left','8px').style('margin-right','auto');;
+                    
+        
+                this.actionBtnmahavastu = this.actionsdiv2.append('input')
+                    .attr('class', 'form-check-input')
+                    .attr('type', 'radio')
+                    .attr('name', 'mahavastu')
+                    .attr('id', 'mahavastuRadio')
+                    .attr('value', 'mahavastu')
+                    .attr('checked',true);
+                this.actionLabelMahavastu = this.actionsdiv2.append('label')
+                .attr('class', 'form-check-label text-sm')
+                .attr('for', 'mahavastuRadio')
+                .html('Mahavastu');
+
+                $('input[type="radio"]').on('click',function(){
+                  
+                  let value = $(this).val();
+                  if(value == 'vedic'){
+                  that.centroid = Utility.getVedicCenteroid(that.vedicMapBoundariesCoords);   
+                  that._stage = 3;
+                  that.vedicStart()
+                  }else{
+                  
+                  that.centroid = Utility.getCentroid(that.mapBoundariesCoords);  
+                  that._stage = 3;
+                  that.start()
+                  }
+                })
+
+
     let actionBody = actionBox
       .append("div")
       .attr("class", "form-row actionbox-body");
@@ -60,7 +117,7 @@ export default class StageThird {
     let gridSelectbox = actionBody.append('div').attr('class', 'col-md-6')
       .append("select").attr('name', 'select-grid').attr("class", "form-control form-control-sm text-sm")
       .html(
-        `<option value="" selected>Selet Grid</option>
+        `<option value="" selected>Select Grid</option>
         <option value="8">8 Division</option>
         <option value="16">16 Division</option>
         <option value="32">32 Division</option>

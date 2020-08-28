@@ -14,6 +14,58 @@ export default class Vedic {
     let diagonalChecked = false, gridChecked = false, gridType = 3;
     let actionBox = this.actionbox.clear().get();
 
+    //Adding radio buttons
+
+
+    this.actionBody = actionBox.append('div')
+        .attr('class', 'row actionbox-body')
+        .style('margin','0px');
+
+    this.actionsdiv = this.actionBody.append('div')
+        .attr('class', 'form-check mb-3').style('margin-left','auto');
+
+
+    this.actionBtnVedic = this.actionsdiv.append('input')
+        .attr('class', 'form-check-input text-sm')
+        .attr('type', 'radio')
+        .attr('name', 'vedic')
+        .attr('id', 'vedicRadio')
+        .attr('value', 'vedic')
+        .attr('checked',true);
+    this.actionLabelVedic = this.actionsdiv.append('label')
+    .attr('class', 'form-check-label text-sm')
+    .attr('for', 'vedicRadio')
+    .html('Vedic');
+
+
+    this.actionsdiv2 = this.actionBody.append('div')
+        .attr('class', 'form-check').style('margin-left','8px').style('margin-right','auto');;
+
+
+    this.actionBtnmahavastu = this.actionsdiv2.append('input')
+        .attr('class', 'form-check-input')
+        .attr('type', 'radio')
+        .attr('name', 'mahavastu')
+        .attr('id', 'mahavastuRadio')
+        .attr('value', 'mahavastu');
+    this.actionLabelMahavastu = this.actionsdiv2.append('label')
+    .attr('class', 'form-check-label text-sm')
+    .attr('for', 'mahavastuRadio')
+    .html('Mahavastu');
+
+    $('input[type="radio"]').on('click',function(){
+
+      let value = $(this).val();
+      if(value == 'mahavastu'){
+      d3.select('g.sjx-svg-wrapper').remove(); 
+      d3.select('g.vedic-polygon').remove();
+
+      that.centroid = Utility.getCentroid(that.mapBoundariesCoords);      
+      that._stage = 3;
+      that.start()
+      }
+    })
+
     let row = actionBox.append('div')
       .classed('form-row', true);
 
@@ -41,35 +93,76 @@ export default class Vedic {
       .attr('type', 'checkbox');
 
     enableGridWrapper.append('label').attr('class', 'form-check-label, text-sm').html('Grid');
-    this.actionbox.show();
-    // let mapGridText = col3
-    //   .append('p').attr('class', 'text-sm')
-    //   .html('GRID TYPE');
+    this.actionbox.show();    
+
+    let html = `<a class="nav-link text-dark menu-item" href="#" id="fixed" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Fixed Tools
+                </a>  
+                <a class="nav-link text-dark menu-item" href="#" id="floating" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Floating Tools
+                </a> `
+  let mapGridType = $('#toolMenu').html(html);
+    let fixedMenu = ` <div class="dropdown-menu" aria-labelledby="fixed" id="fixedToolMenu">
+      <a class="dropdown-item" type="fixed" href="#" id="3GL" value="3GL" selected>3 X 3 Grid Layout</a>
+      <a class="dropdown-item" type="fixed" href="#" id="3GD" value="3GD">3 X 3 Grid Diagonal</a>
+      <a class="dropdown-item" type="fixed" href="#" id="9DL" value="9DL">9 X 9 Disha Lord Numero Grid</a>
+      <a class="dropdown-item" type="fixed" href="#" id="9GL" value="9GL">9 X 9 Grid Layout</a>
+      <a class="dropdown-item" type="fixed" href="#" id="9SG" value="9SG">Maha Vastu Square Grid</a>
+      <a class="dropdown-item" type="fixed" href="#" id="9MS" value="9MS">Marma Sthana</a>
+      <a class="dropdown-item" type="fixed" href="#" id="9SM" value="9SM">Shanmahanti</a>
+      <a class="dropdown-item" type="fixed" href="#" id="9SD" value="9SD">Shubh Dwar</a>
+      <a class="dropdown-item" type="fixed" href="#" id="KSGP" value="KSGP">Karna Sutra Golden points</a>
+      <a class="dropdown-item" type="fixed" href="#" id="KSMP" value="KSMP">Karna Sutra Marma Points</a>        
+      <a class="dropdown-item" type="fixed" href="#" id="CG" value="CG">Circle Grid</a>
+      <a class="dropdown-item" type="fixed" href="#" id ="vpm1" value="VPM">VPM</a>
+      </div> `;
+
+    let floatingMenu = `<div class="dropdown-menu" aria-labelledby="floating" id="floatingToolMenu">
+      <a class="dropdown-item" href="#" id="3GL" value="3GL" selected>3 X 3 Grid Layout</a>
+      <a class="dropdown-item" href="#" id="3GD" value="3GD">3 X 3 Grid Diagonal</a>
+      <a class="dropdown-item" href="#" id="9DL" value="9DL">9 X 9 Disha Lord Numero Grid</a>
+      <a class="dropdown-item" href="#" id="9GL" value="9GL">9 X 9 Grid Layout</a>
+      <a class="dropdown-item" href="#" id="9SG" value="9SG">Maha Vastu Square Grid</a>
+      <a class="dropdown-item" href="#" id="9MS" value="9MS">Marma Sthana</a>
+      <a class="dropdown-item" href="#" id="9SM" value="9SM">Shanmahanti</a>
+      <a class="dropdown-item" href="#" id="9SD" value="9SD">Shubh Dwar</a>
+      <a class="dropdown-item" href="#" id="KSGP" value="KSGP">Karna Sutra Golden points</a>
+      <a class="dropdown-item" href="#" id="KSMP" value="KSMP">Karna Sutra Marma Points</a>        
+      <a class="dropdown-item" href="#" id="CG" value="CG">Circle Grid</a>
+      <a class="dropdown-item" href="#" id ="vpm1" value="VPM">VPM</a>
+      </div> `;
 
 
-    // toolsArea.html(`<a class="dropdown-item" value="" href="#" id="vpm">Vpm</a>`)
-    let mapGridType = $('#toolMenu')
-      .html(`
-        <a class="dropdown-item" href="#" id="3GL" value="3GL" selected>3 X 3 Grid Layout</a>
-        <a class="dropdown-item" href="#" id="3GD" value="3GD">3 X 3 Grid Diagonal</a>
-        <a class="dropdown-item" href="#" id="9DL" value="9DL">9 X 9 Disha Lord Numero Grid</a>
-        <a class="dropdown-item" href="#" id="9GL" value="9GL">9 X 9 Grid Layout</a>
-        <a class="dropdown-item" href="#" id="9SG" value="9SG">Maha Vastu Square Grid</a>
-        <a class="dropdown-item" href="#" id="9MS" value="9MS">Marma Sthana</a>
-        <a class="dropdown-item" href="#" id="9SM" value="9SM">Shanmahanti</a>
-        <a class="dropdown-item" href="#" id="9SD" value="9SD">Shubh Dwar</a>
-        <a class="dropdown-item" href="#" id="KSGP" value="KSGP">Karna Sutra Golden points</a>
-        <a class="dropdown-item" href="#" id="KSMP" value="KSMP">Karna Sutra Marma Points</a>        
-        <a class="dropdown-item" href="#" id="CG" value="CG">Circle Grid</a>
-        <a class="dropdown-item" href="#" id ="vpm1" value="VPM">VPM</a>
-        
-    `);
-    // let vpm = $('#vpm1').attr('data-src', `${that.BASE_URL}assets/images/vpm.svg`);
-    // let MS9 = $('#9MS').attr('data-src', `${that.BASE_URL}assets/images/Marma Sthana.png`);
-    // let DL9 = $('#9DL').attr('data-src', `${that.BASE_URL}assets/images/9 by 9 disha lord numero.jpeg`);
-    // let mvm = $('#mvpc').attr('data-action-object', `${that.BASE_URL}assets/icons/vpm.svg`);
-    // let mvc = $('#mvc').attr('data-action-object', `${that.BASE_URL}assets/images/mvc.png`);
+    // mapGridType.on('click', '#fixed', function () {
+    //   $('#toolMenu').empty();
+    //   $('#floatingToolMenu').remove();
+    //   $('#fixedToolMenu').remove();
+    //   let objId = $(this).attr('id');
+    //   alert(objId)
+    //   if (objId == 'fixed') {
+    //     $('#toolMenu').html(html);
+    //     $('#toolMenu').append(fixedMenu)
+    //   } else if (objId == 'floating') {
+    //     $('#toolMenu').html(html);
+    //     $('#toolMenu').append(floatingMenu)
+    //   }
 
+
+    // });
+    // mapGridType.on('click', '#floating', function () {
+    //   $('#toolMenu').empty();
+    //   $('#floatingToolMenu').remove();
+    //   $('#fixedToolMenu').remove();
+    //   let objId = $(this).attr('id');
+    //   alert(objId)
+    //   if (objId == 'fixed') {
+    //     $('#toolMenu').html(html);
+    //     $('#toolMenu').append(fixedMenu)
+    //   } else if (objId == 'floating') {
+    //     $('#toolMenu').html(html);
+    //     $('#toolMenu').append(floatingMenu)
+    //   }
+    // })
 
     enableDiagonals.on('click', function () {
       diagonalChecked = d3.select(this).property("checked");
@@ -93,6 +186,13 @@ export default class Vedic {
     mapGridType.on('click', 'a', function () {
 
       gridType = $(this).attr('value');
+
+      //toggling fixed and floating menu
+
+
+      let objType = $(this).attr('type');
+
+
 
       let wrapper = $(`g.sjx-svg-wrapper`).remove();
       //remove grid
@@ -251,7 +351,8 @@ export default class Vedic {
             y: that.centroid.y - 400 / 2,
             transfrom: "",
             northAngle: that.calNorthAngle(),
-            angle: that.angle
+            angle: that.angle,
+            type: objType
           }
           that.objectVpm = new Object({
             layer: that.canvas,

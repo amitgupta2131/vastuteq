@@ -257,7 +257,7 @@ export default class Assist {
             (m == screenBoundariesCoords.length - 1) ? n = 0 : null;
             let ip = Utility.linesIntersection(centroid.x, centroid.y, (centroid.x + Math.cos(nAngle * 0.0174533) * 3200), (centroid.y + Math.sin(nAngle * 0.0174533) * 3200), ...screenBoundariesCoords[m], ...screenBoundariesCoords[n]);
             if (ip) { activeDir = directions[m]; }
-            else { console.log("Assist Class: No intersection point found.") }
+            //else { console.log("Assist Class: No intersection point found.") }
         }
 
         let newAng = this.getAngleBasedOnDivisions(division);

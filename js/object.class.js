@@ -139,13 +139,13 @@ export default class Object {
               // fires on tool deactivation
           }
     };
-         
+         console.log(this.data.type)
     this.object = subjx(`.svg-object[data-id="${this.id}"]`).drag(this.svgOptions);
     this.controls = this.object[0].controls;
     this.controls.setAttribute("data-id",this.id);
     
 
-    //Code to rotate VPM to North
+    //Code to rotate VPM to North East
     if(this.data.name == "VPM" || this.data.name == "9MS") {
       let vpmObject = d3.select(`.svg-object[data-object='${this.data.name}']`).select('image.object');
       let x = parseFloat(vpmObject.attr('x')), y = parseFloat(vpmObject.attr('y')), 
@@ -158,6 +158,23 @@ export default class Object {
         delta : this.degreesToRadians(45 + (this.data.northAngle + this.data.angle) - edgeAngle)
       });
     }
+
+//Code to rotate vedic images to North
+console.log(this.data.name)
+if(this.data.name == "9SM" || this.data.name == "9DL" || this.data.name == "9GL" || this.data.name == "9SG"
+|| this.data.name == "9SD" || this.data.name == "KSGP"  || this.data.name == "KSMP"   || this.data.name == "CG") {
+  let vpmObject = d3.select(`.svg-object[data-object='${this.data.name}']`).select('image.object');
+  let x = parseFloat(vpmObject.attr('x')), y = parseFloat(vpmObject.attr('y')), 
+  width = parseFloat(vpmObject.attr('width')), height = parseFloat(vpmObject.attr('height'));
+  let vpmPolygon = [[x,y], [x+width,y], [x+width,y+height], [x,y+height]];
+  let vpmCentroid = d3.polygonCentroid(vpmPolygon);
+  let edgeAngle = this.calTopRightEdgeAngle((x+width),y,vpmCentroid[0],vpmCentroid[1])
+
+  this.object[0].exeRotate({
+    delta : this.degreesToRadians(0 + (this.data.northAngle + this.data.angle) - edgeAngle)
+  });
+}
+
   }
 
   remove(objectName) {

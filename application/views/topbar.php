@@ -203,7 +203,7 @@
                         </div>
                         <div class="form-group col-sm-6">
                             <label for="password">Password</label>
-                            <input type="text" class="form-control" name="password" value="<?php echo $user['password'] ?>">
+                            <input type="password" class="form-control" name="password" value="<?php echo $user['password'] ?>">
                         </div>
                         <div class="form-group col-sm-6">
                             <label for="address">Address</label>

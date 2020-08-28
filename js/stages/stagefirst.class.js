@@ -231,31 +231,36 @@ export default class StageFirst {
                     .attr('type', 'radio')
                     .attr('name', 'mahavastu')
                     .attr('id', 'mahavastuRadio')
-                    .attr('value', 'mahavastu');
+                    .attr('value', 'mahavastu')
+                    .attr('checked',true);
                 this.actionLabelMahavastu = this.actionsdiv2.append('label')
                 .attr('class', 'form-check-label')
                 .attr('for', 'mahavastuRadio')
                 .html('Mahavastu');
 
-                this.actionbox.show()
+                this.actionbox.show();
 
-                $('input[type="radio"]').on('click',function(){
-                    let value = $(this).val();
-                    switch (value) {
+                that.start();
+                // $("input[name='mahavastu']").click();
 
-                        case "vedic": {                                
-                            that.centroid = Utility.getVedicCenteroid(that.vedicMapBoundariesCoords);                                
-                            that._type = "vedic";                                
-                            that.model.editType(that.mapId, that._type);                                
-                            that.vedicStart();
 
-                        } break;
+                // $('input[type="radio"]').on('click',function(){
+                //     let value = $(this).val();
+                //     switch (value) {
+
+                //         case "vedic": {                                
+                //             that.centroid = Utility.getVedicCenteroid(that.vedicMapBoundariesCoords);                                
+                //             that._type = "vedic";                                
+                //             that.model.editType(that.mapId, that._type);                                
+                //             that.vedicStart();
+
+                //         } break;
 
                         
 
-                        default: that.start();
-                    }
-                })
+                //         default: that.start();
+                //     }
+                // })
                 
                        
                     
