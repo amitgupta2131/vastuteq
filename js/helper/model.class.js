@@ -94,6 +94,7 @@ export default class Model {
     }
 
     editVedicBoundariesCoords(id, updatedVedicCoords) {
+        
         this.houseMaps = this.houseMaps.map(houseMap =>
             houseMap.id == id ? {
                 id: houseMap.id,

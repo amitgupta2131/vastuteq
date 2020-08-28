@@ -328,6 +328,7 @@ class Main extends CI_Controller
 			);
 
 			$result = $this->MainModel->insertInto('housemaps', $insertData);
+			// $result2 = $this->MainModel->insertInto('housemaps_temp', $insertData);
 			if ($result) {
 				echo json_encode(array("success", "Details Saved"));
 			} else {
