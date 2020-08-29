@@ -65,7 +65,7 @@ export default class Assist {
             { name: 'Soma', value: 42, text: "Solution,Drive" },
             { name: 'Bhujang', value: 43, text: "Doctor,Healer" },
             { name: 'Aditi', value: 44, text: "Caretaker,Councellor" },
-            { name: 'Diti', value: 45, text: "Instructor,Pt Teacher" },            { name: 'Bhudar', value: 45, text: "white" }
+            { name: 'Diti', value: 45, text: "Instructor,Pt Teacher" }, 
         ];
     }
 

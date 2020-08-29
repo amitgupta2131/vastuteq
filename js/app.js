@@ -4,6 +4,7 @@ import Vastuteq from "./vastuteq.class.js";
 import Model from "./helper/model.class.js";
 import Modal from "./helper/modal.class.js";
 
+
 var isCreateMap = false,
   isImportMap = false;
 
@@ -701,4 +702,7 @@ $('#reportModal').on('click', '#rPrint', () => {
   window.print();
   $('#drawArea').css('display', 'flex');
 })
+
+
+
 

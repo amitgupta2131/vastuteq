@@ -28,59 +28,59 @@ export default class StageThird {
 
 
 
-                //Adding radio buttons
-                this.actionBox = this.actionbox.clear().get();                               
-        
-                this.actionBody = this.actionBox.append('div')
-                    .attr('class', 'row actionbox-body')
-                    .style('margin','0px');
-        
-                this.actionsdiv = this.actionBody.append('div')
-                    .attr('class', 'form-check mb-3').style('margin-left','auto');
-                    
-        
-                this.actionBtnVedic = this.actionsdiv.append('input')
-                    .attr('class', 'form-check-input text-sm')
-                    .attr('type', 'radio')
-                    .attr('name', 'vedic')
-                    .attr('id', 'vedicRadio')
-                    .attr('value', 'vedic');
-                this.actionLabelVedic = this.actionsdiv.append('label')
-                .attr('class', 'form-check-label text-sm')
-                .attr('for', 'vedicRadio')
-                .html('Vedic');
+    //Adding radio buttons
+    this.actionBox = this.actionbox.clear().get();
+
+    this.actionBody = this.actionBox.append('div')
+      .attr('class', 'row actionbox-body')
+      .style('margin', '0px');
+
+    this.actionsdiv = this.actionBody.append('div')
+      .attr('class', 'form-check mb-3').style('margin-left', 'auto');
 
 
-                this.actionsdiv2 = this.actionBody.append('div')
-                    .attr('class', 'form-check').style('margin-left','8px').style('margin-right','auto');;
-                    
-        
-                this.actionBtnmahavastu = this.actionsdiv2.append('input')
-                    .attr('class', 'form-check-input')
-                    .attr('type', 'radio')
-                    .attr('name', 'mahavastu')
-                    .attr('id', 'mahavastuRadio')
-                    .attr('value', 'mahavastu')
-                    .attr('checked',true);
-                this.actionLabelMahavastu = this.actionsdiv2.append('label')
-                .attr('class', 'form-check-label text-sm')
-                .attr('for', 'mahavastuRadio')
-                .html('Mahavastu');
+    this.actionBtnVedic = this.actionsdiv.append('input')
+      .attr('class', 'form-check-input text-sm')
+      .attr('type', 'radio')
+      .attr('name', 'vedic')
+      .attr('id', 'vedicRadio')
+      .attr('value', 'vedic');
+    this.actionLabelVedic = this.actionsdiv.append('label')
+      .attr('class', 'form-check-label text-sm')
+      .attr('for', 'vedicRadio')
+      .html('Vedic');
 
-                $('input[type="radio"]').on('click',function(){
-                  
-                  let value = $(this).val();
-                  if(value == 'vedic'){
-                  that.centroid = Utility.getVedicCenteroid(that.vedicMapBoundariesCoords);   
-                  that._stage = 3;
-                  that.vedicStart()
-                  }else{
-                  
-                  that.centroid = Utility.getCentroid(that.mapBoundariesCoords);  
-                  that._stage = 3;
-                  that.start()
-                  }
-                })
+
+    this.actionsdiv2 = this.actionBody.append('div')
+      .attr('class', 'form-check').style('margin-left', '8px').style('margin-right', 'auto');;
+
+
+    this.actionBtnmahavastu = this.actionsdiv2.append('input')
+      .attr('class', 'form-check-input')
+      .attr('type', 'radio')
+      .attr('name', 'mahavastu')
+      .attr('id', 'mahavastuRadio')
+      .attr('value', 'mahavastu')
+      .attr('checked', true);
+    this.actionLabelMahavastu = this.actionsdiv2.append('label')
+      .attr('class', 'form-check-label text-sm')
+      .attr('for', 'mahavastuRadio')
+      .html('Mahavastu');
+
+    $('input[type="radio"]').on('click', function () {
+
+      let value = $(this).val();
+      if (value == 'vedic') {
+        that.centroid = Utility.getVedicCenteroid(that.vedicMapBoundariesCoords);
+        that._stage = 3;
+        that.vedicStart()
+      } else {
+
+        that.centroid = Utility.getCentroid(that.mapBoundariesCoords);
+        that._stage = 3;
+        that.start()
+      }
+    })
 
 
     let actionBody = actionBox
@@ -210,6 +210,9 @@ export default class StageThird {
       Utility.getObjectDirection(that.calNorthAngle(), that.centroid, that.angle, that.mapBoundariesCoords, 8)
 
     })
+
+   
+
 
     degreeUpdateBtn.on("click", function () {
 
@@ -355,7 +358,7 @@ export default class StageThird {
         classRef.objectVpm = null;
         d3.select('.properties-section.opacity').classed('d-none', true);
       }
-      if (classRef.objectMvm != null || classRef.objectMvm != undefined) {        
+      if (classRef.objectMvm != null || classRef.objectMvm != undefined) {
         that.objectDelete('MVM');
         classRef.objectMvm = null;
         d3.select('.properties-section.opacity').classed('d-none', true);
@@ -386,6 +389,68 @@ export default class StageThird {
 
 
     this.actionbox.show();
+
+     //Removing object/activity
+ $('body').on('click', '.remove', function () {
+  alert('running')
+    let objects = JSON.parse(localStorage.getItem('objects'));
+    let objReport = JSON.parse(localStorage.getItem('objectReport'));
+    let objid = localStorage.getItem('selectedMapId');
+    let newObj = [];
+    let newObjReport = [];
+    let id = $(this).attr('obj-id');
+    let name = $(this).attr('obj-name');
+  
+    // deleting object from array
+    var filteredObj = objects.find(function (item, i) {
+      let index = '';
+      if (item.image.id == id) {
+        delete objects[i];
+        delete objReport[i];
+      }
+      return index;
+    });
+  
+    //create new object array after deleting element
+    objects.forEach(element => {
+      newObj.push(element)
+    });
+  
+    objReport.forEach(element => {
+      newObjReport.push(element)
+    });
+  
+  
+    //removing old objects and adding new objects in localstorage
+    localStorage.removeItem('objects');
+    localStorage.setItem('objects', JSON.stringify(newObj))
+    localStorage.removeItem('objectReport');
+    localStorage.setItem('objectReport', JSON.stringify(newObjReport))
+  
+  
+    //Updating new object array in database
+    let objHandler = new ObjectModel()
+    let result = objHandler.updateObjectsInDataBase(objid);
+  
+    var formData = new FormData();
+    formData.append('id', objid);
+    formData.append('reportData', JSON.stringify(newObjReport));
+    var url = BASE_URL + "/Main/updateReportData";
+    AjaxPost(formData, url, updateReportDatasuccess, AjaxError);
+  
+    function updateReportDatasuccess(content, targetTextarea) {
+      var result = JSON.parse(content);
+      if (result[0] == 'success') {
+        //Removing object from map
+        $(`.svg-object[data-object="${name}"]`).remove();
+        $(`.sjx-svg-wrapper[data-id="${id}]"`).remove();
+  
+        showAlert('Item Removed', 'success');
+      }
+    }
+  
+  
+  })
 
   }
 

@@ -20,7 +20,7 @@ export default class ObjectModel {
     }
 
     editProperties(objectId, data) {
-        console.log(data)
+        
         this.objects = this.objects.map(object =>
             object.image.id == objectId ? {
                 propertyId: object.propertyId,

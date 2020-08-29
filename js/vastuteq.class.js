@@ -587,6 +587,7 @@ export default class Vastuteq {
         saveable: true,
       });
     });
+    
   }
 
   // ? A L I G N  O B J E C T  T O  C E N T E R
