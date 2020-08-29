@@ -93,8 +93,8 @@
             <div class="item" data-command="undo" title="Undo">
                 <img src="<?php echo base_url('assets/paint/undo-icon.png') ?>" />
             </div>
-            <div class="item" data-command="download" title="Download">
-                <img src="<?php echo base_url('assets/paint/download-icon.png') ?>" />
+            <div class="item" data-command="download" title="Save As">
+                <img src="<?php echo base_url('assets/paint/file-download.png') ?>" />
             </div>
         </div>
         <div class="group tools">

@@ -139,14 +139,18 @@ export default class Object {
               // fires on tool deactivation
           }
     };
-         console.log(this.data.type)
+    
+    //remove handles on fixed tool menu
+    console.log(this.data.type)
+    if(this.data.type != 'fixed'){
     this.object = subjx(`.svg-object[data-id="${this.id}"]`).drag(this.svgOptions);
     this.controls = this.object[0].controls;
     this.controls.setAttribute("data-id",this.id);
+    }
     
 
     //Code to rotate VPM to North East
-    if(this.data.name == "VPM" || this.data.name == "9MS") {
+    if(this.data.name == "VPM" || this.data.name == "9MS" && this.data.type != 'fixed') {
       let vpmObject = d3.select(`.svg-object[data-object='${this.data.name}']`).select('image.object');
       let x = parseFloat(vpmObject.attr('x')), y = parseFloat(vpmObject.attr('y')), 
       width = parseFloat(vpmObject.attr('width')), height = parseFloat(vpmObject.attr('height'));
@@ -160,9 +164,9 @@ export default class Object {
     }
 
 //Code to rotate vedic images to North
-console.log(this.data.name)
+
 if(this.data.name == "9SM" || this.data.name == "9DL" || this.data.name == "9GL" || this.data.name == "9SG"
-|| this.data.name == "9SD" || this.data.name == "KSGP"  || this.data.name == "KSMP"   || this.data.name == "CG") {
+|| this.data.name == "9SD" || this.data.name == "KSGP"  || this.data.name == "KSMP"   || this.data.name == "CG" && this.data.type != 'fixed') {
   let vpmObject = d3.select(`.svg-object[data-object='${this.data.name}']`).select('image.object');
   let x = parseFloat(vpmObject.attr('x')), y = parseFloat(vpmObject.attr('y')), 
   width = parseFloat(vpmObject.attr('width')), height = parseFloat(vpmObject.attr('height'));

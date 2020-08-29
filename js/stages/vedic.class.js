@@ -95,14 +95,12 @@ export default class Vedic {
     enableGridWrapper.append('label').attr('class', 'form-check-label, text-sm').html('Grid');
     this.actionbox.show();    
 
-    let html = `<a class="nav-link text-dark menu-item" href="#" id="fixed" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    let html = `<a class="nav-link text-dark menu-item" href="#" id="fixed" role="button">
                   Fixed Tools
                 </a>  
-                <a class="nav-link text-dark menu-item" href="#" id="floating" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <a class="nav-link text-dark menu-item" href="#" id="floating" role="button">
                   Floating Tools
-                </a> `
-  let mapGridType = $('#toolMenu').html(html);
-    let fixedMenu = ` <div class="dropdown-menu" aria-labelledby="fixed" id="fixedToolMenu">
+                </a>  <div class="dropdown-menu"  id="fixedToolMenu">
       <a class="dropdown-item" type="fixed" href="#" id="3GL" value="3GL" selected>3 X 3 Grid Layout</a>
       <a class="dropdown-item" type="fixed" href="#" id="3GD" value="3GD">3 X 3 Grid Diagonal</a>
       <a class="dropdown-item" type="fixed" href="#" id="9DL" value="9DL">9 X 9 Disha Lord Numero Grid</a>
@@ -115,9 +113,9 @@ export default class Vedic {
       <a class="dropdown-item" type="fixed" href="#" id="KSMP" value="KSMP">Karna Sutra Marma Points</a>        
       <a class="dropdown-item" type="fixed" href="#" id="CG" value="CG">Circle Grid</a>
       <a class="dropdown-item" type="fixed" href="#" id ="vpm1" value="VPM">VPM</a>
-      </div> `;
+      </div> 
 
-    let floatingMenu = `<div class="dropdown-menu" aria-labelledby="floating" id="floatingToolMenu">
+      <div class="dropdown-menu"  id="floatingToolMenu">
       <a class="dropdown-item" href="#" id="3GL" value="3GL" selected>3 X 3 Grid Layout</a>
       <a class="dropdown-item" href="#" id="3GD" value="3GD">3 X 3 Grid Diagonal</a>
       <a class="dropdown-item" href="#" id="9DL" value="9DL">9 X 9 Disha Lord Numero Grid</a>
@@ -132,34 +130,38 @@ export default class Vedic {
       <a class="dropdown-item" href="#" id ="vpm1" value="VPM">VPM</a>
       </div> `;
 
-
-    // mapGridType.on('click', '#fixed', function () {
-    //   $('#toolMenu').empty();
-    //   $('#floatingToolMenu').remove();
-    //   $('#fixedToolMenu').remove();
-    //   let objId = $(this).attr('id');
-    //   alert(objId)
-    //   if (objId == 'fixed') {
-    //     $('#toolMenu').html(html);
-    //     $('#toolMenu').append(fixedMenu)
-    //   } else if (objId == 'floating') {
-    //     $('#toolMenu').html(html);
-    //     $('#toolMenu').append(floatingMenu)
-    //   }
+      let mapGridType = $('#toolMenu').html(html);
 
 
-    // });
+
+    mapGridType.on('mouseover', '#fixed', function () {           
+      $('#fixedToolMenu').removeClass('dropdown-menu')
+      $('#fixedToolMenu').addClass('dropdown-menu-show')
+      $('#floatingToolMenu').removeClass('dropdown-menu-show')
+      $('#floatingToolMenu').addClass('dropdown-menu')
+    });   
+
+    mapGridType.on('mouseover', '#floating', function () { 
+      // alert('hello')
+      $('#floatingToolMenu').removeClass('dropdown-menu')
+      $('#floatingToolMenu').addClass('dropdown-menu-show')          
+      $('#fixedToolMenu').removeClass('dropdown-menu-show')
+      $('#fixedToolMenu').addClass('dropdown-menu')
+      
+    });
+
+
     // mapGridType.on('click', '#floating', function () {
-    //   $('#toolMenu').empty();
+      
     //   $('#floatingToolMenu').remove();
     //   $('#fixedToolMenu').remove();
     //   let objId = $(this).attr('id');
     //   alert(objId)
     //   if (objId == 'fixed') {
-    //     $('#toolMenu').html(html);
+        
     //     $('#toolMenu').append(fixedMenu)
     //   } else if (objId == 'floating') {
-    //     $('#toolMenu').html(html);
+       
     //     $('#toolMenu').append(floatingMenu)
     //   }
     // })
@@ -188,7 +190,10 @@ export default class Vedic {
       gridType = $(this).attr('value');
 
       //toggling fixed and floating menu
-
+      $('#fixedToolMenu').addClass('dropdown-menu')
+      $('#fixedToolMenu').removeClass('dropdown-menu-show')
+      $('#floatingToolMenu').removeClass('dropdown-menu-show')
+      $('#floatingToolMenu').addClass('dropdown-menu')
 
       let objType = $(this).attr('type');
 
