@@ -211,7 +211,7 @@ export default class Vedic {
         localStorage.removeItem('vedicImgObj')
         d3.select('.properties-section.opacity').classed('d-none', true);
       }
-      console.log(imgName)
+      
       switch (gridType) {
         case "3GL":
 
@@ -235,7 +235,7 @@ export default class Vedic {
           // that.assist.drawPolygonDiagonals({points: that.vedicMapBoundariesCoords, color:"blue", noOfLines: 9,strokeWidth:2});
           // that.createObject('g.vedic-polygon');
           // that.vedic = new Vedic(); 
-          drawVedicImages('DL9', '9 by 9 disha lord numero.jpeg')
+          drawVedicImages('9DL', '9 by 9 disha lord numero.jpeg')
 
           break;
         case "9GL":
@@ -342,7 +342,7 @@ export default class Vedic {
       function drawVedicImages(objName, objImageSrc, object) {
         localStorage.setItem('vedicImgObj', objName)
         if (that.objectVpm == null || that.objectVpm == undefined) {
-          console.log("Create");
+         
           d3.select('.properties-section.opacity').classed('d-none', false);
           d3.select(objName.parentNode).classed('active', true);
           that.model.editVpmtoggle(that.mapId, true);
@@ -365,7 +365,7 @@ export default class Vedic {
           });
 
         } else {
-          console.log("Delete");
+          
           that.objectDelete(objName);
           that.objectVpm = null
           localStorage.removeItem('vedicImgObj')

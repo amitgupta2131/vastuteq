@@ -351,7 +351,7 @@ export default class Vastuteq {
 
   // ? V E D I C   S T A R T
   vedicStart() {
-    console.log("Vedic stage", this._stage);
+    
     switch (this._stage) {
       case 2: {
         // STAGE SECOND

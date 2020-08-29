@@ -40,7 +40,11 @@ export default class Object {
 
     
     
-    if (data.id != '' && data.id != undefined && data.name != 'map') {
+    if (data.id != '' && data.id != undefined && data.name != 'map' && data.name != 'VPM' 
+    && data.name != 'MVM' && data.name != 'MVC' && data.name != 'DL9' && data.name != '9SG'
+    && data.name != '9MS' && data.name != '9SM' && data.name != 'KSGP' && data.name != 'KSMP'
+    && data.name != 'CG' && data.name != '9SD') {
+      console.log(data)
       this.g.append('image')
         .attr('class', 'remove')
         .attr('xmlns', 'http://www.w3.org/2000/svg')
@@ -182,9 +186,9 @@ export default class Object {
     }
 
     //Code to rotate vedic images to North
-
-    if (this.data.name == "9SM" || this.data.name == "9DL" || this.data.name == "9GL" || this.data.name == "9SG"
-      || this.data.name == "9SD" || this.data.name == "KSGP" || this.data.name == "KSMP" || this.data.name == "CG" && this.data.type != 'fixed') {
+console.log(this.data.name)
+    if (this.data.name == "9SM" && this.data.name == "9DL" && this.data.name == "9GL" && this.data.name == "9SG"
+      && this.data.name == "9SD" && this.data.name == "KSGP" && this.data.name == "KSMP" && this.data.name == "CG" && this.data.type != 'fixed') {
       let vpmObject = d3.select(`.svg-object[data-object='${this.data.name}']`).select('image.object');
       let x = parseFloat(vpmObject.attr('x')), y = parseFloat(vpmObject.attr('y')),
         width = parseFloat(vpmObject.attr('width')), height = parseFloat(vpmObject.attr('height'));

@@ -392,7 +392,7 @@ export default class StageThird {
 
      //Removing object/activity
  $('body').on('click', '.remove', function () {
-  alert('running')
+ 
     let objects = JSON.parse(localStorage.getItem('objects'));
     let objReport = JSON.parse(localStorage.getItem('objectReport'));
     let objid = localStorage.getItem('selectedMapId');
