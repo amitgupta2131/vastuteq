@@ -122,13 +122,13 @@ export default class EditText {
                     image.attr('width', widt); image.attr('height', heigt);
                     image.select('div div').attr('width', widt); image.select('div').attr('height', heigt);
                     image.select('div div').attr('style', `border:1px solid blue;height:${heigt}px`)
-                    x = image.attr('x', x), y = image.attr('y', y);
+                    image.attr('x', x), image.attr('y', y);
                     let transform = d3.select(`.sjx-svg-wrapper[data-id="${objectId}"]`).attr('transform')
                     let objectTransform = object.attr('transform', transform);
 
                     that.editTextModel.editProperties(
                         objectId,
-                        { x: x, y: y, width: width, height: height, transform: objectTransform }
+                        { x: x, y: y, width: widt, height: heigt, transform: transform }
                     );
                 }
             },
@@ -146,7 +146,7 @@ export default class EditText {
 
                     that.editTextModel.editProperties(
                         objectId,
-                        { x: x, y: y, width: width, height: height, transform: objectTransform }
+                        { x: x, y: y, width: width, height: height, transform: transform }
                     );
                 }
             },
