@@ -151,7 +151,7 @@ export default class StageThird {
     let addText = container.append('div').attr('class', 'mt-2 col-md-2 d-flex justify-content-center align-items-center border object-actions')
     .style('flex-direction', 'column').style('height', '42px').style('min-width', '55px');
 
-    let addTextIcon = addText.attr('data-action-object', `${that.BASE_URL}assets/icons/dots.svg`).append('img').attr('src', `${that.BASE_URL}assets/icons/dots.svg`).attr('width', 20);
+    let addTextIcon = addText.attr('data-action-object', `${that.BASE_URL}assets/icons/dots.svg`).append('img').attr('src', `${that.BASE_URL}assets/icons/text.svg`).attr('width', 20);
     addText.append('span').style('margin-top', '1px').style('font-size', '9px').text('Add Text');
 
     faceSelectbox.on("change", function () {
