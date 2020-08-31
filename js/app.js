@@ -33,11 +33,13 @@ if (localStorage.hasOwnProperty('selectedMapId') == true) {
 
 function createMap() {
   // ENABLING TOOLBOXES
+  // let size = parseInt(item.value)
   d3.select(".toolbox.right").classed("d-none", false);
   d3.select(".toolbox.left").classed("d-none", false);
   d3.select(".mousePos").classed("d-none", false);
   let canvasSize = drawAreaSize(35, 35);
 
+  console.log(canvasSize)
   let canvasArea = d3
     .select("#drawArea")
     .append("div")
@@ -63,6 +65,7 @@ function createMap() {
   canvasRuler = new ruler({
     container: document.querySelector("#canvasArea"),
   });
+  // canvasRuler.api.setScale(2);
 
   createMapApp = new Paint("paintCanvas");
 
@@ -172,6 +175,7 @@ function initCreateMap() {
 }
 
 function drawAreaSize(LEFT, RIGHT) {
+  console.log(d3.select("#drawArea").node().offsetWidth )
   return {
     width: d3.select("#drawArea").node().offsetWidth - (LEFT + RIGHT),
     height: d3.select("#drawArea").node().offsetHeight,
@@ -197,6 +201,7 @@ $("[data-behavior]").on("click", function () {
   switch (menuItem) {
     case Behavior.CREATE:
       {
+        // feetModal();
         createMap();
       }
       break;
@@ -701,8 +706,49 @@ $('#reportModal').on('click', '#rPrint', () => {
   $('#drawArea').css('display', 'none');
   window.print();
   $('#drawArea').css('display', 'flex');
-})
+});
 
+function feetModal() {
+  $('#reportModal .modal-body').empty();
+  $('#reportModal .modal-dialog').css('max-width', '470px');
+  $('#reportModal .modal-content').css('min-height', '200px');
+  $('#reportModal .modal-title').text('Select Draw Area size');
+  $('#reportModal .modal-body').attr('id', 'feetModal');
+
+  let html = `<div class="row" style="margin:0">
+                <div class="form-group col-sm-6">
+                  <label for="text">Enter Width</label>
+                  <input type="number" class="form-control" id="text">                  
+                </div>
+                <div class="form-group col-sm-6">
+                  <label for="unit">Select Unit</label>
+                  <select class="form-control" id="unit">
+                    <option>feet</option>
+                    <option>meter</option>                    
+                  </select>
+                </div>
+                <div class="col-sm-12">
+                <button class="btn btn-primary" id="feetSubmit" style="float:right">OK</button>
+                </div>
+              </div>`
+
+  $('#reportModal .modal-body').html(html)
+  $('#reportModal').modal('show')
+}
+
+$('#reportModal .modal-body').on('click','#feetSubmit',function(){
+  let val = $("#text").val();
+  let unit = $("#unit").val();
+  if(val == ''){
+    showAlert('Please enter width','danger')
+    // $("#text").focus
+    // return false;
+  }else{
+    $('#reportModal').modal('hide')
+    let item = {value:val,unit:unit}
+    createMap(item);
+  }
+})
 
 
 

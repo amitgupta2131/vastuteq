@@ -17,7 +17,7 @@ export default class Paint {
         this.canvas = document.getElementById(canvasId);
 		this.context = this.canvas.getContext("2d");
 		this.undoStack = [];
-		this.undoLimit = 3;
+		this.undoLimit = 10;
 
 		this.activeTool = Tool.TOOL_LINE;
 		this.lineWidth = "1";

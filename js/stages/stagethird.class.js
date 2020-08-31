@@ -1,7 +1,9 @@
 import ActionBox from "../helper/actionbox.class.js";
-import Object from '../object.class.js'
+import Object from '../object.class.js';
+import editText from '../EditText.class.js'
 import Utility from "../helper/utility.class.js";
 import ObjectModel from "../helper/objectmodel.class.js";
+import Assist from "../helper/assist.class.js";
 
 export default class StageThird {
 
@@ -146,6 +148,12 @@ export default class StageThird {
     let divisonOfDevtas = divisonOfDevtasContainer.attr('data-action-object', `${that.BASE_URL}assets/icons/dots.svg`).append('img').attr('src', `${that.BASE_URL}assets/icons/dots.svg`).attr('width', 20);
     divisonOfDevtasContainer.append('span').style('margin-top', '1px').style('font-size', '9px').text('division of devtas');
 
+    let addText = container.append('div').attr('class', 'mt-2 col-md-2 d-flex justify-content-center align-items-center border object-actions')
+    .style('flex-direction', 'column').style('height', '42px').style('min-width', '55px');
+
+    let addTextIcon = addText.attr('data-action-object', `${that.BASE_URL}assets/icons/dots.svg`).append('img').attr('src', `${that.BASE_URL}assets/icons/dots.svg`).attr('width', 20);
+    addText.append('span').style('margin-top', '1px').style('font-size', '9px').text('Add Text');
+
     faceSelectbox.on("change", function () {
 
       let str = d3.select(this).node().value.split(',');
@@ -211,6 +219,28 @@ export default class StageThird {
 
     })
 
+
+    addText.on("click",function(){      
+
+      let data = {
+        name: 'Edit Text',
+        src: '',
+        width: 200,
+        height: 200,
+        x: that.centroid.x - 200 / 2,
+        y: that.centroid.y - 200 / 2,
+        transfrom: "",
+        northAngle: that.calNorthAngle(),
+        angle: that.angle,
+        type: 'editText'
+      }
+      let obj = new editText({
+        layer: that.canvas,
+        data: data
+      });
+
+
+    })
    
 
 

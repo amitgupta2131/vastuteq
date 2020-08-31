@@ -132,17 +132,17 @@
             <div class="item active" data-line-width="1" title="1 Pixel">
                 <div class="stroke" style="width:1px;height: 1px;"></div>
             </div>
-            <div class="item" data-line-width="2" title="2 Pixels">
-                <div class="stroke" style="width:2px;height: 2px;"></div>
-            </div>
-            <div class="item" data-line-width="3" title="3 Pixels">
-                <div class="stroke" style="width:3px;height: 3px;"></div>
-            </div>
-            <div class="item" data-line-width="4" title="4 Pixels">
-                <div class="stroke" style="width:4px;height: 4px;"></div>
-            </div>
             <div class="item" data-line-width="5" title="5 Pixels">
                 <div class="stroke" style="width:5px;height: 5px;"></div>
+            </div>
+            <div class="item" data-line-width="10" title="10 Pixels">
+                <div class="stroke" style="width:10px;height: 10px;"></div>
+            </div>
+            <div class="item" data-line-width="15" title="15 Pixels">
+                <div class="stroke" style="width:15px;height: 15px;"></div>
+            </div>
+            <div class="item" data-line-width="20" title="20 Pixels">
+                <div class="stroke" style="width:20px;height: 20px;"></div>
             </div>
         </div>
 

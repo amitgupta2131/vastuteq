@@ -38,12 +38,12 @@ export default class Object {
       .attr("width", data.width)
       .attr("height", data.height);
 
-    
-    
-    if (data.id != '' && data.id != undefined && data.name != 'map' && data.name != 'VPM' 
-    && data.name != 'MVM' && data.name != 'MVC' && data.name != 'DL9' && data.name != '9SG'
-    && data.name != '9MS' && data.name != '9SM' && data.name != 'KSGP' && data.name != 'KSMP'
-    && data.name != 'CG' && data.name != '9SD') {
+
+    //adding remove icon on objects/activities
+    if (data.id != '' && data.id != undefined && data.name != 'map' && data.name != 'VPM'
+      && data.name != 'MVM' && data.name != 'MVC' && data.name != 'DL9' && data.name != '9SG'
+      && data.name != '9MS' && data.name != '9SM' && data.name != 'KSGP' && data.name != 'KSMP'
+      && data.name != 'CG' && data.name != '9SD') {
       console.log(data)
       this.g.append('image')
         .attr('class', 'remove')
@@ -57,7 +57,7 @@ export default class Object {
         .attr('obj-name', data.name)
         .style('position', 'relative')
     }
-      
+
 
     this.init();
 
@@ -159,7 +159,7 @@ export default class Object {
       onDestroy(el) {
         // fires on tool deactivation
       }
-      
+
     };
 
     //remove handles on fixed tool menu
@@ -185,8 +185,7 @@ export default class Object {
       });
     }
 
-    //Code to rotate vedic images to North
-console.log(this.data.name)
+    //Code to rotate vedic images to North  
     if (this.data.name == "9SM" && this.data.name == "9DL" && this.data.name == "9GL" && this.data.name == "9SG"
       && this.data.name == "9SD" && this.data.name == "KSGP" && this.data.name == "KSMP" && this.data.name == "CG" && this.data.type != 'fixed') {
       let vpmObject = d3.select(`.svg-object[data-object='${this.data.name}']`).select('image.object');
@@ -202,7 +201,7 @@ console.log(this.data.name)
     }
 
   }
-  
+
   remove(objectName) {
     d3.select(`.svg-object[data-object="${objectName}"]`).remove();
   }
