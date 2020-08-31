@@ -133,7 +133,7 @@ export default class Vastuteq {
   // ? M A H A V A S T U   S T A R T
 
   start(flag = '') {
-    
+
     switch (this._stage) {
       // ? STAGE FOR TRANSFORM MAP
       case 0:
@@ -196,7 +196,12 @@ export default class Vastuteq {
           // STAGE THIRD
           this.hideMessage();
           this.wrapperDelete("map");
-
+          let html = `<a class="dropdown-item" href="#" id="vpm">Vpm</a>
+                      <a class="dropdown-item" href="#" id="mvpc">Shakti Chakra</a>
+                      <a class="dropdown-item" href="#" id="mvc">Maha Vastu Chakra</a>
+                      <a class="dropdown-item d-none" href="#" data-menu-item="get-marma">Marma</a>
+                      <a class="dropdown-item d-none" href="#" data-menu-item="get-shanmahanti">Shanmahanti</a>`
+                      $("#toolMenu").html(html)       
           d3.select(".align-center-wrapper").classed("d-none", false);
           d3.select(".zoom-state-wrapper").classed("d-none", false);
           d3.select(".zoom-wrapper").classed("d-none", false);
@@ -223,7 +228,7 @@ export default class Vastuteq {
             layer: this.canvas,
             points: this.mapBoundariesCoords,
           });
-         
+
           this.assist.drawBharamNabhi({
             layer: this.canvas,
             centroid: this.centroid,
@@ -293,14 +298,14 @@ export default class Vastuteq {
             };
 
             if (flag == '') {
-              new Object({ mapId: this.mapId, layer: objectLayer, data: objectData,flag: flag });
+              new Object({ mapId: this.mapId, layer: objectLayer, data: objectData, flag: flag });
             } else {
               // d3.selectAll(`.svg-object`).classed('deactive', false);
               // d3.selectAll(`.svg-object`).classed('active', true);
-            //  let objGroup = $(`.objects-group`).html();
-            //  console.log(objGroup);
-            //  d3.select(`.objects-group`).remove();
-            //  $(`#main-group`).append(`<g class="objects-group">${objGroup}</g>`);
+              //  let objGroup = $(`.objects-group`).html();
+              //  console.log(objGroup);
+              //  d3.select(`.objects-group`).remove();
+              //  $(`#main-group`).append(`<g class="objects-group">${objGroup}</g>`);
             }
 
           }
@@ -351,7 +356,7 @@ export default class Vastuteq {
 
   // ? V E D I C   S T A R T
   vedicStart() {
-    
+
     switch (this._stage) {
       case 2: {
         // STAGE SECOND
@@ -360,7 +365,7 @@ export default class Vastuteq {
         $(".property.description").html("Select facing wall");
         this.assist.drawMask({ layer: this.canvas, points: this.mapBoundariesCoords, size: this.RECT_SIZE, });
         this.assist.drawBoundaries({ layer: this.canvas, points: this.mapBoundariesCoords });
-        
+
         this.assist.drawBharamNabhi({ layer: this.canvas, centroid: this.centroid, });
         this.assist.drawPolygon({ layer: this.canvas, points: this.vedicMapBoundariesCoords });
 
@@ -377,10 +382,10 @@ export default class Vastuteq {
         d3.select('.tools-section').classed('d-none', false);
         // d3.select('#vpm').classed('d-none',true);
         // d3.select('#mvpc').classed('d-none',true);
-        
+
         this.assist.drawMask({ layer: this.canvas, points: this.mapBoundariesCoords, size: this.RECT_SIZE, });
         this.assist.drawBoundaries({ layer: this.canvas, points: this.mapBoundariesCoords });
-        
+
         this.assist.drawBharamNabhi({ layer: this.canvas, centroid: this.centroid, });
         this.assist.drawFacingLine(this.canvas, this.centroid, this.faceCoords);
         this.assist.drawDirectionLines(this.canvas, this.faceCoords, this.centroid, this.division, this.angle);
@@ -437,25 +442,25 @@ export default class Vastuteq {
     $('[data-menu-item]').on('click', function () {
       let menuItem = d3.select(this).attr('data-menu-item');
       switch (menuItem) {
-        case "set-measurement": {          
+        case "set-measurement": {
           that._stage = 4;
           that.start();
 
         } break;
         case "get-measurement": {
 
-         let map = JSON.parse(localStorage.getItem('houseMaps'));         
-         if(map[0].dimension != undefined || map[0].dimension != null){          
-          that._stage = 5;
-          that.start();
-         }else{
-           showAlert('Please set measurement first');
-           return false;
-         }
-          
+          let map = JSON.parse(localStorage.getItem('houseMaps'));
+          if (map[0].dimension != undefined || map[0].dimension != null) {
+            that._stage = 5;
+            that.start();
+          } else {
+            showAlert('Please set measurement first');
+            return false;
+          }
+
 
         } break;
-        
+
         default: break;
       }
     })
@@ -587,7 +592,7 @@ export default class Vastuteq {
         saveable: true,
       });
     });
-    
+
   }
 
   // ? A L I G N  O B J E C T  T O  C E N T E R
@@ -685,7 +690,7 @@ export default class Vastuteq {
   }
 
   wrapperDelete(objectName) {
-    
+
     let object = $(`g.svg-object[data-object="${objectName}"]`);
     object.removeClass("active");
     object.removeClass("sjx-drag");

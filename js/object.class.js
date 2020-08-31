@@ -23,10 +23,11 @@ export default class Object {
     this.g = this.layer.append("g")
       .classed('svg-object', true)
       .classed('active', true)
-      .classed('saved', (data.id != undefined || data.saveable != undefined) ? true : false)
+      .classed('saved', (data.id != undefined || data.saveable != undefined) ? true : false)      
       .attr('data-id', this.id)
       .attr('data-object', data.name)
       .attr('opacity', 1)
+      .attr('typeOf','image')
       .attr('transform', (data.transform === "abc") ? null : data.transform);
 
     this.g.append('image')
@@ -166,6 +167,7 @@ export default class Object {
 
     if (this.data.type != 'fixed') {
       this.object = subjx(`.svg-object[data-id="${this.id}"]`).drag(this.svgOptions);
+      console.log(this.id)
       this.controls = this.object[0].controls;
       this.controls.setAttribute("data-id", this.id);
     }

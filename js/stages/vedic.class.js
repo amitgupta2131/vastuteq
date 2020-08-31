@@ -57,8 +57,11 @@ export default class Vedic {
 
       let value = $(this).val();
       if(value == 'mahavastu'){
+      let objName = localStorage.getItem('vedicImgObj');
       d3.select('g.sjx-svg-wrapper').remove(); 
       d3.select('g.vedic-polygon').remove();
+      that.objectDelete(objName);
+      // d3.select('g.svg-object[data-object][typeOf="image"]').remove();
 
       that.centroid = Utility.getCentroid(that.mapBoundariesCoords);      
       that._stage = 3;

@@ -74,6 +74,7 @@ export default class StageThird {
       let value = $(this).val();
       if (value == 'vedic') {
         that.centroid = Utility.getVedicCenteroid(that.vedicMapBoundariesCoords);
+        removeToolsImages();
         that._stage = 3;
         that.vedicStart()
       } else {
@@ -149,7 +150,7 @@ export default class StageThird {
     divisonOfDevtasContainer.append('span').style('margin-top', '1px').style('font-size', '9px').text('division of devtas');
 
     let addText = container.append('div').attr('class', 'mt-2 col-md-2 d-flex justify-content-center align-items-center border object-actions')
-    .style('flex-direction', 'column').style('height', '42px').style('min-width', '55px');
+      .style('flex-direction', 'column').style('height', '42px').style('min-width', '55px');
 
     let addTextIcon = addText.attr('data-action-object', `${that.BASE_URL}assets/icons/dots.svg`).append('img').attr('src', `${that.BASE_URL}assets/icons/text.svg`).attr('width', 20);
     addText.append('span').style('margin-top', '1px').style('font-size', '9px').text('Add Text');
@@ -220,7 +221,7 @@ export default class StageThird {
     })
 
 
-    addText.on("click",function(){      
+    addText.on("click", function () {
 
       let data = {
         name: 'Edit Text',
@@ -241,7 +242,7 @@ export default class StageThird {
 
 
     })
-   
+
 
 
     degreeUpdateBtn.on("click", function () {
@@ -383,6 +384,10 @@ export default class StageThird {
     //delete tools images
     $('.object-delete-toggle').on('click', function () {
       // alert('hello')
+      removeToolsImages()
+    });
+
+    function removeToolsImages() {
       if (classRef.objectVpm != null || classRef.objectVpm != undefined) {
         that.objectDelete('VPM');
         classRef.objectVpm = null;
@@ -398,7 +403,7 @@ export default class StageThird {
         classRef.objectMVC = null;
         d3.select('.properties-section.opacity').classed('d-none', true);
       }
-    });
+    }
 
     divisonOfDevtasContainer.on('click', function () {
       console.log(d3.select(this).classed('active'), 'working');
@@ -420,67 +425,67 @@ export default class StageThird {
 
     this.actionbox.show();
 
-     //Removing object/activity
- $('body').on('click', '.remove', function () {
- 
-    let objects = JSON.parse(localStorage.getItem('objects'));
-    let objReport = JSON.parse(localStorage.getItem('objectReport'));
-    let objid = localStorage.getItem('selectedMapId');
-    let newObj = [];
-    let newObjReport = [];
-    let id = $(this).attr('obj-id');
-    let name = $(this).attr('obj-name');
-  
-    // deleting object from array
-    var filteredObj = objects.find(function (item, i) {
-      let index = '';
-      if (item.image.id == id) {
-        delete objects[i];
-        delete objReport[i];
+    //Removing object/activity
+    $('body').on('click', '.remove', function () {
+
+      let objects = JSON.parse(localStorage.getItem('objects'));
+      let objReport = JSON.parse(localStorage.getItem('objectReport'));
+      let objid = localStorage.getItem('selectedMapId');
+      let newObj = [];
+      let newObjReport = [];
+      let id = $(this).attr('obj-id');
+      let name = $(this).attr('obj-name');
+
+      // deleting object from array
+      var filteredObj = objects.find(function (item, i) {
+        let index = '';
+        if (item.image.id == id) {
+          delete objects[i];
+          delete objReport[i];
+        }
+        return index;
+      });
+
+      //create new object array after deleting element
+      objects.forEach(element => {
+        newObj.push(element)
+      });
+
+      objReport.forEach(element => {
+        newObjReport.push(element)
+      });
+
+
+      //removing old objects and adding new objects in localstorage
+      localStorage.removeItem('objects');
+      localStorage.setItem('objects', JSON.stringify(newObj))
+      localStorage.removeItem('objectReport');
+      localStorage.setItem('objectReport', JSON.stringify(newObjReport))
+
+
+      //Updating new object array in database
+      let objHandler = new ObjectModel()
+      let result = objHandler.updateObjectsInDataBase(objid);
+
+      var formData = new FormData();
+      formData.append('id', objid);
+      formData.append('reportData', JSON.stringify(newObjReport));
+      var url = BASE_URL + "/Main/updateReportData";
+      AjaxPost(formData, url, updateReportDatasuccess, AjaxError);
+
+      function updateReportDatasuccess(content, targetTextarea) {
+        var result = JSON.parse(content);
+        if (result[0] == 'success') {
+          //Removing object from map
+          $(`.svg-object[data-object="${name}"]`).remove();
+          $(`.sjx-svg-wrapper[data-id="${id}]"`).remove();
+
+          showAlert('Item Removed', 'success');
+        }
       }
-      return index;
-    });
-  
-    //create new object array after deleting element
-    objects.forEach(element => {
-      newObj.push(element)
-    });
-  
-    objReport.forEach(element => {
-      newObjReport.push(element)
-    });
-  
-  
-    //removing old objects and adding new objects in localstorage
-    localStorage.removeItem('objects');
-    localStorage.setItem('objects', JSON.stringify(newObj))
-    localStorage.removeItem('objectReport');
-    localStorage.setItem('objectReport', JSON.stringify(newObjReport))
-  
-  
-    //Updating new object array in database
-    let objHandler = new ObjectModel()
-    let result = objHandler.updateObjectsInDataBase(objid);
-  
-    var formData = new FormData();
-    formData.append('id', objid);
-    formData.append('reportData', JSON.stringify(newObjReport));
-    var url = BASE_URL + "/Main/updateReportData";
-    AjaxPost(formData, url, updateReportDatasuccess, AjaxError);
-  
-    function updateReportDatasuccess(content, targetTextarea) {
-      var result = JSON.parse(content);
-      if (result[0] == 'success') {
-        //Removing object from map
-        $(`.svg-object[data-object="${name}"]`).remove();
-        $(`.sjx-svg-wrapper[data-id="${id}]"`).remove();
-  
-        showAlert('Item Removed', 'success');
-      }
-    }
-  
-  
-  })
+
+
+    })
 
   }
 
