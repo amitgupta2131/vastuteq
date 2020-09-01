@@ -35,7 +35,7 @@
     <!-- Date Picker libraries -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.1/moment.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
     <script>
         const base_url = '<?php echo base_url() ?>';
         let data = ''
@@ -46,54 +46,8 @@
     <!-- 
     //////////////////////////////// --- H E A D E R ---  ////////////////////////////////
     -->
-    <section class="header" style="position:unset">
-        <div class="title-bar" style="justify-content:left;">
-            <img class="logo" style="margin-left:20px" src="<?php echo base_url('assets/logo/logo2.svg') ?>" alt="logo" width="130">
-            <!-- M E N U  I T E M S -->
-            <div class="menu-sidebar">
-                <ul class="nav menu" style="float:right">
-                    <li class="nav-item">
-                        <a href="#">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="<?php echo base_url('Main') ?>">Dashboard</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="<?php echo base_url('Main/ayadhi') ?>">Ayadi Calculator</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="<?php echo base_url('Main/devtas') ?>">Devtas</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="<?php echo base_url('Main/propertyInfo') ?>"><i class="fas fa-plus"></i>&nbsp;&nbsp;New Project</a>
-                    </li>
-                    <li class="nav-item">
-                        <img class="profile thumbnail rounded-circle" src="<?php echo base_url('assets/images/thumbnail.png') ?>" alt="user" width="20" id="profileButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="profileButton">
-                            <a class="dropdown-item modal__trigger" href="#" data-modal="#modal3"><i class="fas fa-cog"></i>&nbsp;&nbsp;Setting</a>
-                            <a class="dropdown-item" href="<?php echo base_url('Main/logout') ?>"><i class="fas fa-sign-out-alt"></i>&nbsp;&nbsp;Sign Out</a>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        </div>
-        <!-- <div id="dynamicBar">
-            <nav aria-label="breadcrumb">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Drafts</li>
-                </ol>
-            </nav>
-            <div class="dynamicbar-right">
-                <a href="<?php echo base_url('Main/propertyInfo') ?>" class="btn btn-sm btn-outline rounded-0"><i class="fas fa-plus"></i>&nbsp;&nbsp;New Project</a>
-                <img class="profile thumbnail rounded-circle" src="<?php echo base_url('assets/images/thumbnail.png') ?>" alt="user" width="20" id="profileButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="profileButton">
-                    <a class="dropdown-item modal__trigger" href="#" data-modal="#modal3"><i class="fas fa-cog"></i>&nbsp;&nbsp;Setting</a>
-                    <a class="dropdown-item" href="<?php echo base_url('Main/logout') ?>"><i class="fas fa-sign-out-alt"></i>&nbsp;&nbsp;Sign Out</a>
-                </div>
-            </div>
-        </div> -->
-    </section>
+    <!-- M E N U  I C O N -->
+    <?php include 'topbar.php' ?>
 
 
 
@@ -112,19 +66,48 @@
             <div class="card col-md-12 p-0 mt-5">
                 <div class="card-header">
                     <h5 class="modal-title" id="exampleModalLabel">
-                        Property
+                       Client & Property Details
                     </h5>
                 </div>
                 <div class="card-body">
                     <form action="<?php echo base_url('Main/addProperty') ?>" method="post">
                         <div>
-                            <div class="form-row">
 
+                            <div class="form-row">
+                                <div class="form-group col-md-4">
+                                    <label for="inputEmail4">Full Name</label>
+                                    <input type="text" class="form-control form-control-sm" id="clientName" name="cName" placeholder="Name" required />
+                                    
+                                </div>
+                                
+                                <div class="form-group col-md-4">
+                                    <label for="inputEmail4">Mobile No.</label>
+                                    <input type="input" class="form-control form-control-sm" id="mNumber" name="mNumber" placeholder="Mobile No." required />
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label for="inputEmail4">Landline No.</label>
+                                    <input type="number" class="form-control form-control-sm" name="lNumber" placeholder="Landline No." />
+                                </div>
+                                
+                                <div class="col-md-6 clientContainer d-none" id="clients"></div>
                             </div>
                             <div class="form-row">
                                 <div class="form-group col-md-4">
+                                    <label for="inputEmail4">Email</label>
+                                    <input type="email" class="form-control form-control-sm" name="cEmail" placeholder="Email" required />
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label for="inputAddress">Client Address</label>
+                                    <textarea class="form-control form-control-sm" name="cAddress" placeholder="1234 Main St" ></textarea>
+                                </div>
+                            </div>
+
+
+
+                            <div class="form-row">
+                                <div class="form-group col-md-4">
                                     <label for="inputEmail4">Property Name</label>
-                                    <input type="text" class="form-control form-control-sm" name="name" placeholder="property name" />
+                                    <input type="text" class="form-control form-control-sm" name="pname" placeholder="property name" />
                                 </div>
                                 <div class="form-group col-md-4">
                                     <label for="inputEmail4">Category</label>
@@ -156,14 +139,14 @@
 
                             <div class="form-row">
                                 <div class="form-group col-md-4">
-                                    
+
                                     <label for="inputEmail4">Grah Pravesh Date</label>
-                                    <input type="date" class="form-control form-control-sm" name="gpDate"  placeholder="Grah Pravesh Date (Optional)" />
-                                    
+                                    <input type="date" class="form-control form-control-sm" name="gpDate" placeholder="Grah Pravesh Date (Optional)" />
+
                                 </div>
                                 <div class="form-group col-md-4">
                                     <label for="inputEmail4">First Visit Date</label>
-                                    <input type="date" class="form-control form-control-sm" name="fvDate" placeholder="First Visit Date" required />
+                                    <input type="date" class="form-control form-control-sm" name="fvDate" placeholder="First Visit Date"/>
                                 </div>
                                 <div class="form-group col-md-4">
                                     <label for="inputEmail4">Property Purchase/opening Date</label>
@@ -171,7 +154,7 @@
                                 </div>
                             </div>
 
-
+                            <!-- 
                             <div class="form-group col-md-6">
                                 <label for="inputEmail4">Select Client</label>
                                 <div class="form-row">
@@ -187,7 +170,7 @@
                                         <i class="fa fa-plus" aria-hidden="true"></i>
                                     </button>
                                 </div>
-                            </div>
+                            </div> -->
 
 
                         </div>
@@ -203,7 +186,7 @@
     </div>
 
     <!-- //Client form modal -->
-    <div class="modal fade" id="modal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="margin-left: 1px;">
+    <!-- <div class="modal fade" id="modal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="margin-left: 1px;">
         <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header p-1 pl-3 pr-3">
@@ -249,12 +232,12 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
     </div>
     <script>
-        $(function () {
-                $('#datetimepicker3').datetimepicker();
-            });
+        $(function() {
+            $('#datetimepicker3').datetimepicker();
+        });
     </script>
     <?php if (!empty($this->session->flashdata('error'))) { ?>
         <script>

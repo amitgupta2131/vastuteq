@@ -293,4 +293,13 @@ class MainModel extends ci_model
 		$q = $this->db->query($query)->result_array();
 		return $this->db->affected_rows() ? $q : false;
 	}
+
+	public function getClientDetails($value){
+		$condition = $value.'%';
+		$query = "select * from clientdetails where name like '$condition'";
+		$q = $this->db->query($query)->result_array();
+		return $this->db->affected_rows() ? $q : false;
+	}
+
+
 }

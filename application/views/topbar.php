@@ -239,3 +239,10 @@
         showAlert(error, 'success');
     </script>
 <?php } ?>
+
+<script>
+    d3.select('#newProject').on('click', function () {	
+    
+    window.location.href = base_url + 'Main/propertyInfo';
+    })
+</script>

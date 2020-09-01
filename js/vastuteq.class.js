@@ -443,16 +443,22 @@ export default class Vastuteq {
 
     let id = this.uniqueID();
 
-    d3.select(selector).attr('id', id);
-    console.log(type)
-    if (type != 'fixed') {
+    d3.select(selector).attr('id', id);  
+   
+    
       let object = subjx(selector).drag(svgOptions);
+     
       let controls = object[0].controls;
       controls.setAttribute("data-id", id);
       object[0].exeRotate({
         delta: this.degreesToRadians((this.calNorthAngle() + this.angle) - this.calTopRightEdgeAngle()),
       });
-    }
+
+      if (type == 'fixed') {         
+        $(`.sjx-svg-wrapper[data-id='${id}']`).remove();        
+      }
+
+      
   }
 
   _menuItemEventListener() {
@@ -519,7 +525,7 @@ export default class Vastuteq {
         d3.select(`.svg-object`).classed('active', true);
         d3.select(`.sjx-svg-wrapper`).classed('d-none', false);
       }
-      console.log(mVariable)
+      
       let newK = parseInt(zoom) / 100;
       // let newX = Utility.centerOfCanvas(that.canvasSize, (that.canvasSize.width * mVariable), (that.canvasSize.height * mVariable)).x;
       // let newY = Utility.centerOfCanvas(that.canvasSize, (that.canvasSize.width * mVariable), (that.canvasSize.height * mVariable)).y;

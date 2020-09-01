@@ -26,10 +26,16 @@ class Main extends CI_Controller
 
 	public function propertyInfo()
 	{
-		$this->addProperty();
-		// $data['clients'] = $this->MainModel->selectAllFromTableOrderBy('clientdetails', 'name', 'ASC');
-		// $data['category'] = $this->MainModel->selectAllFromTableOrderBy('property_category', 'category', 'ASC');
-		// $this->load->view('propertyInfo', $data);
+
+		$data['category'] = $this->MainModel->selectAllFromTableOrderBy('property_category', 'category', 'ASC');
+		$this->load->view('propertyInfo', $data);
+	}
+
+	public function getClientDetails()
+	{
+		$value = $_POST['value'];
+		$data = $this->MainModel->getClientDetails($value);
+		echo json_encode($data);
 	}
 
 	public function createMap()
@@ -87,56 +93,80 @@ class Main extends CI_Controller
 	public function addProperty()
 	{
 
-		$insertData = array(
-			'userId' => $_SESSION['userInfo']['userId'],
-			'clientId'	=> "1234567890",
-			'propertyName' => "DUMMY PROPERTY",
-			'category'	=> "RESIDENTIAL",
-			'type' => "FLAT",
-			'propertyAddress' => "DUMMY ADDRESS",
-			'grahPravesh_date' => "2020-07-28",
-			'firstVisit_date' => "2020-07-28",
-			'opening_date' => "2020-07-28",
-		);
-		$insertData['propertyId'] =   $this->MainModel->getNewIDorNo("P-", 'propertydetails');
+		// $insertData = array(
+		// 	'userId' => $_SESSION['userInfo']['userId'],
+		// 	'clientId'	=> "1234567890",
+		// 	'propertyName' => "DUMMY PROPERTY",
+		// 	'category'	=> "RESIDENTIAL",
+		// 	'type' => "FLAT",
+		// 	'propertyAddress' => "DUMMY ADDRESS",
+		// 	'grahPravesh_date' => "2020-07-28",
+		// 	'firstVisit_date' => "2020-07-28",
+		// 	'opening_date' => "2020-07-28",
+		// );
+		// $insertData['propertyId'] =   $this->MainModel->getNewIDorNo("P-", 'propertydetails');
 
-		$result = $this->MainModel->insertInto('propertydetails', $insertData);
-		if ($result) {
-			// $this->session->set_flashdata("success", "Client successfully added");
-			redirect(base_url('Main/draw/') . base64_encode($insertData['propertyId']));
-		} else {
-			$this->session->set_flashdata("error", "Something went wrong contact to IT");
-			redirect(base_url('Main/propertyInfo'));
-		}
-
-
-
-
-		// if (!empty($_POST['client']) && !empty($_POST['name']) && !empty($_POST['category']) && !empty($_POST['type']) && !empty($_POST['address'])) {
-		// 	$insertData = array(
-		// 		'userId' => $_SESSION['userInfo']['userId'],
-		// 		'clientId'	=> validateInput($_POST['client']),
-		// 		'propertyName' => validateInput($_POST['name']),
-		// 		'category'	=> validateInput($_POST['category']),
-		// 		'type' => validateInput($_POST['type']),
-		// 		'propertyAddress' => validateInput($_POST['address']),
-		// 		'grahPravesh_date' => validateInput($_POST['gpDate']),
-		// 		'firstVisit_date' => validateInput($_POST['fvDate']),
-		// 		'opening_date' => validateInput($_POST['ppDate']),
-		// 	);
-		// 	$insertData['propertyId'] =   $this->MainModel->getNewIDorNo("P-", 'propertydetails');
-		// 	$result = $this->MainModel->insertInto('propertydetails', $insertData);
-		// 	if ($result) {
-		// 		$this->session->set_flashdata("success", "Client successfully added");
-		// 		redirect(base_url('Main/draw/') . base64_encode($insertData['propertyId']));
-		// 	} else {
-		// 		$this->session->set_flashdata("error", "Something went wrong contact to IT");
-		// 		redirect(base_url('Main/propertyInfo'));
-		// 	}
+		// $result = $this->MainModel->insertInto('propertydetails', $insertData);
+		// if ($result) {
+		// 	// $this->session->set_flashdata("success", "Client successfully added");
+		// 	redirect(base_url('Main/draw/') . base64_encode($insertData['propertyId']));
 		// } else {
-		// 	$this->session->set_flashdata("error", "All fields are required");
+		// 	$this->session->set_flashdata("error", "Something went wrong contact to IT");
 		// 	redirect(base_url('Main/propertyInfo'));
 		// }
+
+		$clientData['cId'] = '';
+		if (!empty($_POST['cName']) && !empty($_POST['mNumber']) && !empty($_POST['lNumber']) && !empty($_POST['cEmail']) && !empty($_POST['cAddress'])) {
+
+			$clientData = array(
+				'userId' => $_SESSION['userInfo']['userId'],
+				'name'	=> validateInput($_POST['cName']),
+				'mobileNo' => validateInput($_POST['mNumber']),
+				'email'	=> validateInput($_POST['cEmail']),
+				'address' => validateInput($_POST['cAddress']),
+				'landlineNo' => validateInput($_POST['lNumber'])
+			);
+			$clientValidate =   $this->MainModel->selectAllFromWhere('clientdetails', array('email' => $clientData['email'], 'mobileNo' => $clientData['mobileNo']));
+
+			if (!$clientValidate) {
+				$clientData['cId'] =   $this->MainModel->getNewIDorNo("C-", 'clientdetails');
+				$result = $this->MainModel->insertInto('clientdetails', $clientData);
+
+				// if ($result) {
+				// 	echo json_encode(array("success", "Client successfully added", $insertData['cId'], $_POST['cName']));
+				// } else {
+				// 	echo json_encode(array("error", "Something went wrong contact to IT"));
+				// }
+			}
+		}
+
+		if (!empty($_POST['pname']) && !empty($_POST['category']) && !empty($_POST['type']) && !empty($_POST['address'])) {
+
+
+			$insertData = array(
+				'userId' => $_SESSION['userInfo']['userId'],
+				'clientId'	=> $clientData['cId'],
+				'propertyName' => validateInput($_POST['pname']),
+				'category'	=> validateInput($_POST['category']),
+				'type' => validateInput($_POST['type']),
+				'propertyAddress' => validateInput($_POST['address']),
+				'grahPravesh_date' => validateInput($_POST['gpDate']),
+				'firstVisit_date' => validateInput($_POST['fvDate']),
+				'opening_date' => validateInput($_POST['ppDate']),
+			);
+			$insertData['propertyId'] =   $this->MainModel->getNewIDorNo("P-", 'propertydetails');
+			$result = $this->MainModel->insertInto('propertydetails', $insertData);
+			if ($result) {
+				$this->session->set_flashdata("success", "property successfully added");
+				redirect(base_url('Main/draw/') . base64_encode($insertData['propertyId']));
+			} else {
+				$this->session->set_flashdata("error", "Could not add propert information, contact IT");
+				redirect(base_url('Main/propertyInfo'));
+			}
+		} else {
+			$this->session->set_flashdata("error", "All fields with * are required");
+			redirect(base_url('Main/propertyInfo'));
+		}
 	}
 
 	public function draw($id = null)
@@ -230,7 +260,7 @@ class Main extends CI_Controller
 		}
 	}
 
-	public function uploadImage($FILES,$POST)
+	public function uploadImage($FILES, $POST)
 	{
 		// print_r($_FILES["usrImage"]);die;
 		$target_dir = "uploads/";
@@ -274,7 +304,7 @@ class Main extends CI_Controller
 
 		if (isset($_POST) && !empty($_POST)) {
 
-			$uploadResult =	$this->uploadImage($_FILES,$_POST);
+			$uploadResult =	$this->uploadImage($_FILES, $_POST);
 			if ($uploadResult) {
 				$insertData = array(
 					'password' => validateInput($_POST['password']),
@@ -288,15 +318,15 @@ class Main extends CI_Controller
 				$result = $this->MainModel->updateWhere('login', $insertData, array('userId' => validateInput($_POST['id'])));
 
 				if ($result) {
-					$this->session->set_flashdata("success", "Client successfully updated");					
+					$this->session->set_flashdata("success", "Client successfully updated");
 					redirect($_POST['method']);
 				} else {
 					$this->session->set_flashdata("error", "Something went wrong contact to IT");
 					redirect($_POST['method']);
 				}
-			}else{
+			} else {
 				$this->session->set_flashdata("error", "Sorry, there was an error uploading your file.");
-					redirect($_POST['method']);
+				redirect($_POST['method']);
 			}
 		} else {
 			$this->session->set_flashdata("error", "Something went wrong contact to IT");

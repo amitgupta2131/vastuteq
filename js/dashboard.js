@@ -28,15 +28,16 @@ d3.select('#importMap').on('click', function () {
 
 
 
-d3.select('#newProject').on('click', function () {
-	// let id = uniqueID();
-	// localStorage.setItem("selectedMapId", id);
-	window.location.href = base_url + 'Main/propertyInfo';
+// d3.select('#newProject').on('click', function () {
+// 	// let id = uniqueID();
+// 	// localStorage.setItem("selectedMapId", id);
+// 	window.location.href = base_url + 'Main/propertyInfo';
 
 
-})
+// })
 
-d3.selectAll('[data-map-id]').on('click', function () {
+$('#houseMaps').on('click', '[data-map-id]', function () {
+
 	let id = d3.select(this).attr('data-map-id');
 	localStorage.setItem("selectedMapId", id);
 	console.log(id)
@@ -203,6 +204,39 @@ $(document).ready(function () {
 	}
 
 });
+
+$('#clientName').on('keyup', function () {
+	let value = $(this).val();
+
+
+	var formData = new FormData();
+	formData.append('value', value);
+	var url = base_url + "/Main/getClientDetails";
+	AjaxPost(formData, url, clientSuccess, AjaxError);
+
+	function clientSuccess(content, targetTextarea) {
+		var result = JSON.parse(content);
+
+		if (result != "") {
+			console.log(result)
+			$('#clients').empty();
+			result.forEach(element => {
+				$('#clients').removeClass('d-none')
+				$('#clients').append(`<a href="#">${element.name}, ${element.mobileNo}, ${element.email}</a>`)
+			});
+		} else {
+			showAlert(result.error, 'danger');
+		}
+	}
+})
+
+$('#clients').on('click','a',function(){
+	let data = $(this).text().split(',');
+	$("input[name='cName']").val(data[0]);
+	$("#mNumber").val(data[1]);
+	$("input[name='cEmail']").val(data[2]);
+	$('#clients').addClass('d-none')
+})
 
 
 
