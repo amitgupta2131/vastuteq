@@ -170,7 +170,7 @@ export default class Object {
 
     if (this.data.type != 'fixed') {
       this.object = subjx(`.svg-object[data-id="${this.id}"]`).drag(this.svgOptions);
-      console.log(this.id)
+      
       this.controls = this.object[0].controls;
       this.controls.setAttribute("data-id", this.id);
     }

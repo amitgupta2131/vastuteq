@@ -72,6 +72,12 @@ d3.selectAll('[data-map-id]').on('click', function () {
 			localStorage.setItem("objects", result[0].objects);
 		}
 
+		//creating EditText object data for localstorage
+		if (result[0].edit_text_objects != "") {
+			localStorage.removeItem("EditTextObjects");
+			localStorage.setItem("EditTextObjects", result[0].edit_text_objects);
+		}
+
 		//creating reportData for local storage
 		if (result[0].reportData != "") {
 			localStorage.removeItem("objectReport");

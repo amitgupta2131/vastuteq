@@ -140,14 +140,14 @@ export default class Vedic {
     mapGridType.on('mouseover', '#fixed', function () {           
       $('#fixedToolMenu').removeClass('dropdown-menu')
       $('#fixedToolMenu').addClass('dropdown-menu-show')
-      $('#floatingToolMenu').removeClass('dropdown-menu-show')
+      $('#floatingToolMenu').removeClass('dropdown-menu-show2')
       $('#floatingToolMenu').addClass('dropdown-menu')
     });   
 
     mapGridType.on('mouseover', '#floating', function () { 
       // alert('hello')
       $('#floatingToolMenu').removeClass('dropdown-menu')
-      $('#floatingToolMenu').addClass('dropdown-menu-show')          
+      $('#floatingToolMenu').addClass('dropdown-menu-show2')          
       $('#fixedToolMenu').removeClass('dropdown-menu-show')
       $('#fixedToolMenu').addClass('dropdown-menu')
       
@@ -195,7 +195,7 @@ export default class Vedic {
       //toggling fixed and floating menu
       $('#fixedToolMenu').addClass('dropdown-menu')
       $('#fixedToolMenu').removeClass('dropdown-menu-show')
-      $('#floatingToolMenu').removeClass('dropdown-menu-show')
+      $('#floatingToolMenu').removeClass('dropdown-menu-show2')
       $('#floatingToolMenu').addClass('dropdown-menu')
 
       let objType = $(this).attr('type');

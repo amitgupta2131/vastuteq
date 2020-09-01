@@ -1,8 +1,10 @@
 import Utility from "./helper/utility.class.js";
 import ObjectModel from "./helper/objectmodel.class.js";
+import EditTextModel from "./helper/editTextModel.class.js";
 import Model from "./helper/model.class.js";
 import Modal from "./helper/modal.class.js";
 import Object from "./object.class.js";
+import EditTextObjects from "./EditText.class.js";
 import Assist from "./helper/assist.class.js";
 import ActionBox from "./helper/actionbox.class.js";
 import StageZero from "./stages/stagezero.class.js";
@@ -32,6 +34,7 @@ export default class Vastuteq {
 
     //Storing and retrieving image properties to housemap
     this.objectModel = new ObjectModel();
+    this.editTextModel = new EditTextModel();
 
     //List all helper functions for Mahavastu and Vedic actions
     this.assist = new Assist();
@@ -201,7 +204,7 @@ export default class Vastuteq {
                       <a class="dropdown-item" href="#" id="mvc">Maha Vastu Chakra</a>
                       <a class="dropdown-item d-none" href="#" data-menu-item="get-marma">Marma</a>
                       <a class="dropdown-item d-none" href="#" data-menu-item="get-shanmahanti">Shanmahanti</a>`
-                      $("#toolMenu").html(html)       
+          $("#toolMenu").html(html)
           d3.select(".align-center-wrapper").classed("d-none", false);
           d3.select(".zoom-state-wrapper").classed("d-none", false);
           d3.select(".zoom-wrapper").classed("d-none", false);
@@ -283,6 +286,7 @@ export default class Vastuteq {
 
           // DRAW OBJECTS & ACTIVITIES
           let objects = this.objectModel.getObject(this.mapId);
+          let editText = this.editTextModel.getObject(this.mapId);
           let objectData, objectLayer = this.canvas.append("g").classed("objects-group", true);
 
           for (let i in objects) {
@@ -299,14 +303,25 @@ export default class Vastuteq {
 
             if (flag == '') {
               new Object({ mapId: this.mapId, layer: objectLayer, data: objectData, flag: flag });
-            } else {
-              // d3.selectAll(`.svg-object`).classed('deactive', false);
-              // d3.selectAll(`.svg-object`).classed('active', true);
-              //  let objGroup = $(`.objects-group`).html();
-              //  console.log(objGroup);
-              //  d3.select(`.objects-group`).remove();
-              //  $(`#main-group`).append(`<g class="objects-group">${objGroup}</g>`);
             }
+
+          }
+
+          for(let j in editText){
+            let data = {
+              name: editText[j].image.name,
+              src: '',
+              width: editText[j].image.width,
+              height: editText[j].image.height,
+              x: editText[j].image.x,
+              y: editText[j].image.y,
+              transfrom: editText[j].image.transform,              
+              type: 'editText'
+            }
+            new EditTextObjects({
+              layer: this.canvas,
+              data: data
+            });
 
           }
 
@@ -407,7 +422,7 @@ export default class Vastuteq {
     stage.end(this);
   }
 
-  createObject(selector,type="") {
+  createObject(selector, type = "") {
     // object
     let svgOptions = {
       container: '#vastuteqCanvas',
@@ -430,14 +445,14 @@ export default class Vastuteq {
 
     d3.select(selector).attr('id', id);
     console.log(type)
-    if(type!='fixed'){
-    let object = subjx(selector).drag(svgOptions);
-    let controls = object[0].controls;
-    controls.setAttribute("data-id", id);
-    object[0].exeRotate({
-      delta: this.degreesToRadians((this.calNorthAngle() + this.angle) - this.calTopRightEdgeAngle()),
-    });
-  }
+    if (type != 'fixed') {
+      let object = subjx(selector).drag(svgOptions);
+      let controls = object[0].controls;
+      controls.setAttribute("data-id", id);
+      object[0].exeRotate({
+        delta: this.degreesToRadians((this.calNorthAngle() + this.angle) - this.calTopRightEdgeAngle()),
+      });
+    }
   }
 
   _menuItemEventListener() {
@@ -493,6 +508,16 @@ export default class Vastuteq {
       let mVariable = parseFloat(`.${zoom}`);
       if (zoom >= 100) {
         mVariable = mVariable * 10;
+      }
+
+      if (zoom != 100) {        
+        d3.selectAll(`.svg-object`).classed('deactive', true);
+        d3.selectAll(`.svg-object`).classed('active', false);
+        d3.selectAll(`.sjx-svg-wrapper`).classed('d-none', true);
+      }else{
+        d3.select(`.svg-object`).classed('deactive', false);
+        d3.select(`.svg-object`).classed('active', true);
+        d3.select(`.sjx-svg-wrapper`).classed('d-none', false);
       }
       console.log(mVariable)
       let newK = parseInt(zoom) / 100;

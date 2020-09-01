@@ -3,6 +3,7 @@ import Object from '../object.class.js';
 import editText from '../EditText.class.js'
 import Utility from "../helper/utility.class.js";
 import ObjectModel from "../helper/objectmodel.class.js";
+import EditTextModel from "../helper/editTextModel.class.js";
 import Assist from "../helper/assist.class.js";
 
 export default class StageThird {
@@ -240,6 +241,7 @@ export default class StageThird {
         type: 'editText'
       }
       let obj = new editText({
+        mapId : that.mapId,
         layer: that.canvas,
         data: data
       });
@@ -311,7 +313,7 @@ export default class StageThird {
     mapGridType.on('mouseover', '#floating', function () {
       // alert('hello')
       $('#floatingToolMenu').removeClass('dropdown-menu')
-      $('#floatingToolMenu').addClass('dropdown-menu-show')
+      $('#floatingToolMenu').addClass('dropdown-menu-show2')
       $('#fixedToolMenu').removeClass('dropdown-menu-show')
       $('#fixedToolMenu').addClass('dropdown-menu')
 
@@ -325,7 +327,7 @@ export default class StageThird {
       //toggling fixed and floating menu
       $('#fixedToolMenu').addClass('dropdown-menu')
       $('#fixedToolMenu').removeClass('dropdown-menu-show')
-      $('#floatingToolMenu').removeClass('dropdown-menu-show')
+      $('#floatingToolMenu').removeClass('dropdown-menu-show2')
       $('#floatingToolMenu').addClass('dropdown-menu')
 
       let objType = $(this).attr('type');
@@ -625,6 +627,49 @@ export default class StageThird {
           showAlert('Item Removed', 'success');
         }
       }
+
+
+    })
+
+    $('body').on('click', '.removeEditText', function () {
+
+      let textObjects = JSON.parse(localStorage.getItem('EditTextObjects'));      
+      let objid = localStorage.getItem('selectedMapId');
+      let newTextObj = [];      
+      let id = $(this).attr('obj-id');
+      let name = $(this).attr('obj-name');
+      console.log(id)
+console.log(textObjects)
+      // deleting object from array
+      var filteredObj = textObjects.find(function (item, i) {
+        let index = '';
+        if (item.image.id == id) {
+          delete textObjects[i];
+          
+        }
+        return index;
+      });
+      console.log(textObjects)
+      //create new object array after deleting element
+      textObjects.forEach(element => {
+        newTextObj.push(element)
+      });
+
+      //removing old objects and adding new objects in localstorage
+      localStorage.removeItem('EditTextObjects');
+      localStorage.setItem('EditTextObjects', JSON.stringify(newTextObj))
+      
+
+
+      //Updating new object array in database
+      let objHandler = new EditTextModel()
+      let result = objHandler.updateObjectsInDataBase(objid); 
+      console.log(name)
+      console.log(id)
+      $(`.svg-object[data-object="${name}"]`).remove();
+      $(`.sjx-svg-wrapper[data-id="${id}]"`).remove();
+      
+      showAlert('Text field removed','success')
 
 
     })
