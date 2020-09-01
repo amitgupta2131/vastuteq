@@ -133,9 +133,9 @@
                         Tools
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown" id="toolMenu">
-                        <a class="dropdown-item" href="#" id="vpm">Vpm</a>
+                        <!-- <a class="dropdown-item" href="#" id="vpm">Vpm</a>
                         <a class="dropdown-item" href="#" id="mvpc">Shakti Chakra</a>
-                        <a class="dropdown-item" href="#" id="mvc">Maha Vastu Chakra</a>
+                        <a class="dropdown-item" href="#" id="mvc">Maha Vastu Chakra</a> -->
                         <a class="dropdown-item d-none" href="#" data-menu-item="get-marma">Marma</a>
                         <a class="dropdown-item d-none" href="#" data-menu-item="get-shanmahanti">Shanmahanti</a>
                     </div>

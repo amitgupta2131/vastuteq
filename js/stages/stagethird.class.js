@@ -75,6 +75,10 @@ export default class StageThird {
       if (value == 'vedic') {
         that.centroid = Utility.getVedicCenteroid(that.vedicMapBoundariesCoords);
         removeToolsImages();
+        let objName = localStorage.getItem('vedicImgObj');
+        that.objectDelete(objName);
+        that.model.editType(that.mapId, 'vedic');
+        that.model.editCentroid(that.mapId, that.centroid) 
         that._stage = 3;
         that.vedicStart()
       } else {
@@ -274,111 +278,249 @@ export default class StageThird {
       that.modal.drawMap({ areaArr: that.mapPolygonsAreaArray, division: that.division, dimension: that.distanceBetweenTwoPoints });
     })
 
-    let vpm = $('#vpm')
 
 
-    vpm.on('click', function () {
 
-      if (classRef.objectVpm == null || classRef.objectVpm == undefined) {
-        d3.select('.properties-section.opacity').classed('d-none', false);
-        d3.select(this.parentNode).classed('active', true);
-        that.model.editVpmtoggle(that.mapId, true);
-        let data = {
-          name: "VPM",
-          src: that.BASE_URL + 'assets/images/vpm.svg',
-          width: 400,
-          height: 400,
-          x: that.centroid.x - 400 / 2,
-          y: that.centroid.y - 400 / 2,
-          transfrom: "",
-          northAngle: that.calNorthAngle(),
-          angle: that.angle
-        }
-        console.log(this)
-        console.log(that.canvas)
-        classRef.objectVpm = new Object({
-          layer: that.canvas,
-          data: data
-        });
-      } else {
-        that.objectDelete('VPM');
-        classRef.objectVpm = null;
-        d3.select('.properties-section.opacity').classed('d-none', true);
-      }
+    let html = `<a class="nav-link text-dark menu-item" href="#" id="fixed" role="button">
+    Fixed Tools
+  </a>  
+  <a class="nav-link text-dark menu-item" href="#" id="floating" role="button">
+    Floating Tools
+  </a>  
+  <div class="dropdown-menu"  id="fixedToolMenu" style="background:#e1dfdf">
+  <a class="dropdown-item" type='fixed' href="#" value="VPM" id="vpm">Vpm</a>
+  <a class="dropdown-item" type='fixed' href="#" value="MVPC" id="mvpc">Shakti Chakra</a>
+  <a class="dropdown-item" type='fixed' href="#" value="MVC" id="mvc">Maha Vastu Chakra</a>
+</div> 
 
-      if (classRef.objectVpm == null || classRef.objectVpm == undefined)
-        d3.select(this.parentNode).classed('active', false);
+<div class="dropdown-menu"  id="floatingToolMenu">
+<a class="dropdown-item" href="#" value="VPM" id="vpm">Vpm</a>
+<a class="dropdown-item" href="#" value="MVPC" id="mvpc">Shakti Chakra</a>
+<a class="dropdown-item" href="#" value="MVC" id="mvc">Maha Vastu Chakra</a>
+</div> `;
 
-    })
+    let mapGridType = $('#toolMenu').html(html);
 
-    let mvm = $('#mvpc')
+    mapGridType.on('mouseover', '#fixed', function () {
+      $('#fixedToolMenu').removeClass('dropdown-menu')
+      $('#fixedToolMenu').addClass('dropdown-menu-show')
+      $('#floatingToolMenu').removeClass('dropdown-menu-show')
+      $('#floatingToolMenu').addClass('dropdown-menu')
+    });
 
-    mvm.on('click', function () {
-      if (classRef.objectMvm == null || classRef.objectMvm == undefined) {
-        d3.select('.color-state-wrapper').classed('d-none', false);
-        d3.select('.properties-section.opacity').classed('d-none', false);
-        d3.select(this.parentNode).classed('active', true);
-        that.model.editMvpctoggle(that.mapId, true);
-        let data = {
-          name: "MVM",
-          src: that.BASE_URL + 'assets/images/MVPC.svg',
-          width: 400,
-          height: 400,
-          x: that.centroid.x - 400 / 2,
-          y: that.centroid.y - 400 / 2,
-          transfrom: "",
-        }
-        classRef.objectMvm = new Object({
-          layer: that.canvas,
-          data: data
-        });
-      } else {
-        d3.select('.color-state-wrapper').classed('d-none', true);
-        that.objectDelete('MVM');
-        classRef.objectMvm = null;
-        d3.select('.properties-section.opacity').classed('d-none', true);
-      }
-
-      if (classRef.objectMvm == null || classRef.objectMvm == undefined)
-        d3.select(this.parentNode).classed('active', false);
-
-    })
-
-    let mvc = $('#mvc')
-
-    mvc.on('click', function () {
-
-      if (classRef.objectMVC == null || classRef.objectMVC == undefined) {
-        d3.select('.properties-section.opacity').classed('d-none', false);
-        d3.select(this.parentNode).classed('active', true);
-        that.model.editVpmtoggle(that.mapId, true);
-        let data = {
-          name: "MVC",
-          src: that.BASE_URL + 'assets/images/mvc.png',
-          width: 400,
-          height: 400,
-          x: that.centroid.x - 400 / 2,
-          y: that.centroid.y - 400 / 2,
-          transfrom: "",
-          northAngle: that.calNorthAngle(),
-          angle: that.angle
-        }
-        console.log(this)
-        console.log(that.canvas)
-        classRef.objectMVC = new Object({
-          layer: that.canvas,
-          data: data
-        });
-      } else {
-        that.objectDelete('MVC');
-        classRef.objectMVC = null;
-        d3.select('.properties-section.opacity').classed('d-none', true);
-      }
-
-      if (classRef.objectMVC == null || classRef.objectMVC == undefined)
-        d3.select(this.parentNode).classed('active', false);
+    mapGridType.on('mouseover', '#floating', function () {
+      // alert('hello')
+      $('#floatingToolMenu').removeClass('dropdown-menu')
+      $('#floatingToolMenu').addClass('dropdown-menu-show')
+      $('#fixedToolMenu').removeClass('dropdown-menu-show')
+      $('#fixedToolMenu').addClass('dropdown-menu')
 
     });
+
+
+    mapGridType.on('click', 'a', function () {
+
+      let gridType = $(this).attr('value');
+
+      //toggling fixed and floating menu
+      $('#fixedToolMenu').addClass('dropdown-menu')
+      $('#fixedToolMenu').removeClass('dropdown-menu-show')
+      $('#floatingToolMenu').removeClass('dropdown-menu-show')
+      $('#floatingToolMenu').addClass('dropdown-menu')
+
+      let objType = $(this).attr('type');
+
+
+
+      let wrapper = $(`g.sjx-svg-wrapper`).remove();
+      //remove grid
+      $('g.vedic-polygon').remove();
+
+      //remove vedic image
+      let imgName = localStorage.getItem('vedicImgObj')
+      if (imgName != null || imgName != '') {
+        that.objectDelete(imgName);
+        that.objectVpm = null
+        localStorage.removeItem('vedicImgObj')
+        d3.select('.properties-section.opacity').classed('d-none', true);
+      }
+
+      switch (gridType) {
+        case "VPM":
+          drawMahavastuImages('VPM', 'vpm.svg');
+          break;
+
+        case "MVPC":
+          drawMahavastuImages('MVPC', 'MVPC.svg');
+          break;
+
+        case "MVC":
+          drawMahavastuImages('MVC', 'mvc.png');
+          break;
+        default:          
+          break;
+      }
+
+      function drawMahavastuImages(objName, objImageSrc, object) {
+        localStorage.setItem('vedicImgObj', objName)
+        if (that.objectVpm == null || that.objectVpm == undefined) {
+
+          d3.select('.properties-section.opacity').classed('d-none', false);
+          d3.select(objName.parentNode).classed('active', true);
+          that.model.editVpmtoggle(that.mapId, true);
+
+          let data = {
+            name: objName,
+            src: that.BASE_URL + 'assets/images/' + objImageSrc,
+            width: 400,
+            height: 400,
+            x: that.centroid.x - 400 / 2,
+            y: that.centroid.y - 400 / 2,
+            transfrom: "",
+            northAngle: that.calNorthAngle(),
+            angle: that.angle,
+            type: objType
+          }
+          that.objectVpm = new Object({
+            layer: that.canvas,
+            data: data
+          });
+
+        } else {
+
+          that.objectDelete(objName);
+          that.objectVpm = null
+          localStorage.removeItem('vedicImgObj')
+          d3.select('.properties-section.opacity').classed('d-none', true);
+
+        }
+
+        if (that.objectVpm == null || that.objectVpm == undefined) {
+          d3.select(objName.parentNode).classed('active', false);
+        }
+
+      }
+
+      //delete tools images
+      $('.object-delete-toggle').on('click', function () {
+        // alert('hello')
+        let imgName = localStorage.getItem('vedicImgObj')
+        if (imgName != null || imgName != '') {
+          that.objectDelete(imgName);
+          that.objectVpm = null
+          localStorage.removeItem('vedicImgObj')
+          d3.select('.properties-section.opacity').classed('d-none', true);
+        }
+      })
+      // that.vedic.startDrawing(that);
+      //   that.assist.drawPolygonGrid({points: that.vedicMapBoundariesCoords, noOfLines: gridType});
+    })
+
+    // let vpm = $('#vpm')
+
+
+    // vpm.on('click', function () {
+
+    //   if (classRef.objectVpm == null || classRef.objectVpm == undefined) {
+    //     d3.select('.properties-section.opacity').classed('d-none', false);
+    //     d3.select(this.parentNode).classed('active', true);
+    //     that.model.editVpmtoggle(that.mapId, true);
+    //     let data = {
+    //       name: "VPM",
+    //       src: that.BASE_URL + 'assets/images/vpm.svg',
+    //       width: 400,
+    //       height: 400,
+    //       x: that.centroid.x - 400 / 2,
+    //       y: that.centroid.y - 400 / 2,
+    //       transfrom: "",
+    //       northAngle: that.calNorthAngle(),
+    //       angle: that.angle
+    //     }
+    //     console.log(this)
+    //     console.log(that.canvas)
+    //     classRef.objectVpm = new Object({
+    //       layer: that.canvas,
+    //       data: data
+    //     });
+    //   } else {
+    //     that.objectDelete('VPM');
+    //     classRef.objectVpm = null;
+    //     d3.select('.properties-section.opacity').classed('d-none', true);
+    //   }
+
+    //   if (classRef.objectVpm == null || classRef.objectVpm == undefined)
+    //     d3.select(this.parentNode).classed('active', false);
+
+    // })
+
+    // let mvm = $('#mvpc')
+
+    // mvm.on('click', function () {
+    //   if (classRef.objectMvm == null || classRef.objectMvm == undefined) {
+    //     d3.select('.color-state-wrapper').classed('d-none', false);
+    //     d3.select('.properties-section.opacity').classed('d-none', false);
+    //     d3.select(this.parentNode).classed('active', true);
+    //     that.model.editMvpctoggle(that.mapId, true);
+    //     let data = {
+    //       name: "MVM",
+    //       src: that.BASE_URL + 'assets/images/MVPC.svg',
+    //       width: 400,
+    //       height: 400,
+    //       x: that.centroid.x - 400 / 2,
+    //       y: that.centroid.y - 400 / 2,
+    //       transfrom: "",
+    //     }
+    //     classRef.objectMvm = new Object({
+    //       layer: that.canvas,
+    //       data: data
+    //     });
+    //   } else {
+    //     d3.select('.color-state-wrapper').classed('d-none', true);
+    //     that.objectDelete('MVM');
+    //     classRef.objectMvm = null;
+    //     d3.select('.properties-section.opacity').classed('d-none', true);
+    //   }
+
+    //   if (classRef.objectMvm == null || classRef.objectMvm == undefined)
+    //     d3.select(this.parentNode).classed('active', false);
+
+    // })
+
+    // let mvc = $('#mvc')
+
+    // mvc.on('click', function () {
+
+    //   if (classRef.objectMVC == null || classRef.objectMVC == undefined) {
+    //     d3.select('.properties-section.opacity').classed('d-none', false);
+    //     d3.select(this.parentNode).classed('active', true);
+    //     that.model.editVpmtoggle(that.mapId, true);
+    //     let data = {
+    //       name: "MVC",
+    //       src: that.BASE_URL + 'assets/images/mvc.png',
+    //       width: 400,
+    //       height: 400,
+    //       x: that.centroid.x - 400 / 2,
+    //       y: that.centroid.y - 400 / 2,
+    //       transfrom: "",
+    //       northAngle: that.calNorthAngle(),
+    //       angle: that.angle
+    //     }
+    //     console.log(this)
+    //     console.log(that.canvas)
+    //     classRef.objectMVC = new Object({
+    //       layer: that.canvas,
+    //       data: data
+    //     });
+    //   } else {
+    //     that.objectDelete('MVC');
+    //     classRef.objectMVC = null;
+    //     d3.select('.properties-section.opacity').classed('d-none', true);
+    //   }
+
+    //   if (classRef.objectMVC == null || classRef.objectMVC == undefined)
+    //     d3.select(this.parentNode).classed('active', false);
+
+    // });
 
 
     //delete tools images

@@ -61,9 +61,9 @@ export default class Vedic {
       d3.select('g.sjx-svg-wrapper').remove(); 
       d3.select('g.vedic-polygon').remove();
       that.objectDelete(objName);
-      // d3.select('g.svg-object[data-object][typeOf="image"]').remove();
-
-      that.centroid = Utility.getCentroid(that.mapBoundariesCoords);      
+      that.centroid = Utility.getCentroid(that.mapBoundariesCoords);   
+      that.model.editType(that.mapId, 'mahavastu');
+      that.model.editCentroid(that.mapId, that.centroid);         
       that._stage = 3;
       that.start()
       }
@@ -103,7 +103,7 @@ export default class Vedic {
                 </a>  
                 <a class="nav-link text-dark menu-item" href="#" id="floating" role="button">
                   Floating Tools
-                </a>  <div class="dropdown-menu"  id="fixedToolMenu">
+                </a>  <div class="dropdown-menu"  id="fixedToolMenu" style="background:#e1dfdf">
       <a class="dropdown-item" type="fixed" href="#" id="3GL" value="3GL" selected>3 X 3 Grid Layout</a>
       <a class="dropdown-item" type="fixed" href="#" id="3GD" value="3GD">3 X 3 Grid Diagonal</a>
       <a class="dropdown-item" type="fixed" href="#" id="9DL" value="9DL">9 X 9 Disha Lord Numero Grid</a>
@@ -220,7 +220,7 @@ export default class Vedic {
 
           that.assist.drawPolygon({ layer: that.canvas, points: that.vedicMapBoundariesCoords, strokeColor: "red", strokeWidth: 2 });
           that.assist.drawPolygonGrid({ points: that.vedicMapBoundariesCoords, color: "red", noOfLines: 3, strokeWidth: 2 });
-          that.createObject('g.vedic-polygon');
+          that.createObject('g.vedic-polygon',objType);
           that.vedic = new Vedic();
           break;
         case "3GD":
@@ -228,7 +228,7 @@ export default class Vedic {
           that.assist.drawPolygon({ layer: that.canvas, points: that.vedicMapBoundariesCoords, strokeColor: "blue", strokeWidth: 2 });
           that.assist.drawPolygonGrid({ points: that.vedicMapBoundariesCoords, color: "blue", noOfLines: 3, strokeWidth: 2 });
           that.assist.drawPolygonDiagonals({ points: that.vedicMapBoundariesCoords, color: "blue", noOfLines: 3, strokeWidth: 2 });
-          that.createObject('g.vedic-polygon');
+          that.createObject('g.vedic-polygon',objType);
           that.vedic = new Vedic();
           break;
         case "9DL":
@@ -245,7 +245,7 @@ export default class Vedic {
           that.assist.drawPolygon({ layer: that.canvas, points: that.vedicMapBoundariesCoords, strokeColor: "blue", strokeWidth: 2 });
           that.assist.drawPolygonGrid({ points: that.vedicMapBoundariesCoords, color: "blue", noOfLines: 9, strokeWidth: 2 });
           that.assist.drawPolygonDiagonals({ points: that.vedicMapBoundariesCoords, color: "blue", noOfLines: 9, strokeWidth: 2 });
-          that.createObject('g.vedic-polygon');
+          that.createObject('g.vedic-polygon',objType);
           that.vedic = new Vedic();
           break;
         case "9SG":

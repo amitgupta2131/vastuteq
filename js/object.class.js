@@ -31,7 +31,7 @@ export default class Object {
       .attr('transform', (data.transform === "abc") ? null : data.transform);
 
     this.g.append('image')
-      .classed('object', true)
+      .classed('object', true)      
       .attr('xmlns', 'http://www.w3.org/2000/svg')
       .attr("xlink:href", data.src)
       .attr('x', data.x)
@@ -42,9 +42,9 @@ export default class Object {
 
     //adding remove icon on objects/activities
     if (data.id != '' && data.id != undefined && data.name != 'map' && data.name != 'VPM'
-      && data.name != 'MVM' && data.name != 'MVC' && data.name != 'DL9' && data.name != '9SG'
+      && data.name != 'MVM' && data.name != 'MVC' && data.name != '9DL' && data.name != '9SG'
       && data.name != '9MS' && data.name != '9SM' && data.name != 'KSGP' && data.name != 'KSMP'
-      && data.name != 'CG' && data.name != '9SD') {
+      && data.name != 'CG' && data.name != '9SD' && data.name != 'MVPC') {
       console.log(data)
       this.g.append('image')
         .attr('class', 'remove')
@@ -57,6 +57,7 @@ export default class Object {
         .attr('obj-id', data.id)
         .attr('obj-name', data.name)
         .style('position', 'relative')
+       
     }
 
 
@@ -85,6 +86,8 @@ export default class Object {
       container: '#vastuteqCanvas',
       rotationPoint: false,
       proportions: true,
+      resizable: true,
+      rotatable: true,
       snap: {
         x: 10,
         y: 10,
@@ -174,7 +177,7 @@ export default class Object {
 
 
     //Code to rotate VPM to North East
-    if (this.data.name == "VPM" || this.data.name == "9MS" && this.data.type != 'fixed') {
+    if (this.data.name == "VPM" && this.data.name == "9MS" && this.data.type != 'fixed') {
       let vpmObject = d3.select(`.svg-object[data-object='${this.data.name}']`).select('image.object');
       let x = parseFloat(vpmObject.attr('x')), y = parseFloat(vpmObject.attr('y')),
         width = parseFloat(vpmObject.attr('width')), height = parseFloat(vpmObject.attr('height'));

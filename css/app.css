@@ -865,10 +865,24 @@ input::-webkit-inner-spin-button {
   border-radius: .25rem;
 }
 
-#fixed:hover,#floating:hover{
-  border-bottom: 2px solid black;
+#fixed:hover:after,#floating:hover:after{
+  /* border-bottom: 2px solid black; */
+  content : "";
+  display: inline-block;
+  position: relative;
+ /* margin-left: 50px; */
+  width: 0; 
+  height: 0; 
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  
+  border-left: 5px solid black;
   transition: background-position 0.2s 0.1s ease-out;
   /* background-size: 200% auto; */
+}
+
+.svg-object:hover .remove{
+  display:block !important;
 }
 
 

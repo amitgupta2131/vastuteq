@@ -407,7 +407,7 @@ export default class Vastuteq {
     stage.end(this);
   }
 
-  createObject(selector) {
+  createObject(selector,type="") {
     // object
     let svgOptions = {
       container: '#vastuteqCanvas',
@@ -429,12 +429,15 @@ export default class Vastuteq {
     let id = this.uniqueID();
 
     d3.select(selector).attr('id', id);
+    console.log(type)
+    if(type!='fixed'){
     let object = subjx(selector).drag(svgOptions);
     let controls = object[0].controls;
     controls.setAttribute("data-id", id);
     object[0].exeRotate({
       delta: this.degreesToRadians((this.calNorthAngle() + this.angle) - this.calTopRightEdgeAngle()),
     });
+  }
   }
 
   _menuItemEventListener() {

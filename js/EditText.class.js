@@ -84,8 +84,10 @@ export default class EditText {
 
         this.svgOptions = {
             container: '#vastuteqCanvas',
-            rotationPoint: false,
+            rotationPoint: true,
             proportions: true,
+            resizable: true,
+            rotatable: true,
             snap: {
                 x: 10,
                 y: 10,
