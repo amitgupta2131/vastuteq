@@ -236,6 +236,18 @@ $('#clients').on('click','a',function(){
 	$("#mNumber").val(data[1]);
 	$("input[name='cEmail']").val(data[2]);
 	$('#clients').addClass('d-none')
+});
+
+$("input[type='submit']").on('click',function(e){
+e.preventDefault;
+let category = $('#category option:selected').val();
+let type = $('#type option:selected').val();
+if(category == '' || type == ""){
+	showAlert('all * values are required','danger');
+	return false;
+}
+return true;
+
 })
 
 

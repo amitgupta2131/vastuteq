@@ -595,7 +595,7 @@ export default class Assist {
 
 
         if (outerArray.length == 32) {
-            // console.log(outerArray);
+            console.log(outerArray);
             tooltip(brahma, '1', 'Brahma');
             // tooltip(brahma, '1', 'Brahma,Building Purpose,Created services of products');
         // console.log(brahma)

@@ -188,7 +188,7 @@ export default class Object {
 
     //Code to rotate vedic images to North  
     if (this.data.name == "9SM" || this.data.name == "9DL" || this.data.name == "9GL" || this.data.name == "9SG"
-      || this.data.name == "9SD" || this.data.name == "KSGP" || this.data.name == "KSMP" || this.data.name == "CG") {
+      || this.data.name == "9SD" || this.data.name == "KSGP" || this.data.name == "KSMP" || this.data.name == "CG" || this.data.name == "MVC" || this.data.name == "MVPC") {
       let vpmObject = d3.select(`.svg-object[data-object='${this.data.name}']`).select('image.object');
       let x = parseFloat(vpmObject.attr('x')), y = parseFloat(vpmObject.attr('y')),
         width = parseFloat(vpmObject.attr('width')), height = parseFloat(vpmObject.attr('height'));
@@ -197,7 +197,7 @@ export default class Object {
       let edgeAngle = this.calTopRightEdgeAngle((x + width), y, vpmCentroid[0], vpmCentroid[1])
 
       this.object[0].exeRotate({
-        delta: this.degreesToRadians(0 + (this.data.northAngle + this.data.angle) - edgeAngle)
+        delta: this.degreesToRadians(45 + (this.data.northAngle + this.data.angle) - edgeAngle)
       });
     }
 

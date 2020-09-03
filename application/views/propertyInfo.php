@@ -75,13 +75,13 @@
 
                             <div class="form-row">
                                 <div class="form-group col-md-4">
-                                    <label for="inputEmail4">Full Name</label>
+                                    <label for="inputEmail4">Full Name <span class="text-danger">*</span></label>
                                     <input type="text" class="form-control form-control-sm" id="clientName" name="cName" placeholder="Name" required />
                                     
                                 </div>
                                 
                                 <div class="form-group col-md-4">
-                                    <label for="inputEmail4">Mobile No.</label>
+                                    <label for="inputEmail4">Mobile No. <span class="text-danger">*</span></label>
                                     <input type="input" class="form-control form-control-sm" id="mNumber" name="mNumber" placeholder="Mobile No." required />
                                 </div>
                                 <div class="form-group col-md-4">
@@ -93,7 +93,7 @@
                             </div>
                             <div class="form-row">
                                 <div class="form-group col-md-4">
-                                    <label for="inputEmail4">Email</label>
+                                    <label for="inputEmail4">Email <span class="text-danger">*</span></label>
                                     <input type="email" class="form-control form-control-sm" name="cEmail" placeholder="Email" required />
                                 </div>
                                 <div class="form-group col-md-4">
@@ -106,22 +106,22 @@
 
                             <div class="form-row">
                                 <div class="form-group col-md-4">
-                                    <label for="inputEmail4">Property Name</label>
-                                    <input type="text" class="form-control form-control-sm" name="pname" placeholder="property name" />
+                                    <label for="inputEmail4">Property Name <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control form-control-sm" name="pname" placeholder="property name" required />
                                 </div>
                                 <div class="form-group col-md-4">
-                                    <label for="inputEmail4">Category</label>
+                                    <label for="inputEmail4">Category <span class="text-danger">*</span></label>
                                     <select class="form-control form-control-sm" name="category" id="category" placeholder="property category">
                                         <option value="">Select Category</option>
                                         <?php if (isset($category) && !empty($category)) {
                                             for ($i = 0; $i < count($category); $i++) { ?>
-                                                <option tId="<?php echo $category[$i]['id']; ?>"" value=" <?php echo $category[$i]['category']; ?>"><?php echo $category[$i]['category']; ?></option>
+                                                <option tId="<?php echo $category[$i]['id']; ?>" value=" <?php echo $category[$i]['category']; ?>"><?php echo $category[$i]['category']; ?></option>
                                         <?php }
                                         } ?>
                                     </select>
                                 </div>
                                 <div class="form-group col-md-4">
-                                    <label for="inputEmail4">Type</label>
+                                    <label for="inputEmail4">Type <span class="text-danger">*</span></label>
                                     <select class="form-control form-control-sm" name="type" id="type" placeholder="property type">
                                         <option value="">Select Type</option>
 
@@ -130,8 +130,8 @@
                             </div>
                             <div class="form-row">
                                 <div class="form-group col-md-12">
-                                    <label for="inputAddress">Property Address</label>
-                                    <textarea class="form-control form-control-sm" name="address" row='6' placeholder="property address" /></textarea>
+                                    <label for="inputAddress">Property Address <span class="text-danger">*</span></label>
+                                    <textarea class="form-control form-control-sm" name="address" row='6' placeholder="property address" ></textarea>
                                 </div>
                             </div>
 
@@ -140,8 +140,8 @@
                             <div class="form-row">
                                 <div class="form-group col-md-4">
 
-                                    <label for="inputEmail4">Grah Pravesh Date</label>
-                                    <input type="date" class="form-control form-control-sm" name="gpDate" placeholder="Grah Pravesh Date (Optional)" />
+                                    <label for="inputEmail4">Grah Pravesh Date <span class="text-danger">*</span></label>
+                                    <input type="date" class="form-control form-control-sm" name="gpDate" placeholder="Grah Pravesh Date (Optional)" required/>
 
                                 </div>
                                 <div class="form-group col-md-4">

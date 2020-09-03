@@ -638,7 +638,7 @@ export default class Vastuteq {
 
       let selectedItem = d3.select(".svg-object.active[data-object]");
       if (selectedItem.node() != null) {
-        if (selectedItem.classed('saved') == false) {
+        // if (selectedItem.classed('saved') == true) {
           let object = d3.select(".svg-object.active[data-object]");
           let id = object.attr("data-id");
           let wrapper = d3.select(`.sjx-svg-wrapper[data-id="${id}"]`);
@@ -669,7 +669,7 @@ export default class Vastuteq {
             data: data,
           });
         }
-      }
+      // }
     });
   }
 
