@@ -750,5 +750,12 @@ $('#reportModal .modal-body').on('click','#feetSubmit',function(){
   }
 })
 
+$('.savebtn').on('click',function(){
+  let model = new Model();
+  let mapId = localStorage.getItem('selectedMapId');
+  let houseMap = model.getHouseMap(mapId);
+  model.updateHouseMapInDataBase(mapId, houseMap,'','true');
+})
+
 
 

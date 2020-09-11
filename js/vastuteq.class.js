@@ -23,6 +23,7 @@ export default class Vastuteq {
     d3.select(".toolbox.left").classed("d-none", true);
     d3.select(".current-position").classed("d-none", true);
     d3.select("#rightSidebar").classed("d-none", false);
+    d3.select(".savebtn").classed("d-none", false);
 
     // ?  C L A S S  V A R I A B L E
     this.BASE_URL = baseUrl;
@@ -83,7 +84,7 @@ export default class Vastuteq {
       width: d3.select("#drawArea").node().offsetWidth - 250,
       height: d3.select("#drawArea").node().offsetHeight + 1,
     };
-
+console.log(this.canvasSize)
     // ?  M A I N  C A N V A S
     this.svg = d3
       .select("#drawArea")

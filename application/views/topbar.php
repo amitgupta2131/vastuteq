@@ -1,10 +1,11 @@
 <section class="header" style="position:fixed;z-index:10">
     <div class="title-bar" style="justify-content:left;">
-        <img class="logo" style="margin-left:20px" src="<?php echo base_url('assets/images/logo.jpg') ?>" alt="logo" width="50">
+        <img class="logo" style="margin-left:20px" src="<?php echo base_url('assets/images/logo.jpg') ?>" alt="logo" width="30">
+        
 
         <!-- Tool Menus -->
-        <?php $method = $this->router->fetch_method();        
-        $user = $this->MainModel->selectAllFromWhere("login", array("userId" => $_SESSION['userInfo']['userId']));        
+        <?php $method = $this->router->fetch_method();
+        $user = $this->MainModel->selectAllFromWhere("login", array("userId" => $_SESSION['userInfo']['userId']));
         $userImg = $user[0]['userImg'];
         if ($method == 'draw') {
         ?>
@@ -43,44 +44,7 @@
                             </div>
                         </li>
 
-                        <!-- <li class="nav-item dropdown d-none measurement-section">
-                            <a class="nav-link dropdown-toggle text-white menu-item" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Options
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="#" data-menu-item="set-measurement">Set measurement</a>
-                                <a class="dropdown-item" href="#" data-menu-item="get-measurement">Get measurement</a>
-                            </div>
-                        </li>
-                        <li class="nav-item dropdown d-none tools-section">
-                            <a class="nav-link dropdown-toggle text-white menu-item" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Tools
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown" id="toolMenu">
-                            <a class="dropdown-item" href="#" id="vpm">Vpm</a>
-                            <a class="dropdown-item" href="#" id="mvpc">Mvpc</a>
-                                <a class="dropdown-item d-none" href="#" data-menu-item="get-marma">Marma</a>
-                                <a class="dropdown-item d-none" href="#" data-menu-item="get-shanmahanti">Shanmahanti</a>
-                            </div>
-                        </li> -->
-
                     </ul>
-
-                    <!-- <ul class="navbar-nav mr-2">
-                        <li class="nav-item">
-                            <a class="nav-link object-align-center" href="#" id="abc" name="align-center">
-                                <img src="http://localhost/vastuteq5/assets/icons/chevron.svg" alt="" width="20">
-                            </a>
-                        </li>
-                    </ul> -->
-
-                    <!--  <ul class="navbar-nav mr-2">
-                        <li class="nav-item">
-                            <a class="nav-link" href="#" id="print" name="print">
-                                <img src="http://localhost/vastuteq5/assets/icons/print.svg" alt="" width="20">
-                            </a>
-                        </li>
-                    </ul> -->
 
                     <ul class="navbar-nav mr-auto drawing-tools d-none">
                         <li class="nav-item dropdown ml-2 mr-2">
@@ -116,8 +80,17 @@
                     </li> -->
 
 
-                <li class="nav-item">
-                    <a href="#" id="newProject"><i class="fas fa-plus"></i>&nbsp;&nbsp;New Project</a>
+                <li class="nav-item dropdown">
+                    <a class="nav-link text-white menu-item p-0" href="#" id="fileDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        File
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="fileDropdown">
+                        <a class="dropdown-item" href="#" id="newProject"><!--<i class="fas fa-plus"></i>&nbsp;&nbsp; -->New Project</a>
+                        <a class="dropdown-item savebtn d-none" href="#" >Save</a>
+                        <a class="dropdown-item" onclick="javascript:toggleFullScreen()" href="#">Full Screen</a>
+                        
+                    </div>
+
                 </li>
                 <li class="nav-item dropdown d-none measurement-section">
                     <a class="nav-link text-white menu-item" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -151,7 +124,7 @@
                 </li>
                 <li class="nav-item d-none dropdown getReport">
                     <a class="nav-link text-white menu-item" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                       Report</a>
+                        Report</a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="#" id="objColor">Set Object Colour</a>
                         <a class="dropdown-item" href="#" id="inlineRadio1">Object/Activity wise report</a>
@@ -162,7 +135,7 @@
                     <img class="profile thumbnail rounded-circle" src="<?php echo $userImg != '' ? base_url('uploads/') . $userImg : base_url('assets/images/thumbnail.png') ?>" alt="user" width="20" id="profileButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="profileButton">
                         <a class="dropdown-item modal__trigger" href="#" data-toggle="modal" data-target="#settingModal"><i class="fas fa-cog"></i>&nbsp;&nbsp;Setting</a>
-                        <a class="dropdown-item" href="<?php echo base_url('Main/logout') ?>"><i class="fas fa-sign-out-alt"></i>&nbsp;&nbsp;Sign Out</a>
+                        <a class="dropdown-item" href="<?php echo base_url('Main/logout') ?>"><i class="fas fa-sign-out-alt"></i>&nbsp;&nbsp;Log Out</a>
                     </div>
                 </li>
             </ul>
@@ -241,8 +214,30 @@
 <?php } ?>
 
 <script>
-    d3.select('#newProject').on('click', function () {	
-    
-    window.location.href = base_url + 'Main/propertyInfo';
-    })
+    d3.select('#newProject').on('click', function() {
+        window.location.href = base_url + 'Main/propertyInfo';
+    });
+
+    function toggleFullScreen() {
+        var a = $(window).height() - 10;
+
+        if (!document.fullscreenElement && // alternative standard method
+            !document.mozFullScreenElement && !document.webkitFullscreenElement) { // current working methods
+            if (document.documentElement.requestFullscreen) {
+                document.documentElement.requestFullscreen();
+            } else if (document.documentElement.mozRequestFullScreen) {
+                document.documentElement.mozRequestFullScreen();
+            } else if (document.documentElement.webkitRequestFullscreen) {
+                document.documentElement.webkitRequestFullscreen(Element.ALLOW_KEYBOARD_INPUT);
+            }
+        } else {
+            if (document.cancelFullScreen) {
+                document.cancelFullScreen();
+            } else if (document.mozCancelFullScreen) {
+                document.mozCancelFullScreen();
+            } else if (document.webkitCancelFullScreen) {
+                document.webkitCancelFullScreen();
+            }
+        }
+    }
 </script>

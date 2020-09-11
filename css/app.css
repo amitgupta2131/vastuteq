@@ -325,7 +325,7 @@ ul.menu {
 }
 
 .header .title-bar {
-  height: 55px;
+  height: 33px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -497,10 +497,10 @@ body {
 
 #drawArea {
   position: absolute;
-  top: 62px;
+  top: 33px;
   left: 0px;
   width: 100vw;
-  height: calc(100vh - 62px);
+  height: calc(100vh - 33px);
   background-color: #fff;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
@@ -554,10 +554,10 @@ body {
 
 #rightSidebar {
   position: absolute;
-  top: 61px;
+  top: 33px;
   right: 0px;
   width: 250px;
-  height: calc(100vh - 61px);
+  height: calc(100vh - 33px);
   background-color: #fff;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
@@ -710,7 +710,7 @@ body {
 
 .alert {
   position: absolute;
-  top: 63px;
+  top: 33px;
   left: 10px;
   width: calc(100% - 270px);
   font-size: 14px;

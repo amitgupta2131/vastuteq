@@ -67,3 +67,7 @@ function devtaSuccess(content, targetTextarea) {
         $('#other-details').append(`<li>${points[i]}</li>`)
     }
 }
+
+function goBack() {
+    window.history.back();
+  }

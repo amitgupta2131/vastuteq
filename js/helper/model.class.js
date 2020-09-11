@@ -484,7 +484,7 @@ export default class Model {
         return this.houseMaps;
     }
 
-    updateHouseMapInDataBase(id, houseMaps, updatedField) {
+    updateHouseMapInDataBase(id, houseMaps, updatedField = '', msg='false') {
 
         let obj = houseMaps.map(function (houseMap) {
             if (houseMap.id == id) {
@@ -511,8 +511,19 @@ export default class Model {
         });
 
         function updateHouseMapssuccess(content, targetTextarea) {
-            var result = JSON.parse(content);
-            return content;
+            if(msg == 'true'){
+                var result = JSON.parse(content);                
+                if(result[0]=='success'){
+                    showAlert(result[1],'success');
+                }else{
+                    showAlert(result[1],'danger');
+                }
+                
+            }else{
+                var result = JSON.parse(content);                
+                return content;
+            }
+            
         }
     }
 }

@@ -115,8 +115,9 @@ class Main extends CI_Controller
 		// 	redirect(base_url('Main/propertyInfo'));
 		// }
 
-		$clientData['cId'] = '';
-		if (!empty($_POST['cName']) && !empty($_POST['mNumber']) && !empty($_POST['lNumber']) && !empty($_POST['cEmail']) && !empty($_POST['cAddress'])) {
+		//$clientData['cId'] = '';
+		$cId = '';
+		if (!empty($_POST['cName'])) {
 
 			$clientData = array(
 				'userId' => $_SESSION['userInfo']['userId'],
@@ -124,7 +125,8 @@ class Main extends CI_Controller
 				'mobileNo' => validateInput($_POST['mNumber']),
 				'email'	=> validateInput($_POST['cEmail']),
 				'address' => validateInput($_POST['cAddress']),
-				'landlineNo' => validateInput($_POST['lNumber'])
+				'landlineNo' => validateInput($_POST['lNumber']),
+				'cId' => $cId
 			);
 			$clientValidate =   $this->MainModel->selectAllFromWhere('clientdetails', array('email' => $clientData['email'], 'mobileNo' => $clientData['mobileNo']));
 
@@ -140,12 +142,12 @@ class Main extends CI_Controller
 			}
 		}
 
-		if (!empty($_POST['pname']) && !empty($_POST['category']) && !empty($_POST['type']) && !empty($_POST['address'])) {
+		if (!empty($_POST['cName'])) {
 
 
 			$insertData = array(
 				'userId' => $_SESSION['userInfo']['userId'],
-				'clientId'	=> $clientData['cId'],
+				'clientId' => $cId,
 				'propertyName' => validateInput($_POST['pname']),
 				'category'	=> validateInput($_POST['category']),
 				'type' => validateInput($_POST['type']),
@@ -393,7 +395,7 @@ class Main extends CI_Controller
 
 			$result = $this->MainModel->updateWhere('housemaps', $insertData, array('mapId'	=> ($_POST['id'])));
 			if ($result) {
-				echo json_encode(array("success", "Details Updated"));
+				echo json_encode(array("success", "Details Saved"));
 			} else {
 				echo json_encode(array("error", "Details are not saved contact to IT"));
 			}

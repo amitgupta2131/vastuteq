@@ -55,7 +55,8 @@
     <?php include 'topbar.php' ?>
     <section class="ayadi-container p-4" style="margin-top:3rem">
         <div class="card p-2 pb-4">
-            <h4 class="text-center">Ayadi Calculator</h4>
+            <h4 class="text-center">Ayadi Calculator <button class="btn btn-primary" style="float:right;" onclick="goBack()">Back</button></h4>
+             
             <div class="container d-flex justify-content-center overflow-auto" style="max-width:1337px">
                 <div class="w-25 border p-2">
 
@@ -250,6 +251,11 @@
     </section>
 
     <script src="<?php echo base_url('js/ayadi.js') ?>" type="module" defer></script>
+    <script>
+        function goBack() {
+    window.history.back();
+  }
+    </script>
 </body>
 
 </html>

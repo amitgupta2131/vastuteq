@@ -34,38 +34,39 @@ export default class Assist {
             { name: 'N2', value: 1, color: "white" }, { name: 'N3', value: 1, color: "blue" }
         ];
         this.DEVTAS = [
-            { name: 'Shikhi', value: 14, text: "Subject Expert,Bhram Gyani" },
-            { name: 'Parjanya', value: 15, text: "Producer,Fertilizer" },
-            { name: 'Jayant', value: 16, text: "Excellent Performer,Achiever" },
-            { name: 'Mahendra', value: 17, text: "Top Boss,King" },
-            { name: 'Surya', value: 18, text: "Executer,Awakener" },
-            { name: 'Satya', value: 19, text: "Court,Dharma" },
-            { name: 'Bhrisha', value: 20, text: "Researher,Grinder" },
-            { name: 'Antriksh', value: 21, text: "Market Space,Bandwidth" },
-            { name: 'Anil', value: 22, text: "Elevator,Fire" },
-            { name: 'Pusha', value: 23, text: "HighWay Security,Recoverer" },
-            { name: 'Vitasta', value: 24, text: "Ancimory Service Provider" },
-            { name: 'Griha Spatya', value: 25, text: "Binder,Commander" },
-            { name: 'Yama', value: 26, text: "Finer,Sortor" },
-            { name: 'Gandharva', value: 27, text: "whActor,Performing Artist" },
-            { name: 'Bhriangraj', value: 28, text: "Cleasner,Drainer" },
-            { name: 'Mrigah', value: 29, text: "Shooter,Hunter" },
-            { name: 'Pitra', value: 30, text: "Anctestors Legacy" },
-            { name: 'Dauwarik', value: 31, text: "Gaurd Security System" },
-            { name: 'Sugreev', value: 32, text: "Capturer,Gainer" },
-            { name: 'Puspdant', value: 33, text: "Grammarian,Ustaad,maestro" },
-            { name: 'Varun', value: 34, text: "Ed,CBI,Vigilance" },
-            { name: 'Asur', value: 35, text: "Informer,Secret Agent" },
-            { name: 'Shosha', value: 36, text: "Depressive,Dryer" },
-            { name: 'Papyakshma', value: 37, text: "Alcoholic,Addicted" },
-            { name: 'Roga', value: 38, text: "Vyeakent,Fatigue" },
-            { name: 'Ahir', value: 39, text: "Shaker,Attacker" },
-            { name: 'Mukhya', value: 40, text: "Designer,System Maker" },
-            { name: 'Bhallat', value: 41, text: "Discriminator,Parkhi" },
-            { name: 'Soma', value: 42, text: "Solution,Drive" },
-            { name: 'Bhujang', value: 43, text: "Doctor,Healer" },
-            { name: 'Aditi', value: 44, text: "Caretaker,Councellor" },
-            { name: 'Diti', value: 45, text: "Instructor,Pt Teacher" }, 
+            { direction: "N4" ,name: 'Bhallat', value: 41, text: "Discriminator,Parkhi" },
+            { direction: "N5" ,name: 'Soma', value: 42, text: "Solution,Drive" },
+            { direction: "N6" ,name: 'Bhujang', value: 43, text: "Doctor,Healer" },
+            { direction: "N7" ,name: 'Aditi', value: 44, text: "Caretaker,Councellor" },
+            { direction: "N8" ,name: 'Diti', value: 45, text: "Instructor,Pt Teacher" }, 
+            { direction: "E1" ,name: 'Shikhi', value: 14, text: "Subject Expert,Bhram Gyani" },
+            { direction: "E2" ,name: 'Parjanya', value: 15, text: "Producer,Fertilizer" },
+            { direction: "E3" ,name: 'Jayant', value: 16, text: "Excellent Performer,Achiever" },
+            { direction: "E4" ,name: 'Mahendra', value: 17, text: "Top Boss,King" },
+            { direction: "E5" ,name: 'Surya', value: 18, text: "Executer,Awakener" },
+            { direction: "E6",name: 'Satya', value: 19, text: "Court,Dharma" },
+            { direction: "E7" ,name: 'Bhrisha', value: 20, text: "Researher,Grinder" },
+            { direction: "E8" ,name: 'Antriksh', value: 21, text: "Market Space,Bandwidth" },
+            { direction: "S1" ,name: 'Anil', value: 22, text: "Elevator,Fire" },
+            { direction: "S2" ,name: 'Pusha', value: 23, text: "HighWay Security,Recoverer" },
+            { direction: "S3" ,name: 'Vitasta', value: 24, text: "Ancimory Service Provider" },
+            { direction: "S4" ,name: 'Griha Spatya', value: 25, text: "Binder,Commander" },
+            { direction: "S5" ,name: 'Yama', value: 26, text: "Finer,Sortor" },
+            { direction: "S6" ,name: 'Gandharva', value: 27, text: "whActor,Performing Artist" },
+            { direction: "S7" ,name: 'Bhriangraj', value: 28, text: "Cleasner,Drainer" },
+            { direction: "S8" ,name: 'Mrigah', value: 29, text: "Shooter,Hunter" },
+            { direction: "W1" ,name: 'Pitra', value: 30, text: "Anctestors Legacy" },
+            { direction: "W2" ,name: 'Dauwarik', value: 31, text: "Gaurd Security System" },
+            { direction: "W3" ,name: 'Sugreev', value: 32, text: "Capturer,Gainer" },
+            { direction: "W4" ,name: 'Puspdant', value: 33, text: "Grammarian,Ustaad,maestro" },
+            { direction: "W5" ,name: 'Varun', value: 34, text: "Ed,CBI,Vigilance" },
+            { direction: "W6" ,name: 'Asur', value: 35, text: "Informer,Secret Agent" },
+            { direction: "W7" ,name: 'Shosha', value: 36, text: "Depressive,Dryer" },
+            { direction: "W8" ,name: 'Papyakshma', value: 37, text: "Alcoholic,Addicted" },
+            { direction: "N1" ,name: 'Roga', value: 38, text: "Vyeakent,Fatigue" },
+            { direction: "N2" ,name: 'Ahir', value: 39, text: "Shaker,Attacker" },
+            { direction: "N3" ,name: 'Mukhya', value: 40, text: "Designer,System Maker" },
+            
         ];
     }
 
@@ -547,8 +548,8 @@ export default class Assist {
 
         let nAngle = Utility.getAngle(centroid.x, centroid.y, perpendicularPoints.x, perpendicularPoints.y);
         let increment = 360 / 32;
-        let ipArray = Utility.getIntersectionPoints(angle, centroid, mapBoundariesCoords, 32, "intersectionPoints");
-
+        let ipArray = Utility.getIntersectionPoints(nAngle+angle, centroid, mapBoundariesCoords, 32, "intersectionPoints");
+        console.log(ipArray);
         let outerArray = [];
         let len = ipArray.length;
         let devtas = this.DEVTAS
@@ -565,7 +566,7 @@ export default class Assist {
             }
             else {
                 //store current point as farthest point in that direction
-                outerArray.push({ ip: farthestPoint });
+                outerArray.push({ ip: farthestPoint , direction : ipArray[i].direction});
             }
         }
 
@@ -595,7 +596,7 @@ export default class Assist {
 
 
         if (outerArray.length == 32) {
-            console.log(outerArray);
+            // console.log(outerArray);
             tooltip(brahma, '1', 'Brahma');
             // tooltip(brahma, '1', 'Brahma,Building Purpose,Created services of products');
         // console.log(brahma)
@@ -611,7 +612,14 @@ export default class Assist {
                 outerPolygon.push(twoThirdArr[i]);
                 layer.append('polygon')
                     .attr('points', outerPolygon).style('fill-opacity', 0).style('stroke', 'red').style('stroke-width', 2);
-                    tooltip(outerPolygon, devtas[i].value, devtas[i].name);
+                    // let id = getDevtaId(outerArray[i].direction);
+                    let d = outerArray[i].direction;
+                    console.log(d)
+                    let id = devtas.filter(function(e){
+                           if (e.direction == d) {return e};
+                    })
+                    console.log(id);
+                    tooltip(outerPolygon, id[0].value, id[0].name);
             }
 
             //Draw 2nd layer

@@ -1,7 +1,7 @@
 export default class Template {
 
     static aayadiDetailedReport(length, breadth, siUnit, result,aayu,checkedArr) {
-console.log(checkedArr)
+console.log(result)
 
             return `The Aayadi calculation is a matrix of architecture and astrological calculations that 
             are done to check the energy suitability of the plot and its relationship with the owner. 
@@ -67,7 +67,8 @@ console.log(checkedArr)
             ${checkedArr['Nakshatra'] ? `
             <span class="Nakshatra heading">Nakshatra:</span>
             <br>
-            <span class="Nakshatra desc"></span>
+            <span class="Nakshatra desc">Nakshatra is considered very important in Astrology and it is considered Vastu shastras as well for getting best results. Your nakshatra gives a value of ${result['nakshatra']['remainder']} and it's prayay is ${result['nakshatra']['resultBasedOn']} which is ${result['nakshatra']['result']} for your property.
+            </span>
             <br>
             <br>`:''}
             ${checkedArr['Amsha'] ? `

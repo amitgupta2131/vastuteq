@@ -17,4 +17,4 @@ application/logs/*
 /vendor/
 
 #Sessions folder
-sessions/*
+application/sessions/*

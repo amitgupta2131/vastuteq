@@ -81,7 +81,7 @@ class MainModel extends ci_model
 // return $this->db->trans_status();
 	//	$this->db->where($condition);
 	//	$this->db->update($tableName, $data); 
-		return $this->db->affected_rows()?TRUE:FALSE;
+		return $this->db->affected_rows()?FALSE:TRUE;
 	}
 
 	public function selectAllFromTableWhere($tableName=null,$condition=null,$getColumn=null)

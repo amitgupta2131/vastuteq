@@ -24,14 +24,18 @@
     -->
     
     <?php include 'topbar.php' ?>
+    
     <section class="devtas-main justify-content-between align-items-center row devtas_container" style="margin-top:4rem !important">
-        <div class="leftside">
+    <button class="btn btn-primary" style="float:right;position:fixed;top:40px;right:50px" onclick="goBack()">Back</button>  
+    <div class="leftside">
         </div>
         <div class="rightside">
+        
             <img src="<?php echo base_url('assets/images/chakra.png')?>" alt="" width="470">
         </div>
     </section>
-
+    
+    
     <!-- 
     //////////////////////////////// --- A P P  M O D A L ---  ////////////////////////////////
     -->
