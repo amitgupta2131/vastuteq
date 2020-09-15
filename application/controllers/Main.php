@@ -47,6 +47,7 @@ class Main extends CI_Controller
 	public function importMap()
 	{
 		$data['propertyId'] =   $this->MainModel->getNewIDorNo("P-", 'propertydetails');
+		$data['category'] = $this->MainModel->selectAllFromTableOrderBy('property_category', 'category', 'ASC');
 		$data['behavior'] = "import";
 		$this->load->view('draw.php', $data);
 	}
@@ -159,15 +160,16 @@ class Main extends CI_Controller
 			$insertData['propertyId'] =   $this->MainModel->getNewIDorNo("P-", 'propertydetails');
 			$result = $this->MainModel->insertInto('propertydetails', $insertData);
 			if ($result) {
-				$this->session->set_flashdata("success", "property successfully added");
-				redirect(base_url('Main/draw/') . base64_encode($insertData['propertyId']));
+				// $this->session->set_flashdata("success", "property successfully added");
+				// redirect(base_url('Main/draw/') . base64_encode($insertData['propertyId']));
+				echo (json_encode(array('propertyId' => $insertData['propertyId'],'type'=>"success")));
 			} else {
-				$this->session->set_flashdata("error", "Could not add propert information, contact IT");
-				redirect(base_url('Main/propertyInfo'));
+				echo(json_encode(array("error", "Could not add propert information, contact IT")));
+				// redirect(base_url('Main/propertyInfo'));
 			}
 		} else {
-			$this->session->set_flashdata("error", "All fields with * are required");
-			redirect(base_url('Main/propertyInfo'));
+			echo(json_encode(array("error", "All fields with * are required")));
+			// redirect(base_url('Main/propertyInfo'));
 		}
 	}
 

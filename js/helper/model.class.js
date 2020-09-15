@@ -89,8 +89,8 @@ export default class Model {
 
         this._commit(this.houseMaps);
 
-        let updatedField = { name: 'type', value: updatedType };
-        this.updateHouseMapInDataBase(id, this.houseMaps, updatedField)
+        // let updatedField = { name: 'type', value: updatedType };
+        // this.updateHouseMapInDataBase(id, this.houseMaps, updatedField)
     }
 
     editVedicBoundariesCoords(id, updatedVedicCoords) {
@@ -118,8 +118,8 @@ export default class Model {
 
         this._commit(this.houseMaps);
 
-        let updatedField = { name: 'vedicBoundariesCoords', value: JSON.stringify(updatedVedicCoords) };
-        this.updateHouseMapInDataBase(id, this.houseMaps, updatedField)
+        // let updatedField = { name: 'vedicBoundariesCoords', value: JSON.stringify(updatedVedicCoords) };
+        // this.updateHouseMapInDataBase(id, this.houseMaps, updatedField)
     }
 
     editCustomBoundariesCoords(id, updatedCustomCoords) {
@@ -147,8 +147,8 @@ export default class Model {
 
         this._commit(this.houseMaps);
 
-        let updatedField = { name: 'customBoundariesCoords', value: JSON.stringify(updatedCustomCoords) };
-        this.updateHouseMapInDataBase(id, this.houseMaps, updatedField)
+        // let updatedField = { name: 'customBoundariesCoords', value: JSON.stringify(updatedCustomCoords) };
+        // this.updateHouseMapInDataBase(id, this.houseMaps, updatedField)
     }
 
     editCentroid(id, updatedCentroid) {
@@ -175,8 +175,8 @@ export default class Model {
 
         this._commit(this.houseMaps);
 
-        let updatedField = { name: 'centroid', value: JSON.stringify(updatedCentroid) };
-        this.updateHouseMapInDataBase(id, this.houseMaps, updatedField)
+        // let updatedField = { name: 'centroid', value: JSON.stringify(updatedCentroid) };
+        // this.updateHouseMapInDataBase(id, this.houseMaps, updatedField)
     }
 
     editFaceCoords(id, updatedFaceCoords) {
@@ -203,8 +203,8 @@ export default class Model {
 
         this._commit(this.houseMaps);
 
-        let updatedField = { name: 'faceCoords', value: JSON.stringify(updatedFaceCoords) };
-        this.updateHouseMapInDataBase(id, this.houseMaps, updatedField)
+        // let updatedField = { name: 'faceCoords', value: JSON.stringify(updatedFaceCoords) };
+        // this.updateHouseMapInDataBase(id, this.houseMaps, updatedField)
     }
 
     editDimension(id, updatedDimension) {
@@ -231,8 +231,8 @@ export default class Model {
 
         this._commit(this.houseMaps);
 
-        let updatedField = { name: 'dimension', value: updatedDimension };
-        this.updateHouseMapInDataBase(id, this.houseMaps, updatedField)
+        // let updatedField = { name: 'dimension', value: updatedDimension };
+        // this.updateHouseMapInDataBase(id, this.houseMaps, updatedField)
     }
 
     editDegree(id, updatedDegree) {
@@ -260,8 +260,8 @@ export default class Model {
 
         this._commit(this.houseMaps);
 
-        let updatedField = { name: 'degree', value: updatedDegree };
-        this.updateHouseMapInDataBase(id, this.houseMaps, updatedField)
+        // let updatedField = { name: 'degree', value: updatedDegree };
+        // this.updateHouseMapInDataBase(id, this.houseMaps, updatedField)
     }
 
     editFaceWall(id, updateFacewall) {
@@ -290,8 +290,8 @@ export default class Model {
 
         this._commit(this.houseMaps);
 
-        let updatedField = { name: 'degree', value: updateFacewall };
-        this.updateHouseMapInDataBase(id, this.houseMaps, updatedField)
+        // let updatedField = { name: 'degree', value: updateFacewall };
+        // this.updateHouseMapInDataBase(id, this.houseMaps, updatedField)
     }
 
     editVpmtoggle(id, updateVpmtoggle) {
@@ -320,8 +320,8 @@ export default class Model {
 
         this._commit(this.houseMaps);
 
-        let updatedField = { name: 'vpmtoggle', value: updateVpmtoggle };
-        this.updateHouseMapInDataBase(id, this.houseMaps, updatedField)
+        // let updatedField = { name: 'vpmtoggle', value: updateVpmtoggle };
+        // this.updateHouseMapInDataBase(id, this.houseMaps, updatedField)
     }
 
     editMvpctoggle(id, updateMvpctoggle) {
@@ -350,8 +350,8 @@ export default class Model {
 
         this._commit(this.houseMaps);
 
-        let updatedField = { name: 'mvpctoggle', value: updateMvpctoggle };
-        this.updateHouseMapInDataBase(id, this.houseMaps, updatedField)
+        // let updatedField = { name: 'mvpctoggle', value: updateMvpctoggle };
+        // this.updateHouseMapInDataBase(id, this.houseMaps, updatedField)
     }
 
     // Alter stage according to completion
@@ -379,8 +379,8 @@ export default class Model {
 
         this._commit(this.houseMaps);
 
-        let updatedField = { name: 'stage', value: updatedStage };
-        this.updateHouseMapInDataBase(id, this.houseMaps, updatedField)
+        // let updatedField = { name: 'stage', value: updatedStage };
+        // this.updateHouseMapInDataBase(id, this.houseMaps, updatedField)
     }
 
     editMapImageData(id, updatedImageData) {
@@ -434,8 +434,8 @@ export default class Model {
 
         this._commit(this.houseMaps);
 
-        let updatedField = { name: 'complete', value: true };
-        this.updateHouseMapInDataBase(id, this.houseMaps, updatedField)
+        // let updatedField = { name: 'complete', value: true };
+        // this.updateHouseMapInDataBase(id, this.houseMaps, updatedField)
     }
 
     // getCustomBoundariesCoords() {

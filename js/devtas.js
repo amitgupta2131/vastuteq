@@ -42,7 +42,7 @@ $('.devta-btn').click(function () {
     var formData = new FormData();
     formData.append('name', devtaName);
     console.log(devtaName)
-    var url = base_url + "/Main/getDevta";
+    var url = BASE_URL + "/Main/getDevta";
     AjaxPost(formData, url, devtaSuccess, AjaxError); 
     
 })
@@ -56,7 +56,7 @@ function devtaSuccess(content, targetTextarea) {
     console.log(result);
     $('#appModal').modal('show');
     $('#devtaTitle').text(result['name']);
-    $('#devta-img').attr('src', base_url + result['image']);
+    $('#devta-img').attr('src', BASE_URL + result['image']);
     $('#devta-name').text(table.name);
     $('#devta-direction').text(table.direction);
     $('#devta-color').text(table.color);
@@ -68,6 +68,17 @@ function devtaSuccess(content, targetTextarea) {
     }
 }
 
-function goBack() {
-    window.history.back();
-  }
+$('#backbtn').on('click',function(){    
+    console.log(document.referrer)
+    var str = document.referrer;
+    var res = str.match(/importMap/g);
+    console.log(res)
+    if (res) {
+        // let dashboard = new dashboard();
+        let id = localStorage.getItem('selectedMapId');
+        window.location.href = BASE_URL + '/Main/draw/' + btoa(id);
+    } else {
+        window.history.back();
+    }
+})
+

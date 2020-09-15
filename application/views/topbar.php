@@ -22,7 +22,7 @@
                             </a>
                             <div class="dropdown-menu active" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" href="#" data-behavior="create" data-menu-item="create-map" id="open-btn">Create Map</a>
-                                <a class="dropdown-item" href="#" data-behavior="import" data-menu-item="import-map">Import Map</a>
+                                <!-- <a class="dropdown-item" href="#" data-behavior="import" data-menu-item="import-map">Import Map</a> -->
                                 <!-- <input class="import-map-file d-none" type="file"> -->
                                 <div class="dropdown-divider d-none"></div>
                                 <a class="dropdown-item d-none" href="#" data-menu-item="add-image">Add Image</a>
@@ -87,6 +87,8 @@
                     <div class="dropdown-menu" aria-labelledby="fileDropdown">
                         <a class="dropdown-item" href="#" id="newProject"><!--<i class="fas fa-plus"></i>&nbsp;&nbsp; -->New Project</a>
                         <a class="dropdown-item savebtn d-none" href="#" >Save</a>
+                        <a class="dropdown-item" href="<?php echo base_url('Main/logout') ?>">Exit</a>
+                        <a class="dropdown-item" href="<?php echo base_url('Main/createMap') ?>">Create Map</a>
                         <a class="dropdown-item" onclick="javascript:toggleFullScreen()" href="#">Full Screen</a>
                         
                     </div>
@@ -210,12 +212,13 @@
     <script>
         let error = '<?php echo $this->session->flashdata('success'); ?>';
         showAlert(error, 'success');
+        
     </script>
 <?php } ?>
 
 <script>
     d3.select('#newProject').on('click', function() {
-        window.location.href = base_url + 'Main/propertyInfo';
+        window.location.href = base_url + 'Main/importMap';
     });
 
     function toggleFullScreen() {

@@ -26,22 +26,27 @@
     <script src="<?php echo base_url('js/d3.min.js') ?>"></script>
     <!-- FONTAWESOME JS -->
     <script src="<?php echo base_url('assets/fontawesome/js/all.min.js'); ?>"></script>
-    <!-- CUSTOM JS -->
-    <script>const BASE_URL = '<?php echo base_url()?>';</script>
+    <!-- CUSTOM JS -->    
+    <script>
+        const BASE_URL = '<?php echo base_url() ?>';
+    </script>
     <!-- Ajax library -->
     <script src="<?php echo base_url('js/MyScriptLibrary.js'); ?>"></script>
     <!-- Notify library -->
     <script src="<?php echo base_url('js/bootstrap-notify.min.js'); ?>"></script>
     <style>
-         table {
-             border-collapse:collapse;
-         }
-          td,th {
-                border:1px solid #000000; 
-                text-align:center;
-                padding:8px;
-            }
-            /* font-family-sans-serif: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+        table {
+            border-collapse: collapse;
+        }
+
+        td,
+        th {
+            border: 1px solid #000000;
+            text-align: center;
+            padding: 8px;
+        }
+
+        /* font-family-sans-serif: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
     --font-family-monospace: SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace; */
     </style>
 </head>
@@ -55,8 +60,8 @@
     <?php include 'topbar.php' ?>
     <section class="ayadi-container p-4" style="margin-top:3rem">
         <div class="card p-2 pb-4">
-            <h4 class="text-center">Ayadi Calculator <button class="btn btn-primary" style="float:right;" onclick="goBack()">Back</button></h4>
-             
+            <h4 class="text-center">Ayadi Calculator <button class="btn btn-primary" style="float:right;" id="backbtn">Back</button></h4>
+
             <div class="container d-flex justify-content-center overflow-auto" style="max-width:1337px">
                 <div class="w-25 border p-2">
 
@@ -251,11 +256,7 @@
     </section>
 
     <script src="<?php echo base_url('js/ayadi.js') ?>" type="module" defer></script>
-    <script>
-        function goBack() {
-    window.history.back();
-  }
-    </script>
+     
 </body>
 
 </html>

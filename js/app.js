@@ -37,6 +37,8 @@ function createMap() {
   d3.select(".toolbox.right").classed("d-none", false);
   d3.select(".toolbox.left").classed("d-none", false);
   d3.select(".mousePos").classed("d-none", false);
+  d3.select(".client-form").classed("d-none", true);
+  $('#drawArea').removeClass('d-none');
   let canvasSize = drawAreaSize(35, 35);
 
   console.log(canvasSize)
@@ -175,7 +177,7 @@ function initCreateMap() {
 }
 
 function drawAreaSize(LEFT, RIGHT) {
-  console.log(d3.select("#drawArea").node().offsetWidth )
+  console.log(d3.select("#drawArea").node().offsetWidth)
   return {
     width: d3.select("#drawArea").node().offsetWidth - (LEFT + RIGHT),
     height: d3.select("#drawArea").node().offsetHeight,
@@ -265,6 +267,7 @@ document
   .querySelector("input.import-map-file")
   .addEventListener("change", function () {
     var file = document.querySelector("input.import-map-file").files[0];
+    $('#drawArea').removeClass('d-none');
     if (
       file.type != "image/jpeg" &&
       file.type != "image/jpg" &&
@@ -736,25 +739,131 @@ function feetModal() {
   $('#reportModal').modal('show')
 }
 
-$('#reportModal .modal-body').on('click','#feetSubmit',function(){
+$('#reportModal .modal-body').on('click', '#feetSubmit', function () {
   let val = $("#text").val();
   let unit = $("#unit").val();
-  if(val == ''){
-    showAlert('Please enter width','danger')
+  if (val == '') {
+    showAlert('Please enter width', 'danger')
     // $("#text").focus
     // return false;
-  }else{
+  } else {
     $('#reportModal').modal('hide')
-    let item = {value:val,unit:unit}
+    let item = { value: val, unit: unit }
     createMap(item);
   }
 })
 
-$('.savebtn').on('click',function(){
+$('.savebtn').on('click', function () {
   let model = new Model();
   let mapId = localStorage.getItem('selectedMapId');
   let houseMap = model.getHouseMap(mapId);
-  model.updateHouseMapInDataBase(mapId, houseMap,'','true');
+  model.updateHouseMapInDataBase(mapId, houseMap, '', 'true');
+})
+
+$('#clientName').on('keyup', function () {
+  let value = $(this).val();
+
+
+  var formData = new FormData();
+  formData.append('value', value);
+  var url = BASE_URL + "/Main/getClientDetails";
+  AjaxPost(formData, url, clientSuccess, AjaxError);
+
+  function clientSuccess(content, targetTextarea) {
+    var result = JSON.parse(content);
+
+    if (result != "") {
+      // console.log(result)
+      $('#clients').empty();
+      result.forEach(element => {
+        $('#clients').removeClass('d-none')
+        $('#clients').append(`<a href="#">${element.name}, ${element.mobileNo}, ${element.email}</a>`)
+      });
+    } else {
+      showAlert(result.error, 'danger');
+    }
+  }
+})
+
+$('#clients').on('click', 'a', function () {
+  let data = $(this).text().split(',');
+  $("input[name='cName']").val(data[0]);
+  $("#mNumber").val(data[1]);
+  $("input[name='cEmail']").val(data[2]);
+  $("textarea[name='cAddress']").focus();
+  $('#clients').addClass('d-none')
+});
+
+$("input").on('click', function () {
+  $('#clients').addClass('d-none')
+});
+
+
+$('input[type="submit"]').on('click', function (e) {
+  e.preventDefault();
+  var formData = new FormData(document.getElementById('cpDetails'));
+  var url = BASE_URL + "/Main/addProperty";
+  AjaxPost(formData, url, detailsSuccess, AjaxError);
+  function detailsSuccess(content, targetTextarea) {
+    var result = JSON.parse(content);
+    if (result != "" && result.type == 'success') {
+
+      $('input[type="text"]').attr('disabled', 'true')
+      $('input[type="number"]').attr('disabled', 'true')
+      $('input[type="email"]').attr('disabled', 'true')
+      $('textarea').attr('disabled', 'true')
+      $('select').attr('disabled', 'true')
+      $('input[type="text"]').addClass('input-disable')
+      $('input[type="number"]').addClass('input-disable')
+      $('input[type="email"]').addClass('input-disable')
+      $('textarea').addClass('input-disable')
+      $('select').addClass('input-disable')
+      $('[data-behavior="import"]').removeClass('d-none')
+      $('input[value="Save Info"]').addClass('d-none')
+
+    } else {
+      showAlert(result.error, 'danger');
+    }
+  }
+
+});
+
+$(document).ready(function(){
+$('[data-behavior="import"]').on('click', function (e) {
+  e.preventDefault();  
+  
+  // $('.client-form').addClass('d-none');
+  // $('[data-behavior="import"]').trigger('click');
+  // importMap()
+})
+
+$('#category').change(function () {
+  let value = $('option:selected').val()
+  let id = $('option:selected').attr('tId')
+  if (value == '') {
+    showAlert('Please select any category')
+  } else {
+    var formData = new FormData();
+    formData.append('id', id);
+    var url = BASE_URL + "/Main/getType";
+
+
+    AjaxPost(formData, url, typeSuccess, AjaxError);
+  }
+});
+function typeSuccess(content, targetTextarea) {
+  var result = JSON.parse(content);  
+  if (result != "") {
+    let html = ''
+    for (let i in result) {
+      html += `<option value="${result[i]['type']}">${result[i]['type']}</option>`
+    }
+    $('#type').html(html)
+
+  } else {
+    showAlert(result.error, 'danger');
+  }
+}
 })
 
 

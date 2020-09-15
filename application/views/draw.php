@@ -68,19 +68,127 @@
 
     <?php include 'topbar.php' ?>
     <input class="import-map-file d-none" type="file">
-    
 
+    <!-- //////////////////////////////Cliend and property details form////////////////// -->
+    <div class="container client-form d-none">
+        <div class="row">
+            <div class="card col-md-12 p-0 mt-5">
+                <div class="card-header">
+                    <h5 class="modal-title" id="exampleModalLabel">
+                        Client & Property Details
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <form method="post" id="cpDetails">
+                        <div>
+
+                            <div class="form-row">
+                                <div class="form-group col-md-3">
+                                    <label for="inputEmail4">Full Name <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control form-control-sm" id="clientName" name="cName" placeholder="Name" required />
+
+                                </div>
+
+                                <div class="form-group col-md-3">
+                                    <label for="inputEmail4">Mobile No.</label>
+                                    <input type="input" class="form-control form-control-sm" id="mNumber" name="mNumber" placeholder="Mobile No." />
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <label for="inputEmail4">Landline No.</label>
+                                    <input type="number" class="form-control form-control-sm" name="lNumber" placeholder="Landline No." />
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <label for="inputEmail4">Email </label>
+                                    <input type="email" class="form-control form-control-sm" name="cEmail" placeholder="Email" />
+                                </div>
+                                <div class="col-md-6 clientContainer d-none" id="clients"></div>
+                            </div>
+                            <div class="form-row">
+
+                                <div class="form-group col-md-3">
+                                    <label for="inputAddress">Client Address</label>
+                                    <textarea class="form-control form-control-sm" name="cAddress" placeholder="1234 Main St"></textarea>
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <label for="inputEmail4">Property Name </label>
+                                    <input type="text" class="form-control form-control-sm" name="pname" placeholder="property name" />
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <label for="inputEmail4">Category </label>
+                                    <select class="form-control form-control-sm" name="category" id="category" placeholder="property category">
+                                        <option value="">Select Category</option>
+                                        <?php if (isset($category) && !empty($category)) {
+                                            for ($i = 0; $i < count($category); $i++) { ?>
+                                                <option tId="<?php echo $category[$i]['id']; ?>" value=" <?php echo $category[$i]['category']; ?>"><?php echo $category[$i]['category']; ?></option>
+                                        <?php }
+                                        } ?>
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <label for="inputEmail4">Type</label>
+                                    <select class="form-control form-control-sm" name="type" id="type" placeholder="property type">
+                                        <option value="">Select Type</option>
+
+                                    </select>
+                                </div>
+                            </div>
+
+
+                            <!-- 
+                            <div class="form-row">
+                                
+                            </div> -->
+                            <!-- <div class="form-row">
+                               
+                            </div> -->
+
+
+
+                            <div class="form-row">
+                                <div class="form-group col-md-3">
+                                    <label for="inputAddress">Property Address</label>
+                                    <textarea class="form-control form-control-sm" name="address" row='6' placeholder="property address"></textarea>
+                                </div>
+                                <div class="form-group col-md-3">
+
+                                    <label for="inputEmail4">Grah Pravesh Date</label>
+                                    <input type="date" class="form-control form-control-sm" name="gpDate" placeholder="Grah Pravesh Date (Optional)" />
+
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <label for="inputEmail4">First Visit Date</label>
+                                    <input type="date" class="form-control form-control-sm" name="fvDate" placeholder="First Visit Date" />
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <label for="inputEmail4">Property Purchase/opening Date</label>
+                                    <input type="date" class="form-control form-control-sm" name="ppDate" placeholder="Property Purchase/opening Date" />
+                                </div>
+                            </div>
+
+
+                        </div>
+                </div>
+                <div class="card-footer text-muted">
+                    <input type="submit" value="Save Info" class="btn btn-outline-primary btn-sm rounded-0 float-right">
+                    <div  class="btn btn-primary text-sm d-none float-right" data-behavior="import"> Import Map</div>
+
+                </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
 
 
     <!-- 
     //////////////////////////////// --- D R A W  A R E A ---  ////////////////////////////////
     -->
-    <section id="drawArea" class="flex flex-column justify-content-center align-items-center">
-        <div class="row col-sm-5" style="margin-top:100px;" id="mapImportOption">
-            <div class="col-sm-6 text-primary" data-behavior="import" style="cursor:pointer">
+    <section id="drawArea" class="flex d-none flex-column justify-content-center align-items-center">
+        <div class="row col-sm-5 d-none" style="margin-top:100px;" id="mapImportOption">
+            <!-- <div class="col-sm-6 text-primary"  data-behavior="import" style="cursor:pointer;margin-left:auto;margin-right:auto">
                 <center><img src="<?php echo base_url('assets/icons/importMap.svg') ?>" width="100px">Import Map</img></center>
-            </div>
-            <div class="col-sm-6 text-primary" data-behavior="create" style="cursor:pointer">
+            </div> -->
+            <div class="col-sm-6 text-primary d-none" data-behavior="create" style="cursor:pointer">
                 <center><img src="<?php echo base_url('assets/icons/createMap.svg') ?>" width="100px">Create Map</img></center>
             </div>
         </div>
@@ -441,7 +549,7 @@
                     <!-- <ul class="navbar-nav mr-2">
                         <li class="nav-item">
                             <a class="nav-link object-align-center" href="#" id="abc" name="align-center" title="Align to center">
-                                <img src="<?php echo base_url('assets/icons/chevron.svg')?>" alt="" width="20">
+                                <img src="<?php echo base_url('assets/icons/chevron.svg') ?>" alt="" width="20">
                             </a>
                         </li>
                     </ul> -->
@@ -449,7 +557,7 @@
                     <ul class="navbar-nav mr-2">
                         <li class="nav-item">
                             <a class="nav-link" href="#" id="print" name="print" title="Print">
-                                <img src="<?php echo base_url('assets/icons/print.svg')?>" alt="" width="20">
+                                <img src="<?php echo base_url('assets/icons/print.svg') ?>" alt="" width="20">
                             </a>
                         </li>
                     </ul>
@@ -484,23 +592,23 @@
                         </div>
                     </div>
                     <div class="additional container p-2 border mb-3">
-                    <div class="col-md-12">
-                        <div class="row">
-                            <div class="col-md-6 p-1 border d-flex flex-column justify-content-center align-items-center object-align-center">
-                                <img src="<?php echo base_url('assets/icons/chevron.svg') ?>" alt="" width="20">
-                                <div class="name text-xs">align-center</div>
-                            </div>
-                            <!-- <div class="col-md-6 p-1 border d-flex flex-column d-none justify-content-center align-items-center object-color-toggle" data-color-state="colorless">
+                        <div class="col-md-12">
+                            <div class="row">
+                                <div class="col-md-6 p-1 border d-flex flex-column justify-content-center align-items-center object-align-center">
+                                    <img src="<?php echo base_url('assets/icons/chevron.svg') ?>" alt="" width="20">
+                                    <div class="name text-xs">align-center</div>
+                                </div>
+                                <!-- <div class="col-md-6 p-1 border d-flex flex-column d-none justify-content-center align-items-center object-color-toggle" data-color-state="colorless">
                                 <img src="<?php echo base_url('assets/icons/colorless.svg') ?>" alt="" width="20">
                                 <div class="name text-xs">color toggle</div>
                             </div> -->
-                             <div class="col-md-6 p-1 border d-flex flex-column d-none justify-content-center align-items-center object-delete-toggle">
-                                <i class="fa fa-trash" aria-hidden="true"></i>
-                                <div class="name text-xs">Delete</div>
+                                <div class="col-md-6 p-1 border d-flex flex-column d-none justify-content-center align-items-center object-delete-toggle">
+                                    <i class="fa fa-trash" aria-hidden="true"></i>
+                                    <div class="name text-xs">Delete</div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>                   
                 </div>
 
                 <!-- DESCRIPTION ATTRIBUTE -->
@@ -1130,7 +1238,7 @@
         </div>
     </div>
 
-     <!-- 
+    <!-- 
     //////////////////////////////// --- REPORT  M O D A L ---  ////////////////////////////////
     -->
 
@@ -1191,12 +1299,17 @@
 <script src="<?php echo base_url('js/helper/sweetalert.js') ?>"></script>
 
 <script>
-        $('#newProject').on('click', function() {
-            // alert('runs')
-        // let id = uniqueID();
-        // localStorage.setItem("selectedMapId", id);
+    $(document).ready(function() {
+        $('.client-form').removeClass('d-none');
+        let behaviour = '<?php echo isset($behavior) ? $behavior : "import" ?>'
+        if (behaviour == 'create') {
+            $('[data-behavior="create"]').trigger('click')
+        }
+    })
+    $('#newProject').on('click', function() {
+        
         localStorage.removeItem("houseMaps");
-        window.location.href = BASE_URL + 'Main/propertyInfo';
+        window.location.href = BASE_URL + 'Main/importMap';
 
 
     })

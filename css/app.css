@@ -906,6 +906,48 @@ input::-webkit-inner-spin-button {
   display:block !important;
 }
 
+.clientContainer{
+  position: relative;
+  z-index: 99;
+  border: 1px solid #ced4da;
+  top: -16px;
+  left: 6px;
+  border-radius: 3px;
+  padding: 0px !important;
+  
+}
+.clientContainer a{
+  text-decoration: none;
+  color:black;
+  display: block;
+  text-align: center;
+  border-bottom: 1px solid #ced4da;
+  padding: 10px 0;
+  
+}
+
+.clientContainer a:nth-last-child(){
+border: none !important;
+}
+
+.clientContainer a:hover{
+  background: #80bdff;
+  color: white;
+}
+
+.input-disable{  
+  border: none;
+  outline: none;
+  background: white;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  text-indent: 1px;
+  text-overflow: '';
+}
+.input-disable:focus,.input-disable:hover{
+  border: none;
+  box-shadow: none;
+}
 
 
 /*# sourceMappingURL=app.css.map */

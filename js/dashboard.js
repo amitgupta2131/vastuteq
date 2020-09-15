@@ -39,6 +39,11 @@ d3.select('#importMap').on('click', function () {
 $('#houseMaps').on('click', '[data-map-id]', function () {
 
 	let id = d3.select(this).attr('data-map-id');
+	drawMethod(id);
+	
+})
+
+function drawMethod(id){
 	localStorage.setItem("selectedMapId", id);
 	console.log(id)
 	//saving data in backend through ajax
@@ -89,7 +94,7 @@ $('#houseMaps').on('click', '[data-map-id]', function () {
 	}
 
 	window.location.href = base_url + '/Main/draw/' + btoa(id);
-})
+}
 
 $('#houseMaps').on('click', '.deleteMap', function () {
 	let result = confirm("Are you sure to delete this housemap");
@@ -174,69 +179,10 @@ $(document).ready(function () {
 		}
 	}
 
-	$('#category').change(function () {
-		let value = $('option:selected').val()
-		let id = $('option:selected').attr('tId')
-		if (value == '') {
-			showAlert('Please select any category')
-		} else {
-			var formData = new FormData();
-			formData.append('id', id);
-			var url = base_url + "/Main/getType";
-
-
-			AjaxPost(formData, url, typeSuccess, AjaxError);
-		}
-	});
-	function typeSuccess(content, targetTextarea) {
-		var result = JSON.parse(content);
-		console.log(result)
-		if (result != "") {
-			let html = ''
-			for (let i in result) {
-				html += `<option value="${result[i]['type']}">${result[i]['type']}</option>`
-			}
-			$('#type').html(html)
-
-		} else {
-			showAlert(result.error, 'danger');
-		}
-	}
+	
 
 });
 
-$('#clientName').on('keyup', function () {
-	let value = $(this).val();
-
-
-	var formData = new FormData();
-	formData.append('value', value);
-	var url = base_url + "/Main/getClientDetails";
-	AjaxPost(formData, url, clientSuccess, AjaxError);
-
-	function clientSuccess(content, targetTextarea) {
-		var result = JSON.parse(content);
-
-		if (result != "") {
-			console.log(result)
-			$('#clients').empty();
-			result.forEach(element => {
-				$('#clients').removeClass('d-none')
-				$('#clients').append(`<a href="#">${element.name}, ${element.mobileNo}, ${element.email}</a>`)
-			});
-		} else {
-			showAlert(result.error, 'danger');
-		}
-	}
-})
-
-$('#clients').on('click','a',function(){
-	let data = $(this).text().split(',');
-	$("input[name='cName']").val(data[0]);
-	$("#mNumber").val(data[1]);
-	$("input[name='cEmail']").val(data[2]);
-	$('#clients').addClass('d-none')
-});
 
 // $("input[type='submit']").on('click',function(e){
 // e.preventDefault;

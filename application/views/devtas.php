@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="<?php echo base_url('css/devtas.css')?>">
     <!-- CUSTOM CSS -->
     <link rel="stylesheet" href="<?php echo base_url('css/main.css') ?>">
-    <script>const base_url = '<?php echo base_url();?>';</script>
+    <script>const BASE_URL = '<?php echo base_url();?>';</script>
    
      
 </head>
@@ -26,7 +26,7 @@
     <?php include 'topbar.php' ?>
     
     <section class="devtas-main justify-content-between align-items-center row devtas_container" style="margin-top:4rem !important">
-    <button class="btn btn-primary" style="float:right;position:fixed;top:40px;right:50px" onclick="goBack()">Back</button>  
+    <button class="btn btn-primary" style="float:right;position:fixed;top:40px;right:50px" id="backbtn">Back</button>  
     <div class="leftside">
         </div>
         <div class="rightside">
