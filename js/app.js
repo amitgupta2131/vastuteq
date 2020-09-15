@@ -807,19 +807,22 @@ $('input[type="submit"]').on('click', function (e) {
   function detailsSuccess(content, targetTextarea) {
     var result = JSON.parse(content);
     if (result != "" && result.type == 'success') {
-
-      $('input[type="text"]').attr('disabled', 'true')
-      $('input[type="number"]').attr('disabled', 'true')
-      $('input[type="email"]').attr('disabled', 'true')
-      $('textarea').attr('disabled', 'true')
-      $('select').attr('disabled', 'true')
-      $('input[type="text"]').addClass('input-disable')
-      $('input[type="number"]').addClass('input-disable')
-      $('input[type="email"]').addClass('input-disable')
-      $('textarea').addClass('input-disable')
-      $('select').addClass('input-disable')
-      $('[data-behavior="import"]').removeClass('d-none')
-      $('input[value="Save Info"]').addClass('d-none')
+      $('.client-form .card').addClass('card-form');
+      $('.client-form .card-body .form-group').removeClass('col-md-3');
+      $('.client-form .card-body .form-group').addClass('col-md-6 row m-0 form-border');
+      $('.client-form .card-body .form-group label').addClass('col-md-6 text-info');
+      $('.client-form .card-body .form-group input').addClass('col-md-6');
+      $('.client-form .card-body .form-group textarea').addClass('col-md-6');
+      $('.client-form .card-body .form-group select').addClass('col-md-6');
+      $('.client-form input').attr('disabled', 'true');
+      $('textarea').attr('disabled', 'true');
+      $('select').attr('disabled', 'true');
+      $('.client-form input').addClass('input-disable');
+      $('textarea').addClass('input-disable');
+      $('textarea').attr('rows','1');
+      $('select').addClass('input-disable');
+      $('[data-behavior="import"]').removeClass('d-none');
+      $('input[value="Save Info"]').addClass('d-none');
 
     } else {
       showAlert(result.error, 'danger');
@@ -828,42 +831,42 @@ $('input[type="submit"]').on('click', function (e) {
 
 });
 
-$(document).ready(function(){
-$('[data-behavior="import"]').on('click', function (e) {
-  e.preventDefault();  
-  
-  // $('.client-form').addClass('d-none');
-  // $('[data-behavior="import"]').trigger('click');
-  // importMap()
-})
+$(document).ready(function () {
+  $('[data-behavior="import"]').on('click', function (e) {
+    e.preventDefault();
 
-$('#category').change(function () {
-  let value = $('option:selected').val()
-  let id = $('option:selected').attr('tId')
-  if (value == '') {
-    showAlert('Please select any category')
-  } else {
-    var formData = new FormData();
-    formData.append('id', id);
-    var url = BASE_URL + "/Main/getType";
+    // $('.client-form').addClass('d-none');
+    // $('[data-behavior="import"]').trigger('click');
+    // importMap()
+  })
+
+  $('#category').change(function () {
+    let value = $('option:selected').val()
+    let id = $('option:selected').attr('tId')
+    if (value == '') {
+      showAlert('Please select any category')
+    } else {
+      var formData = new FormData();
+      formData.append('id', id);
+      var url = BASE_URL + "/Main/getType";
 
 
-    AjaxPost(formData, url, typeSuccess, AjaxError);
-  }
-});
-function typeSuccess(content, targetTextarea) {
-  var result = JSON.parse(content);  
-  if (result != "") {
-    let html = ''
-    for (let i in result) {
-      html += `<option value="${result[i]['type']}">${result[i]['type']}</option>`
+      AjaxPost(formData, url, typeSuccess, AjaxError);
     }
-    $('#type').html(html)
+  });
+  function typeSuccess(content, targetTextarea) {
+    var result = JSON.parse(content);
+    if (result != "") {
+      let html = ''
+      for (let i in result) {
+        html += `<option value="${result[i]['type']}">${result[i]['type']}</option>`
+      }
+      $('#type').html(html)
 
-  } else {
-    showAlert(result.error, 'danger');
+    } else {
+      showAlert(result.error, 'danger');
+    }
   }
-}
 })
 
 

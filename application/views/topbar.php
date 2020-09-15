@@ -126,7 +126,7 @@
                 </li>
                 <li class="nav-item d-none dropdown getReport">
                     <a class="nav-link text-white menu-item" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Report</a>
+                        Reports</a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="#" id="objColor">Set Object Colour</a>
                         <a class="dropdown-item" href="#" id="inlineRadio1">Object/Activity wise report</a>

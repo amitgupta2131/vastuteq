@@ -9,17 +9,16 @@ export default class EditText {
         this.data = data;
 
 
-        this.editTextModel = new editText();
-
+        this.editTextModel = new editText();        
         this.id = (data.id != undefined) ? data.id : this.uniqueID();
-        data.id = this.id;
+        data.id = this.id;        
         d3.selectAll(`.svg-object`).classed('deactive', true);
         d3.selectAll(`.svg-object`).classed('active', false);
         d3.selectAll(`.sjx-svg-wrapper`).classed('d-none', true);
 
         //adding EditText fields
         if (data.name = "Edit Text") {
-           
+
             var margin = {
                 left: 5,
                 right: 5,
@@ -38,7 +37,7 @@ export default class EditText {
             // .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
             var data = [this.data];
-            
+
             chart.selectAll("text")
                 .data(data)
                 .enter()
@@ -51,7 +50,7 @@ export default class EditText {
 
 
                 .append('xhtml:div')
-                
+
                 .attr("width", "100px")
                 .attr("height", "30px")
                 .append('div')
@@ -60,25 +59,19 @@ export default class EditText {
                     return d.name
                 });
 
-                 //adding remove icon on objects/activities
-    // if (data.id != '' && data.id != undefined && data.name != 'map' && data.name != 'VPM'
-    // && data.name != 'MVM' && data.name != 'MVC' && data.name != '9DL' && data.name != '9SG'
-    // && data.name != '9MS' && data.name != '9SM' && data.name != 'KSGP' && data.name != 'KSMP'
-    // && data.name != 'CG' && data.name != '9SD' && data.name != 'MVPC') {
-    // console.log(data)
-    chart.append('image')
-      .attr('class', 'removeEditText')
-      .attr('xmlns', 'http://www.w3.org/2000/svg')
-      .attr("xlink:href", BASE_URL + 'assets/icons/remove.svg')
-      .attr('x', data[0].x - 10)
-      .attr('y', data[0].y - 20)
-      .attr('height', '20')
-      .attr('width', '20')
-      .attr('obj-id', data[0].id)
-      .attr('obj-name', data[0].name + this.id)
-      .style('position', 'relative')
-     
-//   }
+            chart.append('image')
+                .attr('class', 'removeEditText')
+                .attr('xmlns', 'http://www.w3.org/2000/svg')
+                .attr("xlink:href", BASE_URL + 'assets/icons/remove.svg')
+                .attr('x', data[0].x - 10)
+                .attr('y', data[0].y - 10)
+                .attr('height', '20')
+                .attr('width', '20')
+                .attr('obj-id', data[0].id)
+                .attr('obj-name', data[0].name + this.id)
+                .style('position', 'relative')
+
+
         }
 
 
@@ -121,7 +114,7 @@ export default class EditText {
 
             onInit(el) {
                 // fires on tool activation
-                
+
                 if (that.mapId != undefined) {
                     console.log(that.data.name);
                     that.editTextModel.add(that.mapId, objectModelData)
@@ -145,8 +138,10 @@ export default class EditText {
                     let y = d3.select(`.sjx-svg-wrapper[data-id="${objectId}"] .sjx-svg-box-group rect`).attr('y');
                     image.attr('width', widt); image.attr('height', heigt);
                     image.select('div div').attr('width', widt); image.select('div').attr('height', heigt);
-                    image.select('div div').attr('style', `border:1px solid blue;height:${heigt}px`)
+                    image.select('div div').attr('style', `height:${heigt}px`)
                     image.attr('x', x), image.attr('y', y);
+                    object.select('image').attr('height', 20);
+                    object.select('image').attr('width', 20);
                     let transform = d3.select(`.sjx-svg-wrapper[data-id="${objectId}"]`).attr('transform')
                     let objectTransform = object.attr('transform', transform);
 
@@ -188,7 +183,8 @@ export default class EditText {
                     let width = image.attr('width'), height = image.attr('height');
                     let transform = d3.select(`.sjx-svg-wrapper[data-id="${objectId}"]`).attr('transform')
                     let objectTransform = object.attr('transform', transform);
-
+                    object.select('image').attr('x', x - 10);
+                    object.select('image').attr('y', y - 10);
                     that.editTextModel.editProperties(
                         objectId,
                         { x: x, y: y, width: width, height: height, transform: transform }

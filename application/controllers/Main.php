@@ -48,6 +48,8 @@ class Main extends CI_Controller
 	{
 		$data['propertyId'] =   $this->MainModel->getNewIDorNo("P-", 'propertydetails');
 		$data['category'] = $this->MainModel->selectAllFromTableOrderBy('property_category', 'category', 'ASC');
+		$data['objects'] =   $this->MainModel->selectAllFromWhere('icons', array('category' => 'objects'));
+		$data['activities'] =   $this->MainModel->selectAllFromWhere('icons', array('category' => 'activities'));
 		$data['behavior'] = "import";
 		$this->load->view('draw.php', $data);
 	}

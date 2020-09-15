@@ -91,7 +91,7 @@
 
                                 <div class="form-group col-md-3">
                                     <label for="inputEmail4">Mobile No.</label>
-                                    <input type="input" class="form-control form-control-sm" id="mNumber" name="mNumber" placeholder="Mobile No." />
+                                    <input type="text" class="form-control form-control-sm" id="mNumber" name="mNumber" placeholder="Mobile No." />
                                 </div>
                                 <div class="form-group col-md-3">
                                     <label for="inputEmail4">Landline No.</label>

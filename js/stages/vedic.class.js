@@ -1,6 +1,8 @@
 import ActionBox from "../helper/actionbox.class.js";
 import Object from '../object.class.js';
 import Utility from "../helper/utility.class.js";
+import editText from '../EditText.class.js'
+import EditTextModel from "../helper/editTextModel.class.js";
 
 
 export default class Vedic {
@@ -96,6 +98,11 @@ export default class Vedic {
       .attr('type', 'checkbox');
 
     enableGridWrapper.append('label').attr('class', 'form-check-label, text-sm').html('Grid');
+    let addText = col1.append('div').attr('class', 'mt-2 col-md-2 d-flex justify-content-center align-items-center border object-actions')
+      .style('flex-direction', 'column').style('height', '42px').style('min-width', '80px');
+
+    let addTextIcon = addText.attr('data-action-object', `${that.BASE_URL}assets/icons/dots.svg`).append('img').attr('src', `${that.BASE_URL}assets/icons/text.svg`).attr('width', 20);
+    addText.append('span').style('margin-top', '1px').style('font-size', '9px').text('Add Text');
     this.actionbox.show();    
 
     let html = `<a class="nav-link text-dark menu-item" href="#" id="fixed" role="button">
@@ -186,6 +193,29 @@ export default class Vedic {
         d3.select('.vedic-grid-container').classed('d-none', true);
       }
     });
+
+    addText.on("click", function () {
+
+      let data = {
+        name: 'Edit Text',
+        src: '',
+        width: 200,
+        height: 200,
+        x: that.centroid.x - 200 / 2,
+        y: that.centroid.y - 200 / 2,
+        transfrom: "",
+        northAngle: that.calNorthAngle(),
+        angle: that.angle,
+        type: 'editText'
+      }
+      let obj = new editText({
+        mapId : that.mapId,
+        layer: that.canvas,
+        data: data
+      });
+
+
+    })
 
 
     mapGridType.on('click', 'a', function () {

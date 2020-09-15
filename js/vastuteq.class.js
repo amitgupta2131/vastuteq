@@ -312,6 +312,7 @@ export default class Vastuteq {
 
           for(let j in editText){
             let data = {
+              id: editText[j].image.id,
               name: editText[j].image.name,
               src: '',
               width: editText[j].image.width,

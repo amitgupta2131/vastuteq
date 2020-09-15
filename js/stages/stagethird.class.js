@@ -638,12 +638,11 @@ export default class StageThird {
       let newTextObj = [];      
       let id = $(this).attr('obj-id');
       let name = $(this).attr('obj-name');
-      console.log(id)
-console.log(textObjects)
+      
       // deleting object from array
       var filteredObj = textObjects.find(function (item, i) {
-        let index = '';
-        if (item.image.id == id) {
+        let index = '';        
+        if (item.image.id == id) {          
           delete textObjects[i];
           
         }
@@ -664,8 +663,7 @@ console.log(textObjects)
       //Updating new object array in database
       let objHandler = new EditTextModel()
       let result = objHandler.updateObjectsInDataBase(objid); 
-      console.log(name)
-      console.log(id)
+      
       $(`.svg-object[data-object="${name}"]`).remove();
       $(`.sjx-svg-wrapper[data-id="${id}]"`).remove();
       

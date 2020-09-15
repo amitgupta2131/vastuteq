@@ -938,7 +938,7 @@ border: none !important;
 .input-disable{  
   border: none;
   outline: none;
-  background: white;
+  background-color: white !important;
   -webkit-appearance: none;
   -moz-appearance: none;
   text-indent: 1px;
@@ -947,6 +947,29 @@ border: none !important;
 .input-disable:focus,.input-disable:hover{
   border: none;
   box-shadow: none;
+}
+
+.card-form{
+  -webkit-box-shadow: 0 0 25px -5px #9e9c9e;
+  box-shadow: 0 0 25px -5px #9e9c9e;
+  border-radius: 8px;
+}
+
+.card-form .card-header{
+  border:none !important;
+}
+
+.form-border{
+  border-bottom: 0.5px solid #e8e8e8;
+}
+
+.card-form .card-body .form-group{
+  padding: 0.5rem 0 !important;
+}
+
+.card-form .card-body .form-group textarea{
+  resize: none !important;
+  background-color: white !important;
 }
 
 
