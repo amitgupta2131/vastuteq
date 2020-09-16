@@ -34,7 +34,8 @@
     <!-- Notify library -->
     <script src="<?php echo base_url('js/bootstrap-notify.min.js') ?>"></script>
     <script>
-        const base_url = '<?php echo base_url() ?>'
+        const base_url = '<?php echo base_url() ?>';
+        const BASE_URL = '<?php echo base_url() ?>';
     </script>
 
 </head>
@@ -71,16 +72,16 @@
                         <a href = "<?php echo $imageResource['src'] ?>" download title="click image for download"><img class="card-img-top" src="<?php echo $imageResource['src'] ?>"></a>
                             <div class="card-body p-2 border-top border-thick">                                
                                 <div class="project-name card-text">
-                                    <span class="col-sm-5">Name : </span>
-                                    <span class="col-sm-7"><?php echo $property[$i]['propertyName'] ?></span>
+                                    <span class="col-sm-5 pr-0">Name : </span>
+                                    <span class="col-sm-7 pr-0"><?php echo $property[$i]['propertyName'] ?></span>
                                 </div>
                                 <div class="project-name card-text">
-                                    <span class="col-sm-5">Category : </span>
-                                    <span class="col-sm-7"><?php echo $property[$i]['category'] ?></span>
+                                    <span class="col-sm-5 pr-0">Category : </span>
+                                    <span class="col-sm-7 pr-0"><?php echo $property[$i]['category'] ?></span>
                                 </div>
                                 <div class="project-name card-text">
-                                    <span class="col-sm-5">Type : </span>
-                                    <span class="col-sm-7"><?php echo ucwords($property[$i]['type']) ?></span>
+                                    <span class="col-sm-5 pr-0">Type : </span>
+                                    <span class="col-sm-7 pr-0"><?php echo ucwords($property[$i]['type']) ?></span>
                                 </div>                               
                             </div>
                             <div class="row m-0">

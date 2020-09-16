@@ -193,7 +193,7 @@ function clearCanvas(canvas) {
 
 $("#drawArea").mousemove(function (e) {
   $(".mouse-position-x").html(`X: ${e.pageX - 50}`);
-  $(".mouse-position-y").html(`Y: ${e.pageY - 80}`);
+  $(".mouse-position-y").html(`Y: ${e.pageY - 50}`);
 });
 
 // DECIDE BEHAVIOR OF APP

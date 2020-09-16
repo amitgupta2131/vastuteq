@@ -214,11 +214,9 @@ function convertIntoFeet(value, siUnit) {
     }
 }
 
-$('#backbtn').on('click', function () {
-    console.log(document.referrer)
+$('#backbtn').on('click', function () {    
     var str = document.referrer;
-    var res = str.match(/importMap/g);
-    console.log(res)
+    var res = str.match(/importMap/g);    
     if (res) {
         // let dashboard = new dashboard();
         let id = localStorage.getItem('selectedMapId');

@@ -9,32 +9,13 @@ localStorage.hasOwnProperty('selectedMapId') == true ? localStorage.removeItem("
 
 let mainArea = d3.select('#mapsContainer');
 
-d3.select('#createMap').on('click', function () {
-	// let id = uniqueID();
-	// localStorage.setItem("selectedMapId", id);
+d3.select('#createMap').on('click', function () {	
 	window.location.href = base_url + 'Main/createMap';
-
-
 })
 
-d3.select('#importMap').on('click', function () {
-	// // let id = uniqueID();
-	// // localStorage.setItem("selectedMapId", id);
+d3.select('#importMap').on('click', function () {	
 	window.location.href = base_url + 'Main/importMap';
-
-
-
 })
-
-
-
-// d3.select('#newProject').on('click', function () {
-// 	// let id = uniqueID();
-// 	// localStorage.setItem("selectedMapId", id);
-// 	window.location.href = base_url + 'Main/propertyInfo';
-
-
-// })
 
 $('#mapsContainer').on('click', '[data-map-id]', function () {
 
@@ -140,8 +121,6 @@ $(document).ready(function () {
 	$sidebarArrow.click(function () {
 		$(this).next().slideToggle(300);
 	});
-
-
 
 
 	$('.save-client-info').on('click', function (e) {
