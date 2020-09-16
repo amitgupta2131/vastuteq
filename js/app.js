@@ -192,8 +192,16 @@ function clearCanvas(canvas) {
 // MOUSE POSITION
 
 $("#drawArea").mousemove(function (e) {
-  $(".mouse-position-x").html(`X: ${e.pageX - 50}`);
-  $(".mouse-position-y").html(`Y: ${e.pageY - 50}`);
+  let x = e.pageX - 50;
+  let y = e.pageY - 50;
+  if(Math.sign(x) != -1 && Math.sign(y) != -1){
+    $(".mouse-position-x").html(`X: ${x}`);
+    $(".mouse-position-y").html(`Y: ${y}`);
+  }else{
+    $(".mouse-position-x").html(`X: ${0}`);
+    $(".mouse-position-y").html(`Y: ${0}`);
+  }
+  
 });
 
 // DECIDE BEHAVIOR OF APP
