@@ -7,31 +7,33 @@
   <title>vastuTeq</title>
 
   <!-- FAVICON -->
-  <link rel="icon" href="<?php echo base_url('icons/favicon.ico')?>" type="image/ico">
+  <link rel="icon" href="<?php echo base_url('icons/favicon.ico') ?>" type="image/ico">
   <!-- FONTAWESOME CSS -->
-  <link rel="stylesheet" href="<?php echo base_url('assets/fontawesome/css/all.min.css')?>">
+  <link rel="stylesheet" href="<?php echo base_url('assets/fontawesome/css/all.min.css') ?>">
   <!-- CUSTOM CSS -->
-  <link rel="stylesheet" href="<?php echo base_url('css/index.css')?>">
+  <link rel="stylesheet" href="<?php echo base_url('css/index.css') ?>">
   <!-- JQUERY -->
-  <script src="<?php echo base_url('js/helper/jquery.min.js')?>"></script>
+  <script src="<?php echo base_url('js/helper/jquery.min.js') ?>"></script>
   <!-- D3 JS SCRIPT -->
-  <script src="<?php echo base_url('js/main.js')?>" type="module" defer></script>
+  <script src="<?php echo base_url('js/main.js') ?>" type="module" defer></script>
   <!-- Ajax library -->
-  <script src="<?php echo base_url('js/MyScriptLibrary.js')?>"></script>
+  <script src="<?php echo base_url('js/MyScriptLibrary.js') ?>"></script>
   <!-- Notify library -->
-  <script src="<?php echo base_url('js/bootstrap-notify.min.js')?>"></script>
+  <script src="<?php echo base_url('js/bootstrap-notify.min.js') ?>"></script>
   <!-- Latest compiled and minified CSS -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
 
 </head>
 
 <body style="background-color: #3a3b3c;">
-  <section class="--login-page">
-    <div class="logo-box">
-      <img class="logo" src="<?php echo base_url('assets/images/logo.jpg')?>" alt="logo">
+  <section class="--login-page row m-0">
+    <div class="col-sm-6 pt-3 bg-white" style="max-width:48% !important">
+      <img class="logo" src="<?php echo base_url('assets/images/main.png') ?>" alt="logo">
+      <p class="mt-2 p-0 mb-0 text-center col-sm-12">वास्तुपुरुष नमस्तेअस्तु भूशययाभिरत प्रभो ।<br>
+        मद्गृहे धनधान्यादि समृद्धिं कुरु सर्वदा ।।</p>
     </div>
-    <div class="login-box">
-      <form action="<?php echo base_url('Login/verifyUser');?>" method="post">
+    <div class="login-box col-sm-6 p-0">
+      <form action="<?php echo base_url('Login/verifyUser'); ?>" method="post">
         <div class="form" id="form">
           <div class="field email">
             <div class="icon"></div>
@@ -48,15 +50,15 @@
         </div>
       </form>
     </div>
-  </section> 
-    
-    <?php if(!empty($this->session->flashdata('error'))){ ?>
-      <script>
-    let error = '<?php echo $this->session->flashdata('error'); ?>';
-    showAlert(error, 'danger');
+  </section>
+
+  <?php if (!empty($this->session->flashdata('error'))) { ?>
+    <script>
+      let error = '<?php echo $this->session->flashdata('error'); ?>';
+      showAlert(error, 'danger');
     </script>
-    <?php } ?>
-  
+  <?php } ?>
+
 </body>
 
 </html>

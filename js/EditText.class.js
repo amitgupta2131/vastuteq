@@ -9,9 +9,9 @@ export default class EditText {
         this.data = data;
 
 
-        this.editTextModel = new editText();        
+        this.editTextModel = new editText();
         this.id = (data.id != undefined) ? data.id : this.uniqueID();
-        data.id = this.id;        
+        data.id = this.id;
         d3.selectAll(`.svg-object`).classed('deactive', true);
         d3.selectAll(`.svg-object`).classed('active', false);
         d3.selectAll(`.sjx-svg-wrapper`).classed('d-none', true);
@@ -60,7 +60,7 @@ export default class EditText {
                 });
 
             chart.append('image')
-                .attr('class', 'removeEditText')
+                .attr('class', 'removeEditText d-none')
                 .attr('xmlns', 'http://www.w3.org/2000/svg')
                 .attr("xlink:href", BASE_URL + 'assets/icons/remove.svg')
                 .attr('x', data[0].x - 10)
@@ -91,7 +91,8 @@ export default class EditText {
             width: this.data.width,
             height: this.data.height,
             transform: "abc",
-            type: this.data.type
+            type: this.data.type,
+            ref: this.data.ref
         }
 
         // object

@@ -621,10 +621,10 @@ ul.menu {
 
 #mainArea {
   position: absolute;
-  top: 55px;
+  top: 33px;
   left: 0px;
   width: 100%;
-  height: calc(100% - 105px);
+  height: calc(100% - 33px);
   overflow: scroll;
 }
 
@@ -656,23 +656,25 @@ ul.menu {
 }
 
 #mainArea .card .card-text {
-  font-size: 13px;
+  font-size: 15px;
 }
 
 #mainArea .card .project-name span:nth-child(1) {
-  font-family: "Raleway-SemiBold";
+  font-family: var(--font-family-sans-serif);
   color: #191818;
-  font-weight: bold;
+  font-weight: 500;
 }
 
 #mainArea .card .project-name span:nth-child(2) {
-  font-family: "Raleway-SemiBold";
-  color: #808080;
+  font-family: var(--font-family-sans-serif);
+  color: #383737;
   float: right;
 }
 
 #mainArea .card:hover {
-  border: 1px solid #6968ab;
+  -webkit-box-shadow: -1px 1px 22px 0px rgba(135,135,135,1);
+  -moz-box-shadow: -1px 1px 22px 0px rgba(135,135,135,1);
+  box-shadow: -1px 1px 22px 0px rgba(135,135,135,1);
 }
 
 #mainArea .card:active {

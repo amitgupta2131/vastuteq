@@ -206,7 +206,8 @@ export default class Vedic {
         transfrom: "",
         northAngle: that.calNorthAngle(),
         angle: that.angle,
-        type: 'editText'
+        type: 'editText',
+        ref: 'V'
       }
       let obj = new editText({
         mapId : that.mapId,

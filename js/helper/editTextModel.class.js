@@ -32,7 +32,8 @@ export default class EditTextModel {
                     width: data.width,
                     height: data.height,
                     transform: data.transform,
-                    type: object.image.type
+                    type: object.image.type,
+                    ref: object.image.ref,
                 }
             } : object
         )
@@ -62,7 +63,8 @@ export default class EditTextModel {
                     width: object.image.width,
                     height: object.image.height,
                     transform: object.image.transform,
-                    type: object.image.type
+                    type: object.image.type,
+                    ref: object.image.ref,
                 }
             } : object
         )
@@ -89,7 +91,8 @@ export default class EditTextModel {
                     width: data.width,
                     height: data.height,
                     transform: object.image.transform,
-                    type: object.image.type
+                    type: object.image.type,
+                    ref: object.image.ref,
                 }
             } : object
         )
@@ -115,7 +118,8 @@ export default class EditTextModel {
                     width: object.image.width,
                     height: object.image.height,
                     transform: updatedTransform,
-                    type: object.image.type
+                    type: object.image.type,
+                    ref: object.image.ref,
                 }
             } : object
         )

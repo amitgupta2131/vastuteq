@@ -36,7 +36,7 @@ d3.select('#importMap').on('click', function () {
 
 // })
 
-$('#houseMaps').on('click', '[data-map-id]', function () {
+$('#mapsContainer').on('click', '[data-map-id]', function () {
 
 	let id = d3.select(this).attr('data-map-id');
 	drawMethod(id);
@@ -96,7 +96,7 @@ function drawMethod(id){
 	window.location.href = base_url + '/Main/draw/' + btoa(id);
 }
 
-$('#houseMaps').on('click', '.deleteMap', function () {
+$('#mapsContainer').on('click', '.deleteMap', function () {
 	let result = confirm("Are you sure to delete this housemap");
 	if (result) {
 		let id = $(this).attr('dId');

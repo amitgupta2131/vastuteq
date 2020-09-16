@@ -73,8 +73,8 @@
     <div class="container client-form d-none">
         <div class="row">
             <div class="card col-md-12 p-0 mt-5">
-                <div class="card-header">
-                    <h5 class="modal-title" id="exampleModalLabel">
+                <div class="card-header bg-primary">
+                    <h5 class="modal-title text-white text-center" id="exampleModalLabel">
                         Client & Property Details
                     </h5>
                 </div>

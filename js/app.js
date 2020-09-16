@@ -808,6 +808,8 @@ $('input[type="submit"]').on('click', function (e) {
     var result = JSON.parse(content);
     if (result != "" && result.type == 'success') {
       $('.client-form .card').addClass('card-form');
+      $('.client-form .card-header').removeClass('bg-primary');
+      $('.client-form .modal-title').removeClass('text-white');
       $('.client-form .card-body .form-group').removeClass('col-md-3');
       $('.client-form .card-body .form-group').addClass('col-md-6 row m-0 form-border');
       $('.client-form .card-body .form-group label').addClass('col-md-6 text-info');
@@ -867,6 +869,10 @@ $(document).ready(function () {
       showAlert(result.error, 'danger');
     }
   }
+
+  $('.fObject').on('mouseover',function(){    
+    $(this).siblings().removeClass('d-none');
+  })
 })
 
 

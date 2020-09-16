@@ -215,6 +215,7 @@ export default class Vastuteq {
           d3.select('.zoom-functionality').classed('d-none', false);
           d3.select('.tools-section').classed('d-none', false);
           d3.select('.getReport').classed('d-none', false);
+          d3.select('#pills-object-tab').classed('d-none',false);
           this.drawCanvas.classed('d-none', true);
           $(".property.description").html("");
 
@@ -291,7 +292,7 @@ export default class Vastuteq {
           let objects = this.objectModel.getObject(this.mapId);
           let editText = this.editTextModel.getObject(this.mapId);
           let objectData, objectLayer = this.canvas.append("g").classed("objects-group", true);
-
+          $('.sjx-svg-wrapper[data-id]').remove();
           for (let i in objects) {
             objectData = {
               id: objects[i].image.id,
@@ -310,7 +311,12 @@ export default class Vastuteq {
 
           }
 
+          $('.removeEditText').parent().remove();
+          
+
           for(let j in editText){
+            console.log(editText[j].image.ref)
+            if(editText[j].image.ref == 'M'){
             let data = {
               id: editText[j].image.id,
               name: editText[j].image.name,
@@ -326,6 +332,7 @@ export default class Vastuteq {
               layer: this.canvas,
               data: data
             });
+          }
 
           }
 
@@ -399,8 +406,10 @@ export default class Vastuteq {
         d3.select(".properties-section.decs").classed('d-none', true);
         d3.select(".measurement-section").classed("d-none", false);
         d3.select('.tools-section').classed('d-none', false);
-        // d3.select('#vpm').classed('d-none',true);
-        // d3.select('#mvpc').classed('d-none',true);
+        d3.select('.getReport').classed('d-none',true);
+        d3.select('#pills-object-tab').classed('d-none',true);
+
+        
 
         this.assist.drawMask({ layer: this.canvas, points: this.mapBoundariesCoords, size: this.RECT_SIZE, });
         this.assist.drawBoundaries({ layer: this.canvas, points: this.mapBoundariesCoords });
@@ -414,6 +423,31 @@ export default class Vastuteq {
         this.assist.drawPolygonDiagonals({ points: this.vedicMapBoundariesCoords });
         this.assist.drawPolygonGrid({ points: this.vedicMapBoundariesCoords });
         this.createObject('g.vedic-polygon');
+
+        let editText = this.editTextModel.getObject(this.mapId);
+        $('.removeEditText').parent().remove();
+        $('.sjx-svg-wrapper[data-id]').remove();
+        $('.objects-group').remove();
+        for(let j in editText){
+          if(editText[j].image.ref == 'V'){
+          let data = {
+            id: editText[j].image.id,
+            name: editText[j].image.name,
+            src: '',
+            width: editText[j].image.width,
+            height: editText[j].image.height,
+            x: editText[j].image.x,
+            y: editText[j].image.y,
+            transfrom: editText[j].image.transform,              
+            type: 'editText'
+          }
+          new EditTextObjects({
+            layer: this.canvas,
+            data: data
+          });
+        }
+
+        }
         this.vedic = new Vedic();
         this.vedic.startDrawing(this);
       }
@@ -564,13 +598,14 @@ export default class Vastuteq {
 
   _objectEventListener() {
 
-    $("body").on("dblclick", "g.sjx-svg-wrapper", function () {
+    $("body").on("dblclick", "g.sjx-svg-wrapper", function () {      
       let wrapper = $(this);
       let id = wrapper.attr("data-id");
       let object = $(`.svg-object[data-id="${id}"]`);
       object.removeClass("active");
       object.addClass("deactive");
       wrapper.addClass("d-none");
+      $(`[obj-id=${id}]`).addClass('d-none')
     });
 
     $("body").on("dblclick", "g.svg-object[data-object]", function () {

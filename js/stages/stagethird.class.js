@@ -238,7 +238,8 @@ export default class StageThird {
         transfrom: "",
         northAngle: that.calNorthAngle(),
         angle: that.angle,
-        type: 'editText'
+        type: 'editText',
+        ref: 'M'
       }
       let obj = new editText({
         mapId : that.mapId,

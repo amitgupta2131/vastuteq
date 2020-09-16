@@ -54,7 +54,7 @@
     <!-- 
     //////////////////////////////// --- D R A W  A R E A ---  ////////////////////////////////
     -->
-    <!-- <section id="mainArea" class="p-4">
+    <section id="mainArea" class="p-4">
         <div id="mapsContainer" class="row justify-content-md-start">
          
             <?php
@@ -67,29 +67,35 @@
                     $imageResource = json_decode($property[$i]['imageData'], true);
             ?>
                     <div class="col-lg-3 col-md-4 col-sm-12 mb-4">
-                        <div class="card rounded bubbly-button p-1" data-map-id="<?php echo $property[$i]['mapId'] ?>"><img class="card-img-top" src="<?php echo $imageResource['src'] ?>">
-                            <div class="card-body border-top border-thick">                                
+                        <div class="card rounded bubbly-button p-1">
+                        <a href = "<?php echo $imageResource['src'] ?>" download title="click image for download"><img class="card-img-top" src="<?php echo $imageResource['src'] ?>"></a>
+                            <div class="card-body p-2 border-top border-thick">                                
                                 <div class="project-name card-text">
-                                    <span class="col-sm-5">Name</span>
+                                    <span class="col-sm-5">Name : </span>
                                     <span class="col-sm-7"><?php echo $property[$i]['propertyName'] ?></span>
                                 </div>
                                 <div class="project-name card-text">
-                                    <span class="col-sm-5">Category</span>
+                                    <span class="col-sm-5">Category : </span>
                                     <span class="col-sm-7"><?php echo $property[$i]['category'] ?></span>
                                 </div>
                                 <div class="project-name card-text">
-                                    <span class="col-sm-5">Type</span>
-                                    <span class="col-sm-7"><?php echo $property[$i]['type'] ?></span>
+                                    <span class="col-sm-5">Type : </span>
+                                    <span class="col-sm-7"><?php echo ucwords($property[$i]['type']) ?></span>
                                 </div>                               
+                            </div>
+                            <div class="row m-0">
+                                <div class="col-sm-7"></div>
+                            <button title="Delete" class="btn btn-danger deleteMap mr-2 col-sm-2"  style="text-align:center;cursor:pointer"  dId="<?php echo $property[$i]['propertyId'] ?>"><i class="fas fa-trash"></i></button> 
+                            <button title="Edit" class="btn btn-primary col-sm-2" data-map-id="<?php echo $property[$i]['mapId'] ?>" aria-hidden="true" style="cursor:pointer"><i class="far fa-edit"></i></button>
                             </div>
                         </div>
                     </div>
             <?php }
             } ?>
         </div>
-    </section> -->
+    </section>
 
-    <div class="p-4 container" style="max-width:1340px;">
+    <!-- <div class="p-4 container" style="max-width:1340px;">
         <div class="row" style="margin-top:3rem">
             <div class="card" style="width:100%">
                 <div class="card-header row m-0">
@@ -119,7 +125,7 @@
                                         $imageResource = json_decode($property[$i]['imageData'], true);?>
                                     
                                         <tr>
-                                            <!-- <td><?php echo $i + 1 ?></td> -->
+                                            
                                             <td><?php echo $property[$i]['mapId'] ?></td>
                                             <td><?php echo $property[$i]['propertyName'] ?></td>
                                             <td><?php echo $property[$i]['category'] ?></td>
@@ -138,15 +144,15 @@
             </div>
 
         </div>
-    </div>
+    </div> -->
 
     <!-- data table -->
-    <link rel="stylesheet" href="<?php echo base_url('assets/custom/jquery.dataTables.min.css') ?>">
+    <!-- <link rel="stylesheet" href="<?php echo base_url('assets/custom/jquery.dataTables.min.css') ?>">
     <script src="<?php echo base_url('assets/custom/jquery.dataTables.min.js') ?>"></script>
 
     <script>
         $('.dataTable').dataTable();
-    </script>
+    </script> -->
   
 </body>
 

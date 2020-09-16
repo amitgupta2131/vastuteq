@@ -86,10 +86,11 @@
                     </a>
                     <div class="dropdown-menu" aria-labelledby="fileDropdown">
                         <a class="dropdown-item" href="#" id="newProject"><!--<i class="fas fa-plus"></i>&nbsp;&nbsp; -->New Project</a>
-                        <a class="dropdown-item savebtn d-none" href="#" >Save</a>
-                        <a class="dropdown-item" href="<?php echo base_url('Main/logout') ?>">Exit</a>
+                        <a class="dropdown-item savebtn d-none" href="#" >Save</a>                        
                         <a class="dropdown-item" href="<?php echo base_url('Main/createMap') ?>">Create Map</a>
+                        <a class="dropdown-item" href="<?php echo base_url('Main') ?>">Edit Map</a>
                         <a class="dropdown-item" onclick="javascript:toggleFullScreen()" href="#">Full Screen</a>
+                        <a class="dropdown-item" href="<?php echo base_url('Main/logout') ?>">Exit</a>
                         
                     </div>
 
@@ -115,9 +116,9 @@
                         <a class="dropdown-item d-none" href="#" data-menu-item="get-shanmahanti">Shanmahanti</a>
                     </div>
                 </li>
-                <li class="nav-item">
+                <!-- <li class="nav-item">
                     <a href="<?php echo base_url('Main') ?>">Dashboard</a>
-                </li>
+                </li> -->
                 <li class="nav-item">
                     <a href="<?php echo base_url('Main/ayadhi') ?>">Ayadi Calculator</a>
                 </li>
