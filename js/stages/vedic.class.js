@@ -8,6 +8,7 @@ import EditTextModel from "../helper/editTextModel.class.js";
 export default class Vedic {
   constructor() {
     this.actionbox = new ActionBox();
+    d3.select('.properties-section.opacity').classed('d-none', true);
   }
 
   startDrawing(REF) {
@@ -20,54 +21,54 @@ export default class Vedic {
 
 
     this.actionBody = actionBox.append('div')
-        .attr('class', 'row actionbox-body')
-        .style('margin','0px');
+      .attr('class', 'row actionbox-body')
+      .style('margin', '0px');
 
     this.actionsdiv = this.actionBody.append('div')
-        .attr('class', 'form-check mb-3').style('margin-left','auto');
+      .attr('class', 'form-check mb-3').style('margin-left', 'auto');
 
 
     this.actionBtnVedic = this.actionsdiv.append('input')
-        .attr('class', 'form-check-input text-sm')
-        .attr('type', 'radio')
-        .attr('name', 'vedic')
-        .attr('id', 'vedicRadio')
-        .attr('value', 'vedic')
-        .attr('checked',true);
+      .attr('class', 'form-check-input text-sm')
+      .attr('type', 'radio')
+      .attr('name', 'vedic')
+      .attr('id', 'vedicRadio')
+      .attr('value', 'vedic')
+      .attr('checked', true);
     this.actionLabelVedic = this.actionsdiv.append('label')
-    .attr('class', 'form-check-label text-sm')
-    .attr('for', 'vedicRadio')
-    .html('Vedic');
+      .attr('class', 'form-check-label text-sm')
+      .attr('for', 'vedicRadio')
+      .html('Vedic');
 
 
     this.actionsdiv2 = this.actionBody.append('div')
-        .attr('class', 'form-check').style('margin-left','8px').style('margin-right','auto');;
+      .attr('class', 'form-check').style('margin-left', '8px').style('margin-right', 'auto');;
 
 
     this.actionBtnmahavastu = this.actionsdiv2.append('input')
-        .attr('class', 'form-check-input')
-        .attr('type', 'radio')
-        .attr('name', 'mahavastu')
-        .attr('id', 'mahavastuRadio')
-        .attr('value', 'mahavastu');
+      .attr('class', 'form-check-input')
+      .attr('type', 'radio')
+      .attr('name', 'mahavastu')
+      .attr('id', 'mahavastuRadio')
+      .attr('value', 'mahavastu');
     this.actionLabelMahavastu = this.actionsdiv2.append('label')
-    .attr('class', 'form-check-label text-sm')
-    .attr('for', 'mahavastuRadio')
-    .html('Mahavastu');
+      .attr('class', 'form-check-label text-sm')
+      .attr('for', 'mahavastuRadio')
+      .html('Mahavastu');
 
-    $('input[type="radio"]').on('click',function(){
+    $('input[type="radio"]').on('click', function () {
 
       let value = $(this).val();
-      if(value == 'mahavastu'){
-      let objName = localStorage.getItem('vedicImgObj');
-      d3.select('g.sjx-svg-wrapper').remove(); 
-      d3.select('g.vedic-polygon').remove();
-      that.objectDelete(objName);
-      that.centroid = Utility.getCentroid(that.mapBoundariesCoords);   
-      that.model.editType(that.mapId, 'mahavastu');
-      that.model.editCentroid(that.mapId, that.centroid);         
-      that._stage = 3;
-      that.start()
+      if (value == 'mahavastu') {
+        let objName = localStorage.getItem('vedicImgObj');
+        d3.select('g.sjx-svg-wrapper').remove();
+        d3.select('g.vedic-polygon').remove();
+        that.objectDelete(objName);
+        that.centroid = Utility.getCentroid(that.mapBoundariesCoords);
+        that.model.editType(that.mapId, 'mahavastu');
+        that.model.editCentroid(that.mapId, that.centroid);
+        that._stage = 3;
+        that.start()
       }
     })
 
@@ -76,56 +77,37 @@ export default class Vedic {
 
     let col1 = row.append('div')
       .classed('col-md-6 mb-3', true);
-    let col2 = row.append('div')
-      .classed('col-md-6 mb-3', true);
-    let col3 = row.append('div')
-      .classed('col-md-12', true);
+    // let col2 = row.append('div')
+    //   .classed('col-md-6 mb-3', true);
+    // let col3 = row.append('div')
+    //   .classed('col-md-12', true);
 
 
 
-    let enableDiagonalsWrapper = col1.append('div')
-      .classed('form-check', true);
-    let enableDiagonals = enableDiagonalsWrapper.append('input')
-      .property('checked', true).classed('form-check-input', true)
-      .attr('type', 'checkbox');
+    // let enableDiagonalsWrapper = col1.append('div')
+    //   .classed('form-check', true);
+    // let enableDiagonals = enableDiagonalsWrapper.append('input')
+    //   .property('checked', true).classed('form-check-input', true)
+    //   .attr('type', 'checkbox');
 
-    enableDiagonalsWrapper.append('label').attr('class', 'form-check-label, text-sm').html('Diagonals');
+    // enableDiagonalsWrapper.append('label').attr('class', 'form-check-label, text-sm').html('Diagonals');
 
-    let enableGridWrapper = col2.append('div')
-      .classed('form-check', true);
-    let enableGrid = enableGridWrapper.append('input')
-      .property('checked', true).classed('form-check-input', true)
-      .attr('type', 'checkbox');
+    // let enableGridWrapper = col2.append('div')
+    //   .classed('form-check', true);
+    // let enableGrid = enableGridWrapper.append('input')
+    //   .property('checked', true).classed('form-check-input', true)
+    //   .attr('type', 'checkbox');
 
-    enableGridWrapper.append('label').attr('class', 'form-check-label, text-sm').html('Grid');
+    // enableGridWrapper.append('label').attr('class', 'form-check-label, text-sm').html('Grid');
     let addText = col1.append('div').attr('class', 'mt-2 col-md-2 d-flex justify-content-center align-items-center border object-actions')
       .style('flex-direction', 'column').style('height', '42px').style('min-width', '80px');
 
     let addTextIcon = addText.attr('data-action-object', `${that.BASE_URL}assets/icons/dots.svg`).append('img').attr('src', `${that.BASE_URL}assets/icons/text.svg`).attr('width', 20);
     addText.append('span').style('margin-top', '1px').style('font-size', '9px').text('Add Text');
-    this.actionbox.show();    
+    
+    this.actionbox.show();
 
-    let html = `<a class="nav-link text-dark menu-item" href="#" id="fixed" role="button">
-                  Fixed Tools
-                </a>  
-                <a class="nav-link text-dark menu-item" href="#" id="floating" role="button">
-                  Floating Tools
-                </a>  <div class="dropdown-menu"  id="fixedToolMenu" style="background:#e1dfdf">
-      <a class="dropdown-item" type="fixed" href="#" id="3GL" value="3GL" selected>3 X 3 Grid Layout</a>
-      <a class="dropdown-item" type="fixed" href="#" id="3GD" value="3GD">3 X 3 Grid Diagonal</a>
-      <a class="dropdown-item" type="fixed" href="#" id="9DL" value="9DL">9 X 9 Disha Lord Numero Grid</a>
-      <a class="dropdown-item" type="fixed" href="#" id="9GL" value="9GL">9 X 9 Grid Layout</a>
-      <a class="dropdown-item" type="fixed" href="#" id="9SG" value="9SG">Maha Vastu Square Grid</a>
-      <a class="dropdown-item" type="fixed" href="#" id="9MS" value="9MS">Marma Sthana</a>
-      <a class="dropdown-item" type="fixed" href="#" id="9SM" value="9SM">Shanmahanti</a>
-      <a class="dropdown-item" type="fixed" href="#" id="9SD" value="9SD">Shubh Dwar</a>
-      <a class="dropdown-item" type="fixed" href="#" id="KSGP" value="KSGP">Karna Sutra Golden points</a>
-      <a class="dropdown-item" type="fixed" href="#" id="KSMP" value="KSMP">Karna Sutra Marma Points</a>        
-      <a class="dropdown-item" type="fixed" href="#" id="CG" value="CG">Circle Grid</a>
-      <a class="dropdown-item" type="fixed" href="#" id ="vpm1" value="VPM">VPM</a>
-      </div> 
-
-      <div class="dropdown-menu"  id="floatingToolMenu">
+    let html = `
       <a class="dropdown-item" href="#" id="3GL" value="3GL" selected>3 X 3 Grid Layout</a>
       <a class="dropdown-item" href="#" id="3GD" value="3GD">3 X 3 Grid Diagonal</a>
       <a class="dropdown-item" href="#" id="9DL" value="9DL">9 X 9 Disha Lord Numero Grid</a>
@@ -138,61 +120,61 @@ export default class Vedic {
       <a class="dropdown-item" href="#" id="KSMP" value="KSMP">Karna Sutra Marma Points</a>        
       <a class="dropdown-item" href="#" id="CG" value="CG">Circle Grid</a>
       <a class="dropdown-item" href="#" id ="vpm1" value="VPM">VPM</a>
-      </div> `;
+       `;
 
-      let mapGridType = $('#toolMenu').html(html);
+    let mapGridType = $('#toolMenu').html(html);
 
 
 
-    mapGridType.on('mouseover', '#fixed', function () {           
+    mapGridType.on('mouseover', '#fixed', function () {
       $('#fixedToolMenu').removeClass('dropdown-menu')
       $('#fixedToolMenu').addClass('dropdown-menu-show')
       $('#floatingToolMenu').removeClass('dropdown-menu-show2')
       $('#floatingToolMenu').addClass('dropdown-menu')
-    });   
+    });
 
-    mapGridType.on('mouseover', '#floating', function () { 
+    mapGridType.on('mouseover', '#floating', function () {
       // alert('hello')
       $('#floatingToolMenu').removeClass('dropdown-menu')
-      $('#floatingToolMenu').addClass('dropdown-menu-show2')          
+      $('#floatingToolMenu').addClass('dropdown-menu-show2')
       $('#fixedToolMenu').removeClass('dropdown-menu-show')
       $('#fixedToolMenu').addClass('dropdown-menu')
-      
+
     });
 
 
     // mapGridType.on('click', '#floating', function () {
-      
+
     //   $('#floatingToolMenu').remove();
     //   $('#fixedToolMenu').remove();
     //   let objId = $(this).attr('id');
     //   alert(objId)
     //   if (objId == 'fixed') {
-        
+
     //     $('#toolMenu').append(fixedMenu)
     //   } else if (objId == 'floating') {
-       
+
     //     $('#toolMenu').append(floatingMenu)
     //   }
     // })
 
-    enableDiagonals.on('click', function () {
-      diagonalChecked = d3.select(this).property("checked");
-      if (diagonalChecked) {
-        d3.select('.diagonals-container').classed('d-none', false);
-      } else {
-        d3.select('.diagonals-container').classed('d-none', true);
-      }
-    });
+    // enableDiagonals.on('click', function () {
+    //   diagonalChecked = d3.select(this).property("checked");
+    //   if (diagonalChecked) {
+    //     d3.select('.diagonals-container').classed('d-none', false);
+    //   } else {
+    //     d3.select('.diagonals-container').classed('d-none', true);
+    //   }
+    // });
 
-    enableGrid.on('click', function () {
-      gridChecked = d3.select(this).property("checked");
-      if (gridChecked) {
-        d3.select('.vedic-grid-container').classed('d-none', false);
-      } else {
-        d3.select('.vedic-grid-container').classed('d-none', true);
-      }
-    });
+    // enableGrid.on('click', function () {
+    //   gridChecked = d3.select(this).property("checked");
+    //   if (gridChecked) {
+    //     d3.select('.vedic-grid-container').classed('d-none', false);
+    //   } else {
+    //     d3.select('.vedic-grid-container').classed('d-none', true);
+    //   }
+    // });
 
     addText.on("click", function () {
 
@@ -210,10 +192,87 @@ export default class Vedic {
         ref: 'V'
       }
       let obj = new editText({
-        mapId : that.mapId,
+        mapId: that.mapId,
         layer: that.canvas,
         data: data
       });
+
+
+    });
+
+    $('.object-fixed-toggle').on('click',function(){
+      let unlockClass = 'svg-inline--fa fa-lock fa-w-14';
+      let lockClass = 'svg-inline--fa fa-unlock-alt fa-w-14';
+      let eClass = $(this).children().attr('class');
+      if(eClass==unlockClass){
+        $(this).children().eq(0).removeClass(eClass);
+        $(this).children().eq(0).addClass(lockClass);
+        $(`g.sjx-svg-wrapper`).removeClass('d-none');
+        $('.object-align-center').addClass('d-flex');
+      }else{
+        $(this).children().eq(0).removeClass(eClass);
+        $(this).children().eq(0).addClass(unlockClass);
+        $(`g.sjx-svg-wrapper`).addClass('d-none')
+        $('.object-align-center').removeClass('d-flex');
+      }
+    })
+
+    $('body').on('click', '.removeEditText', function () {
+    
+      let textObjects = JSON.parse(localStorage.getItem('EditTextObjects'));
+      let objid = localStorage.getItem('selectedMapId');
+      let newTextObj = [];
+      let id = $(this).attr('obj-id');
+      let name = $(this).attr('obj-name');
+      swal("Are you sure to delete it?", {
+        buttons: {
+            Delete: true,
+            Cancel: true,
+        },
+    })
+    .then((value) => {
+        switch (value) {
+
+            case "Delete":
+                // deleting object from array
+      var filteredObj = textObjects.find(function (item, i) {
+        let index = '';
+        if (item.image.id == id) {
+          delete textObjects[i];
+
+        }
+        return index;
+      });
+      
+      //create new object array after deleting element
+      textObjects.forEach(element => {
+        newTextObj.push(element)
+      });
+
+      //removing old objects and adding new objects in localstorage
+      localStorage.removeItem('EditTextObjects');
+      localStorage.setItem('EditTextObjects', JSON.stringify(newTextObj))
+
+
+
+      //Updating new object array in database
+      let objHandler = new EditTextModel()
+      let result = objHandler.updateObjectsInDataBase(objid);
+
+      $(`.svg-object[data-object="${name}"]`).remove();
+      $(`.sjx-svg-wrapper[data-id="${id}]"`).remove();
+
+      showAlert('Text field removed', 'success')
+                break;
+
+            case "Cancel":
+                break;
+
+            default:
+                break;
+        }
+    })
+      
 
 
     })
@@ -222,15 +281,12 @@ export default class Vedic {
     mapGridType.on('click', 'a', function () {
 
       gridType = $(this).attr('value');
-
-      //toggling fixed and floating menu
-      $('#fixedToolMenu').addClass('dropdown-menu')
-      $('#fixedToolMenu').removeClass('dropdown-menu-show')
-      $('#floatingToolMenu').removeClass('dropdown-menu-show2')
-      $('#floatingToolMenu').addClass('dropdown-menu')
-
       let objType = $(this).attr('type');
-
+      let lockClass = 'svg-inline--fa fa-unlock-alt fa-w-14';
+      $('.object-fixed-toggle').children().eq(0).removeClass();
+      $('.object-fixed-toggle').children().eq(0).addClass(lockClass);
+      $('.object-align-center').addClass('d-flex');
+      
 
 
       let wrapper = $(`g.sjx-svg-wrapper`).remove();
@@ -245,13 +301,13 @@ export default class Vedic {
         localStorage.removeItem('vedicImgObj')
         d3.select('.properties-section.opacity').classed('d-none', true);
       }
-      
+
       switch (gridType) {
         case "3GL":
 
           that.assist.drawPolygon({ layer: that.canvas, points: that.vedicMapBoundariesCoords, strokeColor: "red", strokeWidth: 2 });
           that.assist.drawPolygonGrid({ points: that.vedicMapBoundariesCoords, color: "red", noOfLines: 3, strokeWidth: 2 });
-          that.createObject('g.vedic-polygon',objType);
+          that.createObject('g.vedic-polygon', objType);
           that.vedic = new Vedic();
           break;
         case "3GD":
@@ -259,7 +315,7 @@ export default class Vedic {
           that.assist.drawPolygon({ layer: that.canvas, points: that.vedicMapBoundariesCoords, strokeColor: "blue", strokeWidth: 2 });
           that.assist.drawPolygonGrid({ points: that.vedicMapBoundariesCoords, color: "blue", noOfLines: 3, strokeWidth: 2 });
           that.assist.drawPolygonDiagonals({ points: that.vedicMapBoundariesCoords, color: "blue", noOfLines: 3, strokeWidth: 2 });
-          that.createObject('g.vedic-polygon',objType);
+          that.createObject('g.vedic-polygon', objType);
           that.vedic = new Vedic();
           break;
         case "9DL":
@@ -276,7 +332,7 @@ export default class Vedic {
           that.assist.drawPolygon({ layer: that.canvas, points: that.vedicMapBoundariesCoords, strokeColor: "blue", strokeWidth: 2 });
           that.assist.drawPolygonGrid({ points: that.vedicMapBoundariesCoords, color: "blue", noOfLines: 9, strokeWidth: 2 });
           that.assist.drawPolygonDiagonals({ points: that.vedicMapBoundariesCoords, color: "blue", noOfLines: 9, strokeWidth: 2 });
-          that.createObject('g.vedic-polygon',objType);
+          that.createObject('g.vedic-polygon', objType);
           that.vedic = new Vedic();
           break;
         case "9SG":
@@ -376,7 +432,7 @@ export default class Vedic {
       function drawVedicImages(objName, objImageSrc, object) {
         localStorage.setItem('vedicImgObj', objName)
         if (that.objectVpm == null || that.objectVpm == undefined) {
-         
+
           d3.select('.properties-section.opacity').classed('d-none', false);
           d3.select(objName.parentNode).classed('active', true);
           that.model.editVpmtoggle(that.mapId, true);
@@ -399,7 +455,7 @@ export default class Vedic {
           });
 
         } else {
-          
+
           that.objectDelete(objName);
           that.objectVpm = null
           localStorage.removeItem('vedicImgObj')
@@ -423,7 +479,9 @@ export default class Vedic {
           localStorage.removeItem('vedicImgObj')
           d3.select('.properties-section.opacity').classed('d-none', true);
         }
-      })
+      });
+
+      
       // that.vedic.startDrawing(that);
       //   that.assist.drawPolygonGrid({points: that.vedicMapBoundariesCoords, noOfLines: gridType});
     })
@@ -439,6 +497,8 @@ export default class Vedic {
     that.createObject('g.vedic-polygon');
     that.vedic = new Vedic();
   }
+
+  
 
   showToast(heading, msg, type = "warning") {
     let toastbox = d3.select('#appToast');

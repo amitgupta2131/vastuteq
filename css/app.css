@@ -96,13 +96,17 @@
 }
 
 .object-align-center,
-.object-color-toggle {
+.object-color-toggle,
+.object-delete-toggle,
+.object-fixed-toggle {
   -webkit-transition: 250ms all ease-in-out;
   transition: 250ms all ease-in-out;
 }
 
 .object-align-center:hover,
-.object-color-toggle:hover {
+.object-color-toggle:hover,
+.object-delete-toggle:hover,
+.object-fixed-toggle:hover {
   background-color: rgba(0, 0, 0, 0.3);
   -webkit-transform: scale(0.9);
   transform: scale(0.9);
@@ -906,24 +910,24 @@ input::-webkit-inner-spin-button {
   display:block !important;
 }
 
-.clientContainer{
-  position: relative;
+.clientContainer {
+  position: absolute;
   z-index: 99;
   border: 1px solid #ced4da;
-  top: -16px;
-  left: 6px;
+  top: 107px;
+  left: 287px;
   border-radius: 3px;
   padding: 0px !important;
-  
+  background: white;
 }
-.clientContainer a{
+.clientContainer a {
   text-decoration: none;
-  color:black;
+  color: black;
   display: block;
   text-align: center;
   border-bottom: 1px solid #ced4da;
   padding: 10px 0;
-  
+  font-size: 15px;
 }
 
 .clientContainer a:nth-last-child(){

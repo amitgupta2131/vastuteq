@@ -33,7 +33,7 @@ export default class modal {
 
     // DRAW MAP
     drawMap({ areaArr, division, dimension }) {
-
+        
         const width = 1080 - 120, height = 500 - 120, margin = 80;
 
         this.modal = d3.select('#appModal');
@@ -51,9 +51,9 @@ export default class modal {
             style('position', 'absolute').style('right', '150px').text('Portrait Print');
         this.printBtn.on('click', () => {
             $('#drawArea').css('display', 'none');
-            $('#appModal .modal-content').css('transform','rotate(90deg)')
+            $('#appModal .modal-content').css('transform', 'rotate(90deg)')
             window.print();
-            $('#appModal .modal-content').css('transform','rotate(0deg)')
+            $('#appModal .modal-content').css('transform', 'rotate(0deg)')
             $('#drawArea').css('display', 'flex');
         })
         this.printBtn2.on('click', () => {
@@ -84,15 +84,15 @@ export default class modal {
         let dScale = 100;
         let dDistance = 1000;
         if ((dimension != null) && (dimension != "null")) {
-            dScale=dimension.scale ;
-            dDistance= dimension.distance;
+            dScale = dimension.scale;
+            dDistance = dimension.distance;
         }
-        
-            scale = Math.pow(parseFloat(dScale / dDistance), 2);
-            newAreaArr = areaArr.map(function (d) {
-                return d * scale;
-            })
-      
+
+        scale = Math.pow(parseFloat(dScale / dDistance), 2);
+        newAreaArr = areaArr.map(function (d) {
+            return d * scale;
+        })
+
 
         let data = newAreaArr.map(function (d, i) {
             return {

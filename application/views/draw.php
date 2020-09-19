@@ -170,7 +170,7 @@
                 </div>
                 <div class="card-footer text-muted">
                     <input type="submit" value="Save Info" class="btn btn-outline-primary btn-sm rounded-0 float-right">
-                    <div  class="btn btn-primary text-sm d-none float-right" data-behavior="import"> Import Map</div>
+                    <div class="btn btn-primary text-sm d-none float-right" data-behavior="import"> Import Map</div>
 
                 </div>
                 </form>
@@ -530,7 +530,7 @@
             <div class="tab-pane fade show active" id="pills-properties" role="tabpanel" aria-labelledby="pills-properties-tab">
                 <!-- PROPERTIES SECTION -->
 
-                <div class="input-group input-group-sm mb-3 d-none zoom-functionality">
+                <div class="input-group input-group-sm mb-1 d-none zoom-functionality">
                     <input type="number" class="form-control zoom-display" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" value="100">
                     <div class="input-group-append">
                         <button type="button" class="btn btn-outline-secondary p-0 border-0 dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -564,7 +564,7 @@
                 </div>
 
                 <!-- ACTION ATTRIBUTE -->
-                <div class="actionbox container p-2 border mb-3"></div>
+                <div class="actionbox container p-2 border mb-1"></div>
 
                 <!-- ADDITIONAL ATTRIBUTES -->
                 <!-- <div class="additional container p-2 border mb-3">
@@ -584,7 +584,7 @@
 
                 <!-- OPACITY ATTRIBUTE -->
                 <div class="properties-section opacity structure p-2  border d-none mb-2">
-                    <h5 class="text-uppercase text-sm overflow-elipsis properties-title object">opacity</h5>
+                    <h5 class="text-uppercase mb-0 text-sm overflow-elipsis properties-title object">opacity</h5>
                     <div class="col-md-12 ml-2 mr-2">
                         <div class="slide-container d-flex justify-content-between align-items-center">
                             <input type="range" min="0.1" max="1" step="0.1" value="1" class="slider" id="myRange">
@@ -594,7 +594,7 @@
                     <div class="additional container p-2 border mb-3">
                         <div class="col-md-12">
                             <div class="row">
-                                <div class="col-md-6 p-1 border d-flex flex-column justify-content-center align-items-center object-align-center">
+                                <div class="col-md-6 d-none p-1 border d-flex  flex-column justify-content-center align-items-center object-align-center">
                                     <img src="<?php echo base_url('assets/icons/chevron.svg') ?>" alt="" width="20">
                                     <div class="name text-xs">align-center</div>
                                 </div>
@@ -606,13 +606,17 @@
                                     <i class="fa fa-trash" aria-hidden="true"></i>
                                     <div class="name text-xs">Delete</div>
                                 </div>
+                                <div class="col-md-6 p-1 border d-flex flex-column justify-content-center align-items-center object-fixed-toggle">
+                                    <i class="fa fa-unlock-alt" aria-hidden="true"></i>
+                                    <div class="name text-xs">Fixed</div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
 
                 <!-- DESCRIPTION ATTRIBUTE -->
-                <div class="mt-3 pb-3 properties-section decs">
+                <div class="mt-1 pb-3 properties-section decs">
                     <h5 class="text-uppercase text-sm overflow-elipsis properties-title">Description</h5>
                     <div class="container p-2 border property description text-sm overflow-scroll"></div>
                 </div>
@@ -1307,7 +1311,7 @@
         }
     })
     $('#newProject').on('click', function() {
-        
+
         localStorage.removeItem("houseMaps");
         window.location.href = BASE_URL + 'Main/importMap';
 

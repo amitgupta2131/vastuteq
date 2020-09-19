@@ -38,6 +38,9 @@ function createMap() {
   d3.select(".toolbox.left").classed("d-none", false);
   d3.select(".mousePos").classed("d-none", false);
   d3.select(".client-form").classed("d-none", true);
+  $('.measurement-section').addClass("d-none");
+  $('.tools-section').addClass("d-none");
+  $('.getReport').addClass("d-none");
   $('#drawArea').removeClass('d-none');
   let canvasSize = drawAreaSize(35, 35);
 
@@ -194,14 +197,14 @@ function clearCanvas(canvas) {
 $("#drawArea").mousemove(function (e) {
   let x = e.pageX - 50;
   let y = e.pageY - 50;
-  if(Math.sign(x) != -1 && Math.sign(y) != -1){
+  if (Math.sign(x) != -1 && Math.sign(y) != -1) {
     $(".mouse-position-x").html(`X: ${x}`);
     $(".mouse-position-y").html(`Y: ${y}`);
-  }else{
+  } else {
     $(".mouse-position-x").html(`X: ${0}`);
     $(".mouse-position-y").html(`Y: ${0}`);
   }
-  
+
 });
 
 // DECIDE BEHAVIOR OF APP
@@ -781,11 +784,11 @@ $('#clientName').on('keyup', function () {
     var result = JSON.parse(content);
 
     if (result != "") {
-      // console.log(result)
+      console.log(result)
       $('#clients').empty();
       result.forEach(element => {
         $('#clients').removeClass('d-none')
-        $('#clients').append(`<a href="#">${element.name}, ${element.mobileNo}, ${element.email}</a>`)
+        $('#clients').append(`<a href="#">${element.name}, ${element.mobileNo},${element.landlineNo}, ${element.email}</a>`)
       });
     } else {
       showAlert(result.error, 'danger');
@@ -797,7 +800,8 @@ $('#clients').on('click', 'a', function () {
   let data = $(this).text().split(',');
   $("input[name='cName']").val(data[0]);
   $("#mNumber").val(data[1]);
-  $("input[name='cEmail']").val(data[2]);
+  $("input[name='lNumber']").val(data[2]);
+  $("input[name='cEmail']").val(data[3]);
   $("textarea[name='cAddress']").focus();
   $('#clients').addClass('d-none')
 });
@@ -829,7 +833,7 @@ $('input[type="submit"]').on('click', function (e) {
       $('select').attr('disabled', 'true');
       $('.client-form input').addClass('input-disable');
       $('textarea').addClass('input-disable');
-      $('textarea').attr('rows','1');
+      $('textarea').attr('rows', '1');
       $('select').addClass('input-disable');
       $('[data-behavior="import"]').removeClass('d-none');
       $('input[value="Save Info"]').addClass('d-none');
@@ -878,7 +882,7 @@ $(document).ready(function () {
     }
   }
 
-  $('.fObject').on('mouseover',function(){    
+  $('.fObject').on('mouseover', function () {
     $(this).siblings().removeClass('d-none');
   })
 })

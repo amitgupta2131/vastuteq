@@ -202,13 +202,29 @@
         let importMap = method.match(/importMap/g);
         let draw = method.match(/draw/g)
         if (importMap != null || draw != null) {
-            let conf = confirm('Before Redirecting, want to save Map data or Discard it ?')
-            if (conf) {
-                $('.savebtn').trigger('click');
-                window.location.href = BASE_URL + url;
-            } else {
-                window.location.href = BASE_URL + url;
-            }
+
+            swal("Before Redirecting, want to save Map data or Discard it ?", {
+                    buttons: {
+                        Save: true,
+                        Cancel: true,
+                    },
+                })
+                .then((value) => {
+                    switch (value) {
+
+                        case "Save":
+                            $('.savebtn').trigger('click');
+                            window.location.href = BASE_URL + url;
+                            break;
+
+                        case "Cancel":
+                            window.location.href = BASE_URL + url;
+
+                        default:
+                            break;
+                    }
+                })
+
         } else {
             window.location.href = BASE_URL + url;
         }

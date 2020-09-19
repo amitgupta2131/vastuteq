@@ -11,6 +11,7 @@ export default class StageThird {
   constructor(attribute) {
     this.attribute = attribute;
     this.actionbox = new ActionBox();
+    d3.select('.properties-section.opacity').classed('d-none', true);
   }
 
   startDrawing(REF) {
@@ -79,7 +80,7 @@ export default class StageThird {
         let objName = localStorage.getItem('vedicImgObj');
         that.objectDelete(objName);
         that.model.editType(that.mapId, 'vedic');
-        that.model.editCentroid(that.mapId, that.centroid) 
+        that.model.editCentroid(that.mapId, that.centroid)
         that._stage = 3;
         that.vedicStart()
       } else {
@@ -143,7 +144,7 @@ export default class StageThird {
     let container = actionBox.append('div').attr('class', 'form-row justify-content-between p-2');
 
     let barchartContainer = container.append('div').attr('class', 'col-md-3 d-flex justify-content-center align-items-center border object-actions')
-      .attr('data-action-object', 'barchart').attr('data-toggle', 'modal').attr('data-target', '#appModal')
+      .attr('data-action-object', 'barchart')
       .style('flex-direction', 'column').style('height', '42px').style('min-width', '55px');
     let barchart = barchartContainer.append('img').attr('src', `${that.BASE_URL}assets/icons/barchart.svg`).attr('width', 20);
     barchartContainer.append('span').style('margin-top', '1px').style('font-size', '9px').text('barchart');
@@ -225,6 +226,16 @@ export default class StageThird {
 
     })
 
+    barchart.on("click", function () {
+      let grid = $('[name="select-grid"]').find('option:selected').val();
+      if (grid != '') {
+        $('#appModal').modal('show');
+      } else {
+        showAlert('Please select grid first', 'warning')
+      }
+
+    })
+
 
     addText.on("click", function () {
 
@@ -242,7 +253,7 @@ export default class StageThird {
         ref: 'M'
       }
       let obj = new editText({
-        mapId : that.mapId,
+        mapId: that.mapId,
         layer: that.canvas,
         data: data
       });
@@ -284,55 +295,25 @@ export default class StageThird {
 
 
 
-    let html = `<a class="nav-link text-dark menu-item" href="#" id="fixed" role="button">
-    Fixed Tools
-  </a>  
-  <a class="nav-link text-dark menu-item" href="#" id="floating" role="button">
-    Floating Tools
-  </a>  
-  <div class="dropdown-menu"  id="fixedToolMenu" style="background:#e1dfdf">
-  <a class="dropdown-item" type='fixed' href="#" value="VPM" id="vpm">Vpm</a>
-  <a class="dropdown-item" type='fixed' href="#" value="MVPC" id="mvpc">Shakti Chakra</a>
-  <a class="dropdown-item" type='fixed' href="#" value="MVC" id="mvc">Maha Vastu Chakra</a>
-</div> 
-
-<div class="dropdown-menu"  id="floatingToolMenu">
-<a class="dropdown-item" href="#" value="VPM" id="vpm">Vpm</a>
+    let html = `<a class="dropdown-item" href="#" value="VPM" id="vpm">Vpm</a>
 <a class="dropdown-item" href="#" value="MVPC" id="mvpc">Shakti Chakra</a>
 <a class="dropdown-item" href="#" value="MVC" id="mvc">Maha Vastu Chakra</a>
-</div> `;
+ `;
 
     let mapGridType = $('#toolMenu').html(html);
 
-    mapGridType.on('mouseover', '#fixed', function () {
-      $('#fixedToolMenu').removeClass('dropdown-menu')
-      $('#fixedToolMenu').addClass('dropdown-menu-show')
-      $('#floatingToolMenu').removeClass('dropdown-menu-show')
-      $('#floatingToolMenu').addClass('dropdown-menu')
-    });
 
-    mapGridType.on('mouseover', '#floating', function () {
-      // alert('hello')
-      $('#floatingToolMenu').removeClass('dropdown-menu')
-      $('#floatingToolMenu').addClass('dropdown-menu-show2')
-      $('#fixedToolMenu').removeClass('dropdown-menu-show')
-      $('#fixedToolMenu').addClass('dropdown-menu')
-
-    });
 
 
     mapGridType.on('click', 'a', function () {
 
       let gridType = $(this).attr('value');
-
-      //toggling fixed and floating menu
-      $('#fixedToolMenu').addClass('dropdown-menu')
-      $('#fixedToolMenu').removeClass('dropdown-menu-show')
-      $('#floatingToolMenu').removeClass('dropdown-menu-show2')
-      $('#floatingToolMenu').addClass('dropdown-menu')
-
       let objType = $(this).attr('type');
-
+      let lockClass = 'svg-inline--fa fa-unlock-alt fa-w-14';
+     
+      $('.object-fixed-toggle').children().eq(0).removeClass();
+      $('.object-fixed-toggle').children().eq(0).addClass(lockClass);
+      $('.object-align-center').addClass('d-flex');
 
 
       let wrapper = $(`g.sjx-svg-wrapper`).remove();
@@ -346,6 +327,7 @@ export default class StageThird {
         that.objectVpm = null
         localStorage.removeItem('vedicImgObj')
         d3.select('.properties-section.opacity').classed('d-none', true);
+       
       }
 
       switch (gridType) {
@@ -360,7 +342,7 @@ export default class StageThird {
         case "MVC":
           drawMahavastuImages('MVC', 'mvc.png');
           break;
-        default:          
+        default:
           break;
       }
 
@@ -419,111 +401,7 @@ export default class StageThird {
       //   that.assist.drawPolygonGrid({points: that.vedicMapBoundariesCoords, noOfLines: gridType});
     })
 
-    // let vpm = $('#vpm')
-
-
-    // vpm.on('click', function () {
-
-    //   if (classRef.objectVpm == null || classRef.objectVpm == undefined) {
-    //     d3.select('.properties-section.opacity').classed('d-none', false);
-    //     d3.select(this.parentNode).classed('active', true);
-    //     that.model.editVpmtoggle(that.mapId, true);
-    //     let data = {
-    //       name: "VPM",
-    //       src: that.BASE_URL + 'assets/images/vpm.svg',
-    //       width: 400,
-    //       height: 400,
-    //       x: that.centroid.x - 400 / 2,
-    //       y: that.centroid.y - 400 / 2,
-    //       transfrom: "",
-    //       northAngle: that.calNorthAngle(),
-    //       angle: that.angle
-    //     }
-    //     console.log(this)
-    //     console.log(that.canvas)
-    //     classRef.objectVpm = new Object({
-    //       layer: that.canvas,
-    //       data: data
-    //     });
-    //   } else {
-    //     that.objectDelete('VPM');
-    //     classRef.objectVpm = null;
-    //     d3.select('.properties-section.opacity').classed('d-none', true);
-    //   }
-
-    //   if (classRef.objectVpm == null || classRef.objectVpm == undefined)
-    //     d3.select(this.parentNode).classed('active', false);
-
-    // })
-
-    // let mvm = $('#mvpc')
-
-    // mvm.on('click', function () {
-    //   if (classRef.objectMvm == null || classRef.objectMvm == undefined) {
-    //     d3.select('.color-state-wrapper').classed('d-none', false);
-    //     d3.select('.properties-section.opacity').classed('d-none', false);
-    //     d3.select(this.parentNode).classed('active', true);
-    //     that.model.editMvpctoggle(that.mapId, true);
-    //     let data = {
-    //       name: "MVM",
-    //       src: that.BASE_URL + 'assets/images/MVPC.svg',
-    //       width: 400,
-    //       height: 400,
-    //       x: that.centroid.x - 400 / 2,
-    //       y: that.centroid.y - 400 / 2,
-    //       transfrom: "",
-    //     }
-    //     classRef.objectMvm = new Object({
-    //       layer: that.canvas,
-    //       data: data
-    //     });
-    //   } else {
-    //     d3.select('.color-state-wrapper').classed('d-none', true);
-    //     that.objectDelete('MVM');
-    //     classRef.objectMvm = null;
-    //     d3.select('.properties-section.opacity').classed('d-none', true);
-    //   }
-
-    //   if (classRef.objectMvm == null || classRef.objectMvm == undefined)
-    //     d3.select(this.parentNode).classed('active', false);
-
-    // })
-
-    // let mvc = $('#mvc')
-
-    // mvc.on('click', function () {
-
-    //   if (classRef.objectMVC == null || classRef.objectMVC == undefined) {
-    //     d3.select('.properties-section.opacity').classed('d-none', false);
-    //     d3.select(this.parentNode).classed('active', true);
-    //     that.model.editVpmtoggle(that.mapId, true);
-    //     let data = {
-    //       name: "MVC",
-    //       src: that.BASE_URL + 'assets/images/mvc.png',
-    //       width: 400,
-    //       height: 400,
-    //       x: that.centroid.x - 400 / 2,
-    //       y: that.centroid.y - 400 / 2,
-    //       transfrom: "",
-    //       northAngle: that.calNorthAngle(),
-    //       angle: that.angle
-    //     }
-    //     console.log(this)
-    //     console.log(that.canvas)
-    //     classRef.objectMVC = new Object({
-    //       layer: that.canvas,
-    //       data: data
-    //     });
-    //   } else {
-    //     that.objectDelete('MVC');
-    //     classRef.objectMVC = null;
-    //     d3.select('.properties-section.opacity').classed('d-none', true);
-    //   }
-
-    //   if (classRef.objectMVC == null || classRef.objectMVC == undefined)
-    //     d3.select(this.parentNode).classed('active', false);
-
-    // });
+  
 
 
     //delete tools images
@@ -549,6 +427,23 @@ export default class StageThird {
         d3.select('.properties-section.opacity').classed('d-none', true);
       }
     }
+
+    $('.object-fixed-toggle').on('click',function(){
+      let unlockClass = 'svg-inline--fa fa-lock fa-w-14';
+      let lockClass = 'svg-inline--fa fa-unlock-alt fa-w-14';
+      let eClass = $(this).children().attr('class');
+      if(eClass==unlockClass){
+        $(this).children().eq(0).removeClass(eClass);
+        $(this).children().eq(0).addClass(lockClass);
+        $(`g.sjx-svg-wrapper`).removeClass('d-none');
+        $('.object-align-center').addClass('d-flex');
+      }else{
+        $(this).children().eq(0).removeClass(eClass);
+        $(this).children().eq(0).addClass(unlockClass);
+        $(`g.sjx-svg-wrapper`).addClass('d-none')
+        $('.object-align-center').removeClass('d-flex');
+      }
+    })
 
     divisonOfDevtasContainer.on('click', function () {
       console.log(d3.select(this).classed('active'), 'working');
@@ -580,95 +475,131 @@ export default class StageThird {
       let newObjReport = [];
       let id = $(this).attr('obj-id');
       let name = $(this).attr('obj-name');
+      swal("Are you sure to delete it?", {
+        buttons: {
+          Delete: true,
+          Cancel: true,
+        },
+      })
+        .then((value) => {
+          switch (value) {
 
-      // deleting object from array
-      var filteredObj = objects.find(function (item, i) {
-        let index = '';
-        if (item.image.id == id) {
-          delete objects[i];
-          delete objReport[i];
-        }
-        return index;
-      });
+            case "Delete":
+              // deleting object from array
+              var filteredObj = objects.find(function (item, i) {
+                let index = '';
+                if (item.image.id == id) {
+                  delete objects[i];
+                  delete objReport[i];
+                }
+                return index;
+              });
 
-      //create new object array after deleting element
-      objects.forEach(element => {
-        newObj.push(element)
-      });
+              //create new object array after deleting element
+              objects.forEach(element => {
+                newObj.push(element)
+              });
 
-      objReport.forEach(element => {
-        newObjReport.push(element)
-      });
-
-
-      //removing old objects and adding new objects in localstorage
-      localStorage.removeItem('objects');
-      localStorage.setItem('objects', JSON.stringify(newObj))
-      localStorage.removeItem('objectReport');
-      localStorage.setItem('objectReport', JSON.stringify(newObjReport))
+              objReport.forEach(element => {
+                newObjReport.push(element)
+              });
 
 
-      //Updating new object array in database
-      let objHandler = new ObjectModel()
-      let result = objHandler.updateObjectsInDataBase(objid);
+              //removing old objects and adding new objects in localstorage
+              localStorage.removeItem('objects');
+              localStorage.setItem('objects', JSON.stringify(newObj))
+              localStorage.removeItem('objectReport');
+              localStorage.setItem('objectReport', JSON.stringify(newObjReport))
 
-      var formData = new FormData();
-      formData.append('id', objid);
-      formData.append('reportData', JSON.stringify(newObjReport));
-      var url = BASE_URL + "/Main/updateReportData";
-      AjaxPost(formData, url, updateReportDatasuccess, AjaxError);
 
-      function updateReportDatasuccess(content, targetTextarea) {
-        var result = JSON.parse(content);
-        if (result[0] == 'success') {
-          //Removing object from map
-          $(`.svg-object[data-object="${name}"]`).remove();
-          $(`.sjx-svg-wrapper[data-id="${id}]"`).remove();
+              //Updating new object array in database
+              let objHandler = new ObjectModel()
+              let result = objHandler.updateObjectsInDataBase(objid);
 
-          showAlert('Item Removed', 'success');
-        }
-      }
+              var formData = new FormData();
+              formData.append('id', objid);
+              formData.append('reportData', JSON.stringify(newObjReport));
+              var url = BASE_URL + "/Main/updateReportData";
+              AjaxPost(formData, url, updateReportDatasuccess, AjaxError);
 
+              function updateReportDatasuccess(content, targetTextarea) {
+                var result = JSON.parse(content);
+                if (result[0] == 'success') {
+                  //Removing object from map
+                  $(`.svg-object[data-object="${name}"]`).remove();
+                  $(`.sjx-svg-wrapper[data-id="${id}]"`).remove();
+
+                  showAlert('Item Removed', 'success');
+                }
+              }
+              break;
+            case "Cancel":
+              break;
+
+            default:
+              break;
+          }
+
+        })
 
     })
 
     $('body').on('click', '.removeEditText', function () {
 
-      let textObjects = JSON.parse(localStorage.getItem('EditTextObjects'));      
+      let textObjects = JSON.parse(localStorage.getItem('EditTextObjects'));
       let objid = localStorage.getItem('selectedMapId');
-      let newTextObj = [];      
+      let newTextObj = [];
       let id = $(this).attr('obj-id');
       let name = $(this).attr('obj-name');
-      
-      // deleting object from array
-      var filteredObj = textObjects.find(function (item, i) {
-        let index = '';        
-        if (item.image.id == id) {          
-          delete textObjects[i];
-          
-        }
-        return index;
-      });
-      console.log(textObjects)
-      //create new object array after deleting element
-      textObjects.forEach(element => {
-        newTextObj.push(element)
-      });
+      swal("Are you sure to delete it?", {
+        buttons: {
+          Delete: true,
+          Cancel: true,
+        },
+      })
+        .then((value) => {
+          switch (value) {
 
-      //removing old objects and adding new objects in localstorage
-      localStorage.removeItem('EditTextObjects');
-      localStorage.setItem('EditTextObjects', JSON.stringify(newTextObj))
-      
+            case "Delete":
+              // deleting object from array
+              var filteredObj = textObjects.find(function (item, i) {
+                let index = '';
+                if (item.image.id == id) {
+                  delete textObjects[i];
+
+                }
+                return index;
+              });
+
+              //create new object array after deleting element
+              textObjects.forEach(element => {
+                newTextObj.push(element)
+              });
+
+              //removing old objects and adding new objects in localstorage
+              localStorage.removeItem('EditTextObjects');
+              localStorage.setItem('EditTextObjects', JSON.stringify(newTextObj))
 
 
-      //Updating new object array in database
-      let objHandler = new EditTextModel()
-      let result = objHandler.updateObjectsInDataBase(objid); 
-      
-      $(`.svg-object[data-object="${name}"]`).remove();
-      $(`.sjx-svg-wrapper[data-id="${id}]"`).remove();
-      
-      showAlert('Text field removed','success')
+
+              //Updating new object array in database
+              let objHandler = new EditTextModel()
+              let result = objHandler.updateObjectsInDataBase(objid);
+
+              $(`.svg-object[data-object="${name}"]`).remove();
+              $(`.sjx-svg-wrapper[data-id="${id}]"`).remove();
+
+              showAlert('Text field removed', 'success')
+              break;
+
+            case "Cancel":
+              break;
+
+            default:
+              break;
+          }
+        })
+
 
 
     })

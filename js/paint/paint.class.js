@@ -13,8 +13,11 @@ export default class Paint {
 		d3.select('[data-menu-item="exit"]').classed('d-none', false);
 		d3.select('.current-position').classed('d-none', false);
 		d3.select('[data-menu-item="import-map"]').classed('d-none', true);
+		d3.select('.measurement-section').classed("d-none", true);
+		d3.select('.tools-section').classed("d-none", true);
+		d3.select('.getReport').classed("d-none", true);
 
-        this.canvas = document.getElementById(canvasId);
+		this.canvas = document.getElementById(canvasId);
 		this.context = this.canvas.getContext("2d");
 		this.undoStack = [];
 		this.undoLimit = 10;
@@ -23,15 +26,16 @@ export default class Paint {
 		this.lineWidth = "1";
 		this.brushSize = "4";
 		this.selectedColor = "#000000";
+		this.pressShift = true;
 
 		this.commandEventListener();
 		this.toolEventListener();
 		this.lineWidthEventListener();
 		this.brushEventEventListener();
-        this.colorEventListener();
-        
-        this.init();
-        this.drawGrid(d3.select('#paintCanvasBackground'));
+		this.colorEventListener();
+		this._pressShiftEventListener();
+		this.init();
+		this.drawGrid(d3.select('#paintCanvasBackground'));
 	}
 
 	// Setter functions
@@ -128,8 +132,13 @@ export default class Paint {
 		this.context.lineWidth = this._lineWidth;
 
 		if (Tool.TOOL_LINE == this.tool) {
-			this.context.moveTo(this.startPos.x, this.startPos.y);
-			this.context.lineTo(this.currentPos.x, this.currentPos.y);
+			console.log(this.pressShift)
+			if (this.pressShift) {
+				this.context.moveTo(this.startPos.x, this.startPos.y);
+				this.context.lineTo(this.currentPos.x, this.currentPos.y);
+			} else {
+				alert('hello')
+			}
 		} else if (Tool.TOOL_RECTANGLE == this.tool) {
 			this.context.rect(
 				this.startPos.x,
@@ -273,59 +282,79 @@ export default class Paint {
 				this.selectedColor = el.getAttribute("data-color");
 			});
 		});
-    }
-    
-    drawGrid(canvas) {
+	}
 
-        var gridOptions = {
-            minorLines: {
-                separation: 5,
-                color: "#eeeeee"
-            },
-            majorLines: {
-                separation: 50,
-                color: "#ddd"
-            }
-        };
+	_pressShiftEventListener() {
 
-        this.drawGridLines(canvas, gridOptions.minorLines);
-        this.drawGridLines(canvas, gridOptions.majorLines);
+		console.log(this.pressShift)
+		document.addEventListener("keydown", function (event) {
+			if (event.shiftKey) {
+				alert('pressed')
+				this.pressShift = true;
 
-        return;
-    }
+			}
+		})
 
-    drawGridLines(cnv, lineOptions) {
+		console.log(this.pressShift)
 
-        var iWidth = cnv.attr('width');
-        var iHeight = cnv.attr('height');
+	}
 
-        let g = cnv.append('g');
 
-        var iCount = null;
-        var i = null;
-        var x = null;
-        var y = null;
+	drawGrid(canvas) {
 
-        iCount = Math.floor(iWidth / lineOptions.separation);
+		var gridOptions = {
+			minorLines: {
+				separation: 5,
+				color: "#eeeeee"
+			},
+			majorLines: {
+				separation: 50,
+				color: "#ddd"
+			}
+		};
 
-        for (i = 1; i <= iCount; i++) {
-            x = (i * lineOptions.separation);
-            g.append('line')
-            .attr('x1', x).attr('y1', 0)
-            .attr('x2', x).attr('y2', iHeight)
-            .style("stroke",lineOptions.color);
-        }
+		this.drawGridLines(canvas, gridOptions.minorLines);
+		this.drawGridLines(canvas, gridOptions.majorLines);
 
-        iCount = Math.floor(iHeight / lineOptions.separation);
+		return;
+	}
 
-        for (i = 1; i <= iCount; i++) {
-            y = (i * lineOptions.separation);
-            g.append('line')
-            .attr('x1', 0).attr('y1', y)
-            .attr('x2', iWidth).attr('y2', y)
-            .style("stroke",lineOptions.color);
-        }
+	drawGridLines(cnv, lineOptions) {
 
-        return;
-    }
+		var iWidth = cnv.attr('width');
+		var iHeight = cnv.attr('height');
+
+		let g = cnv.append('g');
+
+		var iCount = null;
+		var i = null;
+		var x = null;
+		var y = null;
+
+		iCount = Math.floor(iWidth / lineOptions.separation);
+
+		for (i = 1; i <= iCount; i++) {
+			x = (i * lineOptions.separation);
+			g.append('line')
+				.attr('x1', x).attr('y1', 0)
+				.attr('x2', x).attr('y2', iHeight)
+				.style("stroke", lineOptions.color);
+		}
+
+		iCount = Math.floor(iHeight / lineOptions.separation);
+
+		for (i = 1; i <= iCount; i++) {
+			y = (i * lineOptions.separation);
+			g.append('line')
+				.attr('x1', 0).attr('y1', y)
+				.attr('x2', iWidth).attr('y2', y)
+				.style("stroke", lineOptions.color);
+		}
+
+		return;
+	}
+
+
 }
+
+
