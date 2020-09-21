@@ -70,7 +70,7 @@ function createMap() {
   canvasRuler = new ruler({
     container: document.querySelector("#canvasArea"),
   });
-  // canvasRuler.api.setScale(2);
+  canvasRuler.api.setScale(1);
 
   createMapApp = new Paint("paintCanvas");
 
@@ -806,7 +806,7 @@ $('#clients').on('click', 'a', function () {
   $('#clients').addClass('d-none')
 });
 
-$("input").on('click', function () {
+$("input").on('focusout', function () {
   $('#clients').addClass('d-none')
 });
 
@@ -884,7 +884,28 @@ $(document).ready(function () {
 
   $('.fObject').on('mouseover', function () {
     $(this).siblings().removeClass('d-none');
+  });
+
+  $('[data-tool]').on('click', function () {
+    if ($('[data-tool="line"]').hasClass('active') || $('[data-tool="rectangle"]').hasClass('active') || $('[data-tool="circle"]').hasClass('active') || $('[data-tool="triangle"]').hasClass('active')) {
+      $('#paintCanvas').css('cursor', 'crosshair');
+      $('#paintCanvas').removeClass('paint-bucket pencil eraser brush')
+    } else if ($('[data-tool="paint-bucket"]').hasClass('active')) {
+      $('#paintCanvas').addClass('paint-bucket');
+      $('#paintCanvas').removeClass('pencil eraser brush');
+    } else if ($('[data-tool="pencil"]').hasClass('active')) {
+      $('#paintCanvas').addClass('pencil');
+      $('#paintCanvas').removeClass('paint-bucket eraser brush')
+    } else if ($('[data-tool="eraser"]').hasClass('active')) {
+      $('#paintCanvas').addClass('eraser');
+      $('#paintCanvas').removeClass('paint-bucket pencil brush')
+    }else if ($('[data-tool="brush"]').hasClass('active')) {
+      $('#paintCanvas').addClass('brush');
+      $('#paintCanvas').removeClass('paint-bucket pencil eraser')
+    }
   })
+
+
 })
 
 

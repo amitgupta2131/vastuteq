@@ -560,6 +560,16 @@
                                 <img src="<?php echo base_url('assets/icons/print.svg') ?>" alt="" width="20">
                             </a>
                         </li>
+                        <li class="nav-item savebtn">
+                            <a class="nav-link" href="#" id="save" name="save" title="Save">
+                                <img src="<?php echo base_url('assets/images/save.svg') ?>" alt="" width="20">
+                            </a>
+                        </li>
+                        <li class="nav-item" onclick="javascript:toggleFullScreen()">
+                            <a class="nav-link" href="#" id="fullScreen" name="fullScreen" title="Full Screen">
+                                <img src="<?php echo base_url('assets/images/full-screen.svg') ?>" alt="" width="20">
+                            </a>
+                        </li>
                     </ul>
                 </div>
 
@@ -584,32 +594,34 @@
 
                 <!-- OPACITY ATTRIBUTE -->
                 <div class="properties-section opacity structure p-2  border d-none mb-2">
-                    <h5 class="text-uppercase mb-0 text-sm overflow-elipsis properties-title object">opacity</h5>
-                    <div class="col-md-12 ml-2 mr-2">
-                        <div class="slide-container d-flex justify-content-between align-items-center">
+                    
+                    <div class="col-md-12 row">
+                    <h5 class="text-uppercase col-sm-4 pl-0 pr-1 mb-0 text-sm overflow-elipsis properties-title object">opacity</h5>
+                        <div class="slide-container col-sm-8 pl-1 d-flex justify-content-between align-items-center">
                             <input type="range" min="0.1" max="1" step="0.1" value="1" class="slider" id="myRange">
                             <span class="range-value">1</span>
                         </div>
                     </div>
-                    <div class="additional container p-2 border mb-3">
+                    <div class="additional container">
                         <div class="col-md-12">
                             <div class="row">
-                                <div class="col-md-6 d-none p-1 border d-flex  flex-column justify-content-center align-items-center object-align-center">
-                                    <img src="<?php echo base_url('assets/icons/chevron.svg') ?>" alt="" width="20">
-                                    <div class="name text-xs">align-center</div>
-                                </div>
-                                <!-- <div class="col-md-6 p-1 border d-flex flex-column d-none justify-content-center align-items-center object-color-toggle" data-color-state="colorless">
-                                <img src="<?php echo base_url('assets/icons/colorless.svg') ?>" alt="" width="20">
-                                <div class="name text-xs">color toggle</div>
-                            </div> -->
-                                <div class="col-md-6 p-1 border d-flex flex-column d-none justify-content-center align-items-center object-delete-toggle">
-                                    <i class="fa fa-trash" aria-hidden="true"></i>
-                                    <div class="name text-xs">Delete</div>
-                                </div>
-                                <div class="col-md-6 p-1 border d-flex flex-column justify-content-center align-items-center object-fixed-toggle">
+                            <div class="col-md-4 p-1 border d-flex flex-column justify-content-center align-items-center object-fixed-toggle">
                                     <i class="fa fa-unlock-alt" aria-hidden="true"></i>
                                     <div class="name text-xs">Fixed</div>
                                 </div>
+                                <div class="col-md-4 p-1 border d-flex flex-column d-none justify-content-center align-items-center object-delete-toggle">
+                                    <i class="fa fa-trash" aria-hidden="true"></i>
+                                    <div class="name text-xs">Delete</div>
+                                </div> 
+                                <div class="col-md-4 d-none p-1 border d-flex  flex-column justify-content-center align-items-center object-align-center">
+                                    <img src="<?php echo base_url('assets/icons/chevron.svg') ?>" alt="" width="20">
+                                    <div class="name text-xs text-center">align-center</div>
+                                </div>
+                                <!-- <div class="col-md-4 p-1 border d-flex flex-column d-none justify-content-center align-items-center object-color-toggle" data-color-state="colorless">
+                                <img src="<?php echo base_url('assets/icons/colorless.svg') ?>" alt="" width="20">
+                                <div class="name text-xs">color toggle</div>
+                            </div> -->
+                                                              
                             </div>
                         </div>
                     </div>

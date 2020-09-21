@@ -296,6 +296,14 @@ export default class Utility {
     return (dist);
   };
 
+   // ! GET DISTANCE BETWEEN TWO GIVEN POINTS without x and y key in array
+   static distanceOfTwoPoints(startPoint, endPoint) {
+    let deltaX = startPoint[0] - endPoint[0];
+    let deltaY = startPoint[1] - endPoint[1];
+    let dist = Math.sqrt(Math.pow(deltaX, 2) + Math.pow(deltaY, 2));
+    return (dist);
+  };
+
 
   static getObjectDirection(calNorthAngle, centroid, angle, mapBoundariesCoords, division) {
     let objectModel = new ObjectModel();

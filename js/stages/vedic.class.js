@@ -104,22 +104,22 @@ export default class Vedic {
 
     let addTextIcon = addText.attr('data-action-object', `${that.BASE_URL}assets/icons/dots.svg`).append('img').attr('src', `${that.BASE_URL}assets/icons/text.svg`).attr('width', 20);
     addText.append('span').style('margin-top', '1px').style('font-size', '9px').text('Add Text');
-    
+
     this.actionbox.show();
 
     let html = `
-      <a class="dropdown-item" href="#" id="3GL" value="3GL" selected>3 X 3 Grid Layout</a>
-      <a class="dropdown-item" href="#" id="3GD" value="3GD">3 X 3 Grid Diagonal</a>
-      <a class="dropdown-item" href="#" id="9DL" value="9DL">9 X 9 Disha Lord Numero Grid</a>
-      <a class="dropdown-item" href="#" id="9GL" value="9GL">9 X 9 Grid Layout</a>
-      <a class="dropdown-item" href="#" id="9SG" value="9SG">Maha Vastu Square Grid</a>
-      <a class="dropdown-item" href="#" id="9MS" value="9MS">Marma Sthana</a>
-      <a class="dropdown-item" href="#" id="9SM" value="9SM">Shanmahanti</a>
-      <a class="dropdown-item" href="#" id="9SD" value="9SD">Shubh Dwar</a>
-      <a class="dropdown-item" href="#" id="KSGP" value="KSGP">Karna Sutra Golden points</a>
-      <a class="dropdown-item" href="#" id="KSMP" value="KSMP">Karna Sutra Marma Points</a>        
-      <a class="dropdown-item" href="#" id="CG" value="CG">Circle Grid</a>
-      <a class="dropdown-item" href="#" id ="vpm1" value="VPM">VPM</a>
+      <a class="dropdown-item" type="fixed" href="#" id="3GL" value="3GL" selected>3 X 3 Grid Layout</a>
+      <a class="dropdown-item" type="fixed" href="#" id="3GD" value="3GD">3 X 3 Grid Diagonal</a>
+      <a class="dropdown-item" type="fixed" href="#" id="9DL" value="9DL">9 X 9 Disha Lord Numero Grid</a>
+      <a class="dropdown-item" type="fixed" href="#" id="9GL" value="9GL">9 X 9 Grid Layout</a>
+      <a class="dropdown-item" type="fixed" href="#" id="9SG" value="9SG">Maha Vastu Square Grid</a>
+      <a class="dropdown-item" type="fixed" href="#" id="9MS" value="9MS">Marma Sthana</a>
+      <a class="dropdown-item" type="fixed" href="#" id="9SM" value="9SM">Shanmahanti</a>
+      <a class="dropdown-item" type="fixed" href="#" id="9SD" value="9SD">Shubh Dwar</a>
+      <a class="dropdown-item" type="fixed" href="#" id="KSGP" value="KSGP">Karna Sutra Golden points</a>
+      <a class="dropdown-item" type="fixed" href="#" id="KSMP" value="KSMP">Karna Sutra Marma Points</a>        
+      <a class="dropdown-item" type="fixed" href="#" id="CG" value="CG">Circle Grid</a>
+      <a class="dropdown-item" type="fixed" href="#" id ="vpm1" value="VPM">VPM</a>
        `;
 
     let mapGridType = $('#toolMenu').html(html);
@@ -207,18 +207,20 @@ export default class Vedic {
       if(eClass==unlockClass){
         $(this).children().eq(0).removeClass(eClass);
         $(this).children().eq(0).addClass(lockClass);
-        $(`g.sjx-svg-wrapper`).removeClass('d-none');
+        $(`g.sjx-svg-wrapper`).addClass('d-none');
         $('.object-align-center').addClass('d-flex');
+        $('.object-fixed-toggle .name').html('Fixed')
       }else{
         $(this).children().eq(0).removeClass(eClass);
         $(this).children().eq(0).addClass(unlockClass);
-        $(`g.sjx-svg-wrapper`).addClass('d-none')
+        $(`g.sjx-svg-wrapper`).removeClass('d-none')
         $('.object-align-center').removeClass('d-flex');
+        $('.object-fixed-toggle .name').html('Float')
       }
     })
 
     $('body').on('click', '.removeEditText', function () {
-    
+
       let textObjects = JSON.parse(localStorage.getItem('EditTextObjects'));
       let objid = localStorage.getItem('selectedMapId');
       let newTextObj = [];
@@ -226,53 +228,53 @@ export default class Vedic {
       let name = $(this).attr('obj-name');
       swal("Are you sure to delete it?", {
         buttons: {
-            Delete: true,
-            Cancel: true,
+          Delete: true,
+          Cancel: true,
         },
-    })
-    .then((value) => {
-        switch (value) {
+      })
+        .then((value) => {
+          switch (value) {
 
             case "Delete":
-                // deleting object from array
-      var filteredObj = textObjects.find(function (item, i) {
-        let index = '';
-        if (item.image.id == id) {
-          delete textObjects[i];
+              // deleting object from array
+              var filteredObj = textObjects.find(function (item, i) {
+                let index = '';
+                if (item.image.id == id) {
+                  delete textObjects[i];
 
-        }
-        return index;
-      });
-      
-      //create new object array after deleting element
-      textObjects.forEach(element => {
-        newTextObj.push(element)
-      });
+                }
+                return index;
+              });
 
-      //removing old objects and adding new objects in localstorage
-      localStorage.removeItem('EditTextObjects');
-      localStorage.setItem('EditTextObjects', JSON.stringify(newTextObj))
+              //create new object array after deleting element
+              textObjects.forEach(element => {
+                newTextObj.push(element)
+              });
+
+              //removing old objects and adding new objects in localstorage
+              localStorage.removeItem('EditTextObjects');
+              localStorage.setItem('EditTextObjects', JSON.stringify(newTextObj))
 
 
 
-      //Updating new object array in database
-      let objHandler = new EditTextModel()
-      let result = objHandler.updateObjectsInDataBase(objid);
+              //Updating new object array in database
+              let objHandler = new EditTextModel()
+              let result = objHandler.updateObjectsInDataBase(objid);
 
-      $(`.svg-object[data-object="${name}"]`).remove();
-      $(`.sjx-svg-wrapper[data-id="${id}]"`).remove();
+              $(`.svg-object[data-object="${name}"]`).remove();
+              $(`.sjx-svg-wrapper[data-id="${id}]"`).remove();
 
-      showAlert('Text field removed', 'success')
-                break;
+              showAlert('Text field removed', 'success')
+              break;
 
             case "Cancel":
-                break;
+              break;
 
             default:
-                break;
-        }
-    })
-      
+              break;
+          }
+        })
+
 
 
     })
@@ -286,7 +288,7 @@ export default class Vedic {
       $('.object-fixed-toggle').children().eq(0).removeClass();
       $('.object-fixed-toggle').children().eq(0).addClass(lockClass);
       $('.object-align-center').addClass('d-flex');
-      
+
 
 
       let wrapper = $(`g.sjx-svg-wrapper`).remove();
@@ -430,6 +432,8 @@ export default class Vedic {
       }
 
       function drawVedicImages(objName, objImageSrc, object) {
+        let width = Utility.distanceOfTwoPoints(that.vedicMapBoundariesCoords[1],that.vedicMapBoundariesCoords[3]);       
+
         localStorage.setItem('vedicImgObj', objName)
         if (that.objectVpm == null || that.objectVpm == undefined) {
 
@@ -440,10 +444,10 @@ export default class Vedic {
           let data = {
             name: objName,
             src: that.BASE_URL + 'assets/images/' + objImageSrc,
-            width: 400,
-            height: 400,
-            x: that.centroid.x - 400 / 2,
-            y: that.centroid.y - 400 / 2,
+            width: width,
+            height: width,
+            x: that.centroid.x - width / 2,
+            y: that.centroid.y - width / 2,
             transfrom: "",
             northAngle: that.calNorthAngle(),
             angle: that.angle,
@@ -481,7 +485,7 @@ export default class Vedic {
         }
       });
 
-      
+
       // that.vedic.startDrawing(that);
       //   that.assist.drawPolygonGrid({points: that.vedicMapBoundariesCoords, noOfLines: gridType});
     })
@@ -498,7 +502,7 @@ export default class Vedic {
     that.vedic = new Vedic();
   }
 
-  
+
 
   showToast(heading, msg, type = "warning") {
     let toastbox = d3.select('#appToast');

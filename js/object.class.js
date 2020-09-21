@@ -202,7 +202,7 @@ export default class Object {
     }
 
     if (this.data.type == 'fixed') {
-      $(`.sjx-svg-wrapper[data-id='${this.id}']`).remove(); 
+      $(`.sjx-svg-wrapper[data-id='${this.id}']`).addClass('d-none'); 
       
     }
 

@@ -26,14 +26,15 @@ export default class Paint {
 		this.lineWidth = "1";
 		this.brushSize = "4";
 		this.selectedColor = "#000000";
-		this.pressShift = true;
+		this.isShiftDown = false;
+		this.minorlineGrid = 5;
+		this.majorlineGrid = this.minorlineGrid * 10;
 
 		this.commandEventListener();
 		this.toolEventListener();
 		this.lineWidthEventListener();
 		this.brushEventEventListener();
 		this.colorEventListener();
-		this._pressShiftEventListener();
 		this.init();
 		this.drawGrid(d3.select('#paintCanvasBackground'));
 	}
@@ -63,6 +64,25 @@ export default class Paint {
 
 	init() {
 		this.canvas.onmousedown = (e) => this.onMouseDown(e);
+		window.addEventListener('keydown', (e) => this.keyDownListener(e));
+		window.addEventListener('keyup', (e) => this.keyUpListener(e));
+	}
+
+	keyDownListener(e) {
+		var keyCode = e.keyCode;
+		switch (keyCode) {
+			case 16:
+				this.isShiftDown = true;
+				break;
+		};
+	};
+	keyUpListener(e) {
+		var keyCode = e.keyCode;
+		switch (keyCode) {
+			case 16:
+				this.isShiftDown = false;
+				break;
+		};
 	}
 
 	onMouseDown(e) {
@@ -94,17 +114,16 @@ export default class Paint {
 	}
 
 	onMouseMove(e) {
-		console.log(this.tool);
 		this.currentPos = Utility.getMouseCoordsOnCanvas(this.canvas, e);
 
 		switch (this.tool) {
 			case Tool.TOOL_LINE:
 			case Tool.TOOL_RECTANGLE:
 			case Tool.TOOL_CIRCLE:
-			case Tool.TOOL_TRIANGLE:
+			case Tool.TOOL_TRIANGLE:				
 				this.drawShape();
 				break;
-			case Tool.TOOL_PENCIL:
+			case Tool.TOOL_PENCIL:				
 				this.drawFreeLine(this._lineWidth);
 				break;
 			case Tool.TOOL_BRUSH:
@@ -124,6 +143,15 @@ export default class Paint {
 	onMouseUp(e) {
 		this.canvas.onmousemove = null;
 		document.onmouseup = null;
+	}	
+
+	onKeyDown(e) {
+		var keyCode = e.keyCode;
+		switch (keyCode) {
+			case 16:
+				this.isShiftDown = true;
+				break;
+		};
 	}
 
 	drawShape() {
@@ -132,12 +160,12 @@ export default class Paint {
 		this.context.lineWidth = this._lineWidth;
 
 		if (Tool.TOOL_LINE == this.tool) {
-			console.log(this.pressShift)
-			if (this.pressShift) {
+			if (!this.isShiftDown) {
+				this.context.moveTo(this.roundToNextFive(this.startPos.x), this.roundToNextFive(this.startPos.y));
+				this.context.lineTo(this.roundToNextFive(this.currentPos.x), this.roundToNextFive(this.currentPos.y));
+			} else{
 				this.context.moveTo(this.startPos.x, this.startPos.y);
 				this.context.lineTo(this.currentPos.x, this.currentPos.y);
-			} else {
-				alert('hello')
 			}
 		} else if (Tool.TOOL_RECTANGLE == this.tool) {
 			this.context.rect(
@@ -170,7 +198,7 @@ export default class Paint {
 
 	drawFreeLine(lineWidth) {
 		this.context.lineWidth = lineWidth;
-		this.context.lineTo(this.currentPos.x, this.currentPos.y);
+		this.context.lineTo(this.currentPos.x, this.currentPos.y+21);
 		this.context.lineCap = "round";
 		this.context.lineJoin = "round";
 		this.context.stroke();
@@ -284,31 +312,22 @@ export default class Paint {
 		});
 	}
 
-	_pressShiftEventListener() {
-
-		console.log(this.pressShift)
-		document.addEventListener("keydown", function (event) {
-			if (event.shiftKey) {
-				alert('pressed')
-				this.pressShift = true;
-
-			}
-		})
-
-		console.log(this.pressShift)
-
+	roundToNextFive(number) {
+		return number % this.minorlineGrid ? number + this.minorlineGrid - (number % this.minorlineGrid) : number
 	}
+
+
 
 
 	drawGrid(canvas) {
 
 		var gridOptions = {
 			minorLines: {
-				separation: 5,
+				separation: this.minorlineGrid,
 				color: "#eeeeee"
 			},
 			majorLines: {
-				separation: 50,
+				separation: this.majorlineGrid,
 				color: "#ddd"
 			}
 		};

@@ -116,10 +116,15 @@
 .zoom-display {
   width: 65px !important;
   padding-right: 18px;
+  flex: none !important;
   font-size: 14px;
   font-family: "Raleway-SemiBold";
   -webkit-box-sizing: border-box !important;
   box-sizing: border-box !important;
+}
+
+.navbar-nav{
+  display:contents;
 }
 
 .zoom-options {
@@ -133,6 +138,16 @@
   top: 4px;
   right: -2px;
   font-family: "Raleway-Bold";
+}
+
+.slider{
+  height: 5px;
+  position: relative;
+  top: -5px;
+}
+.slide-container span{
+  position: relative;
+  top: -5px;
 }
 
 /* ==================================== */
@@ -924,11 +939,31 @@ input::-webkit-inner-spin-button {
   text-decoration: none;
   color: black;
   display: block;
-  text-align: center;
+  /* text-align: center; */
   border-bottom: 1px solid #ced4da;
-  padding: 10px 0;
-  font-size: 15px;
+  padding: 5px 13px;
+  font-size: 13px;
 }
+
+.paint-bucket{
+  cursor: url('../assets/icons/paint-bucket.png'), default !important;
+}
+.pencil{
+  cursor: url('../assets/icons/pencil.png'), default !important;
+}
+
+.eraser{
+  cursor: url('../assets/icons/eraser.png'), default !important;
+}
+
+.brush{
+  cursor: url('../assets/icons/brush.png'), default !important;
+}
+
+#paintCanvas{
+  cursor: crosshair;
+}
+
 
 .clientContainer a:nth-last-child(){
 border: none !important;

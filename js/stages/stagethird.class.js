@@ -40,7 +40,7 @@ export default class StageThird {
       .style('margin', '0px');
 
     this.actionsdiv = this.actionBody.append('div')
-      .attr('class', 'form-check mb-3').style('margin-left', 'auto');
+      .attr('class', 'form-check mb-1').style('margin-left', 'auto');
 
 
     this.actionBtnVedic = this.actionsdiv.append('input')
@@ -134,29 +134,29 @@ export default class StageThird {
       );
 
     let angleInputbox = actionBody.append('div').attr('class', 'col-md-6')
-      .append("input").attr("class", "mt-2 form-control form-control-sm text-sm")
+      .append("input").attr("class", "mt-1 form-control form-control-sm text-sm")
       .attr('name', 'angleInputbox').attr('type', 'number').attr('placeholder', 'Degree').attr('value', Math.abs(that.angle));
 
     let degreeUpdateBtn = actionBody.append('div').attr('class', 'col-md-6')
-      .append("button").attr("class", "mt-2 form-control form-control-sm text-sm")
+      .append("button").attr("class", "mt-1 form-control form-control-sm text-sm")
       .text('Update');
 
-    let container = actionBox.append('div').attr('class', 'form-row justify-content-between p-2');
+    let container = actionBox.append('div').attr('class', 'form-row justify-content-between pt-1 pl-2 pr-2 pb-0');
 
     let barchartContainer = container.append('div').attr('class', 'col-md-3 d-flex justify-content-center align-items-center border object-actions')
       .attr('data-action-object', 'barchart')
-      .style('flex-direction', 'column').style('height', '42px').style('min-width', '55px');
+      .style('flex-direction', 'column').style('height', '50px').style('min-width', '55px');
     let barchart = barchartContainer.append('img').attr('src', `${that.BASE_URL}assets/icons/barchart.svg`).attr('width', 20);
     barchartContainer.append('span').style('margin-top', '1px').style('font-size', '9px').text('barchart');
 
 
-    let divisonOfDevtasContainer = container.append('div').attr('class', 'col-md-8 d-flex justify-content-center align-items-center border object-actions')
-      .style('flex-direction', 'column').style('height', '42px').style('min-width', '55px');
+    let divisonOfDevtasContainer = container.append('div').attr('class', 'col-md-5 d-flex justify-content-center align-items-center border object-actions')
+      .style('flex-direction', 'column').style('height', '50px').style('min-width', '55px');
     let divisonOfDevtas = divisonOfDevtasContainer.attr('data-action-object', `${that.BASE_URL}assets/icons/dots.svg`).append('img').attr('src', `${that.BASE_URL}assets/icons/dots.svg`).attr('width', 20);
-    divisonOfDevtasContainer.append('span').style('margin-top', '1px').style('font-size', '9px').text('division of devtas');
+    divisonOfDevtasContainer.append('span').style('margin-top', '1px').style('text-align','center').style('font-size', '9px').text('division of devtas');
 
-    let addText = container.append('div').attr('class', 'mt-2 col-md-2 d-flex justify-content-center align-items-center border object-actions')
-      .style('flex-direction', 'column').style('height', '42px').style('min-width', '55px');
+    let addText = container.append('div').attr('class', 'col-md-2 d-flex justify-content-center align-items-center border object-actions')
+      .style('flex-direction', 'column').style('height', '50px').style('min-width', '55px');
 
     let addTextIcon = addText.attr('data-action-object', `${that.BASE_URL}assets/icons/dots.svg`).append('img').attr('src', `${that.BASE_URL}assets/icons/text.svg`).attr('width', 20);
     addText.append('span').style('margin-top', '1px').style('font-size', '9px').text('Add Text');
@@ -295,9 +295,9 @@ export default class StageThird {
 
 
 
-    let html = `<a class="dropdown-item" href="#" value="VPM" id="vpm">Vpm</a>
-<a class="dropdown-item" href="#" value="MVPC" id="mvpc">Shakti Chakra</a>
-<a class="dropdown-item" href="#" value="MVC" id="mvc">Maha Vastu Chakra</a>
+    let html = `<a class="dropdown-item" type="fixed" href="#" value="VPM" id="vpm">Vpm</a>
+<a class="dropdown-item" href="#" type="fixed" value="MVPC" id="mvpc">Shakti Chakra</a>
+<a class="dropdown-item" href="#" type="fixed" value="MVC" id="mvc">Maha Vastu Chakra</a>
  `;
 
     let mapGridType = $('#toolMenu').html(html);
@@ -348,6 +348,7 @@ export default class StageThird {
 
       function drawMahavastuImages(objName, objImageSrc, object) {
         localStorage.setItem('vedicImgObj', objName)
+        let width = Utility.distanceOfTwoPoints(that.vedicMapBoundariesCoords[1],that.vedicMapBoundariesCoords[3]); 
         if (that.objectVpm == null || that.objectVpm == undefined) {
 
           d3.select('.properties-section.opacity').classed('d-none', false);
@@ -357,10 +358,10 @@ export default class StageThird {
           let data = {
             name: objName,
             src: that.BASE_URL + 'assets/images/' + objImageSrc,
-            width: 400,
-            height: 400,
-            x: that.centroid.x - 400 / 2,
-            y: that.centroid.y - 400 / 2,
+            width: width,
+            height: width,
+            x: that.centroid.x - width / 2,
+            y: that.centroid.y - width / 2,
             transfrom: "",
             northAngle: that.calNorthAngle(),
             angle: that.angle,
@@ -435,13 +436,15 @@ export default class StageThird {
       if(eClass==unlockClass){
         $(this).children().eq(0).removeClass(eClass);
         $(this).children().eq(0).addClass(lockClass);
-        $(`g.sjx-svg-wrapper`).removeClass('d-none');
+        $(`g.sjx-svg-wrapper`).addClass('d-none');
         $('.object-align-center').addClass('d-flex');
+        $('.object-fixed-toggle .name').html('Fixed')
       }else{
         $(this).children().eq(0).removeClass(eClass);
         $(this).children().eq(0).addClass(unlockClass);
-        $(`g.sjx-svg-wrapper`).addClass('d-none')
+        $(`g.sjx-svg-wrapper`).removeClass('d-none')
         $('.object-align-center').removeClass('d-flex');
+        $('.object-fixed-toggle .name').html('Float')
       }
     })
 
