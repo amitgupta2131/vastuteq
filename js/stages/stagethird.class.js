@@ -133,13 +133,18 @@ export default class StageThird {
         `
       );
 
-    let angleInputbox = actionBody.append('div').attr('class', 'col-md-6')
-      .append("input").attr("class", "mt-1 form-control form-control-sm text-sm")
+    let angleInputbox = actionBody.append('div').attr('class', 'col-md-4')
+      .append("input").attr("class", "mt-1 form-control form-control-sm text-sm").style('height', '50px')
       .attr('name', 'angleInputbox').attr('type', 'number').attr('placeholder', 'Degree').attr('value', Math.abs(that.angle));
 
-    let degreeUpdateBtn = actionBody.append('div').attr('class', 'col-md-6')
-      .append("button").attr("class", "mt-1 form-control form-control-sm text-sm")
+    let degreeUpdateBtn = actionBody.append('div').attr('class', 'col-md-4')
+      .append("button").attr("class", "mt-1 form-control form-control-sm text-sm").style('height', '50px')
       .text('Update');
+
+      let divisonOfDevtasContainer = actionBody.append('div').attr('class', 'col-md-4 mt-1 d-flex justify-content-center align-items-center border object-actions')
+      .style('flex-direction', 'column').style('height', '50px').style('min-width', '55px');
+    let divisonOfDevtas = divisonOfDevtasContainer.attr('data-action-object', `${that.BASE_URL}assets/icons/dots.svg`).append('img').attr('src', `${that.BASE_URL}assets/icons/dots.svg`).attr('width', 20);
+    divisonOfDevtasContainer.append('span').style('margin-top', '1px').style('text-align','center').style('font-size', '9px').text('division of devtas');
 
     let container = actionBox.append('div').attr('class', 'form-row justify-content-between pt-1 pl-2 pr-2 pb-0');
 
@@ -147,19 +152,18 @@ export default class StageThird {
       .attr('data-action-object', 'barchart')
       .style('flex-direction', 'column').style('height', '50px').style('min-width', '55px');
     let barchart = barchartContainer.append('img').attr('src', `${that.BASE_URL}assets/icons/barchart.svg`).attr('width', 20);
-    barchartContainer.append('span').style('margin-top', '1px').style('font-size', '9px').text('barchart');
-
-
-    let divisonOfDevtasContainer = container.append('div').attr('class', 'col-md-5 d-flex justify-content-center align-items-center border object-actions')
-      .style('flex-direction', 'column').style('height', '50px').style('min-width', '55px');
-    let divisonOfDevtas = divisonOfDevtasContainer.attr('data-action-object', `${that.BASE_URL}assets/icons/dots.svg`).append('img').attr('src', `${that.BASE_URL}assets/icons/dots.svg`).attr('width', 20);
-    divisonOfDevtasContainer.append('span').style('margin-top', '1px').style('text-align','center').style('font-size', '9px').text('division of devtas');
+    barchartContainer.append('span').style('margin-top', '1px').style('font-size', '9px').text('barchart');    
+    
 
     let addText = container.append('div').attr('class', 'col-md-2 d-flex justify-content-center align-items-center border object-actions')
       .style('flex-direction', 'column').style('height', '50px').style('min-width', '55px');
 
     let addTextIcon = addText.attr('data-action-object', `${that.BASE_URL}assets/icons/dots.svg`).append('img').attr('src', `${that.BASE_URL}assets/icons/text.svg`).attr('width', 20);
     addText.append('span').style('margin-top', '1px').style('font-size', '9px').text('Add Text');
+
+    let deleteContainer = container.append('div').attr('class','col-md-4 p-1 border d-flex flex-column d-none justify-content-center align-items-center text-delete-toggle').attr('data-action-object','delete').style('height', '50px')
+    let deleteText = deleteContainer.append('i').attr('class','fa fa-trash').attr('aria-hidden','true')
+    deleteContainer.append('div').attr('class','name text-xs').text('Delete');
 
     faceSelectbox.on("change", function () {
 
@@ -403,7 +407,10 @@ export default class StageThird {
     })
 
   
-
+    deleteContainer.on('click',function(){
+      $('.removeEditText').trigger('click');
+    
+    })
 
     //delete tools images
     $('.object-delete-toggle').on('click', function () {
@@ -590,7 +597,7 @@ export default class StageThird {
               let result = objHandler.updateObjectsInDataBase(objid);
 
               $(`.svg-object[data-object="${name}"]`).remove();
-              $(`.sjx-svg-wrapper[data-id="${id}]"`).remove();
+              $(`.sjx-svg-wrapper[data-id="${id}"]`).remove();
 
               showAlert('Text field removed', 'success')
               break;

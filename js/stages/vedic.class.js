@@ -25,7 +25,7 @@ export default class Vedic {
       .style('margin', '0px');
 
     this.actionsdiv = this.actionBody.append('div')
-      .attr('class', 'form-check mb-3').style('margin-left', 'auto');
+      .attr('class', 'form-check mb-1').style('margin-left', 'auto');
 
 
     this.actionBtnVedic = this.actionsdiv.append('input')
@@ -76,7 +76,7 @@ export default class Vedic {
       .classed('form-row', true);
 
     let col1 = row.append('div')
-      .classed('col-md-6 mb-3', true);
+      .classed('col-md-12 row m-0', true);
     // let col2 = row.append('div')
     //   .classed('col-md-6 mb-3', true);
     // let col3 = row.append('div')
@@ -99,11 +99,20 @@ export default class Vedic {
     //   .attr('type', 'checkbox');
 
     // enableGridWrapper.append('label').attr('class', 'form-check-label, text-sm').html('Grid');
-    let addText = col1.append('div').attr('class', 'mt-2 col-md-2 d-flex justify-content-center align-items-center border object-actions')
+    let addText = col1.append('div').attr('class', 'mr-2 col-md-5 d-flex justify-content-center align-items-center border object-actions').style('margin-left', 'auto')
       .style('flex-direction', 'column').style('height', '42px').style('min-width', '80px');
 
     let addTextIcon = addText.attr('data-action-object', `${that.BASE_URL}assets/icons/dots.svg`).append('img').attr('src', `${that.BASE_URL}assets/icons/text.svg`).attr('width', 20);
     addText.append('span').style('margin-top', '1px').style('font-size', '9px').text('Add Text');
+
+    let deleteContainer = col1.append('div').attr('class','col-md-5 p-1 border d-flex flex-column d-none justify-content-center align-items-center text-delete-toggle').attr('data-action-object','delete').style('height', '42px').style('margin-right', 'auto')
+    let deleteText = deleteContainer.append('i').attr('class','fa fa-trash').attr('aria-hidden','true')
+    deleteContainer.append('div').attr('class','name text-xs').text('Delete');
+
+    deleteContainer.on('click',function(){
+      $('.removeEditText').trigger('click');
+    
+    })
 
     this.actionbox.show();
 
@@ -262,7 +271,7 @@ export default class Vedic {
               let result = objHandler.updateObjectsInDataBase(objid);
 
               $(`.svg-object[data-object="${name}"]`).remove();
-              $(`.sjx-svg-wrapper[data-id="${id}]"`).remove();
+              $(`.sjx-svg-wrapper[data-id="${id}"]`).remove();
 
               showAlert('Text field removed', 'success')
               break;

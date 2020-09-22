@@ -882,9 +882,9 @@ $(document).ready(function () {
     }
   }
 
-  $('.fObject').on('mouseover', function () {
-    $(this).siblings().removeClass('d-none');
-  });
+  // $('.fObject').on('mouseover', function () {
+  //   $(this).siblings().removeClass('d-none');
+  // });
 
   $('[data-tool]').on('click', function () {
     if ($('[data-tool="line"]').hasClass('active') || $('[data-tool="rectangle"]').hasClass('active') || $('[data-tool="circle"]').hasClass('active') || $('[data-tool="triangle"]').hasClass('active')) {

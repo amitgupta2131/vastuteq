@@ -9,11 +9,11 @@ localStorage.hasOwnProperty('selectedMapId') == true ? localStorage.removeItem("
 
 let mainArea = d3.select('#mapsContainer');
 
-d3.select('#createMap').on('click', function () {	
+d3.select('#createMap').on('click', function () {
 	window.location.href = base_url + 'Main/createMap';
 })
 
-d3.select('#importMap').on('click', function () {	
+d3.select('#importMap').on('click', function () {
 	window.location.href = base_url + 'Main/importMap';
 })
 
@@ -21,10 +21,10 @@ $('#mapsContainer').on('click', '[data-map-id]', function () {
 
 	let id = d3.select(this).attr('data-map-id');
 	drawMethod(id);
-	
+
 })
 
-function drawMethod(id){
+function drawMethod(id) {
 	localStorage.setItem("selectedMapId", id);
 	console.log(id)
 	//saving data in backend through ajax
@@ -101,9 +101,13 @@ $('#mapsContainer').on('click', '.deleteMap', function () {
 	}
 })
 
+// function clearStorage() {	
+// 	localStorage.clear();
+// }
 
 $(document).ready(function () {
 
+	// clearStorage();
 
 	var $toggleButton = $('.toggle-button'),
 		$menuWrap = $('.menu-wrap'),
@@ -158,7 +162,7 @@ $(document).ready(function () {
 		}
 	}
 
-	
+
 
 });
 
