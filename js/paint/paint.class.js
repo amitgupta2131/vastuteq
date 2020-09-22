@@ -341,8 +341,9 @@ export default class Paint {
 	drawGridLines(cnv, lineOptions) {
 
 		var iWidth = cnv.attr('width');
-		var iHeight = cnv.attr('height');
-
+		var iHeight = screen.height;
+		console.log('iWidth',iWidth)
+		console.log('iHeight',iHeight)
 		let g = cnv.append('g');
 
 		var iCount = null;

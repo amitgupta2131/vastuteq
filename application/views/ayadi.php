@@ -222,7 +222,7 @@
                     <div class="container">
                         <div class="form-row">
                             <div class="col-md-6">
-                                <div class="form-check">
+                                <div class="form-check p-0">
                                     <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="detailed" checked>
                                     <label class="form-check-label text-sm overflow-elipsis" for="exampleRadios1">
                                         Detail Report
@@ -230,7 +230,7 @@
                                 </div>
                             </div>
                             <div class="col-md-6">
-                                <div class="form-check">
+                                <div class="form-check p-0">
                                     <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="summery" checked>
                                     <label class="form-check-label text-sm overflow-elipsis" for="exampleRadios2">
                                         Summary Report

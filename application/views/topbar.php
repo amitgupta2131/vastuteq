@@ -150,15 +150,19 @@
 <script>
     function toggleFullScreen() {
         var a = $(window).height() - 10;
+        
 
         if (!document.fullscreenElement && // alternative standard method
             !document.mozFullScreenElement && !document.webkitFullscreenElement) { // current working methods
             if (document.documentElement.requestFullscreen) {
                 document.documentElement.requestFullscreen();
+                increaseMapScreen();
             } else if (document.documentElement.mozRequestFullScreen) {
                 document.documentElement.mozRequestFullScreen();
+                increaseMapScreen();
             } else if (document.documentElement.webkitRequestFullscreen) {
                 document.documentElement.webkitRequestFullscreen(Element.ALLOW_KEYBOARD_INPUT);
+                increaseMapScreen();
             }
         } else {
             if (document.cancelFullScreen) {
@@ -169,6 +173,16 @@
                 document.webkitCancelFullScreen();
             }
         }
+    }
+
+    function increaseMapScreen(){
+        var totalHeight = screen.height
+        $('#vastuteqCanvas').attr('height',totalHeight);
+        $('.mask').attr('height',totalHeight);
+        $('#myMask rect').attr('height',totalHeight);
+        $('.mask g rect').attr('height',totalHeight);
+        $('#paintCanvas').attr('height',totalHeight);
+        $('#paintCanvasBackground').attr('height',totalHeight);
     }
 
 
@@ -206,7 +220,7 @@
             swal("Before Redirecting, want to save Map data or Discard it ?", {
                     buttons: {
                         Save: true,
-                        Cancel: true,
+                        Discard: true,
                     },
                 })
                 .then((value) => {
@@ -217,7 +231,7 @@
                             window.location.href = BASE_URL + url;
                             break;
 
-                        case "Cancel":
+                        case "Discard":
                             window.location.href = BASE_URL + url;
 
                         default:

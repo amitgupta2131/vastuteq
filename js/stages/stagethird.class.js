@@ -317,7 +317,7 @@ export default class StageThird {
      
       $('.object-fixed-toggle').children().eq(0).removeClass();
       $('.object-fixed-toggle').children().eq(0).addClass(lockClass);
-      $('.object-align-center').addClass('d-flex');
+      // $('.object-align-center').addClass('d-flex');
 
 
       let wrapper = $(`g.sjx-svg-wrapper`).remove();
@@ -444,14 +444,14 @@ export default class StageThird {
         $(this).children().eq(0).removeClass(eClass);
         $(this).children().eq(0).addClass(lockClass);
         $(`g.sjx-svg-wrapper`).addClass('d-none');
-        $('.object-align-center').addClass('d-flex');
-        $('.object-fixed-toggle .name').html('Fixed')
+        $('.object-align-center').removeClass('d-flex');
+        $('.object-fixed-toggle .name').html('Float')
       }else{
         $(this).children().eq(0).removeClass(eClass);
         $(this).children().eq(0).addClass(unlockClass);
         $(`g.sjx-svg-wrapper`).removeClass('d-none')
-        $('.object-align-center').removeClass('d-flex');
-        $('.object-fixed-toggle .name').html('Float')
+        $('.object-align-center').addClass('d-flex');
+        $('.object-fixed-toggle .name').html('Fixed')
       }
     })
 

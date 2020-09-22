@@ -182,7 +182,7 @@ body {
   margin: 0;
   padding: 0;
   letter-spacing: 2px;
-  font-family: 'Playfair Display', serif;
+  /* font-family: 'Playfair Display', serif; */
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
   background-color: #efeff0;
@@ -1258,6 +1258,10 @@ ul.menu {
   border-color: #80bdff;
   outline: 0;
   box-shadow: 0 0 0 0.1rem rgba(0, 123, 255, 0.25);
+}
+.dropdown-item {
+  font-size: 13px;
+  font-weight: 400;
 }
 
 

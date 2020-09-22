@@ -2,7 +2,7 @@
 -------------------- A P P  F O N T S --------------------
 ***/
 
-@font-face {
+/* @font-face {
     font-family: "Raleway-Thin";
     src: url("/assets/fonts/Raleway-Thin.ttf");
   }
@@ -21,7 +21,7 @@
   @font-face {
     font-family: "Raleway-Bold";
     src: url("/assets/fonts/Raleway-Bold.ttf");
-  }
+  } */
 
 .text-sm {
     font-size: 12px !important;
@@ -35,14 +35,14 @@
 }
 
 .form-check-label {
-  line-height: 10px;
+  line-height: 18px;
 }
 
 
 
 body {
     color: black  !important;
-    font-family: 'Raleway-Regular';
+    /* font-family: 'Raleway-Regular'; */
 }  
 
 .ayadi-container {
@@ -61,4 +61,9 @@ body {
 }
 .heading{
   font-weight: bold;
+}
+
+.dropdown-item {
+  font-size: 13px;
+  font-weight: 400;
 }

@@ -430,7 +430,30 @@ function uniqueID() {
 
 //For Print
 d3.select('#print').on('click', function () {
-  window.print();
+  swal("Select your print mode", {
+    buttons: {
+        Portrait: true,
+        Landscape: true,
+    },
+})
+.then((value) => {
+    switch (value) {
+
+        case "Portrait":          
+            window.print();          
+            break;
+
+        case "Landscape":
+          let style = `transform:rotate(90deg);position: relative;z-index: 15;top: 0px;left: -40%;margin-top: auto;text-align: center;`
+          $('#drawArea').attr('style', style)          
+          window.print();
+        $('#drawArea').attr('style', '')
+
+        default:
+            break;
+    }
+})
+  
 })
 
 //For REPORT GENERATE

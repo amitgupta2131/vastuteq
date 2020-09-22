@@ -15,7 +15,8 @@
     <!-- CUSTOM CSS -->
     <link rel="stylesheet" href="<?php echo base_url('css/main.css') ?>">
     <script>const BASE_URL = '<?php echo base_url();?>';</script>
-   
+   <!-- JQUERY -->
+   <script src="<?php echo base_url('js/helper/jquery.min.js')?>"></script>
      
 </head>
 <body>
@@ -93,8 +94,7 @@
     </div>
 
 
-    <!-- JQUERY -->
-    <script src="<?php echo base_url('js/helper/jquery.min.js')?>"></script>
+    
     <!-- POPPER JS -->
     <script src="<?php echo base_url('js/helper/popper.min.js')?>"></script>
     <!-- BOOTSTRAP JS -->

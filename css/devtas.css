@@ -28,7 +28,7 @@
 }
 
 body {
-	font-family: "Raleway-Regular";
+	/* font-family: "Raleway-Regular"; */
 	overflow: hidden;
 }
 
@@ -107,3 +107,8 @@ body {
  #devta-sloka{
 	 padding-top:10px;
  }
+
+ .dropdown-item {
+    font-size: 13px;
+    font-weight: 400;
+}

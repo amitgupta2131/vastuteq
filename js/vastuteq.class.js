@@ -426,7 +426,7 @@ export default class Vastuteq {
 
         let editText = this.editTextModel.getObject(this.mapId);
         $('.removeEditText').parent().remove();
-        $('.sjx-svg-wrapper[data-id]').remove();
+        $('.sjx-svg-wrapper[data-id]').addClass('d-none');
         $('.objects-group').remove();
         for(let j in editText){
           if(editText[j].image.ref == 'V'){
@@ -493,7 +493,7 @@ export default class Vastuteq {
       });
 
       if (type == 'fixed') {         
-        $(`.sjx-svg-wrapper[data-id='${id}']`).remove();        
+        $(`.sjx-svg-wrapper[data-id='${id}']`).addClass('d-none');        
       }
 
       

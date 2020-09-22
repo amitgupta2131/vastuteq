@@ -607,13 +607,13 @@
                             <div class="row">
                             <div class="col-md-4 p-1 border d-flex flex-column justify-content-center align-items-center object-fixed-toggle">
                                     <i class="fa fa-unlock-alt" aria-hidden="true"></i>
-                                    <div class="name text-xs">Fixed</div>
+                                    <div class="name text-xs">Float</div>
                                 </div>
                                 <div class="col-md-4 p-1 border d-flex flex-column d-none justify-content-center align-items-center object-delete-toggle">
                                     <i class="fa fa-trash" aria-hidden="true"></i>
                                     <div class="name text-xs">Delete</div>
                                 </div> 
-                                <div class="col-md-4 d-none p-1 border d-flex  flex-column justify-content-center align-items-center object-align-center">
+                                <div class="col-md-4 d-none p-1 border flex-column justify-content-center align-items-center object-align-center">
                                     <img src="<?php echo base_url('assets/icons/chevron.svg') ?>" alt="" width="20">
                                     <div class="name text-xs text-center">align-center</div>
                                 </div>

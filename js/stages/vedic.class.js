@@ -9,6 +9,10 @@ export default class Vedic {
   constructor() {
     this.actionbox = new ActionBox();
     d3.select('.properties-section.opacity').classed('d-none', true);
+    $('.properties-section.opacity').addClass('d-flex');
+    $('.properties-section.opacity .col-md-12.row').addClass('d-none');
+    $('.object-delete-toggle').addClass('d-none');
+    $('.object-delete-toggle').removeClass('d-flex');
   }
 
   startDrawing(REF) {
@@ -105,13 +109,13 @@ export default class Vedic {
     let addTextIcon = addText.attr('data-action-object', `${that.BASE_URL}assets/icons/dots.svg`).append('img').attr('src', `${that.BASE_URL}assets/icons/text.svg`).attr('width', 20);
     addText.append('span').style('margin-top', '1px').style('font-size', '9px').text('Add Text');
 
-    let deleteContainer = col1.append('div').attr('class','col-md-5 p-1 border d-flex flex-column d-none justify-content-center align-items-center text-delete-toggle').attr('data-action-object','delete').style('height', '42px').style('margin-right', 'auto')
-    let deleteText = deleteContainer.append('i').attr('class','fa fa-trash').attr('aria-hidden','true')
-    deleteContainer.append('div').attr('class','name text-xs').text('Delete');
+    let deleteContainer = col1.append('div').attr('class', 'col-md-5 p-1 border d-flex flex-column d-none justify-content-center align-items-center text-delete-toggle').attr('data-action-object', 'delete').style('height', '42px').style('margin-right', 'auto')
+    let deleteText = deleteContainer.append('i').attr('class', 'fa fa-trash').attr('aria-hidden', 'true')
+    deleteContainer.append('div').attr('class', 'name text-xs').text('Delete');
 
-    deleteContainer.on('click',function(){
+    deleteContainer.on('click', function () {
       $('.removeEditText').trigger('click');
-    
+
     })
 
     this.actionbox.show();
@@ -209,22 +213,24 @@ export default class Vedic {
 
     });
 
-    $('.object-fixed-toggle').on('click',function(){
+    $('.object-fixed-toggle').on('click', function () {
       let unlockClass = 'svg-inline--fa fa-lock fa-w-14';
       let lockClass = 'svg-inline--fa fa-unlock-alt fa-w-14';
       let eClass = $(this).children().attr('class');
-      if(eClass==unlockClass){
+      let id = $(`g.sjx-svg-wrapper`).attr('data-id');
+      let obj = $(`.svg-object.active[data-id="${id}"]`).attr('data-object');
+      if (eClass == unlockClass) {
         $(this).children().eq(0).removeClass(eClass);
         $(this).children().eq(0).addClass(lockClass);
         $(`g.sjx-svg-wrapper`).addClass('d-none');
-        $('.object-align-center').addClass('d-flex');
-        $('.object-fixed-toggle .name').html('Fixed')
-      }else{
-        $(this).children().eq(0).removeClass(eClass);
-        $(this).children().eq(0).addClass(unlockClass);
-        $(`g.sjx-svg-wrapper`).removeClass('d-none')
         $('.object-align-center').removeClass('d-flex');
         $('.object-fixed-toggle .name').html('Float')
+      } else {
+        $(this).children().eq(0).removeClass(eClass);
+        $(this).children().eq(0).addClass(unlockClass);
+        $(`g.sjx-svg-wrapper`).removeClass('d-none');
+        obj != undefined && $('.object-align-center').addClass('d-flex');
+        $('.object-fixed-toggle .name').html('Fixed');
       }
     })
 
@@ -296,7 +302,7 @@ export default class Vedic {
       let lockClass = 'svg-inline--fa fa-unlock-alt fa-w-14';
       $('.object-fixed-toggle').children().eq(0).removeClass();
       $('.object-fixed-toggle').children().eq(0).addClass(lockClass);
-      $('.object-align-center').addClass('d-flex');
+      // $('.object-align-center').addClass('d-flex');
 
 
 
@@ -315,14 +321,20 @@ export default class Vedic {
 
       switch (gridType) {
         case "3GL":
-
+          $('.properties-section.opacity').addClass('d-flex');
+          $('.properties-section.opacity .col-md-12.row').addClass('d-none');
+          $('.object-delete-toggle').addClass('d-none');
+          $('.object-delete-toggle').removeClass('d-flex');
           that.assist.drawPolygon({ layer: that.canvas, points: that.vedicMapBoundariesCoords, strokeColor: "red", strokeWidth: 2 });
           that.assist.drawPolygonGrid({ points: that.vedicMapBoundariesCoords, color: "red", noOfLines: 3, strokeWidth: 2 });
           that.createObject('g.vedic-polygon', objType);
           that.vedic = new Vedic();
           break;
         case "3GD":
-
+          $('.properties-section.opacity').addClass('d-flex');
+          $('.properties-section.opacity .col-md-12.row').addClass('d-none');
+          $('.object-delete-toggle').addClass('d-none');
+          $('.object-delete-toggle').removeClass('d-flex');
           that.assist.drawPolygon({ layer: that.canvas, points: that.vedicMapBoundariesCoords, strokeColor: "blue", strokeWidth: 2 });
           that.assist.drawPolygonGrid({ points: that.vedicMapBoundariesCoords, color: "blue", noOfLines: 3, strokeWidth: 2 });
           that.assist.drawPolygonDiagonals({ points: that.vedicMapBoundariesCoords, color: "blue", noOfLines: 3, strokeWidth: 2 });
@@ -340,6 +352,10 @@ export default class Vedic {
 
           break;
         case "9GL":
+          $('.properties-section.opacity').addClass('d-flex');
+          $('.properties-section.opacity .col-md-12.row').addClass('d-none');
+          $('.object-delete-toggle').addClass('d-none');
+          $('.object-delete-toggle').removeClass('d-flex');
           that.assist.drawPolygon({ layer: that.canvas, points: that.vedicMapBoundariesCoords, strokeColor: "blue", strokeWidth: 2 });
           that.assist.drawPolygonGrid({ points: that.vedicMapBoundariesCoords, color: "blue", noOfLines: 9, strokeWidth: 2 });
           that.assist.drawPolygonDiagonals({ points: that.vedicMapBoundariesCoords, color: "blue", noOfLines: 9, strokeWidth: 2 });
@@ -441,7 +457,7 @@ export default class Vedic {
       }
 
       function drawVedicImages(objName, objImageSrc, object) {
-        let width = Utility.distanceOfTwoPoints(that.vedicMapBoundariesCoords[1],that.vedicMapBoundariesCoords[3]);       
+        let width = Utility.distanceOfTwoPoints(that.vedicMapBoundariesCoords[1], that.vedicMapBoundariesCoords[3]);
 
         localStorage.setItem('vedicImgObj', objName)
         if (that.objectVpm == null || that.objectVpm == undefined) {
