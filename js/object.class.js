@@ -112,6 +112,7 @@ export default class Object {
       },
       onResize({ clientX, clientY, dx, dy, width, height }) {
         // fires on resizing
+        
         if (d3.select('.svg-object.saved.active[data-object]').node() != null) {
 
           let object = d3.select('.svg-object.saved.active[data-object]');
@@ -129,6 +130,7 @@ export default class Object {
       },
       onRotate({ clientX, clientY, delta, transform }) {
         // fires on rotation
+        
         if (d3.select('.svg-object.saved.active[data-object]').node() != null) {
           let object = d3.select('.svg-object.saved.active[data-object]');
           let objectId = object.attr('data-id');
@@ -145,7 +147,7 @@ export default class Object {
         }
       },
       onDrop({ clientX, clientY }) {
-        // fires on drop
+        // fires on drop        
         if (d3.select('.svg-object.saved.active[data-object]').node() != null) {
           let object = d3.select('.svg-object.saved.active[data-object]');
           let objectId = object.attr('data-id');

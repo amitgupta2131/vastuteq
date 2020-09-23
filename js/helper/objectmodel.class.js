@@ -2,10 +2,12 @@ export default class ObjectModel {
     constructor() {
         // The state of the model, an array of House Map objects, prepopulated with some data
         this.objects = JSON.parse(localStorage.getItem("objects")) || [];
+        
     }
 
     _commit(objects) {
         localStorage.setItem("objects", JSON.stringify(objects));
+       
     }
 
     add(propertyId, data) {
@@ -16,10 +18,11 @@ export default class ObjectModel {
         }
         this.objects.push(object);
         this._commit(this.objects);
-        this.updateObjectsInDataBase(propertyId);
+        // this.updateObjectsInDataBase(propertyId);
     }
 
-    editProperties(objectId, data) {       
+    editProperties(objectId, data) { 
+        this.objects = JSON.parse(localStorage.getItem("objects")) || [];             
         this.objects = this.objects.map(object =>
             object.image.id == objectId ? {
                 propertyId: object.propertyId,
@@ -40,10 +43,10 @@ export default class ObjectModel {
         this._commit(this.objects);
 
         //Update object in data base
-        this.objects.map(object =>
-            object.image.id == objectId ?
-            this.updateObjectsInDataBase(object.propertyId)
-                : object);
+        // this.objects.map(object =>
+        //     object.image.id == objectId ?
+        //     this.updateObjectsInDataBase(object.propertyId)
+        //         : object);
 
 
         
@@ -69,10 +72,10 @@ export default class ObjectModel {
 
         this._commit(this.objects);
         //Update object in data base
-        this.objects.map(object =>
-            object.image.id == objectId ?
-            this.updateObjectsInDataBase(object.propertyId)
-                : object);
+        // this.objects.map(object =>
+        //     object.image.id == objectId ?
+        //     this.updateObjectsInDataBase(object.propertyId)
+        //         : object);
     }
 
     editWidthHeight(objectId, data) {
@@ -96,10 +99,10 @@ export default class ObjectModel {
 
         this._commit(this.objects);
         //Update object in data base
-        this.objects.map(object =>
-            object.image.id == objectId ?
-            this.updateObjectsInDataBase(object.propertyId)
-                : object);
+        // this.objects.map(object =>
+        //     object.image.id == objectId ?
+        //     this.updateObjectsInDataBase(object.propertyId)
+        //         : object);
     }
 
     editTransform(objectId, updatedTransform) {
@@ -123,10 +126,10 @@ export default class ObjectModel {
         this._commit(this.objects);
 
         //Update object in data base
-        this.objects.map(object =>
-            object.image.id == objectId ?
-            this.updateObjectsInDataBase(object.propertyId)
-                : object);
+        // this.objects.map(object =>
+        //     object.image.id == objectId ?
+        //     this.updateObjectsInDataBase(object.propertyId)
+        //         : object);
     }
 
     deleteProperty(propertyId) {

@@ -3,254 +3,218 @@
 class MainModel extends ci_model
 {
 
-	public function selectColumnFromTable($tableName=null,$columnName=null)
+	public function selectColumnFromTable($tableName = null, $columnName = null)
 	{
-        $this->db->select($columnName); // ('a,b,c')
-        $result = $this->db->get($tableName)->result_array();
-        return $this->db->affected_rows()?$result:FALSE;
+		$this->db->select($columnName); // ('a,b,c')
+		$result = $this->db->get($tableName)->result_array();
+		return $this->db->affected_rows() ? $result : FALSE;
 	}
 
-	public function selectColumnFromTableWhere($tableName=null,$columnName=null,$condition)
+	public function selectColumnFromTableWhere($tableName = null, $columnName = null, $condition)
 	{
- 		$this->db->select($columnName); // ('a,b,c')
-  		$result = $this->db->get_where($tableName,$condition)->result_array();
-   		return $this->db->affected_rows()?$result:FALSE;
+		$this->db->select($columnName); // ('a,b,c')
+		$result = $this->db->get_where($tableName, $condition)->result_array();
+		return $this->db->affected_rows() ? $result : FALSE;
 	}
 
 
-	
-	public function selectAllFromTable($tableName=null)
+
+	public function selectAllFromTable($tableName = null)
 	{
-		$imageUrl = base_url()."assets/noticeImage/";
-		if($tableName=="noticeboard"){
+		$imageUrl = base_url() . "assets/noticeImage/";
+		if ($tableName == "noticeboard") {
 			$query = $this->db->query("SELECT *,CONCAT('$imageUrl',noticeImage) as noticeImage FROM $tableName");
-		}
-		else{
+		} else {
 			$query = $this->db->get($tableName);
 		}
-		$result=$query->result_array();
-		return $this->db->affected_rows()?$result:FALSE;
+		$result = $query->result_array();
+		return $this->db->affected_rows() ? $result : FALSE;
 	}
 
 	public function deleteAllTableData()
 	{
 		$query = $this->db->query("SHOW TABLES");
-        $name = $this->db->database;
-        foreach ($query->result_array() as $row)
-        {
-    	   if($row['Tables_in_' . $name]=="erp_admin" || $row['Tables_in_' . $name]=="city" || $row['Tables_in_' . $name]=="country_t" || $row['Tables_in_' . $name]=="gender" || $row['Tables_in_' . $name]=="tbl_cast" || $row['Tables_in_' . $name]=="tbl_religion" || $row['Tables_in_' . $name]=="tbl_occupation" || $row['Tables_in_' . $name]=="leave")
-    	   {
-                 
-    	   }
-    	   else
-    	   {
-    	           $table = $row['Tables_in_' . $name];
-    	           $this->db->query("TRUNCATE " . $table);
-                $this->db->query("ALTER TABLE ".$table." AUTO_INCREMENT = 1");
-    	   }        
-        }
-    return TRUE;
+		$name = $this->db->database;
+		foreach ($query->result_array() as $row) {
+			if ($row['Tables_in_' . $name] == "erp_admin" || $row['Tables_in_' . $name] == "city" || $row['Tables_in_' . $name] == "country_t" || $row['Tables_in_' . $name] == "gender" || $row['Tables_in_' . $name] == "tbl_cast" || $row['Tables_in_' . $name] == "tbl_religion" || $row['Tables_in_' . $name] == "tbl_occupation" || $row['Tables_in_' . $name] == "leave") {
+			} else {
+				$table = $row['Tables_in_' . $name];
+				$this->db->query("TRUNCATE " . $table);
+				$this->db->query("ALTER TABLE " . $table . " AUTO_INCREMENT = 1");
+			}
+		}
+		return TRUE;
 	}
 
-	public function selectAllFromWhere($tableName=null,$condition=null,$getColumn=null)
+	public function selectAllFromWhere($tableName = null, $condition = null, $getColumn = null)
 	{
-		$query = $this->db->get_where($tableName,$condition)->result_array();
-		
-		if($getColumn==null)
-		{
-		             return $this->db->affected_rows()?$query:FALSE;
-		 }
-		 else
-		 {
-		 	return $this->db->affected_rows()?$query[0][$getColumn]:FALSE;
-		 }
+		$query = $this->db->get_where($tableName, $condition)->result_array();
+
+		if ($getColumn == null) {
+			return $this->db->affected_rows() ? $query : FALSE;
+		} else {
+			return $this->db->affected_rows() ? $query[0][$getColumn] : FALSE;
+		}
 	}
 
-	public function insertInto($tableName=null,$data=null)
+	public function insertInto($tableName = null, $data = null)
 	{
-		$this->db->insert($tableName,$data);
-		return $this->db->affected_rows()?TRUE:FALSE;
+		$this->db->insert($tableName, $data);
+		return $this->db->affected_rows() ? TRUE : FALSE;
 	}
 
-	public function updateWhere($tableName=null,$data=null,$condition=null)
+	public function updateWhere($tableName = null, $data = null, $condition = null)
+	{
+		$this->db->trans_start();
+		$this->db->where($condition);
+		$this->db->update($tableName, $data);
+		$this->db->trans_complete();
+
+		// return $this->db->trans_status();
+		//	$this->db->where($condition);
+		//	$this->db->update($tableName, $data); 
+		return $this->db->affected_rows() ? FALSE : TRUE;
+	}
+
+	public function updateWhere2($tableName = null, $data = null, $condition = null)
 	{	$this->db->trans_start();
 		$this->db->where($condition);
-		$this->db->update($tableName, $data); 
+		$this->db->update($tableName, $data);
 		$this->db->trans_complete();
-		
-// return $this->db->trans_status();
-	//	$this->db->where($condition);
-	//	$this->db->update($tableName, $data); 
-		return $this->db->affected_rows()?FALSE:TRUE;
+
+		return $this->db->trans_status();
+			$this->db->where($condition);
+			$this->db->update($tableName, $data); 
+		return $this->db->affected_rows() ? FALSE : TRUE;
 	}
 
-	public function selectAllFromTableWhere($tableName=null,$condition=null,$getColumn=null)
+	public function selectAllFromTableWhere($tableName = null, $condition = null, $getColumn = null)
 	{
-		$result = $this->db->get_where($tableName,$condition)->result_array();
-        return $this->db->affected_rows()?$result:FALSE;
+		$result = $this->db->get_where($tableName, $condition)->result_array();
+		return $this->db->affected_rows() ? $result : FALSE;
 	}
 
-	public function selectAllFromTableOrderBy($tableName=null,$columnName=null,$orderBy=null,$condition=null)
+	public function selectAllFromTableOrderBy($tableName = null, $columnName = null, $orderBy = null, $condition = null)
 	{
-		$this->db->order_by($columnName,$orderBy);
-		if($condition!='')
-		{
-			$query = $this->db->get_where($tableName,$condition)->result_array();
-            return $this->db->affected_rows()?$query:FALSE;
-		}
-		else
-		{
+		$this->db->order_by($columnName, $orderBy);
+		if ($condition != '') {
+			$query = $this->db->get_where($tableName, $condition)->result_array();
+			return $this->db->affected_rows() ? $query : FALSE;
+		} else {
 			$query = $this->db->get($tableName)->result_array();
-            return $this->db->affected_rows()?$query:FALSE;
+			return $this->db->affected_rows() ? $query : FALSE;
 		}
 	}
 
-	public function selectAllFromTableLike($tableName=null,$likeCondition=null,$condition=[])
+	public function selectAllFromTableLike($tableName = null, $likeCondition = null, $condition = [])
 	{
 		$count = count($condition);
-		if($count==1)
-		{
-			foreach($condition as $key => $content)
-			{
-				$this->db->like($key,$content,$likeCondition);
-			}			
+		if ($count == 1) {
+			foreach ($condition as $key => $content) {
+				$this->db->like($key, $content, $likeCondition);
+			}
 			$q = $this->db->get($tableName)->result_array();
-		}
-		else
-		{
+		} else {
 			$this->db->like($condition);
 			$q = $this->db->get($tableName)->result_array();
 		}
-		
-		if($this->db->affected_rows())
-		{
+
+		if ($this->db->affected_rows()) {
 			return $q;
-		}
-		else
-		{
+		} else {
 			return false;
 		}
 	}
 
-	public function selectAllFromLikeOR($tableName=null,$likeCondition=null,$condition=[])
+	public function selectAllFromLikeOR($tableName = null, $likeCondition = null, $condition = [])
 	{
-		$sql = "SELECT * FROM ".$tableName;
-		$i=0;
-		foreach($condition as $key => $data)
-		{
-			if($likeCondition=='before')
-			{
-				if($i==0)
-				{
+		$sql = "SELECT * FROM " . $tableName;
+		$i = 0;
+		foreach ($condition as $key => $data) {
+			if ($likeCondition == 'before') {
+				if ($i == 0) {
 					$sql .= " WHERE `$key` LIKE '%$data'";
-				}
-				else
-				{
+				} else {
 					$sql .= " OR `$key` LIKE '%$data'";
 				}
 				$i++;
-			}
-			elseif($likeCondition=='after')
-			{
-				if($i==0)
-				{
+			} elseif ($likeCondition == 'after') {
+				if ($i == 0) {
 					$sql .= " WHERE `$key` LIKE '$data%'";
-				}
-				else
-				{
+				} else {
 					$sql .= " OR `$key` LIKE '$data%'";
 				}
 				$i++;
-			}
-			elseif($likeCondition=='both')
-			{
-				if($i==0)
-				{
+			} elseif ($likeCondition == 'both') {
+				if ($i == 0) {
 					$sql .= " WHERE `$key` LIKE '%$data%'";
-				}
-				else
-				{
+				} else {
 					$sql .= " OR `$key` LIKE '%$data%'";
 				}
 				$i++;
 			}
-			
 		}
 		$q = $this->db->query($sql)->result_array();
 
-		if($this->db->affected_rows())
-		{
+		if ($this->db->affected_rows()) {
 			return $q;
-		}
-		else
-		{
+		} else {
 			return false;
-		}				
+		}
 	}
 
-	public function deleteFromTable($tableName=null,$condition=null)
+	public function deleteFromTable($tableName = null, $condition = null)
 	{
-		$this->db->delete($tableName,$condition);
-		if($this->db->affected_rows())
-		{
+		$this->db->delete($tableName, $condition);
+		if ($this->db->affected_rows()) {
 			return true;
-		}
-		else
-		{
+		} else {
 			return false;
 		}
 	}
 
-	public function selectAllFromTableGroupBy($tableName=null,$condition=[],$groupBy=null)
+	public function selectAllFromTableGroupBy($tableName = null, $condition = [], $groupBy = null)
 	{
 		$this->db->group_by($groupBy);
 		$this->db->where($condition);
 		$q = $this->db->get($tableName)->result_array();
 
-		if($this->db->affected_rows())
-		{
+		if ($this->db->affected_rows()) {
 			return $q;
-		}
-		else
-		{
+		} else {
 			return false;
 		}
 	}
 
-	public function selectAllFromTableFullJoin($firstTable,$secondTable,$conditionColumn,$conditionValue,$firstTableColumn,$secondTableColumn)
+	public function selectAllFromTableFullJoin($firstTable, $secondTable, $conditionColumn, $conditionValue, $firstTableColumn, $secondTableColumn)
 	{
 		$this->db->select('*');
-		$this->db->from($firstTable);		
-		$this->db->join($secondTable, $firstTable.".".$firstTableColumn ."=". $secondTable.".".$secondTableColumn);
-		
-		$this->db->where($firstTable.".".$conditionColumn,$conditionValue);
+		$this->db->from($firstTable);
+		$this->db->join($secondTable, $firstTable . "." . $firstTableColumn . "=" . $secondTable . "." . $secondTableColumn);
+
+		$this->db->where($firstTable . "." . $conditionColumn, $conditionValue);
 
 		$result = $this->db->get()->result_array();
-		if($this->db->affected_rows())
-		{
+		if ($this->db->affected_rows()) {
 			return $result;
-		}
-		else
-		{
+		} else {
 			return false;
 		}
 	}
 
-	public function deleteFromTableWhere($tableName=null,$condition=null){
-		$this->db->delete($tableName,$condition);
-		return $this->db->affected_rows()?true:false; 
+	public function deleteFromTableWhere($tableName = null, $condition = null)
+	{
+		$this->db->delete($tableName, $condition);
+		return $this->db->affected_rows() ? true : false;
 	}
 
-	public function truncateTable($tableName=null)
+	public function truncateTable($tableName = null)
 	{
 		$this->db->query("TRUNCATE " . $tableName);
-                $this->db->query("ALTER TABLE ".$tableName." AUTO_INCREMENT = 1");
-		if($this->db->affected_rows())
-		{
+		$this->db->query("ALTER TABLE " . $tableName . " AUTO_INCREMENT = 1");
+		if ($this->db->affected_rows()) {
 			return true;
-		}
-		else
-		{
+		} else {
 			return false;
 		}
 	}
@@ -270,7 +234,7 @@ class MainModel extends ci_model
 		return $Id; // $maxid==NULL?1:$maxid+1;
 	}
 
-	public function getColorAndDetils($table,$division)
+	public function getColorAndDetils($table, $division)
 	{
 		$query = "SELECT * FROM `colors` ";
 		$query .= "LEFT JOIN $table ON ";
@@ -285,7 +249,7 @@ class MainModel extends ci_model
 	{
 		$query = "SELECT * FROM `propertydetails` ";
 		$query .= "LEFT JOIN housemaps ON ";
-		$query .= "housemaps.propertId=propertydetails.propertyId ";		
+		$query .= "housemaps.propertId=propertydetails.propertyId ";
 		$query .= "LEFT JOIN clientdetails ON ";
 		$query .= "propertydetails.clientId=clientdetails.cId ";
 		$query .= "where propertydetails.userId = '$userid' ";
@@ -294,12 +258,20 @@ class MainModel extends ci_model
 		return $this->db->affected_rows() ? $q : false;
 	}
 
-	public function getClientDetails($value){
-		$condition = $value.'%';
+	public function getClientDetails($value)
+	{
+		$condition = $value . '%';
 		$query = "select * from clientdetails where name like '$condition'";
 		$q = $this->db->query($query)->result_array();
 		return $this->db->affected_rows() ? $q : false;
 	}
 
-
+	public function updateFields($objects = null, $reportData = null, $id = null)
+	{
+		$query = "UPDATE housemaps
+					SET objects = '$objects', reportData= '$reportData'
+					WHERE mapId = '$id'";
+		$q = $this->db->query($query)->result_array();
+		return $this->db->affected_rows() ? $q : false;
+	}
 }

@@ -243,10 +243,10 @@
             window.location.href = BASE_URL + url;
         }
     }
-    window.addEventListener('beforeunload', (event) => {
-        // Cancel the event as stated by the standard.
-        event.preventDefault();
-        // Chrome requires returnValue to be set.        
-        $('.savebtn').trigger('click');
-    });
+    // window.addEventListener('beforeunload', (event) => {
+    //     // Cancel the event as stated by the standard.
+    //     event.preventDefault();
+    //     // Chrome requires returnValue to be set.        
+    //     $('.savebtn').trigger('click');
+    // });
 </script>

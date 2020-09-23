@@ -3,6 +3,7 @@ import Behavior from "./behavior.class.js";
 import Vastuteq from "./vastuteq.class.js";
 import Model from "./helper/model.class.js";
 import Modal from "./helper/modal.class.js";
+import ObjectModel from "./helper/objectmodel.class";
 
 
 var isCreateMap = false,
@@ -789,9 +790,11 @@ $('#reportModal .modal-body').on('click', '#feetSubmit', function () {
 
 $('.savebtn').on('click', function () {
   let model = new Model();
+  let objectModel = new ObjectModel();
   let mapId = localStorage.getItem('selectedMapId');
   let houseMap = model.getHouseMap(mapId);
   model.updateHouseMapInDataBase(mapId, houseMap, '', 'true');
+  objectModel.updateObjectsInDataBase(mapId);
 })
 
 $('#clientName').on('keyup', function () {
@@ -829,7 +832,7 @@ $('#clients').on('click', 'a', function () {
   $('#clients').addClass('d-none')
 });
 
-$("input").on('focusout', function () {
+$("input").on('focus', function () {
   $('#clients').addClass('d-none')
 });
 
@@ -925,6 +928,29 @@ $(document).ready(function () {
     }else if ($('[data-tool="brush"]').hasClass('active')) {
       $('#paintCanvas').addClass('brush');
       $('#paintCanvas').removeClass('paint-bucket pencil eraser')
+    }
+  })
+
+
+  $('.object-fixed-toggle').on('click', function () {
+    let unlockClass = 'svg-inline--fa fa-lock fa-w-14';
+    let lockClass = 'svg-inline--fa fa-unlock-alt fa-w-14';
+    let eClass = $(this).children().eq(0).attr('class');
+    console.log($(this).children().eq(0).siblings().text())
+    let id = $(`g.sjx-svg-wrapper`).attr('data-id');
+    let obj = $(`.svg-object.active[data-id="${id}"]`).attr('data-object');
+    if (eClass == unlockClass) {
+      $(this).children().eq(0).removeClass(eClass);
+      $(this).children().eq(0).addClass(lockClass);
+      $(`g.sjx-svg-wrapper`).addClass('d-none');
+      $('.object-align-center').removeClass('d-flex');
+      $('.object-fixed-toggle .name').html('Float')
+    } else {
+      $(this).children().eq(0).removeClass(eClass);
+      $(this).children().eq(0).addClass(unlockClass);
+      $(`g.sjx-svg-wrapper`).removeClass('d-none');
+      obj != undefined && $('.object-align-center').addClass('d-flex');
+      $('.object-fixed-toggle .name').html('Fixed');
     }
   })
 

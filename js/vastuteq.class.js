@@ -292,7 +292,7 @@ export default class Vastuteq {
           let objects = this.objectModel.getObject(this.mapId);
           let editText = this.editTextModel.getObject(this.mapId);
           let objectData, objectLayer = this.canvas.append("g").classed("objects-group", true);
-          $('.sjx-svg-wrapper[data-id]').remove();
+          $('.sjx-svg-wrapper[data-id]').addClass('d-none');
           for (let i in objects) {
             objectData = {
               id: objects[i].image.id,

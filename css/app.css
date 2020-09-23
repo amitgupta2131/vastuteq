@@ -940,8 +940,8 @@ input::-webkit-inner-spin-button {
   position: absolute;
   z-index: 99;
   border: 1px solid #ced4da;
-  top: 107px;
-  left: 287px;
+  top: 139px;
+    left: 20px;
   border-radius: 3px;
   padding: 0px !important;
   background: white;

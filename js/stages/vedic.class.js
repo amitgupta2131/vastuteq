@@ -13,6 +13,20 @@ export default class Vedic {
     $('.properties-section.opacity .col-md-12.row').addClass('d-none');
     $('.object-delete-toggle').addClass('d-none');
     $('.object-delete-toggle').removeClass('d-flex');
+    $('.object-align-center').addClass('d-none');
+    $('.object-align-center').removeClass('d-flex');
+    let unloackClass = $('.object-fixed-toggle').children().eq(0).attr('class')
+    
+    if (unloackClass != 'svg-inline--fa fa-unlock-alt fa-w-14') {
+      $('.object-fixed-toggle').children().eq(0).attr('class', '');
+      $('.object-fixed-toggle').children().eq(0).addClass('svg-inline--fa fa-unlock-alt fa-w-14');
+    }
+    if (unloackClass == 'fa fa-unlock-alt') {     
+      $('.object-fixed-toggle').children().eq(0).attr('class', '');
+      $('.object-fixed-toggle').children().eq(0).addClass('fa fa-unlock-alt');
+    }
+    $('.object-fixed-toggle .name').html('Float')
+
   }
 
   startDrawing(REF) {
@@ -67,6 +81,11 @@ export default class Vedic {
         let objName = localStorage.getItem('vedicImgObj');
         d3.select('g.sjx-svg-wrapper').remove();
         d3.select('g.vedic-polygon').remove();
+        d3.select('.properties-section.opacity').classed('d-none', true);
+        d3.select('.properties-section.opacity').classed('d-flex', false);
+        d3.select('.object-delete-toggle').classed('d-none', false);
+        d3.select('.object-delete-toggle').classed('d-flex', true);
+        d3.select('.toggle-fixed').classed('d-flex', true);
         that.objectDelete(objName);
         that.centroid = Utility.getCentroid(that.mapBoundariesCoords);
         that.model.editType(that.mapId, 'mahavastu');
@@ -138,24 +157,6 @@ export default class Vedic {
     let mapGridType = $('#toolMenu').html(html);
 
 
-
-    mapGridType.on('mouseover', '#fixed', function () {
-      $('#fixedToolMenu').removeClass('dropdown-menu')
-      $('#fixedToolMenu').addClass('dropdown-menu-show')
-      $('#floatingToolMenu').removeClass('dropdown-menu-show2')
-      $('#floatingToolMenu').addClass('dropdown-menu')
-    });
-
-    mapGridType.on('mouseover', '#floating', function () {
-      // alert('hello')
-      $('#floatingToolMenu').removeClass('dropdown-menu')
-      $('#floatingToolMenu').addClass('dropdown-menu-show2')
-      $('#fixedToolMenu').removeClass('dropdown-menu-show')
-      $('#fixedToolMenu').addClass('dropdown-menu')
-
-    });
-
-
     // mapGridType.on('click', '#floating', function () {
 
     //   $('#floatingToolMenu').remove();
@@ -213,26 +214,7 @@ export default class Vedic {
 
     });
 
-    $('.object-fixed-toggle').on('click', function () {
-      let unlockClass = 'svg-inline--fa fa-lock fa-w-14';
-      let lockClass = 'svg-inline--fa fa-unlock-alt fa-w-14';
-      let eClass = $(this).children().attr('class');
-      let id = $(`g.sjx-svg-wrapper`).attr('data-id');
-      let obj = $(`.svg-object.active[data-id="${id}"]`).attr('data-object');
-      if (eClass == unlockClass) {
-        $(this).children().eq(0).removeClass(eClass);
-        $(this).children().eq(0).addClass(lockClass);
-        $(`g.sjx-svg-wrapper`).addClass('d-none');
-        $('.object-align-center').removeClass('d-flex');
-        $('.object-fixed-toggle .name').html('Float')
-      } else {
-        $(this).children().eq(0).removeClass(eClass);
-        $(this).children().eq(0).addClass(unlockClass);
-        $(`g.sjx-svg-wrapper`).removeClass('d-none');
-        obj != undefined && $('.object-align-center').addClass('d-flex');
-        $('.object-fixed-toggle .name').html('Fixed');
-      }
-    })
+
 
     $('body').on('click', '.removeEditText', function () {
 

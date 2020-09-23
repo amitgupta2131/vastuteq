@@ -12,6 +12,8 @@ export default class StageThird {
     this.attribute = attribute;
     this.actionbox = new ActionBox();
     d3.select('.properties-section.opacity').classed('d-none', true);
+    $('.svg-inline--fa.fa-trash').removeClass('d-none');
+    $('.svg-inline--fa.fa-trash').addClass('d-flex');
   }
 
   startDrawing(REF) {
@@ -141,10 +143,10 @@ export default class StageThird {
       .append("button").attr("class", "mt-1 form-control form-control-sm text-sm").style('height', '50px')
       .text('Update');
 
-      let divisonOfDevtasContainer = actionBody.append('div').attr('class', 'col-md-4 mt-1 d-flex justify-content-center align-items-center border object-actions')
+    let divisonOfDevtasContainer = actionBody.append('div').attr('class', 'col-md-4 mt-1 d-flex justify-content-center align-items-center border object-actions')
       .style('flex-direction', 'column').style('height', '50px').style('min-width', '55px');
     let divisonOfDevtas = divisonOfDevtasContainer.attr('data-action-object', `${that.BASE_URL}assets/icons/dots.svg`).append('img').attr('src', `${that.BASE_URL}assets/icons/dots.svg`).attr('width', 20);
-    divisonOfDevtasContainer.append('span').style('margin-top', '1px').style('text-align','center').style('font-size', '9px').text('division of devtas');
+    divisonOfDevtasContainer.append('span').style('margin-top', '1px').style('text-align', 'center').style('font-size', '9px').text('division of devtas');
 
     let container = actionBox.append('div').attr('class', 'form-row justify-content-between pt-1 pl-2 pr-2 pb-0');
 
@@ -152,8 +154,8 @@ export default class StageThird {
       .attr('data-action-object', 'barchart')
       .style('flex-direction', 'column').style('height', '50px').style('min-width', '55px');
     let barchart = barchartContainer.append('img').attr('src', `${that.BASE_URL}assets/icons/barchart.svg`).attr('width', 20);
-    barchartContainer.append('span').style('margin-top', '1px').style('font-size', '9px').text('barchart');    
-    
+    barchartContainer.append('span').style('margin-top', '1px').style('font-size', '9px').text('barchart');
+
 
     let addText = container.append('div').attr('class', 'col-md-2 d-flex justify-content-center align-items-center border object-actions')
       .style('flex-direction', 'column').style('height', '50px').style('min-width', '55px');
@@ -161,9 +163,9 @@ export default class StageThird {
     let addTextIcon = addText.attr('data-action-object', `${that.BASE_URL}assets/icons/dots.svg`).append('img').attr('src', `${that.BASE_URL}assets/icons/text.svg`).attr('width', 20);
     addText.append('span').style('margin-top', '1px').style('font-size', '9px').text('Add Text');
 
-    let deleteContainer = container.append('div').attr('class','col-md-4 p-1 border d-flex flex-column d-none justify-content-center align-items-center text-delete-toggle').attr('data-action-object','delete').style('height', '50px')
-    let deleteText = deleteContainer.append('i').attr('class','fa fa-trash').attr('aria-hidden','true')
-    deleteContainer.append('div').attr('class','name text-xs').text('Delete');
+    let deleteContainer = container.append('div').attr('class', 'col-md-4 p-1 border d-flex flex-column d-none justify-content-center align-items-center text-delete-toggle').attr('data-action-object', 'delete').style('height', '50px')
+    let deleteText = deleteContainer.append('i').attr('class', 'fa fa-trash').attr('aria-hidden', 'true')
+    deleteContainer.append('div').attr('class', 'name text-xs').text('Delete');
 
     faceSelectbox.on("change", function () {
 
@@ -314,9 +316,10 @@ export default class StageThird {
       let gridType = $(this).attr('value');
       let objType = $(this).attr('type');
       let lockClass = 'svg-inline--fa fa-unlock-alt fa-w-14';
-     
+
       $('.object-fixed-toggle').children().eq(0).removeClass();
       $('.object-fixed-toggle').children().eq(0).addClass(lockClass);
+      $('.object-delete-toggle').addClass('d-flex');
       // $('.object-align-center').addClass('d-flex');
 
 
@@ -331,7 +334,7 @@ export default class StageThird {
         that.objectVpm = null
         localStorage.removeItem('vedicImgObj')
         d3.select('.properties-section.opacity').classed('d-none', true);
-       
+
       }
 
       switch (gridType) {
@@ -352,7 +355,7 @@ export default class StageThird {
 
       function drawMahavastuImages(objName, objImageSrc, object) {
         localStorage.setItem('vedicImgObj', objName)
-        let width = Utility.distanceOfTwoPoints(that.vedicMapBoundariesCoords[1],that.vedicMapBoundariesCoords[3]); 
+        let width = Utility.distanceOfTwoPoints(that.vedicMapBoundariesCoords[1], that.vedicMapBoundariesCoords[3]);
         if (that.objectVpm == null || that.objectVpm == undefined) {
 
           d3.select('.properties-section.opacity').classed('d-none', false);
@@ -400,16 +403,17 @@ export default class StageThird {
           that.objectVpm = null
           localStorage.removeItem('vedicImgObj')
           d3.select('.properties-section.opacity').classed('d-none', true);
+          d3.select('.properties-section.opacity').classed('d-flex', false);
         }
       })
       // that.vedic.startDrawing(that);
       //   that.assist.drawPolygonGrid({points: that.vedicMapBoundariesCoords, noOfLines: gridType});
     })
 
-  
-    deleteContainer.on('click',function(){
+
+    deleteContainer.on('click', function () {
       $('.removeEditText').trigger('click');
-    
+
     })
 
     //delete tools images
@@ -436,24 +440,25 @@ export default class StageThird {
       }
     }
 
-    $('.object-fixed-toggle').on('click',function(){
-      let unlockClass = 'svg-inline--fa fa-lock fa-w-14';
-      let lockClass = 'svg-inline--fa fa-unlock-alt fa-w-14';
-      let eClass = $(this).children().attr('class');
-      if(eClass==unlockClass){
-        $(this).children().eq(0).removeClass(eClass);
-        $(this).children().eq(0).addClass(lockClass);
-        $(`g.sjx-svg-wrapper`).addClass('d-none');
-        $('.object-align-center').removeClass('d-flex');
-        $('.object-fixed-toggle .name').html('Float')
-      }else{
-        $(this).children().eq(0).removeClass(eClass);
-        $(this).children().eq(0).addClass(unlockClass);
-        $(`g.sjx-svg-wrapper`).removeClass('d-none')
-        $('.object-align-center').addClass('d-flex');
-        $('.object-fixed-toggle .name').html('Fixed')
-      }
-    })
+    // $('.object-fixed-toggle').on('click', function () {
+    //   let unlockClass = 'svg-inline--fa fa-lock fa-w-14';
+    //   let lockClass = 'svg-inline--fa fa-unlock-alt fa-w-14';
+    //   let eClass = $(this).children().attr('class');
+    //   console.log(eClass)
+    //   if (eClass == unlockClass) {
+    //     $(this).children().eq(0).removeClass(eClass);
+    //     $(this).children().eq(0).addClass(lockClass);
+    //     $(`g.sjx-svg-wrapper`).addClass('d-none');
+    //     $('.object-align-center').removeClass('d-flex');
+    //     $('.object-fixed-toggle .name').html('Float')
+    //   } else {
+    //     $(this).children().eq(0).removeClass(eClass);
+    //     $(this).children().eq(0).addClass(unlockClass);
+    //     $(`g.sjx-svg-wrapper`).removeClass('d-none')
+    //     $('.object-align-center').addClass('d-flex');
+    //     $('.object-fixed-toggle .name').html('Fixed')
+    //   }
+    // })
 
     divisonOfDevtasContainer.on('click', function () {
       console.log(d3.select(this).classed('active'), 'working');
@@ -514,7 +519,8 @@ export default class StageThird {
                 newObjReport.push(element)
               });
 
-
+              console.log(newObj)
+              console.log(newObjReport)
               //removing old objects and adding new objects in localstorage
               localStorage.removeItem('objects');
               localStorage.setItem('objects', JSON.stringify(newObj))
@@ -529,15 +535,16 @@ export default class StageThird {
               var formData = new FormData();
               formData.append('id', objid);
               formData.append('reportData', JSON.stringify(newObjReport));
-              var url = BASE_URL + "/Main/updateReportData";
+              formData.append('object', JSON.stringify(newObj));
+              var url = BASE_URL + "/Main/updateObjectsAndReportData";
               AjaxPost(formData, url, updateReportDatasuccess, AjaxError);
 
               function updateReportDatasuccess(content, targetTextarea) {
                 var result = JSON.parse(content);
                 if (result[0] == 'success') {
                   //Removing object from map
-                  $(`.svg-object[data-object="${name}"]`).remove();
-                  $(`.sjx-svg-wrapper[data-id="${id}]"`).remove();
+                  $(`.svg-object[data-id="${id}"]`).remove();
+                  $(`.sjx-svg-wrapper[data-id="${id}"]`).remove();
 
                   showAlert('Item Removed', 'success');
                 }

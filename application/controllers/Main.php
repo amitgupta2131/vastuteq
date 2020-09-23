@@ -415,7 +415,7 @@ class Main extends CI_Controller
 				'objects' => ($_POST['objects']),
 			);
 
-			$result = $this->MainModel->updateWhere('housemaps', $insertData, array('mapId'	=> ($_POST['id'])));
+			$result = $this->MainModel->updateWhere2('housemaps', $insertData, array('mapId'	=> ($_POST['id'])));
 			if ($result) {
 				echo json_encode(array("success", "Details Updated"));
 			} else {
@@ -452,6 +452,25 @@ class Main extends CI_Controller
 			);
 
 			$result = $this->MainModel->updateWhere('housemaps', $insertData, array('mapId'	=> ($_POST['id'])));
+			if ($result) {
+				echo json_encode(array("success", "Report Details Saved"));
+			} else {
+				echo json_encode(array("error", "Details are not saved contact to IT"));
+			}
+		} else {
+			echo json_encode(array("error", "Something went wrong contact to IT"));
+		}
+	}
+
+	public function updateObjectsAndReportData()
+	{
+		if (isset($_POST) && !empty($_POST)) {
+			$insertData = array(
+				'reportData' => $_POST['reportData'],
+				'objects' => $_POST['object']
+			);
+
+			$result = $this->MainModel->updateWhere2('housemaps', $insertData, array('mapId'	=> ($_POST['id'])));
 			if ($result) {
 				echo json_encode(array("success", "Report Details Saved"));
 			} else {
