@@ -3,7 +3,7 @@ import Object from '../object.class.js';
 import editText from '../EditText.class.js'
 import Utility from "../helper/utility.class.js";
 import ObjectModel from "../helper/objectmodel.class.js";
-import EditTextModel from "../helper/editTextModel.class.js";
+
 import Assist from "../helper/assist.class.js";
 
 export default class StageThird {
@@ -83,6 +83,8 @@ export default class StageThird {
         that.objectDelete(objName);
         that.model.editType(that.mapId, 'vedic');
         that.model.editCentroid(that.mapId, that.centroid)
+        $('.g.svg-object[data-object]').remove();
+        $(`g.sjx-svg-wrapper[data-id]`).remove();
         that._stage = 3;
         that.vedicStart()
       } else {
@@ -228,7 +230,7 @@ export default class StageThird {
 
     $('[data-object-item]').on('click', function () {
       // alert('hello');
-      Utility.getObjectDirection(that.calNorthAngle(), that.centroid, that.angle, that.mapBoundariesCoords, 8)
+      Utility.getObjectDirection(that.calNorthAngle(), that.centroid, that.angle, that.mapBoundariesCoords, '8')
 
     })
 
@@ -355,7 +357,9 @@ export default class StageThird {
 
       function drawMahavastuImages(objName, objImageSrc, object) {
         localStorage.setItem('vedicImgObj', objName)
-        let width = Utility.distanceOfTwoPoints(that.vedicMapBoundariesCoords[1], that.vedicMapBoundariesCoords[3]);
+        let d1 = Utility.distanceOfTwoPoints(that.vedicMapBoundariesCoords[0], that.vedicMapBoundariesCoords[1]);
+        let d2 = Utility.distanceOfTwoPoints(that.vedicMapBoundariesCoords[1], that.vedicMapBoundariesCoords[2]);
+        let width = d1>d2 ? d1 : d2;
         if (that.objectVpm == null || that.objectVpm == undefined) {
 
           d3.select('.properties-section.opacity').classed('d-none', false);
@@ -411,10 +415,7 @@ export default class StageThird {
     })
 
 
-    deleteContainer.on('click', function () {
-      $('.removeEditText').trigger('click');
-
-    })
+   
 
     //delete tools images
     $('.object-delete-toggle').on('click', function () {
@@ -561,65 +562,7 @@ export default class StageThird {
 
     })
 
-    $('body').on('click', '.removeEditText', function () {
-
-      let textObjects = JSON.parse(localStorage.getItem('EditTextObjects'));
-      let objid = localStorage.getItem('selectedMapId');
-      let newTextObj = [];
-      let id = $(this).attr('obj-id');
-      let name = $(this).attr('obj-name');
-      swal("Are you sure to delete it?", {
-        buttons: {
-          Delete: true,
-          Cancel: true,
-        },
-      })
-        .then((value) => {
-          switch (value) {
-
-            case "Delete":
-              // deleting object from array
-              var filteredObj = textObjects.find(function (item, i) {
-                let index = '';
-                if (item.image.id == id) {
-                  delete textObjects[i];
-
-                }
-                return index;
-              });
-
-              //create new object array after deleting element
-              textObjects.forEach(element => {
-                newTextObj.push(element)
-              });
-
-              //removing old objects and adding new objects in localstorage
-              localStorage.removeItem('EditTextObjects');
-              localStorage.setItem('EditTextObjects', JSON.stringify(newTextObj))
-
-
-
-              //Updating new object array in database
-              let objHandler = new EditTextModel()
-              let result = objHandler.updateObjectsInDataBase(objid);
-
-              $(`.svg-object[data-object="${name}"]`).remove();
-              $(`.sjx-svg-wrapper[data-id="${id}"]`).remove();
-
-              showAlert('Text field removed', 'success')
-              break;
-
-            case "Cancel":
-              break;
-
-            default:
-              break;
-          }
-        })
-
-
-
-    })
+    
 
   }
 

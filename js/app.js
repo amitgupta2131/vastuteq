@@ -3,7 +3,8 @@ import Behavior from "./behavior.class.js";
 import Vastuteq from "./vastuteq.class.js";
 import Model from "./helper/model.class.js";
 import Modal from "./helper/modal.class.js";
-import ObjectModel from "./helper/objectmodel.class";
+import ObjectModel from "./helper/objectmodel.class.js";
+import EditTextModel from "./helper/editTextModel.class.js";
 
 
 var isCreateMap = false,
@@ -45,7 +46,7 @@ function createMap() {
   $('#drawArea').removeClass('d-none');
   let canvasSize = drawAreaSize(35, 35);
 
-  console.log(canvasSize)
+
   let canvasArea = d3
     .select("#drawArea")
     .append("div")
@@ -431,31 +432,54 @@ function uniqueID() {
 
 //For Print
 d3.select('#print').on('click', function () {
+  let height = $('#vastuteqCanvas').attr('height');
+  let width = $('vastuteqCanvas').attr('width');
+  console.log(screen.height, screen.width)
   swal("Select your print mode", {
     buttons: {
-        Portrait: true,
-        Landscape: true,
+      Portrait: true,
+      Landscape: true,
     },
-})
-.then((value) => {
-    switch (value) {
+  })
+    .then((value) => {
+      switch (value) {
 
         case "Portrait":          
-            window.print();          
-            break;
+          window.print();
+          break;
 
         case "Landscape":
           let style = `transform:rotate(90deg);position: relative;z-index: 15;top: 0px;left: -40%;margin-top: auto;text-align: center;`
-          $('#drawArea').attr('style', style)          
+          $('#drawArea').attr('style', style);
+          
+          // printZoom()
           window.print();
-        $('#drawArea').attr('style', '')
+          $('#drawArea').attr('style', '');
 
         default:
-            break;
-    }
+          break;
+      }
+    })
+
 })
-  
-})
+
+function printZoom() {
+  var totalHeight = 2480;
+  var totalWidth = 3508;
+  $('#vastuteqCanvas').attr('height', totalHeight);
+  $('.mask').attr('height', totalHeight);
+  $('#myMask rect').attr('height', totalHeight);
+  $('.mask g rect').attr('height', totalHeight);
+  $('#paintCanvas').attr('height', totalHeight);
+  $('#paintCanvasBackground').attr('height', totalHeight);
+
+  $('#vastuteqCanvas').attr('height', totalWidth);
+  $('.mask').attr('height', totalWidth);
+  $('#myMask rect').attr('height', totalWidth);
+  $('.mask g rect').attr('height', totalWidth);
+  $('#paintCanvas').attr('height', totalWidth);
+  $('#paintCanvasBackground').attr('height', totalWidth);
+}
 
 //For REPORT GENERATE
 
@@ -925,7 +949,7 @@ $(document).ready(function () {
     } else if ($('[data-tool="eraser"]').hasClass('active')) {
       $('#paintCanvas').addClass('eraser');
       $('#paintCanvas').removeClass('paint-bucket pencil brush')
-    }else if ($('[data-tool="brush"]').hasClass('active')) {
+    } else if ($('[data-tool="brush"]').hasClass('active')) {
       $('#paintCanvas').addClass('brush');
       $('#paintCanvas').removeClass('paint-bucket pencil eraser')
     }
@@ -936,7 +960,6 @@ $(document).ready(function () {
     let unlockClass = 'svg-inline--fa fa-lock fa-w-14';
     let lockClass = 'svg-inline--fa fa-unlock-alt fa-w-14';
     let eClass = $(this).children().eq(0).attr('class');
-    console.log($(this).children().eq(0).siblings().text())
     let id = $(`g.sjx-svg-wrapper`).attr('data-id');
     let obj = $(`.svg-object.active[data-id="${id}"]`).attr('data-object');
     if (eClass == unlockClass) {
@@ -949,9 +972,83 @@ $(document).ready(function () {
       $(this).children().eq(0).removeClass(eClass);
       $(this).children().eq(0).addClass(unlockClass);
       $(`g.sjx-svg-wrapper`).removeClass('d-none');
-      obj != undefined && $('.object-align-center').addClass('d-flex');
+      $('.object-align-center').addClass('d-flex');
       $('.object-fixed-toggle .name').html('Fixed');
     }
+  });
+
+
+  // $('.text-delete-toggle').on('click', function () {
+  //   $('.removeEditText').trigger('click');
+
+  // })
+
+
+  $('.text-delete-toggle').on('click', function () {
+
+    let textObjects = JSON.parse(localStorage.getItem('EditTextObjects'));
+    let objid = localStorage.getItem('selectedMapId');
+    let newTextObj = [];
+    let id = $('.svg-object.sjx-drag.active').attr('data-id');
+    let name = $('.svg-object.sjx-drag.active').attr('data-object');
+
+    let valid = name.split(' ');
+    console.log(valid);
+    if (valid[0] != 'Edit') {
+      return false;
+    }
+
+    swal("Are you sure to delete it?", {
+      buttons: {
+        Delete: true,
+        Cancel: true,
+      },
+    })
+      .then((value) => {
+        switch (value) {
+
+          case "Delete":
+            // deleting object from array
+            var filteredObj = textObjects.find(function (item, i) {
+              let index = '';
+              if (item.image.id == id) {
+                delete textObjects[i];
+
+              }
+              return index;
+            });
+
+            //create new object array after deleting element
+            textObjects.forEach(element => {
+              newTextObj.push(element)
+            });
+
+            //removing old objects and adding new objects in localstorage
+            localStorage.removeItem('EditTextObjects');
+            localStorage.setItem('EditTextObjects', JSON.stringify(newTextObj))
+
+
+
+            //Updating new object array in database
+            let objHandler = new EditTextModel()
+            let result = objHandler.updateObjectsInDataBase(objid);
+
+            $(`.svg-object[data-object="${name}"]`).remove();
+            $(`.sjx-svg-wrapper[data-id="${id}"]`).remove();
+
+            showAlert('Text field removed', 'success')
+            break;
+
+          case "Cancel":
+            break;
+
+          default:
+            break;
+        }
+      })
+
+
+
   })
 
 

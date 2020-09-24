@@ -204,12 +204,11 @@ export default class Utility {
         polygons = Utility.getPolygonsArray(outerPolygons, mapBoundariesCoords);
       }
       else {
-        // console.log("type=",type);
+       
         polygons = Utility.getPolygonsArrayAndDirection(outerPolygons, mapBoundariesCoords);
-        // console.log("polygons: ",polygons);
+        
       }
-      // console.log("polygons: ",polygons);
-      // console.log("outer polygons: ",outerPolygons);
+     ;
     }
 
     return (type == "polygon" || type == "polygonDirections") ? polygons : ipArray;
@@ -219,10 +218,11 @@ export default class Utility {
   // ! GET X,Y COORDINATION ARRAY
   static getPoints(x, y, height, width) {
     let point = [];
-    point.push([x, y]);
-    point.push([parseInt(x) + parseInt(width), y]);
-    point.push([x, parseInt(y) + parseInt(height)]);
+    point.push([parseInt(x), parseInt(y)]);
+    point.push([parseInt(x) + parseInt(width), parseInt(y)]);
     point.push([parseInt(x) + parseInt(width), parseInt(y) + parseInt(height)]);
+    point.push([parseInt(x), parseInt(y) + parseInt(height)]);
+    
     return point
   }
 
@@ -255,16 +255,19 @@ export default class Utility {
 
   // ! GET POLYGON ARRAY WITH DIRECTIONS
   //   TO IDENTIFY WHERE THE OBJECTS HAVE BEEN PLACED
-  static getPolygonsArrayAndDirection(source, clip) {
+  static getPolygonsArrayAndDirection(source, clip) {   
+    
     let intersectionArr = [];
     for (let i = 0; i < source.length; i++) {
       let data = {
         direction: source[i].direction,
         polygon: greinerHormann.intersection(source[i].points, clip)
       }
-      //  console.log("data",data);
+     
       intersectionArr.push(data);
+      
     }
+
     return intersectionArr;
   }
 
@@ -306,11 +309,12 @@ export default class Utility {
 
 
   static getObjectDirection(calNorthAngle, centroid, angle, mapBoundariesCoords, division) {
+  
     let objectModel = new ObjectModel();
-    let objects = objectModel.getObject(localStorage.getItem('selectedMapId'));
-    console.log('objects',objects);
+    let objects = objectModel.getObject(localStorage.getItem('selectedMapId'));    
     let objectData;
-    let div = $('select[name="select-grid"]').val();
+    let div = division;
+    
     let objectReport = [];
     for (let i in objects) {
       objectData = {
@@ -324,7 +328,7 @@ export default class Utility {
         transform: objects[i].image.transform,
       };
       //Check if Object is in any of the directions
-      // console.log(objectData);
+    
       let mapPolygonsArrayWithDirections = Utility.getIntersectionPoints(
         calNorthAngle + angle,
         centroid,
@@ -332,22 +336,33 @@ export default class Utility {
         division,
         "polygonDirections"
       );
+      
       let data = {};
       let testPoint = Utility.getPoints(objectData.x, objectData.y, objectData.height, objectData.width);
-      // console.log("Map:",mapPolygonsArrayWithDirections);
 
-
-      mapPolygonsArrayWithDirections.forEach(element => {
-        // console.log("testPoint",testPoint);
-        // console.log("element",element);
+      mapPolygonsArrayWithDirections.forEach(element => {   
+     
         let dir = element.direction
-        testPoint.forEach(point => {
-          if (d3.polygonContains(element.polygon[0], point)) {
-            data['id'] = objectData.id;
-            data['name'] = objectData.name;            
-            data[dir] = d3.polygonContains(element.polygon[0], point);
-          }
-        });
+        
+        let status = (greinerHormann.intersection(element.polygon[0], testPoint))?true:false;
+        if(status)
+        {
+          data['id'] = objectData.id;
+              data['name'] = objectData.name;            
+              // data[dir] = d3.polygonContains(element.polygon[0], point);
+              data[dir] = status;
+        }
+        // testPoint.forEach(point => {
+          
+        //   if (d3.polygonContains(element.polygon[0], point)) {
+        //     data['id'] = objectData.id;
+        //     data['name'] = objectData.name;            
+        //     // data[dir] = d3.polygonContains(element.polygon[0], point);
+        //     data[dir] = greinerHormann.intersection(element.polygon[0], point)
+        //   }else{
+            
+        //   }
+        // });
 
 
 
@@ -355,16 +370,16 @@ export default class Utility {
       });
 
       objectReport.push(data)
-      // console.log(data)
+     
     }
-    // console.log(objectReport)
+   
     localStorage.removeItem('objectReport');
     localStorage.removeItem('reportDivision');
     localStorage.setItem('objectReport', JSON.stringify(objectReport));
     localStorage.setItem('reportDivision', div);
     
     //update Report data in database
-      console.log(localStorage.getItem('selectedMapId'))
+      
       var formData = new FormData();
       formData.append('id', localStorage.getItem('selectedMapId'));
       formData.append('reportData', JSON.stringify(objectReport));

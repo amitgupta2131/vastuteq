@@ -383,11 +383,13 @@ export default class Assist {
             .text("0°");
     }
 
-    drawPolygon({ layer, points, strokeColor = "red", strokeWidth = 2 }) {
+    drawPolygon({ layer, points, strokeColor = "red", strokeWidth = 2,name='3GL' }) {
+        console.log(points)
         layer.select('g.vedic-polygon').remove();
         let g = layer.append('g')
             .classed('vedic-polygon', true)
-            .classed('object-item', true);
+            .classed('object-item', true)
+            .attr('name',name);
 
         g.append('polygon')
             .attr('points', points)

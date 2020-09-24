@@ -11,7 +11,7 @@ export default class ObjectModel {
     }
 
     add(propertyId, data) {
-        console.log(data)
+       
         const object = {
             propertyId: propertyId,
             image: data

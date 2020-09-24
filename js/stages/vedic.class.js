@@ -2,7 +2,7 @@ import ActionBox from "../helper/actionbox.class.js";
 import Object from '../object.class.js';
 import Utility from "../helper/utility.class.js";
 import editText from '../EditText.class.js'
-import EditTextModel from "../helper/editTextModel.class.js";
+
 
 
 export default class Vedic {
@@ -13,8 +13,8 @@ export default class Vedic {
     $('.properties-section.opacity .col-md-12.row').addClass('d-none');
     $('.object-delete-toggle').addClass('d-none');
     $('.object-delete-toggle').removeClass('d-flex');
-    $('.object-align-center').addClass('d-none');
-    $('.object-align-center').removeClass('d-flex');
+    // $('.object-align-center').addClass('d-none');
+    // $('.object-align-center').removeClass('d-flex');
     let unloackClass = $('.object-fixed-toggle').children().eq(0).attr('class')
     
     if (unloackClass != 'svg-inline--fa fa-unlock-alt fa-w-14') {
@@ -132,10 +132,10 @@ export default class Vedic {
     let deleteText = deleteContainer.append('i').attr('class', 'fa fa-trash').attr('aria-hidden', 'true')
     deleteContainer.append('div').attr('class', 'name text-xs').text('Delete');
 
-    deleteContainer.on('click', function () {
-      $('.removeEditText').trigger('click');
+    // deleteContainer.on('click', function () {
+    //   $('.removeEditText').trigger('click');
 
-    })
+    // })
 
     this.actionbox.show();
 
@@ -154,23 +154,7 @@ export default class Vedic {
       <a class="dropdown-item" type="fixed" href="#" id ="vpm1" value="VPM">VPM</a>
        `;
 
-    let mapGridType = $('#toolMenu').html(html);
-
-
-    // mapGridType.on('click', '#floating', function () {
-
-    //   $('#floatingToolMenu').remove();
-    //   $('#fixedToolMenu').remove();
-    //   let objId = $(this).attr('id');
-    //   alert(objId)
-    //   if (objId == 'fixed') {
-
-    //     $('#toolMenu').append(fixedMenu)
-    //   } else if (objId == 'floating') {
-
-    //     $('#toolMenu').append(floatingMenu)
-    //   }
-    // })
+    let mapGridType = $('#toolMenu').html(html);   
 
     // enableDiagonals.on('click', function () {
     //   diagonalChecked = d3.select(this).property("checked");
@@ -212,69 +196,7 @@ export default class Vedic {
       });
 
 
-    });
-
-
-
-    $('body').on('click', '.removeEditText', function () {
-
-      let textObjects = JSON.parse(localStorage.getItem('EditTextObjects'));
-      let objid = localStorage.getItem('selectedMapId');
-      let newTextObj = [];
-      let id = $(this).attr('obj-id');
-      let name = $(this).attr('obj-name');
-      swal("Are you sure to delete it?", {
-        buttons: {
-          Delete: true,
-          Cancel: true,
-        },
-      })
-        .then((value) => {
-          switch (value) {
-
-            case "Delete":
-              // deleting object from array
-              var filteredObj = textObjects.find(function (item, i) {
-                let index = '';
-                if (item.image.id == id) {
-                  delete textObjects[i];
-
-                }
-                return index;
-              });
-
-              //create new object array after deleting element
-              textObjects.forEach(element => {
-                newTextObj.push(element)
-              });
-
-              //removing old objects and adding new objects in localstorage
-              localStorage.removeItem('EditTextObjects');
-              localStorage.setItem('EditTextObjects', JSON.stringify(newTextObj))
-
-
-
-              //Updating new object array in database
-              let objHandler = new EditTextModel()
-              let result = objHandler.updateObjectsInDataBase(objid);
-
-              $(`.svg-object[data-object="${name}"]`).remove();
-              $(`.sjx-svg-wrapper[data-id="${id}"]`).remove();
-
-              showAlert('Text field removed', 'success')
-              break;
-
-            case "Cancel":
-              break;
-
-            default:
-              break;
-          }
-        })
-
-
-
-    })
+    });  
 
 
     mapGridType.on('click', 'a', function () {
@@ -307,7 +229,8 @@ export default class Vedic {
           $('.properties-section.opacity .col-md-12.row').addClass('d-none');
           $('.object-delete-toggle').addClass('d-none');
           $('.object-delete-toggle').removeClass('d-flex');
-          that.assist.drawPolygon({ layer: that.canvas, points: that.vedicMapBoundariesCoords, strokeColor: "red", strokeWidth: 2 });
+          // $('.object-align-center').addClass('d-flex');
+          that.assist.drawPolygon({ layer: that.canvas, points: that.vedicMapBoundariesCoords, strokeColor: "red", strokeWidth: 2,name:'3GL' });
           that.assist.drawPolygonGrid({ points: that.vedicMapBoundariesCoords, color: "red", noOfLines: 3, strokeWidth: 2 });
           that.createObject('g.vedic-polygon', objType);
           that.vedic = new Vedic();
@@ -317,7 +240,7 @@ export default class Vedic {
           $('.properties-section.opacity .col-md-12.row').addClass('d-none');
           $('.object-delete-toggle').addClass('d-none');
           $('.object-delete-toggle').removeClass('d-flex');
-          that.assist.drawPolygon({ layer: that.canvas, points: that.vedicMapBoundariesCoords, strokeColor: "blue", strokeWidth: 2 });
+          that.assist.drawPolygon({ layer: that.canvas, points: that.vedicMapBoundariesCoords, strokeColor: "blue", strokeWidth: 2,name:'3GD' });
           that.assist.drawPolygonGrid({ points: that.vedicMapBoundariesCoords, color: "blue", noOfLines: 3, strokeWidth: 2 });
           that.assist.drawPolygonDiagonals({ points: that.vedicMapBoundariesCoords, color: "blue", noOfLines: 3, strokeWidth: 2 });
           that.createObject('g.vedic-polygon', objType);
@@ -338,7 +261,7 @@ export default class Vedic {
           $('.properties-section.opacity .col-md-12.row').addClass('d-none');
           $('.object-delete-toggle').addClass('d-none');
           $('.object-delete-toggle').removeClass('d-flex');
-          that.assist.drawPolygon({ layer: that.canvas, points: that.vedicMapBoundariesCoords, strokeColor: "blue", strokeWidth: 2 });
+          that.assist.drawPolygon({ layer: that.canvas, points: that.vedicMapBoundariesCoords, strokeColor: "blue", strokeWidth: 2 ,name:'9GL'});
           that.assist.drawPolygonGrid({ points: that.vedicMapBoundariesCoords, color: "blue", noOfLines: 9, strokeWidth: 2 });
           that.assist.drawPolygonDiagonals({ points: that.vedicMapBoundariesCoords, color: "blue", noOfLines: 9, strokeWidth: 2 });
           that.createObject('g.vedic-polygon', objType);
@@ -393,39 +316,7 @@ export default class Vedic {
           drawVedicImages('CG', 'degreeCircleTransparent.png')
           break;
 
-        case "VPM":
-          //  console.log(that.objectVpm);
-          //        if(that.objectVpm == null || that.objectVpm == undefined) {
-          //         console.log("Create");
-          //           d3.select('.properties-section.opacity').classed('d-none',false);
-          //           d3.select(this.parentNode).classed('active', true);
-          //           that.model.editVpmtoggle(that.mapId,true);
-
-          //           let data = {
-          //             name: "VPM",
-          //             src: that.BASE_URL+'assets/images/vpm.svg',
-          //             width: 400,
-          //             height: 400,
-          //             x: that.centroid.x - 400 / 2,
-          //             y: that.centroid.y - 400 / 2,
-          //             transfrom: "",
-          //             northAngle: that.calNorthAngle(),
-          //             angle: that.angle
-          //           }
-          //           that.objectVpm = new Object({
-          //             layer: that.canvas,
-          //             data: data
-          //           });
-          //           console.log(that.objectVpm);
-          //         } else {
-          //           console.log("Delete");
-          //           that.objectDelete('VPM');
-          //           that.objectVpm = null;
-          //         }
-
-          //         if(that.objectVpm == null || that.objectVpm == undefined){     
-          //           d3.select(this.parentNode).classed('active', false);
-          //         }
+        case "VPM":          
           drawVedicImages('VPM', 'vpm.svg')
 
 
@@ -439,7 +330,9 @@ export default class Vedic {
       }
 
       function drawVedicImages(objName, objImageSrc, object) {
-        let width = Utility.distanceOfTwoPoints(that.vedicMapBoundariesCoords[1], that.vedicMapBoundariesCoords[3]);
+        let d1 = Utility.distanceOfTwoPoints(that.vedicMapBoundariesCoords[0], that.vedicMapBoundariesCoords[1]);
+        let d2 = Utility.distanceOfTwoPoints(that.vedicMapBoundariesCoords[1], that.vedicMapBoundariesCoords[2]);
+        let width = d1>d2 ? d1 : d2;
 
         localStorage.setItem('vedicImgObj', objName)
         if (that.objectVpm == null || that.objectVpm == undefined) {

@@ -1038,6 +1038,22 @@ input::-webkit-inner-spin-button {
   background-color: var(--danger);
 }
 
+.swal-button--Delete {
+  background-color: var(--danger);
+}
+
+.swal-button--Cancel {
+  background-color: var(--primary);
+}
+
+.swal-button--Portrait {
+  background-color: var(--primary);
+}
+
+.swal-button--Landscape {
+  background-color: var(--success);
+}
+
 .rul_ruler {
   display: block;
   border: 1px solid rgba(206, 219, 236, .5);

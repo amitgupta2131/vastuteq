@@ -1,15 +1,24 @@
 import ObjectModel from './helper/objectmodel.class.js';
+import Utility from "./helper/utility.class.js";
 
 export default class Object {
 
-  constructor({ mapId, layer, data }) {
+  constructor({ mapId, layer, data, nAngle = 0 }) {
 
     this.mapId = mapId;
     this.layer = layer;
     this.data = data;
+    this.housemap = JSON.parse(localStorage.getItem('houseMaps'));
+    this.housemap = this.housemap[0];
+    this.nAngle = nAngle;
+    this.centroid = this.housemap.centroid;
+    this.angle = -parseInt(this.housemap.degree);
+    this.mapBoundries = this.housemap.customBoundariesCoords;
+
 
 
     this.objectModel = new ObjectModel();
+    this.utility = new Utility();
 
     this.id = (data.id != undefined) ? data.id : this.uniqueID();
     data.id = this.id
@@ -23,15 +32,15 @@ export default class Object {
     this.g = this.layer.append("g")
       .classed('svg-object', true)
       .classed('active', true)
-      .classed('saved', (data.id != undefined || data.saveable != undefined) ? true : false)      
+      .classed('saved', (data.id != undefined || data.saveable != undefined) ? true : false)
       .attr('data-id', this.id)
       .attr('data-object', data.name)
       .attr('opacity', 1)
-      .attr('typeOf','image')
+      .attr('typeOf', 'image')
       .attr('transform', (data.transform === "abc") ? null : data.transform);
 
     this.g.append('image')
-      .classed('object', true)      
+      .classed('object', true)
       .attr('xmlns', 'http://www.w3.org/2000/svg')
       .attr("xlink:href", data.src)
       .attr('x', data.x)
@@ -45,7 +54,7 @@ export default class Object {
       && data.name != 'MVM' && data.name != 'MVC' && data.name != '9DL' && data.name != '9SG'
       && data.name != '9MS' && data.name != '9SM' && data.name != 'KSGP' && data.name != 'KSMP'
       && data.name != 'CG' && data.name != '9SD' && data.name != 'MVPC') {
-      console.log(data)
+
       this.g.append('image')
         .attr('class', 'remove')
         .attr('xmlns', 'http://www.w3.org/2000/svg')
@@ -57,7 +66,7 @@ export default class Object {
         .attr('obj-id', data.id)
         .attr('obj-name', data.name)
         .style('position', 'relative')
-       
+
     }
 
 
@@ -101,7 +110,7 @@ export default class Object {
       onInit(el) {
         // fires on tool activation
         if (that.data.saveable != undefined) {
-          console.log('in');
+
           that.objectModel.add(that.mapId, objectModelData)
         }
 
@@ -112,7 +121,7 @@ export default class Object {
       },
       onResize({ clientX, clientY, dx, dy, width, height }) {
         // fires on resizing
-        
+
         if (d3.select('.svg-object.saved.active[data-object]').node() != null) {
 
           let object = d3.select('.svg-object.saved.active[data-object]');
@@ -126,11 +135,12 @@ export default class Object {
             objectId,
             { x: x, y: y, width: width, height: height, transform: objectTransform }
           );
+          Utility.getObjectDirection(that.nAngle, that.centroid, that.angle, that.mapBoundries, '8');
         }
       },
       onRotate({ clientX, clientY, delta, transform }) {
         // fires on rotation
-        
+
         if (d3.select('.svg-object.saved.active[data-object]').node() != null) {
           let object = d3.select('.svg-object.saved.active[data-object]');
           let objectId = object.attr('data-id');
@@ -144,9 +154,12 @@ export default class Object {
             objectId,
             { x: x, y: y, width: width, height: height, transform: objectTransform }
           );
+          Utility.getObjectDirection(that.nAngle, that.centroid, that.angle, that.mapBoundries, '8');
         }
       },
       onDrop({ clientX, clientY }) {
+
+        // console.log(that.calNorthAngle(that.housemap))
         // fires on drop        
         if (d3.select('.svg-object.saved.active[data-object]').node() != null) {
           let object = d3.select('.svg-object.saved.active[data-object]');
@@ -160,6 +173,7 @@ export default class Object {
             objectId,
             { x: x, y: y, width: width, height: height, transform: objectTransform }
           );
+          Utility.getObjectDirection(that.nAngle, that.centroid, that.angle, that.mapBoundries, '8');
         }
       },
       onDestroy(el) {
@@ -169,9 +183,9 @@ export default class Object {
     };
 
     //remove handles on fixed tool menu
-    this.object = subjx(`.svg-object[data-id="${this.id}"]`).drag(this.svgOptions);      
+    this.object = subjx(`.svg-object[data-id="${this.id}"]`).drag(this.svgOptions);
     this.controls = this.object[0].controls;
-    this.controls.setAttribute("data-id", this.id);   
+    this.controls.setAttribute("data-id", this.id);
 
 
     //Code to rotate VPM to North East
@@ -204,8 +218,8 @@ export default class Object {
     }
 
     if (this.data.type == 'fixed') {
-      $(`.sjx-svg-wrapper[data-id='${this.id}']`).addClass('d-none'); 
-      
+      $(`.sjx-svg-wrapper[data-id='${this.id}']`).addClass('d-none');
+
     }
 
   }
@@ -235,6 +249,20 @@ export default class Object {
   uniqueID(length = 12) {
     return Math.floor(Math.pow(10, length - 1) + Math.random() * (Math.pow(10, length) - Math.pow(10, length - 1) - 1));
   }
+
+  // calNorthAngle(housemap) {
+  //   const perpendicularPoints = Utility.getPerpendicularPoint(
+  //     housemap.faceCoords[0],
+  //     housemap.faceCoords[1],
+  //     housemap.centroid
+  //   );
+  //   return Utility.getAngle(
+  //     housemap.centroid.x,
+  //     housemap.centroid.y,
+  //     perpendicularPoints.x,
+  //     perpendicularPoints.y
+  //   );
+  // }
 
 
 }

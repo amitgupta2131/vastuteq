@@ -306,7 +306,7 @@ export default class Vastuteq {
             };
 
             if (flag == '') {
-              new Object({ mapId: this.mapId, layer: objectLayer, data: objectData, flag: flag });
+              new Object({ mapId: this.mapId, layer: objectLayer, data: objectData, nAngle:this.calNorthAngle() });
             }
 
           }
@@ -605,7 +605,8 @@ export default class Vastuteq {
       object.removeClass("active");
       object.addClass("deactive");
       wrapper.addClass("d-none");
-      $(`[obj-id=${id}]`).addClass('d-none')
+      $(`[obj-id=${id}]`).addClass('d-none');
+      wrapper.removeClass('active')
     });
 
     $("body").on("dblclick", "g.svg-object[data-object]", function () {
@@ -619,6 +620,7 @@ export default class Vastuteq {
       object.addClass("active");
       object.removeClass("deactive");
       wrapper.removeClass("d-none");
+      wrapper.addClass("active");
       $("#myRange").val(opacity);
       $(".range-value").text(opacity);
     });
@@ -676,6 +678,26 @@ export default class Vastuteq {
     d3.select('.object-align-center').on("click", () => {
 
       let selectedItem = d3.select(".svg-object.active[data-object]");
+      let vedicValidate = $('.vedic-polygon').attr('name');
+      if(vedicValidate != undefined){       
+        // let nPoints = $('[data-object-item="vedicRectangle"]').attr('points');
+        $('.vedic-polygon').remove();
+        // nPoints = nPoints.split(" ")
+        // nPoints = [
+        //   [parseInt(nPoints[0]),parseInt(nPoints[1])],
+        //   [parseInt(nPoints[2]),parseInt(nPoints[3])],
+        //   [parseInt(nPoints[4]),parseInt(nPoints[5])],
+        //   [parseInt(nPoints[6]),parseInt(nPoints[7])]
+        // ]
+        // console.log(nPoints)
+        // this.assist.drawPolygon({ layer: this.canvas, points: nPoints });
+        // this.assist.drawPolygonDiagonals({ points: nPoints });
+        // this.assist.drawPolygonGrid({ points: nPoints });
+        // this.createObject('g.vedic-polygon');
+        $('.object-align-center').removeClass('d-flex');
+        $('.object-align-center').addClass('d-none');
+        $(`#${vedicValidate}`).trigger('click')
+      }
       if (selectedItem.node() != null) {
         // if (selectedItem.classed('saved') == true) {
           let object = d3.select(".svg-object.active[data-object]");
