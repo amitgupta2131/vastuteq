@@ -19,7 +19,8 @@ export default class EditTextModel {
         this.updateObjectsInDataBase(propertyId);
     }
 
-    editProperties(objectId, data) {       
+    editProperties(objectId, data) { 
+        this.objects = JSON.parse(localStorage.getItem("EditTextObjects")) || [];      
         this.objects = this.objects.map(object =>
             object.image.id == objectId ? {
                 propertyId: object.propertyId,
@@ -51,6 +52,7 @@ export default class EditTextModel {
     }
 
     editXY(objectId, data) {
+        this.objects = JSON.parse(localStorage.getItem("EditTextObjects")) || [];
         this.objects = this.objects.map(object =>
             object.image.id == objectId ? {
                 propertyId: object.propertyId,
@@ -78,6 +80,7 @@ export default class EditTextModel {
     }
 
     editWidthHeight(objectId, data) {
+        this.objects = JSON.parse(localStorage.getItem("EditTextObjects")) || [];
         // console.log(data);
         this.objects = this.objects.map(object =>
             object.image.id == objectId ? {
@@ -106,6 +109,7 @@ export default class EditTextModel {
     }
 
     editTransform(objectId, updatedTransform) {
+        this.objects = JSON.parse(localStorage.getItem("EditTextObjects")) || [];
         this.objects = this.objects.map(object =>
             object.image.id == objectId ? {
                 propertyId: object.propertyId,
