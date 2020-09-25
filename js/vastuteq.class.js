@@ -315,7 +315,7 @@ export default class Vastuteq {
           
 
           for(let j in editText){
-            console.log(editText[j].image.ref)
+            console.log(editText[j].image.width)
             if(editText[j].image.ref == 'M'){
             let data = {
               id: editText[j].image.id,

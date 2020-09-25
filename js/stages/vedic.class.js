@@ -2,7 +2,7 @@ import ActionBox from "../helper/actionbox.class.js";
 import Object from '../object.class.js';
 import Utility from "../helper/utility.class.js";
 import editText from '../EditText.class.js'
-
+import EditTextModel from "../helper/editTextModel.class.js";
 
 
 export default class Vedic {
@@ -81,6 +81,7 @@ export default class Vedic {
         let objName = localStorage.getItem('vedicImgObj');
         d3.select('g.sjx-svg-wrapper').remove();
         d3.select('g.vedic-polygon').remove();
+        $('.fObject').parent().remove();
         d3.select('.properties-section.opacity').classed('d-none', true);
         d3.select('.properties-section.opacity').classed('d-flex', false);
         d3.select('.object-delete-toggle').classed('d-none', false);
@@ -93,7 +94,9 @@ export default class Vedic {
         that._stage = 3;
         that.start()
       }
-    })
+    });
+
+   
 
     let row = actionBox.append('div')
       .classed('form-row', true);
@@ -179,10 +182,10 @@ export default class Vedic {
       let data = {
         name: 'Edit Text',
         src: '',
-        width: 200,
-        height: 200,
-        x: that.centroid.x - 200 / 2,
-        y: that.centroid.y - 200 / 2,
+        width: 130,
+        height: 30,
+        x: that.centroid.x - 130 / 2,
+        y: that.centroid.y - 30 / 2,
         transfrom: "",
         northAngle: that.calNorthAngle(),
         angle: that.angle,
@@ -206,6 +209,9 @@ export default class Vedic {
       let lockClass = 'svg-inline--fa fa-unlock-alt fa-w-14';
       $('.object-fixed-toggle').children().eq(0).removeClass();
       $('.object-fixed-toggle').children().eq(0).addClass(lockClass);
+      $('.object-fixed-toggle .name').html('Float');
+      $(`g.sjx-svg-wrapper`).addClass('d-none');
+      $('.object-align-center').removeClass('d-flex');
       // $('.object-align-center').addClass('d-flex');
 
 
@@ -332,7 +338,7 @@ export default class Vedic {
       function drawVedicImages(objName, objImageSrc, object) {
         let d1 = Utility.distanceOfTwoPoints(that.vedicMapBoundariesCoords[0], that.vedicMapBoundariesCoords[1]);
         let d2 = Utility.distanceOfTwoPoints(that.vedicMapBoundariesCoords[1], that.vedicMapBoundariesCoords[2]);
-        let width = d1>d2 ? d1 : d2;
+        let width = d1<d2 ? d1 : d2;
 
         localStorage.setItem('vedicImgObj', objName)
         if (that.objectVpm == null || that.objectVpm == undefined) {

@@ -444,18 +444,23 @@ d3.select('#print').on('click', function () {
     .then((value) => {
       switch (value) {
 
-        case "Portrait":          
-          window.print();
-          break;
-
-        case "Landscape":
-          let style = `transform:rotate(90deg);position: relative;z-index: 15;top: 0px;left: -40%;margin-top: auto;text-align: center;`
+        case "Portrait": {
+          printZoom('1600')
+          let style = `background:'gray';position: relative;z-index: 15;top: 40%;text-align: center;`;
           $('#drawArea').attr('style', style);
-          
-          // printZoom()
           window.print();
           $('#drawArea').attr('style', '');
-
+          break;
+        }
+        case "Landscape": {
+          let style = `transform:rotate(90deg);background:'gray';position: relative;z-index: 15;top: 0px;left: -20%;margin-top: auto;text-align: center;`
+          $('#drawArea').attr('style', style);
+          $('body').attr('style', 'background:lightgray');
+          printZoom('2480')
+          window.print();
+          $('#drawArea').attr('style', '');
+          $('body').attr('style', 'background:lightgray');
+        }
         default:
           break;
       }
@@ -463,8 +468,8 @@ d3.select('#print').on('click', function () {
 
 })
 
-function printZoom() {
-  var totalHeight = 2480;
+function printZoom(height) {
+  var totalHeight = height;
   var totalWidth = 3508;
   $('#vastuteqCanvas').attr('height', totalHeight);
   $('.mask').attr('height', totalHeight);
@@ -473,12 +478,12 @@ function printZoom() {
   $('#paintCanvas').attr('height', totalHeight);
   $('#paintCanvasBackground').attr('height', totalHeight);
 
-  $('#vastuteqCanvas').attr('height', totalWidth);
-  $('.mask').attr('height', totalWidth);
-  $('#myMask rect').attr('height', totalWidth);
-  $('.mask g rect').attr('height', totalWidth);
-  $('#paintCanvas').attr('height', totalWidth);
-  $('#paintCanvasBackground').attr('height', totalWidth);
+  // $('#vastuteqCanvas').attr('height', totalWidth);
+  // $('.mask').attr('height', totalWidth);
+  // $('#myMask rect').attr('height', totalWidth);
+  // $('.mask g rect').attr('height', totalWidth);
+  // $('#paintCanvas').attr('height', totalWidth);
+  // $('#paintCanvasBackground').attr('height', totalWidth);
 }
 
 //For REPORT GENERATE
@@ -815,10 +820,12 @@ $('#reportModal .modal-body').on('click', '#feetSubmit', function () {
 $('.savebtn').on('click', function () {
   let model = new Model();
   let objectModel = new ObjectModel();
+  let objHandler = new EditTextModel();
   let mapId = localStorage.getItem('selectedMapId');
   let houseMap = model.getHouseMap(mapId);
   model.updateHouseMapInDataBase(mapId, houseMap, '', 'true');
   objectModel.updateObjectsInDataBase(mapId);
+  objHandler.updateObjectsInDataBase(mapId)
 })
 
 $('#clientName').on('keyup', function () {
@@ -984,19 +991,25 @@ $(document).ready(function () {
   // })
 
 
-  $('.text-delete-toggle').on('click', function () {
+  $('body').on('click','.text-delete-toggle', function () {
 
     let textObjects = JSON.parse(localStorage.getItem('EditTextObjects'));
     let objid = localStorage.getItem('selectedMapId');
     let newTextObj = [];
     let id = $('.svg-object.sjx-drag.active').attr('data-id');
-    let name = $('.svg-object.sjx-drag.active').attr('data-object');
-
-    let valid = name.split(' ');
-    console.log(valid);
-    if (valid[0] != 'Edit') {
+    let name = $('.svg-object.sjx-drag.active').attr('typeOf');
+    
+    if (id == undefined || id == "") {
       return false;
     }
+    if (name == 'image') {
+      return false;
+    }
+    // let valid = name.split(' ');
+    // console.log(valid);
+    // if (valid[0] != 'Edit') {
+    //   return false;
+    // }
 
     swal("Are you sure to delete it?", {
       buttons: {
@@ -1033,7 +1046,7 @@ $(document).ready(function () {
             let objHandler = new EditTextModel()
             let result = objHandler.updateObjectsInDataBase(objid);
 
-            $(`.svg-object[data-object="${name}"]`).remove();
+            $(`.svg-object[data-id="${id}"]`).remove();
             $(`.sjx-svg-wrapper[data-id="${id}"]`).remove();
 
             showAlert('Text field removed', 'success')
@@ -1050,6 +1063,15 @@ $(document).ready(function () {
 
 
   })
+
+  $('body').on('keyup', '[contenteditable="true"]', function () {
+    let id = $(this).parent().parent().parent().attr('data-id');
+    let text = $(this).text();
+    let objHandler = new EditTextModel();
+    objHandler.editName(id, { name: text })
+    // alert(text)
+  })
+
 
 
 })

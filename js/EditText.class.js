@@ -8,7 +8,7 @@ export default class EditText {
         this.layer = layer;
         this.data = data;
 
-
+        console.log(this.data.name)
         this.editTextModel = new editText();
         this.id = (data.id != undefined) ? data.id : this.uniqueID();
         data.id = this.id;
@@ -17,62 +17,60 @@ export default class EditText {
         d3.selectAll(`.sjx-svg-wrapper`).classed('d-none', true);
 
         //adding EditText fields
-        if (data.name = "Edit Text") {
+        // if (data.name == "Edit Text") {
 
-            var margin = {
-                left: 5,
-                right: 5,
-                top: 5,
-                bottom: 5
-            };
+        var margin = {
+            left: 5,
+            right: 5,
+            top: 5,
+            bottom: 5
+        };
 
-            var chart = this.layer
-                .append("g")
-                .classed('svg-object', true)
-                .classed('active', true)
-                .classed('saved', true)
-                .attr('data-id', this.id)
-                .attr('data-object', data.name + this.id)
-                .attr('transform', (data.transform === "abc") ? null : data.transform);
-            // .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+        var chart = this.layer
+            .append("g")
+            .classed('svg-object', true)
+            .classed('active', true)
+            .classed('saved', true)
+            .attr('data-id', this.id)
+            .attr('data-object', data.name + this.id)
+            .attr('transform', (data.transform === "abc") ? null : data.transform);
+        // .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-            var data = [this.data];
+        var data = [this.data];
 
-            chart.selectAll("text")
-                .data(data)
-                .enter()
-                .append("foreignObject")
-                .attr('class', 'fObject')
-                .attr("x", this.data.x)
-                .attr("y", this.data.y)
-                .attr("width", "100px")
-                .attr("height", "30px")
-
-
-                .append('xhtml:div')
-
-                .attr("width", "100px")
-                .attr("height", "30px")
-                .append('div')
-                .attr("contentEditable", true)
-                .text(function (d) {
-                    return d.name
-                });
-
-            chart.append('image')
-                .attr('class', 'removeEditText d-none')
-                .attr('xmlns', 'http://www.w3.org/2000/svg')
-                .attr("xlink:href", BASE_URL + 'assets/icons/remove.svg')
-                .attr('x', data[0].x - 10)
-                .attr('y', data[0].y - 10)
-                .attr('height', '20')
-                .attr('width', '20')
-                .attr('obj-id', data[0].id)
-                .attr('obj-name', data[0].name + this.id)
-                .style('position', 'relative')
+        chart.selectAll("text")
+            .data(data)
+            .enter()
+            .append("foreignObject")
+            .attr('class', 'fObject')
+            .attr("x", this.data.x)
+            .attr("y", this.data.y)
+            .attr("width", this.data.width)
+            .attr("height", this.data.height)
 
 
-        }
+            .append('xhtml:div')
+
+            .attr("width", this.data.width)
+            .attr("height", this.data.height)
+            .append('div')
+            .attr("contentEditable", true)
+            .text(this.data.name);
+
+        chart.append('image')
+            .attr('class', 'removeEditText d-none')
+            .attr('xmlns', 'http://www.w3.org/2000/svg')
+            .attr("xlink:href", BASE_URL + 'assets/icons/remove.svg')
+            .attr('x', data[0].x - 10)
+            .attr('y', data[0].y - 10)
+            .attr('height', '20')
+            .attr('width', '20')
+            .attr('obj-id', data[0].id)
+            .attr('obj-name', data[0].name + this.id)
+            .style('position', 'relative')
+
+
+        // }
 
 
         this.init();
@@ -174,8 +172,9 @@ export default class EditText {
                     );
                 }
             },
-            onDrop({ clientX, clientY }) {
+            onDrop({ clientX, clientY, dx, dy, width, height }) {
                 // fires on drop
+
                 if (d3.select('.svg-object.saved.active[data-object]').node() != null) {
                     let object = d3.select('.svg-object.saved.active[data-object]');
                     let objectId = object.attr('data-id');
@@ -184,6 +183,9 @@ export default class EditText {
                     let width = image.attr('width'), height = image.attr('height');
                     let transform = d3.select(`.sjx-svg-wrapper[data-id="${objectId}"]`).attr('transform')
                     let objectTransform = object.attr('transform', transform);
+                    let pos = $('.svg-object.saved.active[data-object] foreignObject.fObject').position();
+                    x = pos.left;
+                    y = pos.top;
                     object.select('image').attr('x', x - 10);
                     object.select('image').attr('y', y - 10);
                     that.editTextModel.editProperties(

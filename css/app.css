@@ -932,6 +932,10 @@ input::-webkit-inner-spin-button {
   /* background-size: 200% auto; */
 }
 
+.svg-object .remove {
+  display: none !important;
+}
+
 .svg-object:hover .remove {
   display: block !important;
 }

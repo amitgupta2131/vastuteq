@@ -79,6 +79,35 @@ export default class EditTextModel {
                 : object);
     }
 
+
+    editName(objectId, data) {
+        this.objects = JSON.parse(localStorage.getItem("EditTextObjects")) || [];
+        this.objects = this.objects.map(object =>
+            object.image.id == objectId ? {
+                propertyId: object.propertyId,
+                image: {
+                    id: object.image.id,
+                    name: data.name,
+                    src: object.image.src,
+                    x: object.image.x,
+                    y: object.image.y,
+                    width: object.image.width,
+                    height: object.image.height,
+                    transform: object.image.transform,
+                    type: object.image.type,
+                    ref: object.image.ref,
+                }
+            } : object
+        )
+
+        this._commit(this.objects);
+        //Update object in data base
+        this.objects.map(object =>
+            object.image.id == objectId ?
+            this.updateObjectsInDataBase(object.propertyId)
+                : object);
+    }
+
     editWidthHeight(objectId, data) {
         this.objects = JSON.parse(localStorage.getItem("EditTextObjects")) || [];
         // console.log(data);
