@@ -320,197 +320,7 @@
     </div>
 
     <!-- PAINT TOOLBOX RIGHT END -->
-
-
-
-    <!-- ////////////// Icon Sidebar Toggle Start ////////////////////////////////////-->
-    <div class="formwrapper d-none" id="right_sidebar">
-        <div class="refer-form-slide">
-            <h3 id="corporate_contact" class="row">
-                <button type="button" class="obj-btn btn-primary col-sm-6 rounded-0" data-toggle="#objects">Objects</button>
-                <button type="button" class="obj-btn btn-light col-sm-6 rounded-0" data-toggle="#activities">Activities</button></h3>
-            <!-- For Objects -->
-            <div id="objects" class="row message active">
-                <div class="objectsBar col-sm-3">
-                    <div class="objectimg" data-toggle="#obj1">
-                        <img src="<?php echo base_url('assets/objects/sofa_icon.svg') ?>" alt="" width="40" title="single sofa">
-                    </div>
-
-                    <div class="objectimg" data-toggle="#obj2">
-                        <img src="<?php echo base_url('assets/objects/single_bed_icon.svg') ?>" alt="" width="50" title="single bed" title="chair icon">
-                    </div>
-                    <div class="objectimg" data-toggle="#obj3">
-                        <img src="<?php echo base_url('assets/objects/double_bed_icon.svg') ?>" alt="" width="50" title="double bed">
-                    </div>
-                    <div class="objectimg" data-toggle="#obj4">
-                        <img src="<?php echo base_url('assets/objects/bathtub_icon.svg') ?>" alt="" width="50" title="bathtub">
-                    </div>
-                    <div class="objectimg" data-toggle="#obj5">
-                        <img src="<?php echo base_url('assets/objects/bookshelf_icon.svg') ?>" alt="" width="50" title="bookshelf">
-                    </div>
-                    <div class="objectimg" data-toggle="#obj6">
-                        <img src="<?php echo base_url('assets/objects/dining_table_icon.svg') ?>" alt="" width="50" title="dinning table">
-                    </div>
-                    <div class="objectimg" data-toggle="#obj7">
-                        <img src="<?php echo base_url('assets/objects/wardrobe_02_icon.svg') ?>" alt="" width="50" title="wardrobe">
-                    </div>
-                    <div class="objectimg" data-toggle="#obj8">
-                        <img src="<?php echo base_url('assets/objects/table_01_icon.svg') ?>" alt="" width="50" title="table">
-                    </div>
-                </div>
-
-                <div class="col-sm-9 objcontainer">
-                    <section id="obj1" class="overflow-auto row subobj-container active">
-                        <div class="object-item col-sm-6" data-src="<?php echo base_url('assets/objects/singe_sofa.svg') ?>" data-name="single-sofa">
-                            <img src="<?php echo base_url('assets/objects/sofa_icon.svg') ?>" alt="" width="70" title="single-sofa">
-                        </div>
-                        <div class="object-item col-sm-6" data-src="<?php echo base_url('assets/objects/single_bed_icon.svg') ?>" data-name="single-bed">
-                            <img src="<?php echo base_url('assets/objects/single_bed_icon.svg') ?>" alt="" width="70" title="single-bed">
-                        </div>
-                        <div class="object-item col-sm-6" data-src="<?php echo base_url('assets/objects/double_bed.svg') ?>" data-name="double-bed">
-                            <img src="<?php echo base_url('assets/objects/double_bed_icon.svg') ?>" alt="" width="70" title="double-bed">
-                        </div>
-                        <div class="object-item col-sm-6" data-src="<?php echo base_url('assets/objects/bathtub_icon.svg') ?>" data-name="bathtub">
-                            <img src="<?php echo base_url('assets/objects/bathtub_icon.svg') ?>" alt="" width="70" title="bathtub">
-                        </div>
-                        <div class="object-item col-sm-6" data-src="<?php echo base_url('assets/objects/bookshelf_icon.svg') ?>" data-name="bookshelf">
-                            <img src="<?php echo base_url('assets/objects/bookshelf_icon.svg') ?>" alt="" width="70" title="bookshelf">
-                        </div>
-                        <div class="object-item col-sm-6" data-src="<?php echo base_url('assets/objects/table01.svg') ?>" data-name="dinning-table">
-                            <img src="<?php echo base_url('assets/objects/dining_table_icon.svg') ?>" alt="" width="70" title="dinning-table">
-                        </div>
-                        <div class="object-item col-sm-6" data-src="<?php echo base_url('assets/objects/wardrobe_02_icon.svg') ?>" data-name="wardrobe">
-                            <img src="<?php echo base_url('assets/objects/wardrobe_02_icon.svg') ?>" alt="" width="70" title="wardrobe">
-                        </div>
-                        <div class="object-item col-sm-6" data-src="<?php echo base_url('assets/objects/study_table.svg') ?>" data-name="table">
-                            <img src="<?php echo base_url('assets/objects/table_01_icon.svg') ?>" alt="" width="70" title="table">
-                        </div>
-
-                    </section>
-                    <section id="obj2" class="overflow-auto row subobj-container">
-                        <div class="object-item col-sm-6" data-src="<?php echo base_url('assets/objects/single_bed_icon.svg') ?>">
-                            <img src="<?php echo base_url('assets/objects/single_bed_icon.svg') ?>" alt="" width="70" title="single bed" title="chair icon">
-                        </div>
-                        <div class="object-item col-sm-6" data-src="<?php echo base_url('assets/objects/singe_sofa.svg') ?>">
-                            <img src="<?php echo base_url('assets/objects/sofa_icon.svg') ?>" alt="" width="70" title="single sofa">
-                        </div>
-
-                        <div class="object-item col-sm-6" data-src="<?php echo base_url('assets/objects/double_bed.svg') ?>">
-                            <img src="<?php echo base_url('assets/objects/double_bed_icon.svg') ?>" alt="" width="70" title="double bed">
-                        </div>
-                        <div class="object-item col-sm-6" data-src="<?php echo base_url('assets/objects/bathtub_icon.svg') ?>">
-                            <img src="<?php echo base_url('assets/objects/bathtub_icon.svg') ?>" alt="" width="70" title="bathtub">
-                        </div>
-                        <div class="object-item col-sm-6" data-src="<?php echo base_url('assets/objects/bookshelf_icon.svg') ?>">
-                            <img src="<?php echo base_url('assets/objects/bookshelf_icon.svg') ?>" alt="" width="70" title="bookshelf">
-                        </div>
-                        <div class="object-item col-sm-6" data-src="<?php echo base_url('assets/objects/table01.svg') ?>">
-                            <img src="<?php echo base_url('assets/objects/dining_table_icon.svg') ?>" alt="" width="70" title="dinning table">
-                        </div>
-                        <div class="object-item col-sm-6" data-src="<?php echo base_url('assets/objects/wardrobe_02_icon.svg') ?>">
-                            <img src="<?php echo base_url('assets/objects/wardrobe_02_icon.svg') ?>" alt="" width="70" title="wardrobe">
-                        </div>
-                        <div class="object-item col-sm-6" data-src="<?php echo base_url('assets/objects/study_table.svg') ?>">
-                            <img src="<?php echo base_url('assets/objects/table_01_icon.svg') ?>" alt="" width="70" title="table">
-                        </div>
-
-                    </section>
-                </div>
-
-            </div>
-            <!-- For Activities -->
-            <div id="activities" class="row message">
-                <div class="objectsBar col-sm-3">
-                    <div class="objectimg" data-toggle="#act1">
-                        <img src="<?php echo base_url('assets/objects/sofa_icon.svg') ?>" alt="" width="40" title="single sofa">
-                    </div>
-
-                    <div class="objectimg" data-toggle="#act2">
-                        <img src="<?php echo base_url('assets/objects/single_bed_icon.svg') ?>" alt="" width="50" title="single bed" title="chair icon">
-                    </div>
-                    <div class="objectimg" data-toggle="#act3">
-                        <img src="<?php echo base_url('assets/objects/double_bed_icon.svg') ?>" alt="" width="50" title="double bed">
-                    </div>
-                    <div class="objectimg" data-toggle="#act4">
-                        <img src="<?php echo base_url('assets/objects/bathtub_icon.svg') ?>" alt="" width="50" title="bathtub">
-                    </div>
-                    <div class="objectimg" data-toggle="#act5">
-                        <img src="<?php echo base_url('assets/objects/bookshelf_icon.svg') ?>" alt="" width="50" title="bookshelf">
-                    </div>
-                    <div class="objectimg" data-toggle="#act6">
-                        <img src="<?php echo base_url('assets/objects/dining_table_icon.svg') ?>" alt="" width="50" title="dinning table">
-                    </div>
-                    <div class="objectimg" data-toggle="#act7">
-                        <img src="<?php echo base_url('assets/objects/wardrobe_02_icon.svg') ?>" alt="" width="50" title="wardrobe">
-                    </div>
-                    <div class="objectimg" data-toggle="#act8">
-                        <img src="<?php echo base_url('assets/objects/table_01_icon.svg') ?>" alt="" width="50" title="table">
-                    </div>
-                </div>
-
-                <div class="col-sm-9 objcontainer">
-                    <section id="act1" class="overflow-auto row subobj-container active">
-                        <div class="object-item col-sm-6" data-src="<?php echo base_url('assets/objects/singe_sofa.svg') ?>">
-                            <img src="<?php echo base_url('assets/objects/sofa_icon.svg') ?>" alt="" width="70" title="single sofa">
-                        </div>
-                        <div class="object-item col-sm-6" data-src="<?php echo base_url('assets/objects/single_bed_icon.svg') ?>">
-                            <img src="<?php echo base_url('assets/objects/single_bed_icon.svg') ?>" alt="" width="70" title="single bed" title="chair icon">
-                        </div>
-                        <div class="object-item col-sm-6" data-src="<?php echo base_url('assets/objects/double_bed.svg') ?>">
-                            <img src="<?php echo base_url('assets/objects/double_bed_icon.svg') ?>" alt="" width="70" title="double bed">
-                        </div>
-                        <div class="object-item col-sm-6" data-src="<?php echo base_url('assets/objects/bathtub_icon.svg') ?>">
-                            <img src="<?php echo base_url('assets/objects/bathtub_icon.svg') ?>" alt="" width="70" title="bathtub">
-                        </div>
-                        <div class="object-item col-sm-6" data-src="<?php echo base_url('assets/objects/bookshelf_icon.svg') ?>">
-                            <img src="<?php echo base_url('assets/objects/bookshelf_icon.svg') ?>" alt="" width="70" title="bookshelf">
-                        </div>
-                        <div class="object-item col-sm-6" data-src="<?php echo base_url('assets/objects/table01.svg') ?>">
-                            <img src="<?php echo base_url('assets/objects/dining_table_icon.svg') ?>" alt="" width="70" title="dinning table">
-                        </div>
-                        <div class="object-item col-sm-6" data-src="<?php echo base_url('assets/objects/wardrobe_02_icon.svg') ?>">
-                            <img src="<?php echo base_url('assets/objects/wardrobe_02_icon.svg') ?>" alt="" width="70" title="wardrobe">
-                        </div>
-                        <div class="object-item col-sm-6" data-src="<?php echo base_url('assets/objects/study_table.svg') ?>">
-                            <img src="<?php echo base_url('assets/objects/table_01_icon.svg') ?>" alt="" width="70" title="table">
-                        </div>
-
-                    </section>
-                    <section id="act2" class="overflow-auto row subobj-container">
-                        <div class="object-item col-sm-6" data-src="<?php echo base_url('assets/objects/single_bed_icon.svg') ?>">
-                            <img src="<?php echo base_url('assets/objects/single_bed_icon.svg') ?>" alt="" width="70" title="single bed" title="chair icon">
-                        </div>
-                        <div class="object-item col-sm-6" data-src="<?php echo base_url('assets/objects/singe_sofa.svg') ?>">
-                            <img src="<?php echo base_url('assets/objects/sofa_icon.svg') ?>" alt="" width="70" title="single sofa">
-                        </div>
-                        <div class="object-item col-sm-6" data-src="<?php echo base_url('assets/objects/double_bed.svg') ?>">
-                            <img src="<?php echo base_url('assets/objects/double_bed_icon.svg') ?>" alt="" width="70" title="double bed">
-                        </div>
-                        <div class="object-item col-sm-6" data-src="<?php echo base_url('assets/objects/bathtub_icon.svg') ?>">
-                            <img src="<?php echo base_url('assets/objects/bathtub_icon.svg') ?>" alt="" width="70" title="bathtub">
-                        </div>
-                        <div class="object-item col-sm-6" data-src="<?php echo base_url('assets/objects/bookshelf_icon.svg') ?>">
-                            <img src="<?php echo base_url('assets/objects/bookshelf_icon.svg') ?>" alt="" width="70" title="bookshelf">
-                        </div>
-                        <div class="object-item col-sm-6" data-src="<?php echo base_url('assets/objects/table01.svg') ?>">
-                            <img src="<?php echo base_url('assets/objects/dining_table_icon.svg') ?>" alt="" width="70" title="dinning table">
-                        </div>
-                        <div class="object-item col-sm-6" data-src="<?php echo base_url('assets/objects/wardrobe_02_icon.svg') ?>">
-                            <img src="<?php echo base_url('assets/objects/wardrobe_02_icon.svg') ?>" alt="" width="70" title="wardrobe">
-                        </div>
-                        <div class="object-item col-sm-6" data-src="<?php echo base_url('assets/objects/study_table.svg') ?>">
-                            <img src="<?php echo base_url('assets/objects/table_01_icon.svg') ?>" alt="" width="70" title="table">
-                        </div>
-
-                    </section>
-                </div>
-
-            </div>
-            <div alt="corporate-nomination" id="fixed_image">
-                <h4><i class="fa fa-object-ungroup" aria-hidden="true"></i></h4>
-            </div>
-        </div>
-    </div>
+  
     <!-- ///////////// Icon Sidebar Toggle Start /////////////////////////////////////-->
 
     <!-- 
@@ -574,23 +384,7 @@
                 </div>
 
                 <!-- ACTION ATTRIBUTE -->
-                <div class="actionbox container p-2 border mb-1"></div>
-
-                <!-- ADDITIONAL ATTRIBUTES -->
-                <!-- <div class="additional container p-2 border mb-3">
-                    <div class="col-md-12">
-                        <div class="row">
-                            <div class="col-md-6 p-1 border d-flex flex-column justify-content-center align-items-center object-align-center">
-                                <img src="<?php echo base_url('assets/icons/chevron.svg') ?>" alt="" width="20">
-                                <div class="name text-xs">align-center</div>
-                            </div>
-                            <div class="col-md-6 p-1 border d-flex flex-column justify-content-center align-items-center object-color-toggle" data-color-state="colorless">
-                                <img src="<?php echo base_url('assets/icons/colorless.svg') ?>" alt="" width="20">
-                                <div class="name text-xs">color toggle</div>
-                            </div>
-                        </div>
-                    </div>
-                </div> -->
+                <div class="actionbox container p-2 border mb-1"></div>                
 
                 <!-- OPACITY ATTRIBUTE -->
                 <div class="properties-section opacity structure p-2  border d-none mb-2">
@@ -947,7 +741,7 @@
                     <div class="tab-pane fade" id="pills-activity" role="tabpanel" aria-labelledby="pills-activity-tab">
                         <!-- ACTIVITY SECTION -->
 
-                        <input class="form-control form-control-sm text-sm mb-3" type="text" placeholder="Search...">
+                        <!-- <input class="form-control form-control-sm text-sm mb-3" type="text" placeholder="Search..."> -->
                         <div class="col-md-12 border p-1">
                             <div class="col-md-12 mt-2 mb-2 border-bot">
                                 <div class="heading text-capitalize text-sm font-weight-bold" data-toggle="collapse" data-target="#collapse18" aria-expanded="false" aria-controls="collapse18">

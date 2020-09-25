@@ -16,12 +16,12 @@ export default class Vedic {
     // $('.object-align-center').addClass('d-none');
     // $('.object-align-center').removeClass('d-flex');
     let unloackClass = $('.object-fixed-toggle').children().eq(0).attr('class')
-    
+
     if (unloackClass != 'svg-inline--fa fa-unlock-alt fa-w-14') {
       $('.object-fixed-toggle').children().eq(0).attr('class', '');
       $('.object-fixed-toggle').children().eq(0).addClass('svg-inline--fa fa-unlock-alt fa-w-14');
     }
-    if (unloackClass == 'fa fa-unlock-alt') {     
+    if (unloackClass == 'fa fa-unlock-alt') {
       $('.object-fixed-toggle').children().eq(0).attr('class', '');
       $('.object-fixed-toggle').children().eq(0).addClass('fa fa-unlock-alt');
     }
@@ -75,28 +75,66 @@ export default class Vedic {
       .html('Mahavastu');
 
     $('input[type="radio"]').on('click', function () {
+      swal("Before Redirecting, want to save Map data or Discard it ?", {
+        buttons: {
+          Save: true,
+          Discard: true,
+        },
+      })
+        .then((value) => {
+          switch (value) {
 
-      let value = $(this).val();
-      if (value == 'mahavastu') {
-        let objName = localStorage.getItem('vedicImgObj');
-        d3.select('g.sjx-svg-wrapper').remove();
-        d3.select('g.vedic-polygon').remove();
-        $('.fObject').parent().remove();
-        d3.select('.properties-section.opacity').classed('d-none', true);
-        d3.select('.properties-section.opacity').classed('d-flex', false);
-        d3.select('.object-delete-toggle').classed('d-none', false);
-        d3.select('.object-delete-toggle').classed('d-flex', true);
-        d3.select('.toggle-fixed').classed('d-flex', true);
-        that.objectDelete(objName);
-        that.centroid = Utility.getCentroid(that.mapBoundariesCoords);
-        that.model.editType(that.mapId, 'mahavastu');
-        that.model.editCentroid(that.mapId, that.centroid);
-        that._stage = 3;
-        that.start()
-      }
+            case "Save": {
+              $('.savebtn').trigger('click');
+              let value = $(this).val();
+              if (value == 'mahavastu') {
+                let objName = localStorage.getItem('vedicImgObj');
+                d3.select('g.sjx-svg-wrapper').remove();
+                d3.select('g.vedic-polygon').remove();
+                $('.fObject').parent().remove();
+                d3.select('.properties-section.opacity').classed('d-none', true);
+                d3.select('.properties-section.opacity').classed('d-flex', false);
+                d3.select('.object-delete-toggle').classed('d-none', false);
+                d3.select('.object-delete-toggle').classed('d-flex', true);
+                d3.select('.toggle-fixed').classed('d-flex', true);
+                that.objectDelete(objName);
+                that.centroid = Utility.getCentroid(that.mapBoundariesCoords);
+                that.model.editType(that.mapId, 'mahavastu');
+                that.model.editCentroid(that.mapId, that.centroid);
+                that._stage = 3;
+                that.start()
+              }
+              break;
+            }
+            case "Discard": {
+              let value = $(this).val();
+              if (value == 'mahavastu') {
+                let objName = localStorage.getItem('vedicImgObj');
+                d3.select('g.sjx-svg-wrapper').remove();
+                d3.select('g.vedic-polygon').remove();
+                $('.fObject').parent().remove();
+                d3.select('.properties-section.opacity').classed('d-none', true);
+                d3.select('.properties-section.opacity').classed('d-flex', false);
+                d3.select('.object-delete-toggle').classed('d-none', false);
+                d3.select('.object-delete-toggle').classed('d-flex', true);
+                d3.select('.toggle-fixed').classed('d-flex', true);
+                that.objectDelete(objName);
+                that.centroid = Utility.getCentroid(that.mapBoundariesCoords);
+                that.model.editType(that.mapId, 'mahavastu');
+                that.model.editCentroid(that.mapId, that.centroid);
+                that._stage = 3;
+                that.start()
+              }
+              break;
+            }
+            default:
+              break;
+          }
+        })
+
     });
 
-   
+
 
     let row = actionBox.append('div')
       .classed('form-row', true);
@@ -157,7 +195,7 @@ export default class Vedic {
       <a class="dropdown-item" type="fixed" href="#" id ="vpm1" value="VPM">VPM</a>
        `;
 
-    let mapGridType = $('#toolMenu').html(html);   
+    let mapGridType = $('#toolMenu').html(html);
 
     // enableDiagonals.on('click', function () {
     //   diagonalChecked = d3.select(this).property("checked");
@@ -199,7 +237,7 @@ export default class Vedic {
       });
 
 
-    });  
+    });
 
 
     mapGridType.on('click', 'a', function () {
@@ -236,7 +274,7 @@ export default class Vedic {
           $('.object-delete-toggle').addClass('d-none');
           $('.object-delete-toggle').removeClass('d-flex');
           // $('.object-align-center').addClass('d-flex');
-          that.assist.drawPolygon({ layer: that.canvas, points: that.vedicMapBoundariesCoords, strokeColor: "red", strokeWidth: 2,name:'3GL' });
+          that.assist.drawPolygon({ layer: that.canvas, points: that.vedicMapBoundariesCoords, strokeColor: "red", strokeWidth: 2, name: '3GL' });
           that.assist.drawPolygonGrid({ points: that.vedicMapBoundariesCoords, color: "red", noOfLines: 3, strokeWidth: 2 });
           that.createObject('g.vedic-polygon', objType);
           that.vedic = new Vedic();
@@ -246,7 +284,7 @@ export default class Vedic {
           $('.properties-section.opacity .col-md-12.row').addClass('d-none');
           $('.object-delete-toggle').addClass('d-none');
           $('.object-delete-toggle').removeClass('d-flex');
-          that.assist.drawPolygon({ layer: that.canvas, points: that.vedicMapBoundariesCoords, strokeColor: "blue", strokeWidth: 2,name:'3GD' });
+          that.assist.drawPolygon({ layer: that.canvas, points: that.vedicMapBoundariesCoords, strokeColor: "blue", strokeWidth: 2, name: '3GD' });
           that.assist.drawPolygonGrid({ points: that.vedicMapBoundariesCoords, color: "blue", noOfLines: 3, strokeWidth: 2 });
           that.assist.drawPolygonDiagonals({ points: that.vedicMapBoundariesCoords, color: "blue", noOfLines: 3, strokeWidth: 2 });
           that.createObject('g.vedic-polygon', objType);
@@ -267,7 +305,7 @@ export default class Vedic {
           $('.properties-section.opacity .col-md-12.row').addClass('d-none');
           $('.object-delete-toggle').addClass('d-none');
           $('.object-delete-toggle').removeClass('d-flex');
-          that.assist.drawPolygon({ layer: that.canvas, points: that.vedicMapBoundariesCoords, strokeColor: "blue", strokeWidth: 2 ,name:'9GL'});
+          that.assist.drawPolygon({ layer: that.canvas, points: that.vedicMapBoundariesCoords, strokeColor: "blue", strokeWidth: 2, name: '9GL' });
           that.assist.drawPolygonGrid({ points: that.vedicMapBoundariesCoords, color: "blue", noOfLines: 9, strokeWidth: 2 });
           that.assist.drawPolygonDiagonals({ points: that.vedicMapBoundariesCoords, color: "blue", noOfLines: 9, strokeWidth: 2 });
           that.createObject('g.vedic-polygon', objType);
@@ -322,7 +360,7 @@ export default class Vedic {
           drawVedicImages('CG', 'degreeCircleTransparent.png')
           break;
 
-        case "VPM":          
+        case "VPM":
           drawVedicImages('VPM', 'vpm.svg')
 
 
@@ -338,7 +376,7 @@ export default class Vedic {
       function drawVedicImages(objName, objImageSrc, object) {
         let d1 = Utility.distanceOfTwoPoints(that.vedicMapBoundariesCoords[0], that.vedicMapBoundariesCoords[1]);
         let d2 = Utility.distanceOfTwoPoints(that.vedicMapBoundariesCoords[1], that.vedicMapBoundariesCoords[2]);
-        let width = d1<d2 ? d1 : d2;
+        let width = d1 < d2 ? d1 : d2;
 
         localStorage.setItem('vedicImgObj', objName)
         if (that.objectVpm == null || that.objectVpm == undefined) {

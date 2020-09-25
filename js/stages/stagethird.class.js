@@ -74,25 +74,66 @@ export default class StageThird {
       .html('Mahavastu');
 
     $('input[type="radio"]').on('click', function () {
-      let value = $(this).val();
-      if (value == 'vedic') {
-        // $('.savebtn').trigger('click')
-        that.centroid = Utility.getVedicCenteroid(that.vedicMapBoundariesCoords);
-        removeToolsImages();
-        let objName = localStorage.getItem('vedicImgObj');
-        that.objectDelete(objName);
-        that.model.editType(that.mapId, 'vedic');
-        that.model.editCentroid(that.mapId, that.centroid)
-        $('.fObject').parent().remove();
-        $(`g.sjx-svg-wrapper[data-id]`).remove();
-        that._stage = 3;
-        that.vedicStart()
-      } else {
+      swal("Before Redirecting, want to save Map data or Discard it ?", {
+        buttons: {
+          Save: true,
+          Discard: true,
+        },
+      })
+        .then((value) => {
+          switch (value) {
 
-        that.centroid = Utility.getCentroid(that.mapBoundariesCoords);
-        that._stage = 3;
-        that.start()
-      }
+            case "Save": {
+              $('.savebtn').trigger('click');
+              let value = $(this).val();
+              if (value == 'vedic') {
+                // $('.savebtn').trigger('click')
+                that.centroid = Utility.getVedicCenteroid(that.vedicMapBoundariesCoords);
+                removeToolsImages();
+                let objName = localStorage.getItem('vedicImgObj');
+                that.objectDelete(objName);
+                that.model.editType(that.mapId, 'vedic');
+                that.model.editCentroid(that.mapId, that.centroid)
+                $('.fObject').parent().remove();
+                $(`g.sjx-svg-wrapper[data-id]`).remove();
+                that._stage = 3;
+                that.vedicStart()
+              } else {
+
+                that.centroid = Utility.getCentroid(that.mapBoundariesCoords);
+                that._stage = 3;
+                that.start()
+              }
+              break;
+            }
+            case "Discard": {
+              let value = $(this).val();
+              if (value == 'vedic') {
+                // $('.savebtn').trigger('click')
+                that.centroid = Utility.getVedicCenteroid(that.vedicMapBoundariesCoords);
+                removeToolsImages();
+                let objName = localStorage.getItem('vedicImgObj');
+                that.objectDelete(objName);
+                that.model.editType(that.mapId, 'vedic');
+                that.model.editCentroid(that.mapId, that.centroid)
+                $('.fObject').parent().remove();
+                $(`g.sjx-svg-wrapper[data-id]`).remove();
+                that._stage = 3;
+                that.vedicStart()
+              } else {
+
+                that.centroid = Utility.getCentroid(that.mapBoundariesCoords);
+                that._stage = 3;
+                that.start()
+              }
+              break;
+            }
+
+            default:
+              break;
+          }
+        })
+
     })
 
 
@@ -362,7 +403,7 @@ export default class StageThird {
         localStorage.setItem('vedicImgObj', objName)
         let d1 = Utility.distanceOfTwoPoints(that.vedicMapBoundariesCoords[0], that.vedicMapBoundariesCoords[1]);
         let d2 = Utility.distanceOfTwoPoints(that.vedicMapBoundariesCoords[1], that.vedicMapBoundariesCoords[2]);
-        let width = d1<d2 ? d1 : d2;
+        let width = d1 < d2 ? d1 : d2;
         if (that.objectVpm == null || that.objectVpm == undefined) {
 
           d3.select('.properties-section.opacity').classed('d-none', false);
@@ -418,7 +459,7 @@ export default class StageThird {
     })
 
 
-   
+
 
     //delete tools images
     $('.object-delete-toggle').on('click', function () {
@@ -566,9 +607,9 @@ export default class StageThird {
     });
 
 
-   
 
-    
+
+
 
   }
 
