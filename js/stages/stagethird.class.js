@@ -73,7 +73,7 @@ export default class StageThird {
       .attr('for', 'mahavastuRadio')
       .html('Mahavastu');
 
-    $('input[type="radio"]').on('click', function () {
+    $('input[name="vedic"]').on('click', function () {
       swal("Before Redirecting, want to save Map data or Discard it ?", {
         buttons: {
           Save: true,
@@ -607,6 +607,7 @@ export default class StageThird {
     });
 
 
+ 
 
 
 

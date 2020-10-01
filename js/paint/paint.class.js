@@ -118,6 +118,7 @@ export default class Paint {
 
 		switch (this.tool) {
 			case Tool.TOOL_LINE:
+			case Tool.TOOL_DASHED_LINE:
 			case Tool.TOOL_RECTANGLE:
 			case Tool.TOOL_CIRCLE:
 			case Tool.TOOL_TRIANGLE:				
@@ -167,7 +168,19 @@ export default class Paint {
 				this.context.moveTo(this.startPos.x, this.startPos.y);
 				this.context.lineTo(this.currentPos.x, this.currentPos.y);
 			}
-		} else if (Tool.TOOL_RECTANGLE == this.tool) {
+		}else if (Tool.TOOL_DASHED_LINE == this.tool) {
+			if (!this.isShiftDown) {
+				this.context.setLineDash([5, 5]);
+				this.context.moveTo(this.roundToNextFive(this.startPos.x), this.roundToNextFive(this.startPos.y));
+				this.context.lineTo(this.roundToNextFive(this.currentPos.x), this.roundToNextFive(this.currentPos.y));
+			} else{
+				this.context.setLineDash([5, 5]);
+				this.context.moveTo(this.startPos.x, this.startPos.y);
+				this.context.lineTo(this.currentPos.x, this.currentPos.y);
+			}
+		}  
+		
+		else if (Tool.TOOL_RECTANGLE == this.tool) {
 			this.context.rect(
 				this.startPos.x,
 				this.startPos.y,
@@ -250,6 +263,7 @@ export default class Paint {
 
 				switch (selectedTool) {
 					case Tool.TOOL_LINE:
+					case Tool.TOOL_DASHED_LINE:
 					case Tool.TOOL_RECTANGLE:
 					case Tool.TOOL_CIRCLE:
 					case Tool.TOOL_TRIANGLE:

@@ -209,6 +209,9 @@
             <div class="item active" data-tool="line" title="Line Tool">
                 <img src="<?php echo base_url('assets/paint/line-icon.png') ?>" />
             </div>
+            <div class="item" data-tool="dashed-line" title="Dashed Line Tool">
+                <img src="<?php echo base_url('assets/paint/dashed-line.png') ?>" />
+            </div>
             <div class="item" data-tool="rectangle" title="Rectangle Tool">
                 <img src="<?php echo base_url('assets/paint/rect-icon.png') ?>" />
             </div>
@@ -320,7 +323,7 @@
     </div>
 
     <!-- PAINT TOOLBOX RIGHT END -->
-  
+
     <!-- ///////////// Icon Sidebar Toggle Start /////////////////////////////////////-->
 
     <!-- 
@@ -384,13 +387,13 @@
                 </div>
 
                 <!-- ACTION ATTRIBUTE -->
-                <div class="actionbox container p-2 border mb-1"></div>                
+                <div class="actionbox container p-2 border mb-1"></div>
 
                 <!-- OPACITY ATTRIBUTE -->
                 <div class="properties-section opacity structure p-2  border d-none mb-2">
-                    
+
                     <div class="col-md-12 row">
-                    <h5 class="text-uppercase col-sm-4 pl-0 pr-1 mb-0 text-sm overflow-elipsis properties-title object">opacity</h5>
+                        <h5 class="text-uppercase col-sm-4 pl-0 pr-1 mb-0 text-sm overflow-elipsis properties-title object">opacity</h5>
                         <div class="slide-container col-sm-8 pl-1 d-flex justify-content-between align-items-center">
                             <input type="range" min="0.1" max="1" step="0.1" value="1" class="slider" id="myRange">
                             <span class="range-value">1</span>
@@ -399,14 +402,14 @@
                     <div class="additional container">
                         <div class="col-md-12">
                             <div class="row">
-                            <div class="col-md-4 p-1 border d-flex flex-column justify-content-center align-items-center object-fixed-toggle">
+                                <div class="col-md-4 p-1 border d-flex flex-column justify-content-center align-items-center object-fixed-toggle">
                                     <i class="fa fa-unlock-alt" aria-hidden="true"></i>
                                     <div class="name text-xs">Float</div>
                                 </div>
                                 <div class="col-md-4 p-1 border d-flex flex-column d-none justify-content-center align-items-center object-delete-toggle">
                                     <i class="fa fa-trash" aria-hidden="true"></i>
                                     <div class="name text-xs">Delete</div>
-                                </div> 
+                                </div>
                                 <div class="col-md-4 d-none p-1 border flex-column justify-content-center align-items-center object-align-center">
                                     <img src="<?php echo base_url('assets/icons/chevron.svg') ?>" alt="" width="20">
                                     <div class="name text-xs text-center">align-center</div>
@@ -415,7 +418,7 @@
                                 <img src="<?php echo base_url('assets/icons/colorless.svg') ?>" alt="" width="20">
                                 <div class="name text-xs">color toggle</div>
                             </div> -->
-                                                              
+
                             </div>
                         </div>
                     </div>
@@ -423,7 +426,21 @@
 
                 <!-- DESCRIPTION ATTRIBUTE -->
                 <div class="mt-1 pb-3 properties-section decs">
-                    <h5 class="text-uppercase text-sm overflow-elipsis properties-title">Description</h5>
+                    <div class="row">
+                        <h5 class="text-uppercase col-sm-6 text-sm overflow-elipsis properties-title">Description </h5>
+                        <div class="form-check col-sm-3 mt-r-5">
+                            <input class="form-check-input" type="radio" name="exampleRadios" id="eng" value="eng" checked>
+                            <label class="form-check-label text-sm" for="eng">
+                             ENG
+                            </label>
+                        </div>
+                        <div class="form-check col-sm-3 mt-r-5">
+                            <input class="form-check-input" type="radio" name="exampleRadios" id="hindi" value="hindi">
+                            <label class="form-check-label text-sm" for="hindi">
+                            हिं
+                            </label>
+                        </div>
+                    </div>
                     <div class="container p-2 border property description text-sm overflow-scroll"></div>
                 </div>
 

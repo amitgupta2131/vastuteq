@@ -683,6 +683,30 @@ class Main extends CI_Controller
 		}
 	}
 
+	//save 16 zone color data
+	public function saveSixteenZoneColorData(){
+		if(isset($_POST['mapId']) && !empty($_POST['mapId']) && isset($_POST['data']) && !empty($_POST['data'])){
+			$insertData = array(
+				'houseMapId' => validateInput($_POST['mapId']),
+				'colors' => $_POST['data']
+
+			);
+			$validate = $this->MainModel->selectAllFromWhere("sixteen_zone_color", array("houseMapId" => $insertData['houseMapId']));
+			if(!$validate){
+				$result = $this->MainModel->insertInto("sixteen_zone_color", $insertData);
+				if($result){
+					echo json_encode(array('success','16 Zone color is successfullt set'));
+				}else{
+					echo json_encode(array('error','16 Zone color could not be set, contact to IT'));
+				}
+			}else{
+				echo json_encode(array('error','16 Zone color is already set for this HouseMAp'));
+			}
+		}else{
+			echo json_encode(array('error','Insuffiecient data found'));
+		}
+	}
+
 
 	public function getDate()
 	{

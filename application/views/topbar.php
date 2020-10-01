@@ -63,6 +63,7 @@
                         <a class="dropdown-item" href="#" id="objColor">Set Object Colour</a>
                         <a class="dropdown-item" href="#" id="inlineRadio1">Object/Activity wise report</a>
                         <a class="dropdown-item" href="#" id="inlineRadio2">Zone wise object</a>
+                        <a class="dropdown-item" href="#" id="sixteenZoneColor">Set 16 Zone color</a>
                     </div>
                 </li>
                 <li class="nav-item">

@@ -733,6 +733,87 @@ $('#objColor').on('click', function () {
 
 })
 
+//set 16 zone color
+
+$('#sixteenZoneColor').on('click', function () {
+  var formData = new FormData();
+  formData.append('grid', 'sixteen');
+  var url = BASE_URL + "/Main/getGridData";
+  AjaxPost(formData, url, sixteenZonesuccess, AjaxError);
+
+  function sixteenZonesuccess(content, targetTextarea) {
+    var result = JSON.parse(content);    
+    $('#reportModal .modal-body').empty();
+    $('#reportModal .modal-dialog').css('min-width', '1150px');
+    $('#reportModal .modal-content').css('min-height', '460px');
+    $('#reportModal .modal-title').text('Set 16 Zone colour');
+    $('#reportModal .modal-body').attr('id', 'setSixteenZoneColor');
+    let objColor = `<div class="form-group mb-0">
+                  <select class="form-control objColor" >
+                    <option>Red</option>
+                    <option>Blue</option>
+                    <option>Green</option>
+                    <option>Orange</option>
+                    <option>Black</option>
+                  </select>
+                </div>`
+    let reportTable = `<table id="colorTable" class="table table-bordered table-hover mt-2">
+                        <thead>
+                          <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Direction Name</th>                            
+                            <th scope="col">Direction Short Name</th> 
+                            <th scope="col">Colour</th>                                  
+                          </tr>
+                        </thead>
+                        <tbody>`
+    let count = 1;
+    for (let data of result) {
+
+      reportTable += `<tr>
+                          <th scope="row">${count++}</th>
+                          <td>${data.zone}</td>                              
+                          <td>${data.shortName}</td> 
+                          <td>${objColor}</td>                          
+                        </tr>`
+    }
+
+    reportTable += `</tbody></table>`
+    //appending table to modal body
+    $('#setSixteenZoneColor').html(reportTable)
+    $('#setSixteenZoneColor').append(`<button class="btn btn-primary" id="set16ZoneColor" data-dismiss="modal" aria-label="Close" style="float:right">Set</button>`)
+
+    //Show modal
+    $('#reportModal').modal('show')
+  }
+  
+
+})
+
+$('#reportModal').on('click', '#set16ZoneColor', function () {
+  let dataArray = [];
+  $('#reportModal table tbody tr').each(function () {
+    let name = $(this).find('td:eq(1)').html();
+    let color = $(this).find('td:eq(2)').find('option:selected').html();    
+    dataArray.push({ shortName: name, color: color });
+  });
+
+  var formData = new FormData();
+  formData.append('mapId', propertyId);
+  formData.append('data', JSON.stringify(dataArray));
+  var url = BASE_URL + "/Main/saveSixteenZoneColorData";
+  AjaxPost(formData, url, sixteenZoneSavesuccess, AjaxError);
+
+  function sixteenZoneSavesuccess(content, targetTextarea) {
+    let result = JSON.parse(content);
+    if(result[0] == 'success'){
+      showAlert(result[1],'success')
+    }else{
+      showAlert(result[1],'danger')
+    }
+  }
+})
+
 $('#reportModal').on('click', '#setColor', function () {
 
   //creating report data with color
@@ -876,6 +957,7 @@ $('input[type="submit"]').on('click', function (e) {
   function detailsSuccess(content, targetTextarea) {
     var result = JSON.parse(content);
     if (result != "" && result.type == 'success') {
+
       $('.client-form .card').addClass('card-form');
       $('.client-form .card-header').removeClass('bg-primary');
       $('.client-form .modal-title').removeClass('text-white');
@@ -886,6 +968,12 @@ $('input[type="submit"]').on('click', function (e) {
       $('.client-form .card-body .form-group textarea').addClass('col-md-6');
       $('.client-form .card-body .form-group select').addClass('col-md-6');
       $('.client-form input').attr('disabled', 'true');
+      $('#category').val() == '' ? $('#category option:selected').remove() : '';
+      $('#type').val() == '' ? $('#type option:selected').remove() : '';
+      $('input[name="gpDate"]').val() == '' ? $('input[name="gpDate"]').css('color', 'transparent') : '';
+      $('input[name="fvDate"]').val() == '' ? $('input[name="fvDate"]').css('color', 'transparent') : '';
+      $('input[name="ppDate"]').val() == '' ? $('input[name="ppDate"]').css('color', 'transparent') : '';
+      $(':input').removeAttr('placeholder');
       $('textarea').attr('disabled', 'true');
       $('select').attr('disabled', 'true');
       $('.client-form input').addClass('input-disable');
@@ -991,14 +1079,14 @@ $(document).ready(function () {
   // })
 
 
-  $('body').on('click','.text-delete-toggle', function () {
+  $('body').on('click', '.text-delete-toggle', function () {
 
     let textObjects = JSON.parse(localStorage.getItem('EditTextObjects'));
     let objid = localStorage.getItem('selectedMapId');
     let newTextObj = [];
     let id = $('.svg-object.sjx-drag.active').attr('data-id');
     let name = $('.svg-object.sjx-drag.active').attr('typeOf');
-    
+
     if (id == undefined || id == "") {
       return false;
     }

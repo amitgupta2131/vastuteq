@@ -74,7 +74,7 @@ export default class Vedic {
       .attr('for', 'mahavastuRadio')
       .html('Mahavastu');
 
-    $('input[type="radio"]').on('click', function () {
+    $('input[name="mahavastu"]').on('click', function () {
       swal("Before Redirecting, want to save Map data or Discard it ?", {
         buttons: {
           Save: true,

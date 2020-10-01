@@ -34,39 +34,39 @@ export default class Assist {
             { name: 'N2', value: 1, color: "white" }, { name: 'N3', value: 1, color: "blue" }
         ];
         this.DEVTAS = [
-            { direction: "N4" ,name: 'Bhallat', value: 41, text: "Discriminator,Parkhi" },
-            { direction: "N5" ,name: 'Soma', value: 42, text: "Solution,Drive" },
-            { direction: "N6" ,name: 'Bhujang', value: 43, text: "Doctor,Healer" },
-            { direction: "N7" ,name: 'Aditi', value: 44, text: "Caretaker,Councellor" },
-            { direction: "N8" ,name: 'Diti', value: 45, text: "Instructor,Pt Teacher" }, 
-            { direction: "E1" ,name: 'Shikhi', value: 14, text: "Subject Expert,Bhram Gyani" },
-            { direction: "E2" ,name: 'Parjanya', value: 15, text: "Producer,Fertilizer" },
-            { direction: "E3" ,name: 'Jayant', value: 16, text: "Excellent Performer,Achiever" },
-            { direction: "E4" ,name: 'Mahendra', value: 17, text: "Top Boss,King" },
-            { direction: "E5" ,name: 'Surya', value: 18, text: "Executer,Awakener" },
-            { direction: "E6",name: 'Satya', value: 19, text: "Court,Dharma" },
-            { direction: "E7" ,name: 'Bhrisha', value: 20, text: "Researher,Grinder" },
-            { direction: "E8" ,name: 'Antriksh', value: 21, text: "Market Space,Bandwidth" },
-            { direction: "S1" ,name: 'Anil', value: 22, text: "Elevator,Fire" },
-            { direction: "S2" ,name: 'Pusha', value: 23, text: "HighWay Security,Recoverer" },
-            { direction: "S3" ,name: 'Vitasta', value: 24, text: "Ancimory Service Provider" },
-            { direction: "S4" ,name: 'Griha Spatya', value: 25, text: "Binder,Commander" },
-            { direction: "S5" ,name: 'Yama', value: 26, text: "Finer,Sortor" },
-            { direction: "S6" ,name: 'Gandharva', value: 27, text: "whActor,Performing Artist" },
-            { direction: "S7" ,name: 'Bhriangraj', value: 28, text: "Cleasner,Drainer" },
-            { direction: "S8" ,name: 'Mrigah', value: 29, text: "Shooter,Hunter" },
-            { direction: "W1" ,name: 'Pitra', value: 30, text: "Anctestors Legacy" },
-            { direction: "W2" ,name: 'Dauwarik', value: 31, text: "Gaurd Security System" },
-            { direction: "W3" ,name: 'Sugreev', value: 32, text: "Capturer,Gainer" },
-            { direction: "W4" ,name: 'Puspdant', value: 33, text: "Grammarian,Ustaad,maestro" },
-            { direction: "W5" ,name: 'Varun', value: 34, text: "Ed,CBI,Vigilance" },
-            { direction: "W6" ,name: 'Asur', value: 35, text: "Informer,Secret Agent" },
-            { direction: "W7" ,name: 'Shosha', value: 36, text: "Depressive,Dryer" },
-            { direction: "W8" ,name: 'Papyakshma', value: 37, text: "Alcoholic,Addicted" },
-            { direction: "N1" ,name: 'Roga', value: 38, text: "Vyeakent,Fatigue" },
-            { direction: "N2" ,name: 'Ahir', value: 39, text: "Shaker,Attacker" },
-            { direction: "N3" ,name: 'Mukhya', value: 40, text: "Designer,System Maker" },
-            
+            { direction: "N4", name: 'Bhallat', value: 41, text: "Discriminator,Parkhi" },
+            { direction: "N5", name: 'Soma', value: 42, text: "Solution,Drive" },
+            { direction: "N6", name: 'Bhujang', value: 43, text: "Doctor,Healer" },
+            { direction: "N7", name: 'Aditi', value: 44, text: "Caretaker,Councellor" },
+            { direction: "N8", name: 'Diti', value: 45, text: "Instructor,Pt Teacher" },
+            { direction: "E1", name: 'Shikhi', value: 14, text: "Subject Expert,Bhram Gyani" },
+            { direction: "E2", name: 'Parjanya', value: 15, text: "Producer,Fertilizer" },
+            { direction: "E3", name: 'Jayant', value: 16, text: "Excellent Performer,Achiever" },
+            { direction: "E4", name: 'Mahendra', value: 17, text: "Top Boss,King" },
+            { direction: "E5", name: 'Surya', value: 18, text: "Executer,Awakener" },
+            { direction: "E6", name: 'Satya', value: 19, text: "Court,Dharma" },
+            { direction: "E7", name: 'Bhrisha', value: 20, text: "Researher,Grinder" },
+            { direction: "E8", name: 'Antriksh', value: 21, text: "Market Space,Bandwidth" },
+            { direction: "S1", name: 'Anil', value: 22, text: "Elevator,Fire" },
+            { direction: "S2", name: 'Pusha', value: 23, text: "HighWay Security,Recoverer" },
+            { direction: "S3", name: 'Vitasta', value: 24, text: "Ancimory Service Provider" },
+            { direction: "S4", name: 'Griha Spatya', value: 25, text: "Binder,Commander" },
+            { direction: "S5", name: 'Yama', value: 26, text: "Finer,Sortor" },
+            { direction: "S6", name: 'Gandharva', value: 27, text: "whActor,Performing Artist" },
+            { direction: "S7", name: 'Bhriangraj', value: 28, text: "Cleasner,Drainer" },
+            { direction: "S8", name: 'Mrigah', value: 29, text: "Shooter,Hunter" },
+            { direction: "W1", name: 'Pitra', value: 30, text: "Anctestors Legacy" },
+            { direction: "W2", name: 'Dauwarik', value: 31, text: "Gaurd Security System" },
+            { direction: "W3", name: 'Sugreev', value: 32, text: "Capturer,Gainer" },
+            { direction: "W4", name: 'Puspdant', value: 33, text: "Grammarian,Ustaad,maestro" },
+            { direction: "W5", name: 'Varun', value: 34, text: "Ed,CBI,Vigilance" },
+            { direction: "W6", name: 'Asur', value: 35, text: "Informer,Secret Agent" },
+            { direction: "W7", name: 'Shosha', value: 36, text: "Depressive,Dryer" },
+            { direction: "W8", name: 'Papyakshma', value: 37, text: "Alcoholic,Addicted" },
+            { direction: "N1", name: 'Roga', value: 38, text: "Vyeakent,Fatigue" },
+            { direction: "N2", name: 'Ahir', value: 39, text: "Shaker,Attacker" },
+            { direction: "N3", name: 'Mukhya', value: 40, text: "Designer,System Maker" },
+
         ];
     }
 
@@ -267,9 +267,9 @@ export default class Assist {
         if (division == 8) { directionData = this.DATA_EIGHT; directionDetail = DIRECTION_EIGHT; }
         else if (division == 16) { gridAngle += 360 / division; directionData = this.DATA_SIXTEEN; directionDetail = DIRECTION_SIXTEEN; }
         else if (division == 32) { gridAngle += 360 / 16 + 360 / division; directionData = this.DATA_THIRTYTWO; directionDetail = DIRECTION_THIRTYTWO; }
-
+        
         for (let i = 0; i < division; i++) {
-            var temp = { name: directionData[i].name, value: directionData[i].value, detail: directionDetail[i] };
+            var temp = { name: directionData[i].name, value: directionData[i].value, detail: directionDetail[i].detail, hindiDetail: directionDetail[i].hindiDetail };
             data.push(temp);
         }
 
@@ -293,10 +293,11 @@ export default class Assist {
             .enter()
             .append("g")
             .attr("transform", "rotate(" + (gridAngle + nAngle + angle) + ")");
-
+        
         g.append("path")
             .attr("class", function (d, i) { return data[i].name; })
             .attr("data-detail", function (d, i) { return data[i].detail; })
+            .attr("data-detail-hindi", function (d, i) { return data[i].hindiDetail; })
             .attr("d", arc)
             // .attr("stroke", "#21252963")
             .attr("stroke", "#F7E7BD")
@@ -321,8 +322,10 @@ export default class Assist {
 
         g.on("mouseover", function () {
             if (type == "vedic") return false;
+            let lan = $('.decs input[type="radio"]:checked').val();            
             let className = d3.select(this).select("path").attr("class");
             let detail = d3.select(this).select("path").attr("data-detail");
+            let detail_hindi = d3.select(this).select("path").attr("data-detail-hindi");
 
             d3.select(".B-" + className)
                 .style("fill-opacity", "0.75");
@@ -332,7 +335,7 @@ export default class Assist {
                 .style("fill", "green")
                 .style("fill-opacity", "0.1");
 
-            d3.select('.property.description').text(detail);
+            d3.select('.property.description').text(lan == 'eng' ? detail : detail_hindi);
 
         }).on("mouseout", function () {
             if (type == "vedic") return false;
@@ -346,6 +349,19 @@ export default class Assist {
                 .style("fill-opacity", "0");
         });
     }
+
+    // getDirectionData(){
+    //     var formData = new FormData();
+    //     formData.append('grid', 'sixteen');
+    //     var url = BASE_URL + "/Main/getGridData";
+    //     AjaxPost(formData, url, directonDataSuccess, AjaxError);
+
+    //    let data = function directonDataSuccess(content, targetTextarea) {
+    //        return JSON.parse(content);
+    //     }
+    //     console.log(data)
+
+    // }
 
     drawFacingLine(layer, centroid, faceCoords, active = true) {
 
@@ -383,13 +399,13 @@ export default class Assist {
             .text("0°");
     }
 
-    drawPolygon({ layer, points, strokeColor = "red", strokeWidth = 2,name='3GL' }) {
+    drawPolygon({ layer, points, strokeColor = "red", strokeWidth = 2, name = '3GL' }) {
         console.log(points)
         layer.select('g.vedic-polygon').remove();
         let g = layer.append('g')
             .classed('vedic-polygon', true)
             .classed('object-item', true)
-            .attr('name',name);
+            .attr('name', name);
 
         g.append('polygon')
             .attr('points', points)
@@ -550,7 +566,7 @@ export default class Assist {
 
         let nAngle = Utility.getAngle(centroid.x, centroid.y, perpendicularPoints.x, perpendicularPoints.y);
         let increment = 360 / 32;
-        let ipArray = Utility.getIntersectionPoints(nAngle+angle, centroid, mapBoundariesCoords, 32, "intersectionPoints");
+        let ipArray = Utility.getIntersectionPoints(nAngle + angle, centroid, mapBoundariesCoords, 32, "intersectionPoints");
         console.log(ipArray);
         let outerArray = [];
         let len = ipArray.length;
@@ -568,7 +584,7 @@ export default class Assist {
             }
             else {
                 //store current point as farthest point in that direction
-                outerArray.push({ ip: farthestPoint , direction : ipArray[i].direction});
+                outerArray.push({ ip: farthestPoint, direction: ipArray[i].direction });
             }
         }
 
@@ -579,7 +595,7 @@ export default class Assist {
             ]
         });
 
-        
+
 
         let twoThirdArr = outerArray.map((pts) => {
             return [
@@ -601,7 +617,7 @@ export default class Assist {
             // console.log(outerArray);
             tooltip(brahma, '1', 'Brahma');
             // tooltip(brahma, '1', 'Brahma,Building Purpose,Created services of products');
-        // console.log(brahma)
+            // console.log(brahma)
             //Draw outer 32 devtas
             let len = outerArray.length;
             for (let i = 0; i < len; i++) {
@@ -614,14 +630,14 @@ export default class Assist {
                 outerPolygon.push(twoThirdArr[i]);
                 layer.append('polygon')
                     .attr('points', outerPolygon).style('fill-opacity', 0).style('stroke', 'red').style('stroke-width', 2);
-                    // let id = getDevtaId(outerArray[i].direction);
-                    let d = outerArray[i].direction;
-                    console.log(d)
-                    let id = devtas.filter(function(e){
-                           if (e.direction == d) {return e};
-                    })
-                    console.log(id);
-                    tooltip(outerPolygon, id[0].value, id[0].name);
+                // let id = getDevtaId(outerArray[i].direction);
+                let d = outerArray[i].direction;
+                console.log(d)
+                let id = devtas.filter(function (e) {
+                    if (e.direction == d) { return e };
+                })
+                console.log(id);
+                tooltip(outerPolygon, id[0].value, id[0].name);
             }
 
             //Draw 2nd layer
@@ -636,7 +652,7 @@ export default class Assist {
             layer.append('polygon').attr('points', aapaha).attr('id', 'aapaha').style('fill-opacity', 0).style('stroke', 'blue').style('stroke-width', 2);
             tooltip(aapaha, '6', 'Aapaha');
             // tooltip(aapaha, '6', 'Aapaha,Distributor,Kapha');
-            
+
 
 
             let aapahaVatsa = [];
@@ -743,7 +759,7 @@ export default class Assist {
             bhudhar.push(halfOfMidCircleArr[31]);
             bhudhar.push(halfOfMidCircleArr[30]);
             bhudhar.push(halfOfMidCircleArr[29]);
-            
+
 
             // console.log("outer",bhudhar);
             layer.append('polygon').attr('points', bhudhar).style('fill-opacity', 0).style('stroke', 'black').style('stroke-width', 2);
@@ -832,7 +848,7 @@ export default class Assist {
                 .style('fill-opacity', 0)
                 .style('stroke', 'black')
                 .style('stroke-width', 2);
-                tooltip(mitra, '5', 'Mitra');
+            tooltip(mitra, '5', 'Mitra');
             // tooltip(mitra, '5', 'Mitra,Friend,Arbitrator');
 
             // let centerPoint = d3.polygonCentroid(mitra);
@@ -853,7 +869,7 @@ export default class Assist {
                     .attr('class', 'barsEndlineText')
                     .attr('text-anchor', 'middle')
                     .attr("x", centerPoint[0])
-                    .attr("y", centerPoint[1]+15)
+                    .attr("y", centerPoint[1] + 15)
                     .style("position", "absolute")
                     .style("visibility", "hidden")
                     .style('fill', 'blue')

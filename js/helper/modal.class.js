@@ -17,23 +17,23 @@ export default class modal {
         ];
 
         this.DIRECTION_THIRTYTWO = [
-            { name: 'N4', value: 1, color: "#CCC" }, { name: 'N5', value: 1, color: "#CCC" }, { name: 'N6', value: 1, color: "#CCC" },
-            { name: 'N7', value: 1, color: "#CCC" }, { name: 'N8', value: 1, color: "green" }, { name: 'E1', value: 1, color: "#CCC" },
-            { name: 'E2', value: 1, color: "blue" }, { name: 'E3', value: 1, color: "blue" }, { name: 'E4', value: 1, color: "green" },
-            { name: 'E5', value: 1, color: "blue" }, { name: 'E6', value: 1, color: "blue" }, { name: 'E7', value: 1, color: "red" },
-            { name: 'E8', value: 1, color: "green" }, { name: 'S1', value: 1, color: "yellow" }, { name: 'S2', value: 1, color: "red" },
-            { name: 'S3', value: 1, color: "red" }, { name: 'S4', value: 1, color: "red" }, { name: 'S5', value: 1, color: "green" },
-            { name: 'S6', value: 1, color: "yellow" }, { name: 'S7', value: 1, color: "yellow" }, { name: 'S8', value: 1, color: "yellow" },
-            { name: 'W1', value: 1, color: "#CCC" }, { name: 'W2', value: 1, color: "red" }, { name: 'W3', value: 1, color: "red" },
-            { name: 'W4', value: 1, color: "#CCC" }, { name: 'W5', value: 1, color: "#CCC" }, { name: 'W6', value: 1, color: "yellow" },
-            { name: 'W7', value: 1, color: "#CCC" }, { name: 'W8', value: 1, color: "yellow" }, { name: 'N1', value: 1, color: "yellow" },
-            { name: 'N2', value: 1, color: "#CCC" }, { name: 'N3', value: 1, color: "blue" }
+            { name: 'N4', value: 1, color: "#CCC", devta: 'Bhallat' }, { name: 'N5', value: 1, color: "#CCC", devta: 'Soma' }, { name: 'N6', value: 1, color: "#CCC", devta: 'Bhujang' },
+            { name: 'N7', value: 1, color: "#CCC", devta: 'Aditi' }, { name: 'N8', value: 1, color: "green", devta: 'Diti' }, { name: 'E1', value: 1, color: "#CCC", devta: 'Shikhi' },
+            { name: 'E2', value: 1, color: "blue", devta: 'Parjanya' }, { name: 'E3', value: 1, color: "blue", devta: 'Jayant' }, { name: 'E4', value: 1, color: "green", devta: 'Mahendra' },
+            { name: 'E5', value: 1, color: "blue", devta: 'Surya' }, { name: 'E6', value: 1, color: "blue", devta: 'Satya' }, { name: 'E7', value: 1, color: "red", devta: 'Bhrisha' },
+            { name: 'E8', value: 1, color: "green", devta: 'Antriksh' }, { name: 'S1', value: 1, color: "yellow", devta: 'Anil' }, { name: 'S2', value: 1, color: "red", devta: 'Pusha' },
+            { name: 'S3', value: 1, color: "red", devta: 'Vitasta' }, { name: 'S4', value: 1, color: "red", devta: 'Griha Spatya' }, { name: 'S5', value: 1, color: "green", devta: 'Yama' },
+            { name: 'S6', value: 1, color: "yellow", devta: 'Gandharva' }, { name: 'S7', value: 1, color: "yellow", devta: 'Bhriangraj' }, { name: 'S8', value: 1, color: "yellow", devta: 'Mrigah' },
+            { name: 'W1', value: 1, color: "#CCC", devta: 'Pitra' }, { name: 'W2', value: 1, color: "red", devta: 'Dauwarik' }, { name: 'W3', value: 1, color: "red", devta: 'Sugreev' },
+            { name: 'W4', value: 1, color: "#CCC", devta: 'Puspdant' }, { name: 'W5', value: 1, color: "#CCC", devta: 'Varun' }, { name: 'W6', value: 1, color: "yellow", devta: 'Asur' },
+            { name: 'W7', value: 1, color: "#CCC", devta: 'Shosha' }, { name: 'W8', value: 1, color: "yellow", devta: 'Papyakshma' }, { name: 'N1', value: 1, color: "yellow", devta: 'Roga' },
+            { name: 'N2', value: 1, color: "#CCC", devta: 'Ahir' }, { name: 'N3', value: 1, color: "blue", devta: 'Mukhya' }
         ];
     }
 
     // DRAW MAP
     drawMap({ areaArr, division, dimension }) {
-        
+
         const width = 1080 - 120, height = 500 - 120, margin = 80;
 
         this.modal = d3.select('#appModal');
@@ -99,6 +99,7 @@ export default class modal {
                 name: DATA[i].name,
                 color: DATA[i].color,
                 value: d.toFixed(2),
+                devta: DATA[i].devta,
             };
         });
 
@@ -119,7 +120,7 @@ export default class modal {
 
         const svg = this.modalBody.append('svg')
             .attr('width', `${width + margin + 75}`)
-            .attr('height', `${height + margin + 75}`);
+            .attr('height', `${height + margin + 110}`);
 
         const chart = svg.append('g')
             .attr('width', `${width + margin}`)
@@ -129,6 +130,11 @@ export default class modal {
         const xScale = d3.scaleBand()
             .range([0, width])
             .domain(data.map((d) => d.name))
+            .padding(0.1)
+
+        const xScale2 = d3.scaleBand()
+            .range([0, width])
+            .domain(data.map((d) => d.devta))
             .padding(0.1)
 
         const yScale = d3.scaleLinear()
@@ -146,6 +152,17 @@ export default class modal {
             .attr('transform', `translate(0, ${height})`)
             .call(d3.axisBottom(xScale));
 
+        if (data[0].devta != undefined) {
+            chart.append('g')
+                .attr('transform', `translate(0, ${height + 20})`)
+                .call(d3.axisBottom(xScale2))                
+                .selectAll("text")
+                .attr("transform", "rotate(-90)")
+                .style("text-anchor", "end")
+                .attr("y", "-5")
+                .attr("x", "-10")
+                
+        }
         chart.append('g')
             .call(d3.axisLeft(yScale));
 

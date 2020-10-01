@@ -69,7 +69,7 @@
             ?>
                     <div class="col-lg-3 col-md-4 col-sm-12 mb-4">
                         <div class="card rounded bubbly-button p-1">
-                        <a href = "<?php echo $imageResource['src'] ?>" download title="click image for download"><img class="card-img-top" src="<?php echo $imageResource['src'] ?>"></a>
+                        <img class="card-img-top" src="<?php echo isset($imageResource['src'])?$imageResource['src']:base_url('assets/images/noImage.png') ?>">
                             <div class="card-body p-2 border-top border-thick">                                
                                 <div class="project-name card-text">
                                     <span class="col-sm-5 pr-0">Name : </span>
@@ -85,9 +85,10 @@
                                 </div>                               
                             </div>
                             <div class="row m-0">
-                                <div class="col-sm-7"></div>
+                                <div class="col-sm-5"></div>
                             <button title="Delete" class="btn btn-danger deleteMap mr-2 col-sm-2"  style="text-align:center;cursor:pointer"  dId="<?php echo $property[$i]['propertyId'] ?>"><i class="fas fa-trash"></i></button> 
-                            <button title="Edit" class="btn btn-primary col-sm-2" data-map-id="<?php echo $property[$i]['mapId'] ?>" aria-hidden="true" style="cursor:pointer"><i class="far fa-edit"></i></button>
+                            <button title="Edit" class="btn btn-primary mr-2  col-sm-2" data-map-id="<?php echo $property[$i]['mapId'] ?>" aria-hidden="true" style="cursor:pointer"><i class="far fa-edit"></i></button>
+                            <a class="btn btn-info col-sm-2" href = "<?php echo isset($imageResource['src'])?$imageResource['src']:base_url('assets/images/noImage.png') ?>" download title="Download HouseMap Image"><i class="fa fa-download" aria-hidden="true"></i></a>
                             </div>
                         </div>
                     </div>
