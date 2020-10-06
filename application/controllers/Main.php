@@ -195,11 +195,17 @@ class Main extends CI_Controller
 		$this->load->view('ayadi');
 	}
 
+	public function reports()
+	{
+
+		$this->load->view('reports');
+	}
+
 	public function admin()
 	{
 		$data['users'] = $this->MainModel->selectAllFromTableOrderBy('login', 'name', 'ASC', array('isAdmin' => '0'));
 		$this->load->view('admin', $data);
-	}
+	}	
 
 	public function addUser()
 	{
@@ -655,6 +661,18 @@ class Main extends CI_Controller
 		} else {
 			echo json_encode(array('error' => 'Please enter grid'));
 		}
+	}
+
+	//get 16 zone data with colors
+	public function getSixteenZoneData(){
+		$result = $this->MainModel->selectSixteenZoneData();
+		$colors = $this->MainModel->selectAllFromWhere("sixteen_zone_color", array("houseMapId" => $_POST['id']));
+		if($result && $colors){
+			echo json_encode(array('zoneData' => $result,'userColors'=>$colors));
+		}else{
+			echo json_encode('error','No data found');
+		}
+		
 	}
 
 	// Api call function to get colorsAnd Details result

@@ -274,4 +274,14 @@ class MainModel extends ci_model
 		$q = $this->db->query($query)->result_array();
 		return $this->db->affected_rows() ? $q : false;
 	}
+
+	public function selectSixteenZoneData(){
+		$query = "SELECT * FROM `sixteenzones` ";
+		$query .= "LEFT JOIN colors ON ";
+		$query .= "colors.name=sixteenzones.shortName ";		
+		$query .= "where colors.divisions = 'SIXTEEN' ";
+		$query .= "order by colors.serial ASC";
+		$q = $this->db->query($query)->result_array();
+		return $this->db->affected_rows() ? $q : false;
+	}
 }

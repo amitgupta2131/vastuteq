@@ -489,400 +489,400 @@ function printZoom(height) {
 
 //For REPORT GENERATE
 
-function objectWiseReport() {
-  let reportData = JSON.parse(localStorage.getItem('objectReport'));
-  let objects = JSON.parse(localStorage.getItem('objects'));
-  if (reportData != null && reportData != '') {
-    $('#reportModal .modal-body').empty();
-    $('#reportModal .modal-dialog').css('min-width', '1150px');
-    $('#reportModal .modal-content').css('min-height', '460px');
-    $('#reportModal .modal-title').text('Object/Activity Wise Report');
-    $('#reportModal .modal-body').attr('id', 'ReportPrintableContent');
+// function objectWiseReport() {
+//   let reportData = JSON.parse(localStorage.getItem('objectReport'));
+//   let objects = JSON.parse(localStorage.getItem('objects'));
+//   if (reportData != null && reportData != '') {
+//     $('#reportModal .modal-body').empty();
+//     $('#reportModal .modal-dialog').css('min-width', '1150px');
+//     $('#reportModal .modal-content').css('min-height', '460px');
+//     $('#reportModal .modal-title').text('Object/Activity Wise Report');
+//     $('#reportModal .modal-body').attr('id', 'ReportPrintableContent');
 
 
-    //Add Print Button
-    $('#reportModal .modal-body').
-      append(`<div style="position:relative">
-              <button class="btn btn-outline-primary btn-sm text-sm pl-3 pr-3" id="rPrint" style="position:absolute;right:60px;top:-49px">Print</button>
-            </div>`)
+//     //Add Print Button
+//     $('#reportModal .modal-body').
+//       append(`<div style="position:relative">
+//               <button class="btn btn-outline-primary btn-sm text-sm pl-3 pr-3" id="rPrint" style="position:absolute;right:60px;top:-49px">Print</button>
+//             </div>`)
 
 
-    //Creating Report table
-    $('#reportModal .modal-body').append('<div id="rtable"></div>')
-    let reportTable = `<table class="table table-bordered table-hover mt-2">
-                        <thead>
-                          <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Object/Activity Name</th>
-                            <th scope="col">Direction</th>
-                            <th scope="col">Type</th> 
-                            <th scope="col">Object Colour</th>
-                            <th scope="col">Recommended Colour</th>        
-                          </tr>
-                        </thead>
-                        <tbody>`
-    let count = 1;
-    for (let data of reportData) {
-      let type = '';
-      objects.map(object => object.image.id == data.id ?
-        type = object.image.type
-        : object)
-      let keys = Object.keys(data)
-      for (let i = 2; i < keys.length; i++) {
-        if (keys[i] != 'color' && keys[i] != 'recommendedColor') {
-          reportTable += `<tr>
-                          <th scope="row">${count++}</th>
-                          <td>${data.name}</td>
-                          <td>${keys[i]}</td>      
-                          <td>${type}</td> 
-                          <td>${data.color != undefined ? data.color : ""}</td>
-                          <td>${data.recommendedColor != undefined ? data.recommendedColor : ""}</td>
-                        </tr>`
-        }
-      }
-    }
-    reportTable += `</tbody></table>`
-    //appending table to modal body
-    $('#rtable').html(reportTable)
-    //adding text area after report table for custom report
-    $('#reportModal .modal-body').
-      append(`<div class="form-group">
-              <label for="exampleFormControlTextarea1">Recommendation</label>
-              <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-              </div>`)
-    //Show modal
-    $('#reportModal').modal('show')
-  }
-  else {
-    showAlert('Add objects and then Select the grid Before generate the report', 'danger')
-  }
-}
+//     //Creating Report table
+//     $('#reportModal .modal-body').append('<div id="rtable"></div>')
+//     let reportTable = `<table class="table table-bordered table-hover mt-2">
+//                         <thead>
+//                           <tr>
+//                             <th scope="col">#</th>
+//                             <th scope="col">Object/Activity Name</th>
+//                             <th scope="col">Direction</th>
+//                             <th scope="col">Type</th> 
+//                             <th scope="col">Object Colour</th>
+//                             <th scope="col">Recommended Colour</th>        
+//                           </tr>
+//                         </thead>
+//                         <tbody>`
+//     let count = 1;
+//     for (let data of reportData) {
+//       let type = '';
+//       objects.map(object => object.image.id == data.id ?
+//         type = object.image.type
+//         : object)
+//       let keys = Object.keys(data)
+//       for (let i = 2; i < keys.length; i++) {
+//         if (keys[i] != 'color' && keys[i] != 'recommendedColor') {
+//           reportTable += `<tr>
+//                           <th scope="row">${count++}</th>
+//                           <td>${data.name}</td>
+//                           <td>${keys[i]}</td>      
+//                           <td>${type}</td> 
+//                           <td>${data.color != undefined ? data.color : ""}</td>
+//                           <td>${data.recommendedColor != undefined ? data.recommendedColor : ""}</td>
+//                         </tr>`
+//         }
+//       }
+//     }
+//     reportTable += `</tbody></table>`
+//     //appending table to modal body
+//     $('#rtable').html(reportTable)
+//     //adding text area after report table for custom report
+//     $('#reportModal .modal-body').
+//       append(`<div class="form-group">
+//               <label for="exampleFormControlTextarea1">Recommendation</label>
+//               <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+//               </div>`)
+//     //Show modal
+//     $('#reportModal').modal('show')
+//   }
+//   else {
+//     showAlert('Add objects and then Select the grid Before generate the report', 'danger')
+//   }
+// }
 
 //ZoneWiseReport
-function zoneWiseReport() {
-  let reportData = JSON.parse(localStorage.getItem('objectReport'));
-  let objects = JSON.parse(localStorage.getItem('objects'));
+// function zoneWiseReport() {
+//   let reportData = JSON.parse(localStorage.getItem('objectReport'));
+//   let objects = JSON.parse(localStorage.getItem('objects'));
 
-  if (reportData != null && reportData != '') {
-    $('#reportModal .modal-body').empty();
-    $('#reportModal .modal-dialog').css('min-width', '1150px');
-    $('#reportModal .modal-content').css('min-height', '460px');
-    $('#reportModal .modal-title').text('Zone Wise Report');
-    $('#reportModal .modal-body').attr('id', 'ReportPrintableContent');
-
-
-    //Add Print Button
-    $('#reportModal .modal-body').append(`<div style="position:relative">
-                                          <button class="btn btn-outline-primary btn-sm text-sm pl-3 pr-3" id="rPrint" style="position:absolute;right:60px;top:-49px">Print</button>
-                                          </div>`)
-    //create table for report showing
-    $('#reportModal .modal-body').append('<div id="rtable"></div>')
-    let div = localStorage.getItem('reportDivision')
-    if (div == null || div == "") {
-      div = 8;
-    }
-
-    let modal = new Modal()
-    let directions = modal.getDivData(div)
-    let checkArray = [];
-
-    let reportTable = `<table class="table table-bordered table-hover mt-2">
-                     <thead id="zoneHead">
-                     <tr>
-                     <th scope="col">#</th>
-                     <th scope="col">Directions</th>`
-    for (let data of directions) {
-      for (let dData of reportData) {
-        let keys = Object.keys(dData)
-        let type = '';
-        objects.map(object => object.image.id == dData.id ?
-          type = object.image.type
-          : object)
-
-        for (let i = 2; i < keys.length; i++) {
-          if (keys[i] == data.name && type == 'object' && !checkArray.includes(dData.name)) {
-            checkArray.push(dData.name)
-            reportTable += `<th>${dData.name}</th>`;
-          } else if (keys[i] == data.name && type == 'activity' && !checkArray.includes(dData.name)) {
-            checkArray.push(dData.name)
-            reportTable += `<th>${dData.name}</th>`;
-          }
-        }
-      }
-    }
-    reportTable += `</tr>
-                 </thead>
-                 <tbody>`
-    let count = 1;
-    for (let data of directions) {
-
-      reportTable += `<tr>
-                    <th scope="row">${count++}</th>
-                    <td>${data.name}</td>`
+//   if (reportData != null && reportData != '') {
+//     $('#reportModal .modal-body').empty();
+//     $('#reportModal .modal-dialog').css('min-width', '1150px');
+//     $('#reportModal .modal-content').css('min-height', '460px');
+//     $('#reportModal .modal-title').text('Zone Wise Report');
+//     $('#reportModal .modal-body').attr('id', 'ReportPrintableContent');
 
 
+//     //Add Print Button
+//     $('#reportModal .modal-body').append(`<div style="position:relative">
+//                                           <button class="btn btn-outline-primary btn-sm text-sm pl-3 pr-3" id="rPrint" style="position:absolute;right:60px;top:-49px">Print</button>
+//                                           </div>`)
+//     //create table for report showing
+//     $('#reportModal .modal-body').append('<div id="rtable"></div>')
+//     let div = localStorage.getItem('reportDivision')
+//     if (div == null || div == "") {
+//       div = 8;
+//     }
 
-      for (let dData of reportData) {
-        let keys = Object.keys(dData);
-        let type = '';
-        objects.map(object => object.image.id == dData.id ?
-          type = object.image.type
-          : object)
-        for (let i = 2; i < keys.length; i++) {
-          if (keys[i] == data.name && type == 'object') {
-            let effect = getEffect(dData.name, data.name);
-            console.log(effect)
-            reportTable += `<td>${effect.trim() != '' ? effect : ''}</td>`
-          } else if (keys[i] == data.name && type == 'activity') {
-            let effect = getEffect(dData.name, data.name);
-            reportTable += `<td>${effect.trim() != '' ? effect : ''}</td>`
-          }else{
-            reportTable += `<td></td>`
-          }
-        }
-      }
+//     let modal = new Modal()
+//     let directions = modal.getDivData(div)
+//     let checkArray = [];
+
+//     let reportTable = `<table class="table table-bordered table-hover mt-2">
+//                      <thead id="zoneHead">
+//                      <tr>
+//                      <th scope="col">#</th>
+//                      <th scope="col">Directions</th>`
+//     for (let data of directions) {
+//       for (let dData of reportData) {
+//         let keys = Object.keys(dData)
+//         let type = '';
+//         objects.map(object => object.image.id == dData.id ?
+//           type = object.image.type
+//           : object)
+
+//         for (let i = 2; i < keys.length; i++) {
+//           if (keys[i] == data.name && type == 'object' && !checkArray.includes(dData.name)) {
+//             checkArray.push(dData.name)
+//             reportTable += `<th>${dData.name}</th>`;
+//           } else if (keys[i] == data.name && type == 'activity' && !checkArray.includes(dData.name)) {
+//             checkArray.push(dData.name)
+//             reportTable += `<th>${dData.name}</th>`;
+//           }
+//         }
+//       }
+//     }
+//     reportTable += `</tr>
+//                  </thead>
+//                  <tbody>`
+//     let count = 1;
+//     for (let data of directions) {
+
+//       reportTable += `<tr>
+//                     <th scope="row">${count++}</th>
+//                     <td>${data.name}</td>`
 
 
 
-      reportTable += `</tr>`
-    }
-    reportTable += `</tbody></table>`
-    //Append report table to modal body
-
-    $('#rtable').html(reportTable)
-    //Append text area after report table for any custom information
-    $('#reportModal .modal-body').
-      append(`<div class="form-group">
-              <label for="exampleFormControlTextarea1">Recommendation</label>
-              <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-            </div>`)
-
-    //Remove last comma from Report table td
-    for (let data of directions) {
-      let txt = $(`.${data.name}`).text().replace(/,\s*$/, "");
-      let txt1 = $(`.${data.name}1`).text().replace(/,\s*$/, "");
-      $(`.${data.name}`).text(txt);
-      $(`.${data.name}1`).text(txt1);
-    }
-    //Show report Modal
-    $('#reportModal').modal('show')
-  } else {
-    showAlert('Add objects and then Select the grid Before generate the report', 'danger')
-  }
-}
-
-function getEffect(obj, dir) {
-  let effects;
-  OBJ_EFFECT.map(object => object.objName == obj ?
-    object.effect.map(object1 => object1.direction == dir ?
-      effects = object1.effect
-      : '')
-    : '');
-  return effects != undefined ? effects : "";
-}
-
-function setObjColor() {
-  let reportData = JSON.parse(localStorage.getItem('objectReport'));
-  let objects = JSON.parse(localStorage.getItem('objects'));
-  if (reportData != null && reportData != '') {
-    $('#reportModal .modal-body').empty();
-    $('#reportModal .modal-dialog').css('min-width', '1150px');
-    $('#reportModal .modal-content').css('min-height', '460px');
-    $('#reportModal .modal-title').text('Set object colour');
-    $('#reportModal .modal-body').attr('id', 'setObjColor');
+//       for (let dData of reportData) {
+//         let keys = Object.keys(dData);
+//         let type = '';
+//         objects.map(object => object.image.id == dData.id ?
+//           type = object.image.type
+//           : object)
+//         for (let i = 2; i < keys.length; i++) {
+//           if (keys[i] == data.name && type == 'object') {
+//             let effect = getEffect(dData.name, data.name);
+//             console.log(effect)
+//             reportTable += `<td>${effect.trim() != '' ? effect : ''}</td>`
+//           } else if (keys[i] == data.name && type == 'activity') {
+//             let effect = getEffect(dData.name, data.name);
+//             reportTable += `<td>${effect.trim() != '' ? effect : ''}</td>`
+//           }else{
+//             reportTable += `<td></td>`
+//           }
+//         }
+//       }
 
 
 
-    //creating object color selection box
-    let objColor = `<div class="form-group">
-                  <select class="form-control objColor" >
-                    <option>Red</option>
-                    <option>Blue</option>
-                    <option>Green</option>
-                    <option>Orange</option>
-                    <option>Black</option>
-                  </select>
-                </div>`
+//       reportTable += `</tr>`
+//     }
+//     reportTable += `</tbody></table>`
+//     //Append report table to modal body
 
-    //Creating Report table
-    $('#reportModal .modal-body').append('<div id="rtable"></div>')
-    let reportTable = `<table id="colorTable" class="table table-bordered table-hover mt-2">
-                        <thead>
-                          <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Object/Activity Name</th>                            
-                            <th scope="col">Type</th> 
-                            <th scope="col">Object Colour</th>
-                            <th scope="col">Recommended Colour</th>        
-                          </tr>
-                        </thead>
-                        <tbody>`
-    let count = 1;
-    for (let data of reportData) {
-      let type = '';
-      objects.map(object => object.image.id == data.id ?
-        type = object.image.type
-        : object)
+//     $('#rtable').html(reportTable)
+//     //Append text area after report table for any custom information
+//     $('#reportModal .modal-body').
+//       append(`<div class="form-group">
+//               <label for="exampleFormControlTextarea1">Recommendation</label>
+//               <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+//             </div>`)
 
-      reportTable += `<tr>
-                          <th scope="row">${count++}</th>
-                          <td>${data.name}</td>                              
-                          <td>${type}</td> 
-                          <td>${objColor}</td>
-                          <td>${objColor}</td>
-                        </tr>`
-    }
+//     //Remove last comma from Report table td
+//     for (let data of directions) {
+//       let txt = $(`.${data.name}`).text().replace(/,\s*$/, "");
+//       let txt1 = $(`.${data.name}1`).text().replace(/,\s*$/, "");
+//       $(`.${data.name}`).text(txt);
+//       $(`.${data.name}1`).text(txt1);
+//     }
+//     //Show report Modal
+//     $('#reportModal').modal('show')
+//   } else {
+//     showAlert('Add objects and then Select the grid Before generate the report', 'danger')
+//   }
+// }
 
-    reportTable += `</tbody></table>`
-    //appending table to modal body
-    $('#rtable').html(reportTable)
-    $('#rtable').append(`<button class="btn btn-primary" id="setColor" data-dismiss="modal" aria-label="Close" style="float:right">Set</button>`)
+// function getEffect(obj, dir) {
+//   let effects;
+//   OBJ_EFFECT.map(object => object.objName == obj ?
+//     object.effect.map(object1 => object1.direction == dir ?
+//       effects = object1.effect
+//       : '')
+//     : '');
+//   return effects != undefined ? effects : "";
+// }
 
-    //Show modal
-    $('#reportModal').modal('show')
-  }
-  else {
-    showAlert('Sorry, There is no object please add object first', 'danger')
-  }
-}
+// function setObjColor() {
+//   let reportData = JSON.parse(localStorage.getItem('objectReport'));
+//   let objects = JSON.parse(localStorage.getItem('objects'));
+//   if (reportData != null && reportData != '') {
+//     $('#reportModal .modal-body').empty();
+//     $('#reportModal .modal-dialog').css('min-width', '1150px');
+//     $('#reportModal .modal-content').css('min-height', '460px');
+//     $('#reportModal .modal-title').text('Set object colour');
+//     $('#reportModal .modal-body').attr('id', 'setObjColor');
 
-$('#inlineRadio1').on('click', function () {
-  objectWiseReport()
 
-})
 
-$('#inlineRadio2').on('click', function () {
-  zoneWiseReport()
+//     //creating object color selection box
+//     let objColor = `<div class="form-group">
+//                   <select class="form-control objColor" >
+//                     <option>Red</option>
+//                     <option>Blue</option>
+//                     <option>Green</option>
+//                     <option>Orange</option>
+//                     <option>Black</option>
+//                   </select>
+//                 </div>`
 
-})
+//     //Creating Report table
+//     $('#reportModal .modal-body').append('<div id="rtable"></div>')
+//     let reportTable = `<table id="colorTable" class="table table-bordered table-hover mt-2">
+//                         <thead>
+//                           <tr>
+//                             <th scope="col">#</th>
+//                             <th scope="col">Object/Activity Name</th>                            
+//                             <th scope="col">Type</th> 
+//                             <th scope="col">Object Colour</th>
+//                             <th scope="col">Recommended Colour</th>        
+//                           </tr>
+//                         </thead>
+//                         <tbody>`
+//     let count = 1;
+//     for (let data of reportData) {
+//       let type = '';
+//       objects.map(object => object.image.id == data.id ?
+//         type = object.image.type
+//         : object)
 
-$('#objColor').on('click', function () {
-  setObjColor()
+//       reportTable += `<tr>
+//                           <th scope="row">${count++}</th>
+//                           <td>${data.name}</td>                              
+//                           <td>${type}</td> 
+//                           <td>${objColor}</td>
+//                           <td>${objColor}</td>
+//                         </tr>`
+//     }
 
-})
+//     reportTable += `</tbody></table>`
+//     //appending table to modal body
+//     $('#rtable').html(reportTable)
+//     $('#rtable').append(`<button class="btn btn-primary" id="setColor" data-dismiss="modal" aria-label="Close" style="float:right">Set</button>`)
+
+//     //Show modal
+//     $('#reportModal').modal('show')
+//   }
+//   else {
+//     showAlert('Sorry, There is no object please add object first', 'danger')
+//   }
+// }
+
+// $('#inlineRadio1').on('click', function () {
+//   objectWiseReport()
+
+// })
+
+// $('#inlineRadio2').on('click', function () {
+//   zoneWiseReport()
+
+// })
+
+// $('#objColor').on('click', function () {
+//   setObjColor()
+
+// })
 
 //set 16 zone color
 
-$('#sixteenZoneColor').on('click', function () {
-  var formData = new FormData();
-  formData.append('grid', 'sixteen');
-  var url = BASE_URL + "/Main/getGridData";
-  AjaxPost(formData, url, sixteenZonesuccess, AjaxError);
+// $('#sixteenZoneColor').on('click', function () {
+//   var formData = new FormData();
+//   formData.append('grid', 'sixteen');
+//   var url = BASE_URL + "/Main/getGridData";
+//   AjaxPost(formData, url, sixteenZonesuccess, AjaxError);
 
-  function sixteenZonesuccess(content, targetTextarea) {
-    var result = JSON.parse(content);
-    $('#reportModal .modal-body').empty();
-    $('#reportModal .modal-dialog').css('min-width', '1150px');
-    $('#reportModal .modal-content').css('min-height', '460px');
-    $('#reportModal .modal-title').text('Set 16 Zone colour');
-    $('#reportModal .modal-body').attr('id', 'setSixteenZoneColor');
-    let objColor = `<div class="form-group mb-0">
-                  <select class="form-control objColor" >
-                    <option>Red</option>
-                    <option>Blue</option>
-                    <option>Green</option>
-                    <option>Orange</option>
-                    <option>Black</option>
-                  </select>
-                </div>`
-    let reportTable = `<table id="colorTable" class="table table-bordered table-hover mt-2">
-                        <thead>
-                          <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Direction Name</th>                            
-                            <th scope="col">Direction Short Name</th> 
-                            <th scope="col">Colour</th>                                  
-                          </tr>
-                        </thead>
-                        <tbody>`
-    let count = 1;
-    for (let data of result) {
+//   function sixteenZonesuccess(content, targetTextarea) {
+//     var result = JSON.parse(content);
+//     $('#reportModal .modal-body').empty();
+//     $('#reportModal .modal-dialog').css('min-width', '1150px');
+//     $('#reportModal .modal-content').css('min-height', '460px');
+//     $('#reportModal .modal-title').text('Set 16 Zone colour');
+//     $('#reportModal .modal-body').attr('id', 'setSixteenZoneColor');
+//     let objColor = `<div class="form-group mb-0">
+//                   <select class="form-control objColor" >
+//                     <option>Red</option>
+//                     <option>Blue</option>
+//                     <option>Green</option>
+//                     <option>Orange</option>
+//                     <option>Black</option>
+//                   </select>
+//                 </div>`
+//     let reportTable = `<table id="colorTable" class="table table-bordered table-hover mt-2">
+//                         <thead>
+//                           <tr>
+//                             <th scope="col">#</th>
+//                             <th scope="col">Direction Name</th>                            
+//                             <th scope="col">Direction Short Name</th> 
+//                             <th scope="col">Colour</th>                                  
+//                           </tr>
+//                         </thead>
+//                         <tbody>`
+//     let count = 1;
+//     for (let data of result) {
 
-      reportTable += `<tr>
-                          <th scope="row">${count++}</th>
-                          <td>${data.zone}</td>                              
-                          <td>${data.shortName}</td> 
-                          <td>${objColor}</td>                          
-                        </tr>`
-    }
+//       reportTable += `<tr>
+//                           <th scope="row">${count++}</th>
+//                           <td>${data.zone}</td>                              
+//                           <td>${data.shortName}</td> 
+//                           <td>${objColor}</td>                          
+//                         </tr>`
+//     }
 
-    reportTable += `</tbody></table>`
-    //appending table to modal body
-    $('#setSixteenZoneColor').html(reportTable)
-    $('#setSixteenZoneColor').append(`<button class="btn btn-primary" id="set16ZoneColor" data-dismiss="modal" aria-label="Close" style="float:right">Set</button>`)
+//     reportTable += `</tbody></table>`
+//     //appending table to modal body
+//     $('#setSixteenZoneColor').html(reportTable)
+//     $('#setSixteenZoneColor').append(`<button class="btn btn-primary" id="set16ZoneColor" data-dismiss="modal" aria-label="Close" style="float:right">Set</button>`)
 
-    //Show modal
-    $('#reportModal').modal('show')
-  }
+//     //Show modal
+//     $('#reportModal').modal('show')
+//   }
 
 
-})
+// })
 
-$('#reportModal').on('click', '#set16ZoneColor', function () {
-  let dataArray = [];
-  $('#reportModal table tbody tr').each(function () {
-    let name = $(this).find('td:eq(1)').html();
-    let color = $(this).find('td:eq(2)').find('option:selected').html();
-    dataArray.push({ shortName: name, color: color });
-  });
+// $('#reportModal').on('click', '#set16ZoneColor', function () {
+//   let dataArray = [];
+//   $('#reportModal table tbody tr').each(function () {
+//     let name = $(this).find('td:eq(1)').html();
+//     let color = $(this).find('td:eq(2)').find('option:selected').html();
+//     dataArray.push({ shortName: name, color: color });
+//   });
 
-  var formData = new FormData();
-  formData.append('mapId', propertyId);
-  formData.append('data', JSON.stringify(dataArray));
-  var url = BASE_URL + "/Main/saveSixteenZoneColorData";
-  AjaxPost(formData, url, sixteenZoneSavesuccess, AjaxError);
+//   var formData = new FormData();
+//   formData.append('mapId', propertyId);
+//   formData.append('data', JSON.stringify(dataArray));
+//   var url = BASE_URL + "/Main/saveSixteenZoneColorData";
+//   AjaxPost(formData, url, sixteenZoneSavesuccess, AjaxError);
 
-  function sixteenZoneSavesuccess(content, targetTextarea) {
-    let result = JSON.parse(content);
-    if (result[0] == 'success') {
-      showAlert(result[1], 'success')
-    } else {
-      showAlert(result[1], 'danger')
-    }
-  }
-})
+//   function sixteenZoneSavesuccess(content, targetTextarea) {
+//     let result = JSON.parse(content);
+//     if (result[0] == 'success') {
+//       showAlert(result[1], 'success')
+//     } else {
+//       showAlert(result[1], 'danger')
+//     }
+//   }
+// })
 
-$('#reportModal').on('click', '#setColor', function () {
+// $('#reportModal').on('click', '#setColor', function () {
 
-  //creating report data with color
-  let colorArr = [];
-  let newReportData = [];
-  let reportData = JSON.parse(localStorage.getItem('objectReport'));
-  $('#reportModal #rtable table tbody tr').each(function () {
-    let name = $(this).find('td:eq(0)').html();
-    let color = $(this).find('td:eq(2)').find('option:selected').html();
-    let recomColor = $(this).find('td:eq(3)').find('option:selected').html();
-    colorArr.push({ name: name, color: color, recommendedColor: recomColor });
-  });
-  for (let i = 0; i < colorArr.length; i++) {
-    newReportData.push($.extend({}, reportData[i], colorArr[i]));
-  }
+//   //creating report data with color
+//   let colorArr = [];
+//   let newReportData = [];
+//   let reportData = JSON.parse(localStorage.getItem('objectReport'));
+//   $('#reportModal #rtable table tbody tr').each(function () {
+//     let name = $(this).find('td:eq(0)').html();
+//     let color = $(this).find('td:eq(2)').find('option:selected').html();
+//     let recomColor = $(this).find('td:eq(3)').find('option:selected').html();
+//     colorArr.push({ name: name, color: color, recommendedColor: recomColor });
+//   });
+//   for (let i = 0; i < colorArr.length; i++) {
+//     newReportData.push($.extend({}, reportData[i], colorArr[i]));
+//   }
 
-  console.log(newReportData)
-  //update data in localstorage
-  localStorage.removeItem('objectReport')
-  localStorage.setItem('objectReport', JSON.stringify(newReportData))
+//   console.log(newReportData)
+//   //update data in localstorage
+//   localStorage.removeItem('objectReport')
+//   localStorage.setItem('objectReport', JSON.stringify(newReportData))
 
-  //update Report data in database
-  console.log(localStorage.getItem('selectedMapId'))
-  var formData = new FormData();
-  formData.append('id', localStorage.getItem('selectedMapId'));
-  formData.append('reportData', JSON.stringify(newReportData));
-  var url = BASE_URL + "/Main/updateReportData";
-  AjaxPost(formData, url, updateReportDatasuccess, AjaxError);
+//   //update Report data in database
+//   console.log(localStorage.getItem('selectedMapId'))
+//   var formData = new FormData();
+//   formData.append('id', localStorage.getItem('selectedMapId'));
+//   formData.append('reportData', JSON.stringify(newReportData));
+//   var url = BASE_URL + "/Main/updateReportData";
+//   AjaxPost(formData, url, updateReportDatasuccess, AjaxError);
 
-  function updateReportDatasuccess(content, targetTextarea) {
-    var result = JSON.parse(content);
-    showAlert(result[1], result[0]);
-  }
+//   function updateReportDatasuccess(content, targetTextarea) {
+//     var result = JSON.parse(content);
+//     showAlert(result[1], result[0]);
+//   }
 
-})
+// })
 
-$('#reportModal').on('click', '#rPrint', () => {
-  $('#drawArea').css('display', 'none');
-  window.print();
-  $('#drawArea').css('display', 'flex');
-});
+// $('#reportModal').on('click', '#rPrint', () => {
+//   $('#drawArea').css('display', 'none');
+//   window.print();
+//   $('#drawArea').css('display', 'flex');
+// });
 
 function feetModal() {
   $('#reportModal .modal-body').empty();

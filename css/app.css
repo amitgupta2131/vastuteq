@@ -815,7 +815,8 @@ input::-webkit-inner-spin-button {
   #barPrint,
   #porPrint,
   #rPrint,
-  .client-form {
+  .client-form,
+  #back {
     display: none;
   }
 
@@ -1234,6 +1235,18 @@ input::-webkit-inner-spin-button {
 #language:hover,#profile:hover{
   background: var(--primary);
   color:white;
+}
+
+.report-container .b-right{
+  background-color:rgb(231, 230, 230);
+}
+
+.report-container .b-right .nav-link{
+  padding: .5rem 1rem !important;
+}
+
+body{
+  overflow-y: scroll;
 }
 
 /*# sourceMappingURL=app.css.map */

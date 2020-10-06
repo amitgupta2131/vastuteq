@@ -57,14 +57,15 @@
                     <a href="#" id="devtas">Devtas</a>
                 </li>
                 <li class="nav-item d-none dropdown getReport">
-                    <a class="nav-link text-white menu-item" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <a class="nav-link text-white menu-item" href="#" id="reports" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Reports</a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <!-- <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="#" id="objColor">Set Object Colour</a>
                         <a class="dropdown-item" href="#" id="inlineRadio1">Object/Activity wise report</a>
                         <a class="dropdown-item" href="#" id="inlineRadio2">Zone wise object</a>
                         <a class="dropdown-item" href="#" id="sixteenZoneColor">Set 16 Zone color</a>
-                    </div>
+                        <a class="dropdown-item" href="#" id="otherReports">Other Reports</a>
+                    </div> -->
                 </li>
                 <li class="nav-item">
                     <img class="profile thumbnail rounded-circle" src="<?php echo $userImg != '' ? base_url('uploads/') . $userImg : base_url('assets/images/thumbnail.png') ?>" alt="user" width="20" id="profileButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -147,7 +148,7 @@
     //////////////////////////////// --- Setting  M O D A L ---  ////////////////////////////////
     -->
 
-<div class="modal fade bd-example-modal-lg" id="settingModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+<!-- <div class="modal fade bd-example-modal-lg" id="settingModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered" role="document" style="max-width:765px">
         <div class="modal-content" style="min-height:460px">
             <div class="modal-header p-1 pl-3 pr-3">
@@ -217,7 +218,7 @@
             </div>
         </div>
     </div>
-</div>
+</div> -->
 
 <!-- Message pop up -->
 <?php if (!empty($this->session->flashdata('error'))) { ?>
@@ -295,6 +296,10 @@
 
     $('#devtas').on('click', function() {
         confirmSave('Main/devtas')
+    })
+
+    $('#reports').on('click', function() {
+        confirmSave('Main/reports')
     })
 
     function confirmSave(url = '') {
