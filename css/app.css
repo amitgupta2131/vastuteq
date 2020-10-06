@@ -1058,6 +1058,14 @@ input::-webkit-inner-spin-button {
   background-color: var(--success);
 }
 
+.swal-button--English {
+  background-color: var(--primary);
+}
+
+.swal-button--Hindi {
+  background-color: var(--info);
+}
+
 .rul_ruler {
   display: block;
   border: 1px solid rgba(206, 219, 236, .5);
@@ -1068,6 +1076,164 @@ input::-webkit-inner-spin-button {
 
 .mt-r-5{
   margin-top: -5px;
+}
+
+
+.md-form {
+  position: relative;
+  /* margin-top: 1.5rem; */
+  margin-bottom: 0.5rem;
+}
+
+.md-form .prefix {
+  position: absolute;
+  -webkit-transition: color .2s;
+  transition: color .2s;
+}
+
+.md-form .prefix {
+  top: .25rem;
+  font-size: 1.75rem;
+}
+
+.md-form .prefix~label {
+  margin-left: 2.5rem;
+}
+
+.md-form>label {
+  max-width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.md-form label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-size: 1rem;
+  color: #757575;
+  cursor: text;
+  -webkit-transition: color .2s ease-out, -webkit-transform .2s ease-out;
+  transition: color .2s ease-out, -webkit-transform .2s ease-out;
+  transition: transform .2s ease-out, color .2s ease-out;
+  transition: transform .2s ease-out, color .2s ease-out, -webkit-transform .2s ease-out;
+  -webkit-transform: translateY(12px);
+  transform: translateY(12px);
+  -webkit-transform-origin: 0 100%;
+  transform-origin: 0 100%;
+}
+
+.md-form input:not([type]):focus:not([readonly]),
+.md-form input[type="text"]:not(.browser-default):focus:not([readonly]),
+.md-form input[type="password"]:not(.browser-default):focus:not([readonly]),
+.md-form input[type="email"]:not(.browser-default):focus:not([readonly]),
+.md-form input[type="url"]:not(.browser-default):focus:not([readonly]),
+.md-form input[type="time"]:not(.browser-default):focus:not([readonly]),
+.md-form input[type="date"]:not(.browser-default):focus:not([readonly]),
+.md-form input[type="datetime"]:not(.browser-default):focus:not([readonly]),
+.md-form input[type="datetime-local"]:not(.browser-default):focus:not([readonly]),
+.md-form input[type="tel"]:not(.browser-default):focus:not([readonly]),
+.md-form input[type="number"]:not(.browser-default):focus:not([readonly]),
+.md-form input[type="search"]:not(.browser-default):focus:not([readonly]),
+.md-form input[type="phone"]:not(.browser-default):focus:not([readonly]),
+.md-form input[type="search-md"]:focus:not([readonly]),
+.md-form input[type="file"]:focus:not([readonly]),
+.md-form textarea.md-textarea:focus:not([readonly]) {
+  border-bottom: 1px solid #4285f4;
+  -webkit-box-shadow: 0 1px 0 0 #4285f4;
+  box-shadow: 0 1px 0 0 #4285f4;
+}
+
+.grey-text {
+  color: #9e9e9e !important;
+}
+
+.md-form input:not([type]),
+.md-form input[type="text"]:not(.browser-default),
+.md-form input[type="password"]:not(.browser-default),
+.md-form input[type="email"]:not(.browser-default),
+.md-form input[type="url"]:not(.browser-default),
+.md-form input[type="time"]:not(.browser-default),
+.md-form input[type="date"]:not(.browser-default),
+.md-form input[type="datetime"]:not(.browser-default),
+.md-form input[type="datetime-local"]:not(.browser-default),
+.md-form input[type="tel"]:not(.browser-default),
+.md-form input[type="number"]:not(.browser-default),
+.md-form input[type="search"]:not(.browser-default),
+.md-form input[type="phone"]:not(.browser-default),
+.md-form input[type="file"]:not(.browser-default),
+.md-form input[type="search-md"],
+.md-form textarea.md-textarea {
+  -webkit-box-sizing: content-box;
+  box-sizing: content-box;
+  background-color: transparent;
+  border: 0;
+  border-bottom: 1px solid #ced4da;
+  border-radius: 0;
+  outline: 0;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  -webkit-transition: border-color .15s ease-in-out, -webkit-box-shadow .15s ease-in-out;
+  transition: border-color .15s ease-in-out, -webkit-box-shadow .15s ease-in-out;
+  transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+  transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out, -webkit-box-shadow .15s ease-in-out;
+}
+
+.md-form .prefix~input,
+.md-form .prefix~textarea {
+  width: calc(100% - 2.5rem);
+  margin-left: 2.5rem;
+}
+
+.md-form .form-control {
+  -webkit-box-sizing: border-box !important;
+  box-sizing: border-box !important;
+}
+
+
+
+.md-form .form-control {
+  height: auto;
+  padding: .6rem 0 .4rem 0;
+  margin: 0 0 .5rem 0;
+  background-color: transparent;
+  border-radius: 0;
+}
+
+.pro-style{
+  position: relative;
+  top: 60px;
+}
+
+.mt-5r {
+  margin-top: 5rem;
+}
+
+.dropdown-menu.dropdown-menu-right.p-option.show{
+  display:flex;
+}
+
+.p-option{
+  min-width:35rem!important;  
+  top:-40px !important;
+}
+
+.b-right{
+  border-right: 1px solid #9e9c9e;
+}
+
+.hide{
+  display: none;
+}
+
+#language,#profile{
+  cursor: pointer;
+}
+
+#language:hover,#profile:hover{
+  background: var(--primary);
+  color:white;
 }
 
 /*# sourceMappingURL=app.css.map */

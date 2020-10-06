@@ -81,53 +81,53 @@ hindiDetail: `हिंदी में डिस्क्रिप्शन श
 ];
 
 export const DIRECTION_SIXTEEN = [
-`ATTRIBUTE : MONEY AND OPPORTUNITIES
+{detail:`ATTRIBUTE : MONEY AND OPPORTUNITIES
   ELEMENT : WATER
   IT COVERS -
   BHALLAT spread over 2 padas of Pishach Vithi & Manushya Vithi(N4)
   SOMA-spread over 2 padas of Pishach Vithi & Manushya Vithi (N5) 
   BHUDHAR-occupies Dev Vithi
-  `,
-`ATTRIBUTE : HEALTH AND IMMUNITY
+  `,hindiDetail: `हिंदी में डिस्क्रिप्शन शो होगा।`},
+{detail:`ATTRIBUTE : HEALTH AND IMMUNITY
   ELEMENT : WATER
   IT COVERS -
   BHUJANG spread over 2 padas of Pishach Vithi & Manushya Vithi(N6)
   ADITI-spread over 1 pada of Pishach Vithi(N7) 
   APA occupies Manushya Vithi 
   BHUDHAR-occupies Dev Vithi
-  `,
-`ATTRIBUTE : CLARITY OF MIND
+  `,hindiDetail: `हिंदी में डिस्क्रिप्शन शो होगा।`},
+{detail:`ATTRIBUTE : CLARITY OF MIND
   ELEMENT : WATER
   IT COVERS -
   DITI spread over 1 pada of Pishach Vithi(N8) 
   APA occupies Manushya Vithi & BHUDHAR occupies Dev Vithi 
   SHIKHI -spread over 1 pada of Pishach Vithi(E1)
   APAVATSA occupies Manushya Vithi & ARYAMA in Dev Vithi
-  `,
-`ATTRIBUTE : RECREATION AND FUN
+  `,hindiDetail: `हिंदी में डिस्क्रिप्शन शो होगा।`},
+{detail:`ATTRIBUTE : RECREATION AND FUN
   ELEMENT : AIR
   IT COVERS -
   PARJANYA - spread over 1 pada of Pishach Vithi(E2)
   APAVATSA occupies Manushya Vithi & ARYAMA in Dev Vithi ,
   JAYANTA -spread over 2 padas of Pishach Vithi & Manushya Vithi(E3)
   ARYAMA in Dev Vithi
-  `,
-`ATTRIBUTE : SOCIAL ASSOCIATION
+  `,hindiDetail: `हिंदी में डिस्क्रिप्शन शो होगा।`},
+{detail:`ATTRIBUTE : SOCIAL ASSOCIATION
   ELEMENT : AIR
   IT COVERS -
   INDRA- spread over 2 padas of Pishach Vithi & Manushya Vithi(E4),
   RAVI-spread over 2 padas of Pishach Vithi & Manushya Vithi(E5)
   ARYAMA in Dev Vithi
-  `,
-`ATTRIBUTE : ANXIETY AND ANALYSIS
+  `,hindiDetail: `हिंदी में डिस्क्रिप्शन शो होगा।`},
+{detail:`ATTRIBUTE : ANXIETY AND ANALYSIS
   ELEMENT : AIR
   IT COVERS -
   SATYA- spread over 2 padas of Pishach Vithi & Manushya Vithi(E6), 
   BHRISH-spread over 1 pada of Pishach Vithi(E7), 
   SAVITA occupies Manushya Vithi, 
   ARYAMA in Dev Vithi
-  `,
-`ATTRIBUTE : CASH FLOW
+  `,hindiDetail: `हिंदी में डिस्क्रिप्शन शो होगा।`},
+{detail:`ATTRIBUTE : CASH FLOW
   ELEMENT : FIRE
   IT COVERS -
   AKASH- spread over 1 pada of Pishach Vithi(E8)
@@ -136,29 +136,29 @@ export const DIRECTION_SIXTEEN = [
   ANIL-spread over 1 pada of Pishach Vithi(S1)
   SOSHA occupies Manushya Vithi 
   VIVASVAN in Dev Vithi
-  `,
-`ATTRIBUTE : POWER AND CONFIDENCE
+  `,hindiDetail: `हिंदी में डिस्क्रिप्शन शो होगा।`},
+{detail:`ATTRIBUTE : POWER AND CONFIDENCE
   ELEMENT : FIRE
   IT COVERS -PUSHA- spread over 1 pada of Pishach Vithi(S2,)
   SOSHA occupies Manushya Vithi
   VIVASVAN in Dev Vithi
   VITATHA-spread over 2 padas of Pishach Vithi & Manushya Vithi(S3)
   VIVASVAN in Dev Vithi
-  `,
-`ATTRIBUTE : REST, RELAXATION AND FAME
+  `,hindiDetail: `हिंदी में डिस्क्रिप्शन शो होगा।`},
+{detail:`ATTRIBUTE : REST, RELAXATION AND FAME
   ELEMENT : FIRE
   IT COVERS -GRIHAKSHAT- spread over 2 padas of Pishach Vithi & Manushya Vithi(S4)
   YAMA - spread over 2 padas of Pishach Vithi & Manushya Vithi(S5)
   VIVASVAN in Dev Vithi
-  `,
-`ATTRIBUTE : EXPENDITURE AND WASTAGE
+  `,hindiDetail: `हिंदी में डिस्क्रिप्शन शो होगा।`},
+{detail:`ATTRIBUTE : EXPENDITURE AND WASTAGE
   ELEMENT : EARTH
   IT COVERS -
   GANDHARVA- spread over 2 padas of Pishach Vithi & Manushya Vithi(S6)
   BHRINGARAJ- spread over 1 pada of Pishach Vithi(S7), INDRA occupies Manushya Vithi,
   VIVASVAN in Dev Vithi
-  `,
-`ATTRIBUTE : RELATIONSHIP AND SKILLS
+  `,hindiDetail: `हिंदी में डिस्क्रिप्शन शो होगा।`},
+{detail:`ATTRIBUTE : RELATIONSHIP AND SKILLS
   ELEMENT : EARTH
   IT COVERS -
   MRIGA- spread over 1 pada of Pishach Vithi(S8),
@@ -167,8 +167,8 @@ export const DIRECTION_SIXTEEN = [
   PITRI- spread over 1 pada of Pishach Vithi(W1),
   JAYA occupies Manushya Vithi 
   MITRA in Dev Vithi
-  `,
-`ATTRIBUTE : EDUCATIONS AND SAVINGS
+  `,hindiDetail: `हिंदी में डिस्क्रिप्शन शो होगा।`},
+{detail:`ATTRIBUTE : EDUCATIONS AND SAVINGS
   ELEMENT : SPACE
   IT COVERS -
   DAUVARIK- spread over 1 pada of Pishach Vithi(W2)
@@ -176,111 +176,111 @@ export const DIRECTION_SIXTEEN = [
   MITRA in Dev Vithi
   SUGRIVA- spread over 2 padas of Pishach Vithi & Manushya Vithi(W3) 
   MITRA in Dev Vithi
-  `,
-`ATTRIBUTE : GAINS AND PROFITS
+  `,hindiDetail: `हिंदी में डिस्क्रिप्शन शो होगा।`},
+{detail:`ATTRIBUTE : GAINS AND PROFITS
   ELEMENT : SPACE
   IT COVERS -
   PUSHPADANT- spread over 2 padas of Pishach Vithi & Manushya Vithi(W4), 
   VARUN- spread over 2 padas of Pishach Vithi & Manushya Vithi(W5), 
   MITRA in Dev Vithi
-  `,
-`ATTRIBUTE : DEPRESSION
+  `,hindiDetail: `हिंदी में डिस्क्रिप्शन शो होगा।`},
+{detail:`ATTRIBUTE : DEPRESSION
   ELEMENT : SPACE
   IT COVERS -
   ASURA- spread over 2 padas of Pishach Vithi & Manushya Vithi(W6),
   SOSHA- spread over 1 pada of Pishach Vithi(W7), 
   RUDRA occupies Manushya Vithi, 
   MITRA in Dev Vithi
-  `,
-`ATTRIBUTE : SUPPORT AND BANKING
+  `,hindiDetail: `हिंदी में डिस्क्रिप्शन शो होगा।`},
+{detail:`ATTRIBUTE : SUPPORT AND BANKING
   ELEMENT : EARTH
   IT COVERS -
   PAPA YAKSHMA - spread over 1 pada of Pishach Vithi(W8), RUDRA occupies Manushya Vithi 
   MITRA occupies Dev Vithi, 
   ROGA- spread over 1 pada of Pishach Vithi(N1), RAJYAKSHAMA occupies Manushya Vithi 
   BHUDHAR in Dev Vithi
-  `,
-`ATTRIBUTE : ATTRACTION AND SEX
+  `,hindiDetail: `हिंदी में डिस्क्रिप्शन शो होगा।`},
+{detail:`ATTRIBUTE : ATTRACTION AND SEX
   ELEMENT :WATER
   IT COVERS -
   NAGA - spread over 1 pada of Pishach Vithi(N2), RAJYAKSHAMA occupies Manushya VithI
   BHUDHAR in Dev Vithi, 
   MUKHYA- spread over 2 padas of Pishach Vithi & Manushya Vithi(N3), 
   BHUDHAR in Dev Vithi
-  `,
+  `,hindiDetail: `हिंदी में डिस्क्रिप्शन शो होगा।`},
 ];
 
 export const DIRECTION_THIRTYTWO = [
-  `The Entrance Ensures Abundance Of Money, Inherited And / Or Earned.`,
+  {detail:`The Entrance Ensures Abundance Of Money, Inherited And / Or Earned.`,hindiDetail: `हिंदी में डिस्क्रिप्शन शो होगा।`},
 
-  `This Entrance Makes People Religious, Non-aggressive And Calm.`,
+ {detail: `This Entrance Makes People Religious, Non-aggressive And Calm.`,hindiDetail: `हिंदी में डिस्क्रिप्शन शो होगा।`},
 
-  `The Entrance Makes Residents Behave In A Manner That People Generally 
-  Disapprove Of. People Usually Avoid Listening To Them.`,
+  {detail:`The Entrance Makes Residents Behave In A Manner That People Generally 
+  Disapprove Of. People Usually Avoid Listening To Them.`,hindiDetail: `हिंदी में डिस्क्रिप्शन शो होगा।`},
 
-  `This Entrance Instigates Rebellious Attitude Among Young Girls And Makes 
+ {detail: `This Entrance Instigates Rebellious Attitude Among Young Girls And Makes 
   Them Go Against The Family’s Culture And Social Beliefs. In The Indian Context, 
-  A Girl In Such A Family May Resort To An Inter Caste Marriage.`,
+  A Girl In Such A Family May Resort To An Inter Caste Marriage.`,hindiDetail: `हिंदी में डिस्क्रिप्शन शो होगा।`},
 
-  `Such A Entrance Paves Way For A Higher Bank Balance For Its Occupants.`,
+ {detail: `Such A Entrance Paves Way For A Higher Bank Balance For Its Occupants.`,hindiDetail: `हिंदी में डिस्क्रिप्शन शो होगा।`},
 
-  `This Entrance Causes Fire Accidents And Unexpected Losses`,
+  {detail:`This Entrance Causes Fire Accidents And Unexpected Losses`,hindiDetail: `हिंदी में डिस्क्रिप्शन शो होगा।`},
 
-  `This Entrance Induces Wasteful Expenditure. For An Expecting Mother, 
-  It Will Increase The Probability Of Birth Of Baby.`,
+ {detail: `This Entrance Induces Wasteful Expenditure. For An Expecting Mother, 
+  It Will Increase The Probability Of Birth Of Baby.`,hindiDetail: `हिंदी में डिस्क्रिप्शन शो होगा।`},
 
-  `This Is An Auspicious Zone Entrance Which Brings Money, Profits And Overall Success`,
+  {detail:`This Is An Auspicious Zone Entrance Which Brings Money, Profits And Overall Success`,hindiDetail: `हिंदी में डिस्क्रिप्शन शो होगा।`},
 
-  `This Entrance Helps The Inhabitants Build Beneficial And Close Association With 
-  Government Officials Or With Those In Authority`,
+  {detail:`This Entrance Helps The Inhabitants Build Beneficial And Close Association With 
+  Government Officials Or With Those In Authority`,hindiDetail: `हिंदी में डिस्क्रिप्शन शो होगा।`},
 
-  `This Entrance Makes People Extremely Short-tempered, Bordering On Insanity At Times.`,
+  {detail:`This Entrance Makes People Extremely Short-tempered, Bordering On Insanity At Times.`,hindiDetail: `हिंदी में डिस्क्रिप्शन शो होगा।`},
 
-  `This Entrance Makes It Difficult For People To Keep Their Word Making Them Appear Unreliable.`,
+  {detail:`This Entrance Makes It Difficult For People To Keep Their Word Making Them Appear Unreliable.`,hindiDetail: `हिंदी में डिस्क्रिप्शन शो होगा।`},
 
-  `People Of Such Houses Become Insensitive Towards The Problems Of Other People.`,
+  {detail:`People Of Such Houses Become Insensitive Towards The Problems Of Other People.`,hindiDetail: `हिंदी में डिस्क्रिप्शन शो होगा।`},
 
-  `This Entrance Paves Way For Accidents, Financial Losses, Burglary And Other Such Problems.`,
+  {detail:`This Entrance Paves Way For Accidents, Financial Losses, Burglary And Other Such Problems.`,hindiDetail: `हिंदी में डिस्क्रिप्शन शो होगा।`},
 
-  `This Entrance Negatively Impacts Children, Especially The Boys Of The House. Their Actions Go 
-  Against Their Parents Expectations.`,
+  {detail:`This Entrance Negatively Impacts Children, Especially The Boys Of The House. Their Actions Go 
+  Against Their Parents Expectations.`,hindiDetail: `हिंदी में डिस्क्रिप्शन शो होगा।`},
 
-  `This Entrance Increase The Tendency To Work For Others. It Is Good For People Working In M Or Similar Setups,`,
+  {detail:`This Entrance Increase The Tendency To Work For Others. It Is Good For People Working In M Or Similar Setups,`,hindiDetail: `हिंदी में डिस्क्रिप्शन शो होगा।`},
 
-  `This Entrance Brings Immense Prosperity. The Occupants Of Such A House Become Smarter And Their Work Gets Done Easily`,
+  {detail:`This Entrance Brings Immense Prosperity. The Occupants Of Such A House Become Smarter And Their Work Gets Done Easily`,hindiDetail: `हिंदी में डिस्क्रिप्शन शो होगा।`},
 
-  `Industries In Such Plots Are Highly Successful. The Family Residing In Such A Space Is Bless With More Sons.`,
+  {detail:`Industries In Such Plots Are Highly Successful. The Family Residing In Such A Space Is Bless With More Sons.`,hindiDetail: `हिंदी में डिस्क्रिप्शन शो होगा।`},
 
-  `The People In Such Houses Are Rarely Free From Debts. They Feel Incapable Of Making Good Use Of Their Intellect.`,
+  {detail:`The People In Such Houses Are Rarely Free From Debts. They Feel Incapable Of Making Good Use Of Their Intellect.`,hindiDetail: `हिंदी में डिस्क्रिप्शन शो होगा।`},
 
-  `A Door Abysmal Poverty`,
+  {detail:`A Door Abysmal Poverty`,hindiDetail: `हिंदी में डिस्क्रिप्शन शो होगा।`},
 
-  `People Residing In Such Houses Suffer, As Their Efforts Towards A Profession Or Relationship Keep Going Waste. They Remain Disconnected And Unhappy.`,
+  {detail:`People Residing In Such Houses Suffer, As Their Efforts Towards A Profession Or Relationship Keep Going Waste. They Remain Disconnected And Unhappy.`,hindiDetail: `हिंदी में डिस्क्रिप्शन शो होगा।`},
 
-  `The Most Ominous Entrance, It Results In Such Behaviour And Attitude, Which Gradually Disconnects The Family From The Rest Of The World, 
-  Thereby Severely Affecting Their Finance And Relationships,`,
+  {detail:`The Most Ominous Entrance, It Results In Such Behaviour And Attitude, Which Gradually Disconnects The Family From The Rest Of The World, 
+  Thereby Severely Affecting Their Finance And Relationships,`,hindiDetail: `हिंदी में डिस्क्रिप्शन शो होगा।`},
 
-  `This Entrance IS NEGATIVE FOT THE RESIDENTS Financial Position And Life Span`,
+  {detail:`This Entrance IS NEGATIVE FOT THE RESIDENTS Financial Position And Life Span`,hindiDetail: `हिंदी में डिस्क्रिप्शन शो होगा।`},
 
-  `The Entrance Creates Instability In Career. People Residing Here Lack Clarity Of Thought And Vision. They Turn Insure, Especially Of 
-  Their Near And Dear Ones.`,
+  {detail:`The Entrance Creates Instability In Career. People Residing Here Lack Clarity Of Thought And Vision. They Turn Insure, Especially Of 
+  Their Near And Dear Ones.`,hindiDetail: `हिंदी में डिस्क्रिप्शन शो होगा।`},
 
-  `This Entrance Brings Astounding Growth And Prosperity.`,
+  {detail:`This Entrance Brings Astounding Growth And Prosperity.`,hindiDetail: `हिंदी में डिस्क्रिप्शन शो होगा।`},
 
-  `It Offers No Particular Benefits Or Harms. Life In Such Houses Is Generally Smooth. Overall It Is Good Entrance.`,
+  {detail:`It Offers No Particular Benefits Or Harms. Life In Such Houses Is Generally Smooth. Overall It Is Good Entrance.`,hindiDetail: `हिंदी में डिस्क्रिप्शन शो होगा।`},
 
-  `The Entrance Makes One A Perfectionist To The Extent Of Becoming Delusional And Overambitious. One Starts Expecting Unrealistic Gains.`,
+  {detail:`The Entrance Makes One A Perfectionist To The Extent Of Becoming Delusional And Overambitious. One Starts Expecting Unrealistic Gains.`,hindiDetail: `हिंदी में डिस्क्रिप्शन शो होगा।`},
 
-  `This Entrance Makes People Prone To Mental Depression.`,
+  {detail:`This Entrance Makes People Prone To Mental Depression.`,hindiDetail: `हिंदी में डिस्क्रिप्शन शो होगा।`},
 
-  `An Entrance In This Zone Causes Loss Of General Happiness In The House. At Times, It Induces The Person To Resort To Drugs And Alcohol.`,
+  {detail:`An Entrance In This Zone Causes Loss Of General Happiness In The House. At Times, It Induces The Person To Resort To Drugs And Alcohol.`,hindiDetail: `हिंदी में डिस्क्रिप्शन शो होगा।`},
 
-  `This Entrance Affects The Mentality Of Residents In Such A Way That They Do Not Mind Adopting Unfair And Unlawful Means For Their Own Benefit.`,
+  {detail:`This Entrance Affects The Mentality Of Residents In Such A Way That They Do Not Mind Adopting Unfair And Unlawful Means For Their Own Benefit.`,hindiDetail: `हिंदी में डिस्क्रिप्शन शो होगा।`},
 
-  `In Such A House, The Inhabitants Becomes Susceptible To Harm Caused By Bad Intentions Of Other People.`,
+  {detail:`In Such A House, The Inhabitants Becomes Susceptible To Harm Caused By Bad Intentions Of Other People.`,hindiDetail: `हिंदी में डिस्क्रिप्शन शो होगा।`},
 
-  `A Fear Of Enemies, That Is Not Entirely Unfounded, Stalks People Living In Such Houses, Residents Feel That Others Are Jealous Of Them.`,
+  {detail:`A Fear Of Enemies, That Is Not Entirely Unfounded, Stalks People Living In Such Houses, Residents Feel That Others Are Jealous Of Them.`,hindiDetail: `हिंदी में डिस्क्रिप्शन शो होगा।`},
 
-  `This Door Bring Lots Of Money And Male Progeny For Those Who Occupy It.`,
+  {detail:`This Door Bring Lots Of Money And Male Progeny For Those Who Occupy It.`,hindiDetail: `हिंदी में डिस्क्रिप्शन शो होगा।`},
 ];
 

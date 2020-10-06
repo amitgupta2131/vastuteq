@@ -428,7 +428,7 @@
                 <div class="mt-1 pb-3 properties-section decs">
                     <div class="row">
                         <h5 class="text-uppercase col-sm-6 text-sm overflow-elipsis properties-title">Description </h5>
-                        <div class="form-check col-sm-3 mt-r-5">
+                        <!-- <div class="form-check col-sm-3 mt-r-5">
                             <input class="form-check-input" type="radio" name="exampleRadios" id="eng" value="eng" checked>
                             <label class="form-check-label text-sm" for="eng">
                              ENG
@@ -439,7 +439,7 @@
                             <label class="form-check-label text-sm" for="hindi">
                             हिं
                             </label>
-                        </div>
+                        </div> -->
                     </div>
                     <div class="container p-2 border property description text-sm overflow-scroll"></div>
                 </div>

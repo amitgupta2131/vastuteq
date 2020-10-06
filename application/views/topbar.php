@@ -69,7 +69,72 @@
                 <li class="nav-item">
                     <img class="profile thumbnail rounded-circle" src="<?php echo $userImg != '' ? base_url('uploads/') . $userImg : base_url('assets/images/thumbnail.png') ?>" alt="user" width="20" id="profileButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="profileButton">
-                        <a class="dropdown-item modal__trigger" href="#" data-toggle="modal" data-target="#settingModal"><i class="fas fa-cog"></i>&nbsp;&nbsp;Setting</a>
+                        <a class="dropdown-item" href="#" id="setting" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-cog"></i>&nbsp;&nbsp;Setting</a>
+                        <div class="dropdown-menu dropdown-menu-right p-option row p-0" aria-labelledby="setting">
+                            <div class="col-sm-4 p-0 b-right pt-3 pb-3">
+                                <a class="dropdown-item" id="profile"><i class="fa fa-user" aria-hidden="true"></i>&nbsp;&nbsp;Profile</a>
+                                <a class="dropdown-item row m-0" id="language"><i class="fa fa-language" aria-hidden="true"></i>&nbsp;&nbsp;Language</a>
+                            </div>
+                            <div class="col-sm-8 p-0">
+                                <form class="m-0 profile-form" action="<?php echo base_url('Main/updateUser') ?>" method='post' enctype="multipart/form-data">
+                                    <?php $user = $this->MainModel->selectAllFromWhere("login", array("userId" => $_SESSION['userInfo']['userId']))[0]; ?>
+
+                                    <div class="row m-0 p-3 col-sm-12">
+                                        <div class="md-form col-sm-12">
+                                            <i class="fa fa-user prefix grey-text"></i>
+                                            <input type="text" hidden class="form-control" name='id' value="<?php echo $user['userId'] ?>">
+                                            <input type="text" hidden class="form-control" name='method' value="<?php echo current_url() ?>">
+                                            <input type="text" class="form-control" name="name" placeholder="Full Name" value="<?php echo $user['name'] ?>">
+
+                                        </div>
+
+                                        <div class="md-form col-sm-12">
+                                            <i class="fa fa-phone-square prefix grey-text"></i>
+                                            <input type="number" class="form-control validate" name="phone" required placeholder="Phone No" value="<?php echo $user['mobileNo'] ?>">
+
+                                        </div>
+                                        <div class="md-form col-sm-12">
+                                            <i class="fa fa-envelope prefix grey-text"></i>
+                                            <input type="email" class="form-control validate" name="email" required placeholder="Email" readonly value="<?php echo $user['email'] ?>">
+
+                                        </div>
+                                        <div class="md-form col-sm-12">
+                                            <i class="fa fa-unlock-alt prefix grey-text"></i>
+                                            <input type="password" class="form-control validate" name="password" required placeholder="Password" value="<?php echo $user['password'] ?>">
+                                        </div>
+                                        <div class="md-form col-sm-12">
+                                            <i class="fa fa fa-map-marker prefix grey-text"></i>
+                                            <textarea class="form-control md-textarea validate" rows="1" name="address" required placeholder="Address" value="<?php echo $user['address'] ?>"><?php echo $user['address'] ?></textarea>
+                                        </div>
+                                        <div class="md-form col-sm-12">
+                                            <img class="rounded-circle prefix" src="<?php echo $userImg != '' ? base_url('uploads/') . $userImg : '' ?>" alt="User Image" height="30" width="30">
+                                            <input class="form-control validate" type="file"  class="form-control" name="usrImage">
+                                        </div>
+
+                                        <div class="col-sm-12">
+                                            <button type="submit" class="btn btn-primary" style="float:right;">Update</button>
+                                        </div>
+                                    </div>
+
+
+                                </form>
+                                <div class="col-sm-12 row p-4 m-0 hide text-center lan-container">
+                                    <div class="form-check col-sm-3 mt-r-5">
+                                        <input class="form-check-input" type="radio" name="exampleRadios" id="eng" value="eng" checked>
+                                        <label class="form-check-label text-sm" for="eng">
+                                            ENG
+                                        </label>
+                                    </div>
+                                    <div class="form-check col-sm-3 mt-r-5">
+                                        <input class="form-check-input" type="radio" name="exampleRadios" id="hindi" value="hindi">
+                                        <label class="form-check-label text-sm" for="hindi">
+                                            हिं
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
                         <a class="dropdown-item exit" href="#"><i class="fas fa-sign-out-alt"></i>&nbsp;&nbsp;Log Out</a>
                     </div>
                 </li>
@@ -86,48 +151,68 @@
     <div class="modal-dialog modal-lg modal-dialog-centered" role="document" style="max-width:765px">
         <div class="modal-content" style="min-height:460px">
             <div class="modal-header p-1 pl-3 pr-3">
-                <h5 class="modal-title" id="settingTitle">Settings</h5>
+                <h5 class="modal-title" id="settingTitle">User Profile</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body">
+            <div class="modal-body p-0">
                 <form style="margin:0px" action="<?php echo base_url('Main/updateUser') ?>" method='post' enctype="multipart/form-data">
                     <?php $user = $this->MainModel->selectAllFromWhere("login", array("userId" => $_SESSION['userInfo']['userId']))[0]; ?>
-                    <div class="row">
-                        <div class="form-group col-sm-6">
-                            <label for="name">Name</label>
-                            <input type="text" hidden class="form-control" name='id' value="<?php echo $user['userId'] ?>">
-                            <input type="text" hidden class="form-control" name='method' value="<?php echo current_url() ?>">
-                            <input type="text" class="form-control" name="name" value="<?php echo $user['name'] ?>">
+                    <div class="row m-0">
+                        <div class="col-sm-6 p-0" style="background:#e3e3e3;">
+                            <div class="text-center bg-primary">
+                                <div class="pro-style">
+                                    <img class="rounded-circle" src="<?php echo $userImg != '' ? base_url('uploads/') . $userImg : '' ?>" alt="User Image" height="100" width="100">
+                                    <div><?php echo $user['name'] ?></div>
+                                </div>
+                            </div>
+                            <div class="mt-5r ml-auto mr-auto p-3">
+                                <div class="row m-0"><span class="text-info col-sm-5">Phone No : </span><span class="col-sm-7"><?php echo $user['mobileNo'] ?></span></div>
+                                <div class="row m-0"><span class="text-info col-sm-5">Email : </span><span class="col-sm-7"><?php echo $user['email'] ?></span></div>
+                                <div class="row m-0"><span class="text-info col-sm-5">Password : </span><span class="col-sm-7"><?php echo $user['password'] ?></span></div>
+                                <div class="row m-0"><span class="text-info col-sm-5">Address : </span><span class="col-sm-7"><?php echo $user['address'] ?></span></div>
+                            </div>
+
                         </div>
-                        <div class="form-group col-sm-6">
-                            <label for="phone">Phone No.</label>
-                            <input type="number" class="form-control" name="phone" value="<?php echo $user['mobileNo'] ?>">
-                        </div>
-                        <div class="form-group col-sm-6">
-                            <label for="exampleFormControlInput1">Email address</label>
-                            <input type="email" class="form-control" name="email" placeholder="name@example.com" readonly value="<?php echo $user['email'] ?>">
-                        </div>
-                        <div class="form-group col-sm-6">
-                            <label for="password">Password</label>
-                            <input type="password" class="form-control" name="password" value="<?php echo $user['password'] ?>">
-                        </div>
-                        <div class="form-group col-sm-6">
-                            <label for="address">Address</label>
-                            <textarea class="form-control" name="address" value="<?php echo $user['address'] ?>"><?php echo $user['address'] ?></textarea>
-                        </div>
-                        <div class="form-group col-sm-6">
-                            <label for="image">User Image</label>
-                            <div class="row">
-                                <img class="col-sm-4" src="<?php echo $userImg != '' ? base_url('uploads/') . $userImg : '' ?>" height="50" width="50">
-                                <input class="col-sm-8" type="file" class="form-control" name="usrImage">
+                        <div class="row m-0 p-3 col-sm-6">
+                            <div class="md-form col-sm-12">
+                                <i class="fa fa-user prefix grey-text"></i>
+                                <input type="text" hidden class="form-control" name='id' value="<?php echo $user['userId'] ?>">
+                                <input type="text" hidden class="form-control" name='method' value="<?php echo current_url() ?>">
+                                <input type="text" class="form-control" name="name" placeholder="Full Name">
+
+                            </div>
+
+                            <div class="md-form col-sm-12">
+                                <i class="fa fa-phone-square prefix grey-text"></i>
+                                <input type="number" class="form-control validate" name="phone" required placeholder="Phone No">
+
+                            </div>
+                            <div class="md-form col-sm-12">
+                                <i class="fa fa-envelope prefix grey-text"></i>
+                                <input type="email" class="form-control validate" name="email" required placeholder="Email" readonly value="<?php echo $user['email'] ?>">
+
+                            </div>
+                            <div class="md-form col-sm-12">
+                                <i class="fa fa-unlock-alt prefix grey-text"></i>
+                                <input type="password" class="form-control validate" name="password" required placeholder="Password">
+                            </div>
+                            <div class="md-form col-sm-12">
+                                <i class="fa fa fa-map-marker prefix grey-text"></i>
+                                <textarea class="form-control md-textarea validate" rows="1" name="address" required placeholder="Address"></textarea>
+                            </div>
+                            <div class="md-form col-sm-12">
+                                <i class="fa fa-camera prefix grey-text"></i>
+                                <input class="form-control validate" type="file" required class="form-control" name="usrImage">
+                            </div>
+
+                            <div class="col-sm-12">
+                                <button type="submit" class="btn btn-primary" style="float:right;">Update</button>
                             </div>
                         </div>
                     </div>
-                    <div>
-                        <button type="submit" class="btn btn-primary" style="float:right;">Update</button>
-                    </div>
+
                 </form>
             </div>
         </div>
@@ -151,7 +236,7 @@
 <script>
     function toggleFullScreen() {
         var a = $(window).height() - 10;
-        
+
 
         if (!document.fullscreenElement && // alternative standard method
             !document.mozFullScreenElement && !document.webkitFullscreenElement) { // current working methods
@@ -176,14 +261,14 @@
         }
     }
 
-    function increaseMapScreen(){
+    function increaseMapScreen() {
         var totalHeight = screen.height
-        $('#vastuteqCanvas').attr('height',totalHeight);
-        $('.mask').attr('height',totalHeight);
-        $('#myMask rect').attr('height',totalHeight);
-        $('.mask g rect').attr('height',totalHeight);
-        $('#paintCanvas').attr('height',totalHeight);
-        $('#paintCanvasBackground').attr('height',totalHeight);
+        $('#vastuteqCanvas').attr('height', totalHeight);
+        $('.mask').attr('height', totalHeight);
+        $('#myMask rect').attr('height', totalHeight);
+        $('.mask g rect').attr('height', totalHeight);
+        $('#paintCanvas').attr('height', totalHeight);
+        $('#paintCanvasBackground').attr('height', totalHeight);
     }
 
 

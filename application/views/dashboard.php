@@ -70,7 +70,11 @@
                     <div class="col-lg-3 col-md-4 col-sm-12 mb-4">
                         <div class="card rounded bubbly-button p-1">
                         <img class="card-img-top" src="<?php echo isset($imageResource['src'])?$imageResource['src']:base_url('assets/images/noImage.png') ?>">
-                            <div class="card-body p-2 border-top border-thick">                                
+                            <div class="card-body p-2 border-top border-thick">
+                            <div class="project-name card-text">
+                                    <span class="col-sm-5 pr-0">Id : </span>
+                                    <span class="col-sm-7 pr-0"><?php echo $property[$i]['propertyId'] ?></span>
+                                </div>                                
                                 <div class="project-name card-text">
                                     <span class="col-sm-5 pr-0">Name : </span>
                                     <span class="col-sm-7 pr-0"><?php echo $property[$i]['propertyName'] ?></span>

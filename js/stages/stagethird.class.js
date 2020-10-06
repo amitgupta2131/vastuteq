@@ -606,11 +606,17 @@ export default class StageThird {
 
     });
 
+// select language
+$('#language').on('mouseover',function(){
+ $('.profile-form').addClass('hide');
+ $('.lan-container').removeClass('hide')
+});
 
- 
-
-
-
+// select profile
+$('#profile').on('mouseover',function(){
+  $('.profile-form').removeClass('hide');
+  $('.lan-container').addClass('hide')
+});
 
   }
 

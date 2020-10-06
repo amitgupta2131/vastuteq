@@ -322,7 +322,7 @@ export default class Assist {
 
         g.on("mouseover", function () {
             if (type == "vedic") return false;
-            let lan = $('.decs input[type="radio"]:checked').val();            
+            let lan = $('.lan-container input[type="radio"]:checked').val();          
             let className = d3.select(this).select("path").attr("class");
             let detail = d3.select(this).select("path").attr("data-detail");
             let detail_hindi = d3.select(this).select("path").attr("data-detail-hindi");
@@ -335,7 +335,7 @@ export default class Assist {
                 .style("fill", "green")
                 .style("fill-opacity", "0.1");
 
-            d3.select('.property.description').text(lan == 'eng' ? detail : detail_hindi);
+            d3.select('.property.description').text(lan == 'hindi' ? detail_hindi : detail);
 
         }).on("mouseout", function () {
             if (type == "vedic") return false;

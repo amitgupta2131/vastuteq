@@ -5,6 +5,7 @@ import Model from "./helper/model.class.js";
 import Modal from "./helper/modal.class.js";
 import ObjectModel from "./helper/objectmodel.class.js";
 import EditTextModel from "./helper/editTextModel.class.js";
+import { OBJ_EFFECT } from "./helper/objectEffect.class.js";
 
 
 var isCreateMap = false,
@@ -557,9 +558,11 @@ function objectWiseReport() {
   }
 }
 
+//ZoneWiseReport
 function zoneWiseReport() {
   let reportData = JSON.parse(localStorage.getItem('objectReport'));
   let objects = JSON.parse(localStorage.getItem('objects'));
+
   if (reportData != null && reportData != '') {
     $('#reportModal .modal-body').empty();
     $('#reportModal .modal-dialog').css('min-width', '1150px');
@@ -578,59 +581,74 @@ function zoneWiseReport() {
     if (div == null || div == "") {
       div = 8;
     }
-    console.log(div)
+
     let modal = new Modal()
     let directions = modal.getDivData(div)
-
+    let checkArray = [];
 
     let reportTable = `<table class="table table-bordered table-hover mt-2">
-                     <thead>
+                     <thead id="zoneHead">
                      <tr>
                      <th scope="col">#</th>
-                     <th scope="col">Directions</th>
-                     <th scope="col">Objects</th>
-                     <th scope="col">Activities</th>
-                     </tr>
+                     <th scope="col">Directions</th>`
+    for (let data of directions) {
+      for (let dData of reportData) {
+        let keys = Object.keys(dData)
+        let type = '';
+        objects.map(object => object.image.id == dData.id ?
+          type = object.image.type
+          : object)
+
+        for (let i = 2; i < keys.length; i++) {
+          if (keys[i] == data.name && type == 'object' && !checkArray.includes(dData.name)) {
+            checkArray.push(dData.name)
+            reportTable += `<th>${dData.name}</th>`;
+          } else if (keys[i] == data.name && type == 'activity' && !checkArray.includes(dData.name)) {
+            checkArray.push(dData.name)
+            reportTable += `<th>${dData.name}</th>`;
+          }
+        }
+      }
+    }
+    reportTable += `</tr>
                  </thead>
                  <tbody>`
     let count = 1;
     for (let data of directions) {
+
       reportTable += `<tr>
                     <th scope="row">${count++}</th>
-                    <td>${data.name}</td>
-                    <td class="${data.name}">`
+                    <td>${data.name}</td>`
+
+
+
       for (let dData of reportData) {
-        let keys = Object.keys(dData)
+        let keys = Object.keys(dData);
         let type = '';
         objects.map(object => object.image.id == dData.id ?
           type = object.image.type
           : object)
-
         for (let i = 2; i < keys.length; i++) {
           if (keys[i] == data.name && type == 'object') {
-            reportTable += dData.name + ',';
-          }
-        }
-      }
-      reportTable += `</td><td class="${data.name}1">`
-      for (let dData of reportData) {
-        let keys = Object.keys(dData)
-        let type = '';
-        objects.map(object => object.image.id == dData.id ?
-          type = object.image.type
-          : object)
-
-        for (let i = 2; i < keys.length; i++) {
-          if (keys[i] == data.name && type == 'activity') {
-            reportTable += dData.name + ',';
+            let effect = getEffect(dData.name, data.name);
+            console.log(effect)
+            reportTable += `<td>${effect.trim() != '' ? effect : ''}</td>`
+          } else if (keys[i] == data.name && type == 'activity') {
+            let effect = getEffect(dData.name, data.name);
+            reportTable += `<td>${effect.trim() != '' ? effect : ''}</td>`
+          }else{
+            reportTable += `<td></td>`
           }
         }
       }
 
-      reportTable += `</td></tr>`
+
+
+      reportTable += `</tr>`
     }
     reportTable += `</tbody></table>`
-    //Append report table to modal body  
+    //Append report table to modal body
+
     $('#rtable').html(reportTable)
     //Append text area after report table for any custom information
     $('#reportModal .modal-body').
@@ -651,6 +669,16 @@ function zoneWiseReport() {
   } else {
     showAlert('Add objects and then Select the grid Before generate the report', 'danger')
   }
+}
+
+function getEffect(obj, dir) {
+  let effects;
+  OBJ_EFFECT.map(object => object.objName == obj ?
+    object.effect.map(object1 => object1.direction == dir ?
+      effects = object1.effect
+      : '')
+    : '');
+  return effects != undefined ? effects : "";
 }
 
 function setObjColor() {
@@ -742,7 +770,7 @@ $('#sixteenZoneColor').on('click', function () {
   AjaxPost(formData, url, sixteenZonesuccess, AjaxError);
 
   function sixteenZonesuccess(content, targetTextarea) {
-    var result = JSON.parse(content);    
+    var result = JSON.parse(content);
     $('#reportModal .modal-body').empty();
     $('#reportModal .modal-dialog').css('min-width', '1150px');
     $('#reportModal .modal-content').css('min-height', '460px');
@@ -786,7 +814,7 @@ $('#sixteenZoneColor').on('click', function () {
     //Show modal
     $('#reportModal').modal('show')
   }
-  
+
 
 })
 
@@ -794,7 +822,7 @@ $('#reportModal').on('click', '#set16ZoneColor', function () {
   let dataArray = [];
   $('#reportModal table tbody tr').each(function () {
     let name = $(this).find('td:eq(1)').html();
-    let color = $(this).find('td:eq(2)').find('option:selected').html();    
+    let color = $(this).find('td:eq(2)').find('option:selected').html();
     dataArray.push({ shortName: name, color: color });
   });
 
@@ -806,10 +834,10 @@ $('#reportModal').on('click', '#set16ZoneColor', function () {
 
   function sixteenZoneSavesuccess(content, targetTextarea) {
     let result = JSON.parse(content);
-    if(result[0] == 'success'){
-      showAlert(result[1],'success')
-    }else{
-      showAlert(result[1],'danger')
+    if (result[0] == 'success') {
+      showAlert(result[1], 'success')
+    } else {
+      showAlert(result[1], 'danger')
     }
   }
 })
