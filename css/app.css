@@ -816,8 +816,17 @@ input::-webkit-inner-spin-button {
   #porPrint,
   #rPrint,
   .client-form,
-  #back {
+  #back,
+  .note-toolbar.card-header,
+  #cReport,
+  .note-resizebar {
     display: none;
+  }
+
+  .note-editing-area,
+  .note-editor.note-airframe,
+  .note-editor.note-frame {
+    border: none;
   }
 
   select {
@@ -946,7 +955,7 @@ input::-webkit-inner-spin-button {
   z-index: 99;
   border: 1px solid #ced4da;
   top: 139px;
-    left: 20px;
+  left: 20px;
   border-radius: 3px;
   padding: 0px !important;
   background: white;
@@ -1075,7 +1084,7 @@ input::-webkit-inner-spin-button {
   z-index: 1 !important;
 }
 
-.mt-r-5{
+.mt-r-5 {
   margin-top: -5px;
 }
 
@@ -1202,7 +1211,7 @@ input::-webkit-inner-spin-button {
   border-radius: 0;
 }
 
-.pro-style{
+.pro-style {
   position: relative;
   top: 60px;
 }
@@ -1211,42 +1220,83 @@ input::-webkit-inner-spin-button {
   margin-top: 5rem;
 }
 
-.dropdown-menu.dropdown-menu-right.p-option.show{
-  display:flex;
+.dropdown-menu.dropdown-menu-right.p-option.show {
+  display: flex;
 }
 
-.p-option{
-  min-width:35rem!important;  
-  top:-40px !important;
+.p-option {
+  min-width: 35rem !important;
+  top: -40px !important;
 }
 
-.b-right{
+.b-right {
   border-right: 1px solid #9e9c9e;
 }
 
-.hide{
+.hide {
   display: none;
 }
 
-#language,#profile{
+#language,
+#profile {
   cursor: pointer;
 }
 
-#language:hover,#profile:hover{
+#language:hover,
+#profile:hover {
   background: var(--primary);
-  color:white;
+  color: white;
 }
 
-.report-container .b-right{
-  background-color:rgb(231, 230, 230);
+.report-container .b-right {
+  background-color: rgb(231, 230, 230);
 }
 
-.report-container .b-right .nav-link{
+.report-container .b-right .nav-link {
   padding: .5rem 1rem !important;
 }
 
-body{
+body {
   overflow-y: scroll;
 }
 
+.note-editable.card-block{
+  height: 300px !important;
+}
+
+#main-tab-right #rtable .card:nth-child(2),
+#main-tab-right #rtable .card:nth-child(3),
+#main-tab-right #rtable .card:nth-child(4),
+#main-tab-right #rtable .card:nth-child(5),
+#main-tab-right #rtable .card:nth-child(6){
+  margin-top: 1rem;
+}
+
+#main-tab-right #rtable .card:nth-child(2) .card-header:nth-child(1) div,
+#main-tab-right #rtable .card:nth-child(3) .card-header:nth-child(1) div,
+#main-tab-right #rtable .card:nth-child(4) .card-header:nth-child(1) div,
+#main-tab-right #rtable .card:nth-child(5) .card-header:nth-child(1) div,
+#main-tab-right #rtable .card:nth-child(6) .card-header:nth-child(1) div{
+  display: none !important;
+}
+
+#main-tab-right #rtable .card:nth-child(2) .rheader,
+#main-tab-right #rtable .card:nth-child(2) .rfooter,
+#main-tab-right #rtable .card:nth-child(3) .rheader,
+#main-tab-right #rtable .card:nth-child(3) .rfooter,
+#main-tab-right #rtable .card:nth-child(4) .rheader,
+#main-tab-right #rtable .card:nth-child(4) .rfooter,
+#main-tab-right #rtable .card:nth-child(5) .rheader,
+#main-tab-right #rtable .card:nth-child(5) .rfooter{
+  display: none !important;
+}
+
+#main-tab-right #rtable .card:nth-child(6) .rheader,
+#main-tab-right #rtable .card:nth-child(1) .rfooter{
+  display: none ;
+}
+
+#main-tab-right.flag #rtable .card:nth-child(1) .rfooter{
+  display: flex !important ;
+}
 /*# sourceMappingURL=app.css.map */

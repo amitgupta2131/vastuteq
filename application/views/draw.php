@@ -86,6 +86,7 @@
                                 <div class="form-group col-md-3">
                                     <label for="inputEmail4">Full Name <span class="text-danger">*</span></label>
                                     <input type="text" class="form-control form-control-sm" id="clientName" name="cName" placeholder="Name" required />
+                                    <input type="text" hidden class="form-control form-control-sm" id="cId" name="cId" required />
 
                                 </div>
 
@@ -961,6 +962,24 @@
                                     ?>
                                         <div class="col-md-4 border d-flex flex-column justify-content-center align-items-center object-item cursor-pointer" data-object-item="<?php echo $value['type'] ?>" data-src="<?php echo base_url('assets/objects/sofa_icon.svg') ?>" title="<?php echo $value['type'] ?>" type="activity">
                                             <img src="<?php echo base_url('assets/objects/sofa_icon.svg') ?>" alt="" width="35">
+                                        </div>
+                                    <?php } ?>
+                                </div>
+                            </div>
+                            <div class="col-md-12 mt-2 mb-2 border-bot">
+                                <div class="heading text-capitalize text-sm font-weight-bold" data-toggle="collapse" data-target="#collapse30" aria-expanded="false" aria-controls="collapse30">
+                                    <img class="img_pos" src="<?php echo base_url('assets/objects/') . 'gate.svg' ?>" alt="" width="20">
+
+                                    MAIN GATE</div>
+                                <div class="row collapse" id="collapse30">
+                                    <?php
+                                    $arr = array_filter($activities, function ($ar) {
+                                        return ($ar['accessories'] == 'MAIN GATE');
+                                    });
+                                    foreach ($arr as $key => $value) {
+                                    ?>
+                                        <div class="col-md-4 border d-flex flex-column justify-content-center align-items-center object-item cursor-pointer" data-object-item="<?php echo $value['type'] ?>" data-src="<?php echo base_url('assets/objects/gate.svg') ?>" title="<?php echo $value['type'] ?>" type="activity">
+                                            <img src="<?php echo base_url('assets/objects/gate.svg') ?>" alt="" width="35">
                                         </div>
                                     <?php } ?>
                                 </div>

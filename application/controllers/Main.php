@@ -119,19 +119,19 @@ class Main extends CI_Controller
 		// }
 
 		//$clientData['cId'] = '';
-		$cId = '';
+		$cId = $_POST['cId'];
 		if (!empty($_POST['cName'])) {
 
 			$clientData = array(
 				'userId' => $_SESSION['userInfo']['userId'],
-				'name'	=> validateInput($_POST['cName']),
-				'mobileNo' => validateInput($_POST['mNumber']),
-				'email'	=> validateInput($_POST['cEmail']),
-				'address' => validateInput($_POST['cAddress']),
+				'clientName'	=> validateInput($_POST['cName']),
+				'clientMobileNo' => validateInput($_POST['mNumber']),
+				'clientEmail'	=> validateInput($_POST['cEmail']),
+				'clientAddress' => validateInput($_POST['cAddress']),
 				'landlineNo' => validateInput($_POST['lNumber']),
 				'cId' => $cId
 			);
-			$clientValidate =   $this->MainModel->selectAllFromWhere('clientdetails', array('email' => $clientData['email'], 'mobileNo' => $clientData['mobileNo']));
+			$clientValidate =   $this->MainModel->selectAllFromWhere('clientdetails', array('clientEmail' => $clientData['clientEmail'], 'clientMobileNo' => $clientData['clientMobileNo']));
 
 			if (!$clientValidate) {
 				$clientData['cId'] =   $this->MainModel->getNewIDorNo("C-", 'clientdetails');
@@ -665,14 +665,58 @@ class Main extends CI_Controller
 
 	//get 16 zone data with colors
 	public function getSixteenZoneData(){
+		$id = $_POST['id'];
 		$result = $this->MainModel->selectSixteenZoneData();
-		$colors = $this->MainModel->selectAllFromWhere("sixteen_zone_color", array("houseMapId" => $_POST['id']));
+		$colors = $this->MainModel->selectAllFromWhere("sixteen_zone_color", array("houseMapId" => $id));
 		if($result && $colors){
 			echo json_encode(array('zoneData' => $result,'userColors'=>$colors));
 		}else{
-			echo json_encode('error','No data found');
+			echo json_encode(array('error','No data found'));
 		}
 		
+	}
+
+	//get consultant report
+	public function consultantReport(){
+		$id = $_POST['id'];
+		$report = $this->MainModel->selectAllFromWhere("consultant_report", array("mapId" => $id));
+		if($report){
+			echo json_encode(array('success',$report));
+		}else{
+			echo json_encode(array('error','No data found'));
+		}
+	}
+
+	//getProperty Details
+	public function getPropertyHousemapDetails(){
+		$id = $_POST['id'];
+		$report = $this->MainModel->getPropertyHousemapDetails($id);
+		if($report){
+			echo json_encode(array('success',$report));
+		}else{
+			echo json_encode(array('error','No data found'));
+		}
+	}
+
+	public function saveConsultantReport(){
+		
+		$data = array(
+			'mapId' => $_POST['id'],
+			'report' => $_POST['value'],
+		);
+
+		$report = $this->MainModel->selectAllFromWhere("consultant_report", array("mapId" => $data['report']));
+		if(!$report){
+			$result = $this->MainModel->insertInto("consultant_report",$data);
+			if($result){
+				echo json_encode(array('success','Report saved successfully'));
+			}else{
+				echo json_encode(array('error','Report could not saved contact to IT'));
+			}
+			
+		}else{
+			echo json_encode(array('error','HouseMap already contains consultant Report'));
+		}
 	}
 
 	// Api call function to get colorsAnd Details result

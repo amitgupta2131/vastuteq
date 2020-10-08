@@ -954,7 +954,7 @@ $('#clientName').on('keyup', function () {
       $('#clients').empty();
       result.forEach(element => {
         $('#clients').removeClass('d-none')
-        $('#clients').append(`<a href="#">${element.name}, ${element.mobileNo},${element.landlineNo}, ${element.email}</a>`)
+        $('#clients').append(`<a href="#" cId="${element.cId}">${element.clientName}, ${element.clientMobileNo},${element.landlineNo}, ${element.clientEmail}</a>`)
       });
     } else {
       showAlert(result.error, 'danger');
@@ -964,7 +964,9 @@ $('#clientName').on('keyup', function () {
 
 $('#clients').on('click', 'a', function () {
   let data = $(this).text().split(',');
+  let id = $(this).attr('cId')
   $("input[name='cName']").val(data[0]);
+  $("input[name='cId']").val(id);
   $("#mNumber").val(data[1]);
   $("input[name='lNumber']").val(data[2]);
   $("input[name='cEmail']").val(data[3]);

@@ -261,7 +261,7 @@ class MainModel extends ci_model
 	public function getClientDetails($value)
 	{
 		$condition = $value . '%';
-		$query = "select * from clientdetails where name like '$condition'";
+		$query = "select * from clientdetails where clientName like '$condition'";
 		$q = $this->db->query($query)->result_array();
 		return $this->db->affected_rows() ? $q : false;
 	}
@@ -281,6 +281,20 @@ class MainModel extends ci_model
 		$query .= "colors.name=sixteenzones.shortName ";		
 		$query .= "where colors.divisions = 'SIXTEEN' ";
 		$query .= "order by colors.serial ASC";
+		$q = $this->db->query($query)->result_array();
+		return $this->db->affected_rows() ? $q : false;
+	}
+
+	public function getPropertyHousemapDetails($id = ''){
+		$query = "SELECT * FROM `propertydetails` ";
+		$query .= "LEFT JOIN housemaps ON ";
+		$query .= "housemaps.propertId=propertydetails.propertyId ";
+		$query .= "LEFT JOIN login ON ";
+		$query .= "propertydetails.userId=login.userId ";
+		$query .= "LEFT JOIN clientdetails ON ";
+		$query .= "propertydetails.clientId=clientdetails.cId ";
+		$query .= "where housemaps.mapId = '$id' ";
+		$query .= "order by housemaps.id DESC";
 		$q = $this->db->query($query)->result_array();
 		return $this->db->affected_rows() ? $q : false;
 	}

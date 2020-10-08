@@ -1,4 +1,4 @@
-import { DIRECTION_EIGHT, DIRECTION_SIXTEEN, DIRECTION_THIRTYTWO } from "./directiondetails.class.js";
+import { DIRECTION_EIGHT, DIRECTION_SIXTEEN, DIRECTION_THIRTYTWO, DEVTAS } from "./directiondetails.class.js";
 import Utility from './utility.class.js';
 
 export default class Assist {
@@ -33,41 +33,7 @@ export default class Assist {
             { name: 'W7', value: 1, color: "white" }, { name: 'W8', value: 1, color: "yellow" }, { name: 'N1', value: 1, color: "yellow" },
             { name: 'N2', value: 1, color: "white" }, { name: 'N3', value: 1, color: "blue" }
         ];
-        this.DEVTAS = [
-            { direction: "N4", name: 'Bhallat', value: 41, text: "Discriminator,Parkhi" },
-            { direction: "N5", name: 'Soma', value: 42, text: "Solution,Drive" },
-            { direction: "N6", name: 'Bhujang', value: 43, text: "Doctor,Healer" },
-            { direction: "N7", name: 'Aditi', value: 44, text: "Caretaker,Councellor" },
-            { direction: "N8", name: 'Diti', value: 45, text: "Instructor,Pt Teacher" },
-            { direction: "E1", name: 'Shikhi', value: 14, text: "Subject Expert,Bhram Gyani" },
-            { direction: "E2", name: 'Parjanya', value: 15, text: "Producer,Fertilizer" },
-            { direction: "E3", name: 'Jayant', value: 16, text: "Excellent Performer,Achiever" },
-            { direction: "E4", name: 'Mahendra', value: 17, text: "Top Boss,King" },
-            { direction: "E5", name: 'Surya', value: 18, text: "Executer,Awakener" },
-            { direction: "E6", name: 'Satya', value: 19, text: "Court,Dharma" },
-            { direction: "E7", name: 'Bhrisha', value: 20, text: "Researher,Grinder" },
-            { direction: "E8", name: 'Antriksh', value: 21, text: "Market Space,Bandwidth" },
-            { direction: "S1", name: 'Anil', value: 22, text: "Elevator,Fire" },
-            { direction: "S2", name: 'Pusha', value: 23, text: "HighWay Security,Recoverer" },
-            { direction: "S3", name: 'Vitasta', value: 24, text: "Ancimory Service Provider" },
-            { direction: "S4", name: 'Griha Spatya', value: 25, text: "Binder,Commander" },
-            { direction: "S5", name: 'Yama', value: 26, text: "Finer,Sortor" },
-            { direction: "S6", name: 'Gandharva', value: 27, text: "whActor,Performing Artist" },
-            { direction: "S7", name: 'Bhriangraj', value: 28, text: "Cleasner,Drainer" },
-            { direction: "S8", name: 'Mrigah', value: 29, text: "Shooter,Hunter" },
-            { direction: "W1", name: 'Pitra', value: 30, text: "Anctestors Legacy" },
-            { direction: "W2", name: 'Dauwarik', value: 31, text: "Gaurd Security System" },
-            { direction: "W3", name: 'Sugreev', value: 32, text: "Capturer,Gainer" },
-            { direction: "W4", name: 'Puspdant', value: 33, text: "Grammarian,Ustaad,maestro" },
-            { direction: "W5", name: 'Varun', value: 34, text: "Ed,CBI,Vigilance" },
-            { direction: "W6", name: 'Asur', value: 35, text: "Informer,Secret Agent" },
-            { direction: "W7", name: 'Shosha', value: 36, text: "Depressive,Dryer" },
-            { direction: "W8", name: 'Papyakshma', value: 37, text: "Alcoholic,Addicted" },
-            { direction: "N1", name: 'Roga', value: 38, text: "Vyeakent,Fatigue" },
-            { direction: "N2", name: 'Ahir', value: 39, text: "Shaker,Attacker" },
-            { direction: "N3", name: 'Mukhya', value: 40, text: "Designer,System Maker" },
-
-        ];
+        this.DEVTAS = DEVTAS;
     }
 
     drawMask({ layer, points, size }) {

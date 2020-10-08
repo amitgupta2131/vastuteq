@@ -18,6 +18,8 @@
     <link rel="stylesheet" href="<?php echo base_url('css/modal.css') ?>">
     <!-- RULER CSS -->
     <link rel="stylesheet" href="<?php echo base_url('css/ruler.min.css') ?>">
+    <!-- summernote -->
+    <link rel="stylesheet" href="<?php echo base_url('css/summernote-bs4.min.css') ?>">
 
 
     <!-- BASE URL -->
@@ -52,6 +54,8 @@
     <script src="<?php echo base_url('js/bootstrap-notify.min.js') ?>"></script>
     <!-- D3 JS SCRIPT -->
     <script src="<?php echo base_url('js/helper/ruler.min.js') ?>"></script>
+    <!-- Summernote -->
+    <script src="<?php echo base_url('js/summernote-bs4.min.js') ?>"></script>
 
     <script defer src="<?php echo base_url('js/reports.js') ?>" type="module"></script>
 

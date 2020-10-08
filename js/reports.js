@@ -1,12 +1,16 @@
 import Modal from "./helper/modal.class.js";
 import { OBJ_EFFECT } from "./helper/objectEffect.class.js";
+import { DEVTAS } from "./helper/directiondetails.class.js";
 
 
 $(document).ready(function () {
     let reportData = JSON.parse(localStorage.getItem('objectReport'));
     let objects = JSON.parse(localStorage.getItem('objects'));
+    let mapId = localStorage.getItem('selectedMapId');
+    let div = localStorage.getItem('reportDivision')
+
     //Print and back buttons
-    let buttons = `<div style="position:relative">
+    let buttons = `<div class="col-sm-2" style="position:relative">
                     <button class="btn btn-outline-primary float-right mb-1 btn-sm text-sm pl-3 pr-3" id="rPrint">Print</button>
                     <button class="btn btn-outline-primary float-right mr-2 mb-1 btn-sm text-sm pl-3 pr-3" id="back">Back</button>
                    </div>`;
@@ -23,27 +27,46 @@ $(document).ready(function () {
     });
     $('#tab3').on('click', function () {
         $('#main-tab-right').empty();
+        mainGateEntry();
+        $('#main-tab-right').addClass('flag');
+
+
     });
     $('#tab4').on('click', function () {
+        $('#main-tab-right').empty();
         objectWiseReport()
+        $('#main-tab-right').addClass('flag');
     });
     $('#tab5').on('click', function () {
+        $('#main-tab-right').empty();
         zoneWiseReport('activity')
+        $('#main-tab-right').addClass('flag');
     });
     $('#tab6').on('click', function () {
+        $('#main-tab-right').empty();
         zoneWiseReport()
+        $('#main-tab-right').addClass('flag');
     });
     $('#tab7').on('click', function () {
+        $('#main-tab-right').empty();
         sixteenZoneColorReport()
+        $('#main-tab-right').addClass('flag');
     });
     $('#tab8').on('click', function () {
         $('#main-tab-right').empty();
+        consultantReport();
+        $('#main-tab-right').addClass('flag');
     });
     $('#tab9').on('click', function () {
         $('#main-tab-right').empty();
-    });
-    $('#tab10').on('click', function () {
-        $('#main-tab-right').empty();
+        $('#main-tab-right').removeClass('flag');
+        mainGateEntry();
+        objectWiseReport();
+        zoneWiseReport('activity');
+        zoneWiseReport();
+        sixteenZoneColorReport();
+        consultantReport();
+        
     });
     $('#tab10').on('click', function () {
         window.location.href = BASE_URL + 'Main/ayadhi'
@@ -52,11 +75,33 @@ $(document).ready(function () {
     //Object Wise Report
     function objectWiseReport() {
         if (reportData != null && reportData != '') {
-            $('#main-tab-right').empty();
-            $('#main-tab-right').append(buttons);
-            //Creating Report table
-            $('#main-tab-right').append('<div id="rtable"></div>')
-            let reportTable = `<table class="table table-bordered table-hover mt-2">
+            getHouseMAp().then(resolve => {
+
+                $('#main-tab-right').append('<div id="rtable"></div>')
+                let data = JSON.parse(resolve)[1][0];
+
+                let reportHeader = `<div class="col-sm-12 row rheader text-center">
+                <div class="col-sm-3"><div class="font-weight-bold">Client Name  </div><div>${data.clientName}</div></div>
+                <div class="col-sm-3"><div class="font-weight-bold">Building Address  </div><div>${data.propertyAddress}</div></div>
+                <div class="col-sm-3"><div class="font-weight-bold">Facing of Building  </div><div>${localStorage.getItem('face')}</div></div>
+                <div class="col-sm-3"><div class="font-weight-bold">Degree  </div><div>${data.degree}</div></div>
+                </div>`;
+
+                let reportFooter = `<div class="col-sm-12 rfooter row text-center">
+                <div class="col-sm-3"><div class="font-weight-bold">Consultant Name </div><div>${data.name}</div></div>
+                <div class="col-sm-3"><div class="font-weight-bold">Address  </div><div>${data.address}</div></div>
+                <div class="col-sm-3"><div class="font-weight-bold">Contact No  </div><div>${data.mobileNo}</div></div>
+                <div class="col-sm-3"><div class="font-weight-bold">Email  </div><div>${data.email}</div></div>
+                </div>`
+
+                let reportTable = `<div class="card">
+                                    <div class="card-header row m-0">
+                                   <h5 class="col-sm-10"> Object/Activity Wise Report </h5>
+                                        ${buttons}
+                                    </div>
+                                    <div class="card-body">
+                                    ${reportHeader}
+                <table class="table table-bordered table-hover mt-2">
                               <thead>
                                 <tr>
                                   <th scope="col">#</th>
@@ -68,16 +113,16 @@ $(document).ready(function () {
                                 </tr>
                               </thead>
                               <tbody>`
-            let count = 1;
-            for (let data of reportData) {
-                let type = '';
-                objects.map(object => object.image.id == data.id ?
-                    type = object.image.type
-                    : object)
-                let keys = Object.keys(data)
-                for (let i = 2; i < keys.length; i++) {
-                    if (keys[i] != 'color' && keys[i] != 'recommendedColor') {
-                        reportTable += `<tr>
+                let count = 1;
+                for (let data of reportData) {
+                    let type = '';
+                    objects.map(object => object.image.id == data.id ?
+                        type = object.image.type
+                        : object)
+                    let keys = Object.keys(data)
+                    for (let i = 2; i < keys.length; i++) {
+                        if (keys[i] != 'color' && keys[i] != 'recommendedColor') {
+                            reportTable += `<tr>
                                 <th scope="row">${count++}</th>
                                 <td>${data.name}</td>
                                 <td>${keys[i]}</td>      
@@ -85,114 +130,127 @@ $(document).ready(function () {
                                 <td>${data.color != undefined ? data.color : ""}</td>
                                 <td>${data.recommendedColor != undefined ? data.recommendedColor : ""}</td>
                               </tr>`
+                        }
                     }
                 }
-            }
-            reportTable += `</tbody></table>`
-            //appending table to modal body
-            $('#rtable').html(reportTable)
-            //adding text area after report table for custom report
-            $('#main-tab-right').
-                append(`<div class="form-group">
+                reportTable += `</tbody></table>      
+                <div class="form-group col-sm-12 p-0">
                     <label for="exampleFormControlTextarea1">Recommendation</label>
                     <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-                    </div>`)
+                </div>
+                ${reportFooter}
+                </div>
+                </div>`
+                //appending table to modal body                
+                $('#rtable').append(reportTable)
+            });
         }
         else {
             showAlert('Add objects and then Select the grid Before generate the report', 'warning')
         }
+
     }
 
     //Zone Wise Report
     function zoneWiseReport(objType = 'object') {
+
         if (reportData != null && reportData != '') {
+            getHouseMAp().then(resolve => {
 
-            $('#main-tab-right').empty();
-            $('#main-tab-right').append(buttons);
-            //create table for report showing
-            $('#main-tab-right').append('<div id="rtable"></div>')
-            let div = localStorage.getItem('reportDivision')
-            if (div == null || div == "") {
-                div = 8;
-            }
-
-            let modal = new Modal()
-            let directions = modal.getDivData(div)
-            let checkArray = [];
-            let objArray = [];
-            let tableData = [];
-
-
-            let reportTable = `<table class="table table-bordered table-responsive table-hover mt-2">
-                           <thead id="zoneHead">
-                           <tr>
-                           <th scope="col">#</th>
-                           <th scope="col">Objects</th>`
-            for (let data of directions) {
-                for (let dData of reportData) {
-                    let keys = Object.keys(dData)
-                    let type = '';
-                    objects.map(object => object.image.id == dData.id ?
-                        type = object.image.type
-                        : object)
-
-                    for (let i = 2; i < keys.length; i++) {
-                        if (keys[i] == data.name && type == objType && !checkArray.includes(data.name)) {
-                            checkArray.push(data.name)
-                            reportTable += `<th>${data.name}</th>`;
-                        }
-                        if (keys[i] == data.name && type == objType && !objArray.includes(dData.name)) {
-                            objArray.push(dData.name)
-
-                        }
-                        if (keys[i] == data.name && type == objType) {
-                            let effect = getEffect(dData.name, data.name);
-                            tableData.push({ name: dData.name, direction: data.name, effect: effect })
-
-                        }
-                    }
+                $('#main-tab-right').append('<div id="rtable"></div>')
+                let data = JSON.parse(resolve)[1][0];
+                let checkArray = [];
+                let objArray = [];
+                let tableData = [];
+                let div = localStorage.getItem('reportDivision')
+                if (div == null || div == "") {
+                    div = 8;
                 }
-            }
+                let modal = new Modal()
+                let directions = modal.getDivData(div)
 
-            console.log(checkArray)
-            reportTable += `</tr>
-                       </thead>
-                       <tbody>`
-            let count = 1;
-            if (checkArray.length > 0) {
-                for (let obj of objArray) {
-                    reportTable += `<tr>
-                          <th scope="row">${count++}</th>
-                          <td>${obj}</td>`
-                    for (let i = 0; i < checkArray.length; i++) {
-                        let flag = true;
-                        for (let j = 0; j < tableData.length; j++) {
-                            if (obj == tableData[j].name && checkArray[i] == tableData[j].direction && tableData[j].effect != '') {
-                                reportTable += `<td>${tableData[j].effect}</td>`;
-                                flag = false;
+                let reportHeader = `<div class="col-sm-12 rheader row text-center">
+                <div class="col-sm-3"><div class="font-weight-bold">Client Name  </div><div>${data.clientName}</div></div>
+                <div class="col-sm-3"><div class="font-weight-bold">Building Address  </div><div>${data.propertyAddress}</div></div>
+                <div class="col-sm-3"><div class="font-weight-bold">Facing of Building  </div><div>${localStorage.getItem('face')}</div></div>
+                <div class="col-sm-3"><div class="font-weight-bold">Degree  </div><div>${data.degree}</div></div>
+                </div>`;
+
+                let reportFooter = `<div class="col-sm-12 rfooter row text-center">
+                <div class="col-sm-3"><div class="font-weight-bold">Consultant Name </div><div>${data.name}</div></div>
+                <div class="col-sm-3"><div class="font-weight-bold">Address  </div><div>${data.address}</div></div>
+                <div class="col-sm-3"><div class="font-weight-bold">Contact No  </div><div>${data.mobileNo}</div></div>
+                <div class="col-sm-3"><div class="font-weight-bold">Email  </div><div>${data.email}</div></div>
+                </div>`
+
+                let reportTable = `<div class="card">
+                                    <div class="card-header row m-0">
+                                    <h5 class="col-sm-10"> Zone ${objType} Report </h5>
+                                        ${buttons}
+                                    </div>
+                                    <div class="card-body">
+                                    ${reportHeader}
+                                    <table class="table table-bordered table-responsive table-hover mt-2">
+                                    <thead id="zoneHead">
+                                    <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Direction</th>
+                                    <th>Object</th>
+                                    <th>Effect</th>
+                                    `
+                for (let data of directions) {
+                    for (let dData of reportData) {
+                        let keys = Object.keys(dData)
+                        let type = '';
+                        objects.map(object => object.image.id == dData.id ?
+                            type = object.image.type
+                            : object)
+
+                        for (let i = 2; i < keys.length; i++) {
+                            if (keys[i] == data.name && type == objType && !checkArray.includes(data.name)) {
+                                checkArray.push(data.name)
+
+                            }
+                            if (keys[i] == data.name && type == objType && !objArray.includes(dData.name)) {
+                                objArray.push(dData.name)
+
+                            }
+                            if (keys[i] == data.name && type == objType) {
+                                let effect = getEffect(dData.name, data.name);
+                                tableData.push({ name: dData.name, direction: data.name, effect: effect })
+
                             }
                         }
-                        if (flag) {
-                            reportTable += `<td></td>`
-                        }
                     }
-                    reportTable += `</tr>`
                 }
-            } else {
-                reportTable += `<tr><td class="text-center" colspan="2">No ${objType} found</td></tr>`
-            }
-            reportTable += `</tbody></table>`
-            //Append report table to modal body
 
-            $('#rtable').html(reportTable)
-            //Append text area after report table for any custom information
-            if (checkArray.length > 0) {
-                $('#main-tab-right').
-                    append(`<div class="form-group">
+                reportTable += `</tr>
+                                </thead>
+                                <tbody>`
+                let count = 1;
+                if (checkArray.length > 0) {
+                    for (let obj of tableData) {
+                        reportTable += `<tr>
+                                   <th scope="row">${count++}</th>
+                                   <td>${obj.direction}</td>
+                                   <td>${obj.name}</td>
+                                   <td>${obj.effect}</td>`
+                        reportTable += `</tr>`
+                    }
+                } else {
+                    reportTable += `<tr><td class="text-center" colspan="2">No ${objType} found</td></tr>`
+                }
+                reportTable += `</tbody></table>      
+                <div class="form-group col-sm-12 p-0">
                     <label for="exampleFormControlTextarea1">Recommendation</label>
                     <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-                  </div>`)
-            }
+                </div>
+                ${reportFooter}
+                </div>
+                </div>`
+                //appending table to modal body                
+                $('#rtable').append(reportTable)
+            });
 
         } else {
             showAlert('Add objects and then Select the grid Before generate the report', 'danger')
@@ -326,51 +384,248 @@ $(document).ready(function () {
     //16 zone color report
     function sixteenZoneColorReport() {
         var formData = new FormData();
-        formData.append('id', localStorage.getItem('selectedMapId'));
+        formData.append('id', mapId);
         var url = BASE_URL + "/Main/getSixteenZoneData";
         AjaxPost(formData, url, sixteenZonesuccess, AjaxError);
 
         function sixteenZonesuccess(content, targetTextarea) {
             var result = JSON.parse(content);
-            var userColors = JSON.parse(result.userColors[0].colors)
-            if (userColors.length > 0) {
-                $('#main-tab-right').empty();
-                $('#main-tab-right').append(buttons);
-                $('#main-tab-right').append('<div id="rtable"></div>')
-                let reportTable = `<table id="colorTable" class="table table-bordered table-hover mt-2">
-                                  <thead>
-                                    <tr>
-                                      <th scope="col">#</th>
-                                      <th scope="col">Zone</th>                            
-                                      <th scope="col">Primary Colour</th> 
-                                      <th scope="col">Effect</th>  
-                                      <th scope="col">Recommended Colour</th>                                
-                                    </tr>
-                                  </thead>
-                                  <tbody>`
-                let count = 1;
-                for (let data of result.zoneData) {
-                    for (let data1 of userColors) {
-                        if (data1.shortName == data.name) {
-                            reportTable += `<tr>
-                                    <th scope="row">${count++}</th>
-                                    <td>${data.name}</td>                              
-                                    <td>${data1.color}</td> 
-                                    <td>${data.attribute}</td>  
-                                    <td>${data.mainColor}</td>                          
-                                </tr>`
+            if (result[0] != 'error') {
+                var userColors = JSON.parse(result.userColors[0].colors)
+                getHouseMAp().then(resolve => {
+
+                    $('#main-tab-right').append('<div id="rtable"></div>')
+                    let data = JSON.parse(resolve)[1][0];
+                    console.log(data)
+                    let reportHeader = `<div class="col-sm-12 row rheader text-center">
+                    <div class="col-sm-3"><div class="font-weight-bold">Client Name  </div><div>${data.clientName}</div></div>
+                    <div class="col-sm-3"><div class="font-weight-bold">Building Address  </div><div>${data.propertyAddress}</div></div>
+                    <div class="col-sm-3"><div class="font-weight-bold">Facing of Building  </div><div>${localStorage.getItem('face')}</div></div>
+                    <div class="col-sm-3"><div class="font-weight-bold">Degree  </div><div>${data.degree}</div></div>
+                    </div>`;
+
+                    let reportFooter = `<div class="col-sm-12 row rfooter text-center">
+                    <div class="col-sm-3"><div class="font-weight-bold">Consultant Name </div><div>${data.name}</div></div>
+                    <div class="col-sm-3"><div class="font-weight-bold">Address  </div><div>${data.address}</div></div>
+                    <div class="col-sm-3"><div class="font-weight-bold">Contact No  </div><div>${data.mobileNo}</div></div>
+                    <div class="col-sm-3"><div class="font-weight-bold">Email  </div><div>${data.email}</div></div>
+                    </div>`
+
+                    let reportTable = `<div class="card">
+                    <div class="card-header row m-0">
+                    <h5 class="col-sm-10"> Zone Colour Report </h5>
+                                            ${buttons}
+                                        </div>
+                                        <div class="card-body">
+                                        ${reportHeader}
+                                        <table id="colorTable" class="table table-bordered table-hover mt-2">
+                                        <thead>
+                                          <tr>
+                                            <th scope="col">#</th>
+                                            <th scope="col">Zone</th>                            
+                                            <th scope="col">Primary Colour</th> 
+                                            <th scope="col">Effect</th>  
+                                            <th scope="col">Recommended Colour</th>                                
+                                          </tr>
+                                        </thead>
+                                        <tbody>`
+                    let count = 1;
+                    for (let data of result.zoneData) {
+                        for (let data1 of userColors) {
+                            if (data1.shortName == data.name) {
+                                reportTable += `<tr>
+                                          <th scope="row">${count++}</th>
+                                          <td>${data.name}</td>                              
+                                          <td>${data1.color}</td> 
+                                          <td>${data.attribute}</td>  
+                                          <td>${data.mainColor}</td>                          
+                                      </tr>`
+                            }
                         }
                     }
-                }
+                    reportTable += `</tbody></table>      
+                    <div class="form-group col-sm-12 p-0">
+                        <label for="exampleFormControlTextarea1">Recommendation</label>
+                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                    </div>
+                    ${reportFooter}
+                    </div>
+                    </div>`
+                    //appending table to modal body                
+                    $('#rtable').append(reportTable)
+                });
 
-                reportTable += `</tbody></table>`
-                //appending table to modal body
-                $('#rtable').html(reportTable)
             } else {
                 showAlert('Please define colors for 16 zone', 'warning')
             }
         }
     }
+
+    //Main gate entry Report
+    function mainGateEntry() {
+
+        var formData = new FormData();
+        formData.append('grid', 'THIRTYTWO');
+        var url = BASE_URL + "/Main/getGridData";
+
+        AjaxPost(formData, url, thirtyTwoZonesuccess, AjaxError);
+
+        function thirtyTwoZonesuccess(content, targetTextarea) {
+            let result = JSON.parse(content);
+            getHouseMAp().then(resolve => {
+
+                $('#main-tab-right').append('<div id="rtable"></div>')
+                let data = JSON.parse(resolve)[1][0];
+
+                let reportHeader = `<div class="col-sm-12 row rheader text-center">
+            <div class="col-sm-3"><div class="font-weight-bold">Client Name  </div><div>${data.clientName}</div></div>
+            <div class="col-sm-3"><div class="font-weight-bold">Building Address  </div><div>${data.propertyAddress}</div></div>
+            <div class="col-sm-3"><div class="font-weight-bold">Facing of Building  </div><div>${localStorage.getItem('face')}</div></div>
+            <div class="col-sm-3"><div class="font-weight-bold">Degree  </div><div>${data.degree}</div></div>
+            </div>`;
+
+                let reportFooter = `<div class="col-sm-12 rfooter row text-center">
+            <div class="col-sm-3"><div class="font-weight-bold">Consultant Name </div><div>${data.name}</div></div>
+            <div class="col-sm-3"><div class="font-weight-bold">Address  </div><div>${data.address}</div></div>
+            <div class="col-sm-3"><div class="font-weight-bold">Contact No  </div><div>${data.mobileNo}</div></div>
+            <div class="col-sm-3"><div class="font-weight-bold">Email  </div><div>${data.email}</div></div>
+            </div>`
+
+                let reportTable = `<div class="card">
+                <div class="card-header row m-0">
+                <h5 class="col-sm-10"> Main Gate Entry Report </h5>
+                                    ${buttons}
+                                </div>
+                                <div class="card-body">
+                                ${reportHeader}
+                                <table id="colorTable" class="table table-bordered table-hover mt-2">
+                                <thead>
+                                  <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Activity</th>                            
+                                    <th scope="col">Grid</th> 
+                                    <th scope="col">Devta</th>  
+                                    <th scope="col">Effects</th>
+                                    <th scope="col">Suggested Grids</th>                                 
+                                  </tr>
+                                </thead>
+                                <tbody>`
+                for (let dir of result) {
+                    for (let devtas of DEVTAS) {
+                        for (let dData of reportData) {
+                            let keys = Object.keys(dData)
+                            let type = '';
+                            objects.map(object => object.image.id == dData.id ?
+                                type = object.image.type
+                                : object);
+                            for (let i = 2; i < keys.length; i++) {
+                                if (keys[i] == dir.shortName && type == 'activity' && devtas.direction == dir.shortName && dData.name == 'MAIN GATE') {
+                                    reportTable += `<tr>
+                                  <th scope="row">1</th>
+                                  <td>${dData.name}</td>                              
+                                  <td>${dir.shortName}</td> 
+                                  <td>${devtas.name}</td>  
+                                  <td>${dir.effect}</td> 
+                                  <td>E3,E4,S3,S4,W4,W5,N3,N4,N5</td>                         
+                                </tr>`
+
+                                }
+                            }
+                        }
+                    }
+                }
+                reportTable += `</tbody></table>      
+            <div class="form-group col-sm-12 p-0">
+                <label for="exampleFormControlTextarea1">Recommendation</label>
+                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+            </div>
+            ${reportFooter}
+            </div>
+            </div>`
+                //appending table to modal body   
+                if (div != '32') {
+                    showAlert('Please choose 32 grid for this report', 'warning');
+                }
+
+                let haveGate = reportData.filter(p => p.name == "MAIN GATE");
+                if (haveGate[0] == undefined) {
+                    showAlert('Please Select Main Gate from activities', 'warning');
+                }
+                $('#rtable').append(reportTable)
+            });
+        }
+    }
+
+    //Consultant Report
+    function consultantReport() {
+        var formData = new FormData();
+        formData.append('id', mapId);
+        var url = BASE_URL + "/Main/consultantReport";
+        AjaxPost(formData, url, reportSuccess, AjaxError);
+
+        function reportSuccess(content, targetTextarea) {
+            let result = JSON.parse(content);
+            let report = result[0] != 'error' ? result[1][0].report : '';
+            getHouseMAp().then(resolve => {
+
+                $('#main-tab-right').append('<div id="rtable"></div>')
+                let data = JSON.parse(resolve)[1][0];
+
+                let reportHeader = `<div class="col-sm-12 row rheader text-center">
+                <div class="col-sm-3"><div class="font-weight-bold">Client Name  </div><div>${data.clientName}</div></div>
+                <div class="col-sm-3"><div class="font-weight-bold">Building Address  </div><div>${data.propertyAddress}</div></div>
+                <div class="col-sm-3"><div class="font-weight-bold">Facing of Building  </div><div>${localStorage.getItem('face')}</div></div>
+                <div class="col-sm-3"><div class="font-weight-bold">Degree  </div><div>${data.degree}</div></div>
+                </div>`;
+
+                let reportFooter = `<div class="col-sm-12 row rfooter text-center">
+                <div class="col-sm-3"><div class="font-weight-bold">Consultant Name </div><div>${data.name}</div></div>
+                <div class="col-sm-3"><div class="font-weight-bold">Address  </div><div>${data.address}</div></div>
+                <div class="col-sm-3"><div class="font-weight-bold">Contact No  </div><div>${data.mobileNo}</div></div>
+                <div class="col-sm-3"><div class="font-weight-bold">Email  </div><div>${data.email}</div></div>
+                </div>`
+
+                let reportTable = `<div class="card">
+                <div class="card-header row m-0">
+                <h5 class="col-sm-10"> Consultant Report </h5>
+                                        ${buttons}
+                                        <button class="btn btn-outline-primary float-right mr-2 mb-1 btn-sm text-sm pl-3 pr-3" id="cReport" data-dismiss="modal" aria-label="Close" style="float:right">Save</button>
+                                    </div>
+                                    <div class="card-body">
+                                    ${reportHeader}
+                                    <div>
+                        <div class="col-md-12">            
+                            <div class="mb-3">
+                                <textarea class="textarea" name="desc" rows="10" placeholder="Place some text here" style="width: 100%; height: 500px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;">${report}</textarea>
+                            </div>               
+                        </div>
+                        <!-- /.col-->
+                        </div>      
+                <div class="form-group col-sm-12 p-0">
+                    <label for="exampleFormControlTextarea1">Recommendation</label>
+                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                </div>
+                ${reportFooter}
+                </div>
+                </div>`
+                //appending table to modal body                
+                $('#rtable').append(reportTable);
+                $('.textarea').summernote()
+            });
+
+        }
+
+    }
+
+    //getHouseMap
+    async function getHouseMAp() {
+        var formData = new FormData();
+        formData.append('id', mapId);
+        var url = BASE_URL + "/Main/getPropertyHousemapDetails";
+        let result = await AjaxPostPromise(formData, url).catch(AjaxError);
+        return result;
+    }
+
 
     $('#main-tab-right').on('click', '#set16ZoneColor', function () {
         let dataArray = [];
@@ -381,7 +636,7 @@ $(document).ready(function () {
         });
 
         var formData = new FormData();
-        formData.append('mapId', localStorage.getItem('selectedMapId'));
+        formData.append('mapId', mapId);
         formData.append('data', JSON.stringify(dataArray));
         var url = BASE_URL + "/Main/saveSixteenZoneColorData";
         AjaxPost(formData, url, sixteenZoneSavesuccess, AjaxError);
@@ -417,10 +672,9 @@ $(document).ready(function () {
         localStorage.removeItem('objectReport')
         localStorage.setItem('objectReport', JSON.stringify(newReportData))
 
-        //update Report data in database
-        console.log(localStorage.getItem('selectedMapId'))
+        //update Report data in database       
         var formData = new FormData();
-        formData.append('id', localStorage.getItem('selectedMapId'));
+        formData.append('id', mapId);
         formData.append('reportData', JSON.stringify(newReportData));
         var url = BASE_URL + "/Main/updateReportData";
         AjaxPost(formData, url, updateReportDatasuccess, AjaxError);
@@ -438,6 +692,28 @@ $(document).ready(function () {
         window.print();
         $('.b-right').css('display', 'flex');
     });
+
+    $('#main-tab-right').on('click', '#cReport', () => {
+        let value = $('.textarea').val();
+        if (value.trim() != '') {
+            var formData = new FormData();
+            formData.append('id', mapId);
+            formData.append('value', value);
+            var url = BASE_URL + "/Main/saveConsultantReport";
+            AjaxPost(formData, url, reportSuccess, AjaxError);
+
+            function reportSuccess(content, targetTextarea) {
+                let result = JSON.parse(content);
+                if (result[0] == 'success') {
+                    showAlert(result[1], 'success')
+                } else {
+                    showAlert(result[1], 'warning')
+                }
+            }
+        } else {
+            showAlert('Report Text is not found', 'warning')
+        }
+    })
 
     $('#back').on('click', function () {
         var str = document.referrer;
