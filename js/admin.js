@@ -1,4 +1,5 @@
 $(document).ready(function () {
+    $('.dataTable').dataTable();
     $('#cnsltInfo').submit(function (e) {
         e.preventDefault;
         let mNo = $("[name='mNumber']").val();
@@ -16,7 +17,7 @@ $(document).ready(function () {
         e.preventDefault();
         let id = $(this).attr('did');
         id = atob(id)
-        var formData = new FormData();        
+        var formData = new FormData();
         formData.append('id', id);
         var url = base_url + "/Main/delete";
         AjaxPost(formData, url, deleteSucccess, AjaxError);
@@ -45,18 +46,47 @@ $(document).ready(function () {
         $.each($tds, function () {               // Visits every single <td> element
             data.push($(this).text());        // Prints out the text within the <td>
         });
-
-        $('#id').attr('value',id)
-        $('#method').attr('value','edit')
-        $('#name').attr('value',data[1])
-        $('#mNumber').attr('value',data[2])
-        $('#email').attr('value',data[3])
-        $('#password').attr('value',data[4])
-        $('#address').attr('value',data[5])
+        let name = data[1].split(' ');
+        $('#id').attr('value', id)
+        $('#method').attr('value', 'edit')
+        $('#fname').attr('value', name[0])
+        $('#lname').attr('value', name[1])
+        $('#mNumber').attr('value', data[4])
+        $('#email').attr('value', data[3])        
         $('#address').text(data[5])
         console.log(data);
-        
+        console.log(name);
 
-    });   
+
+    });
+
+    $('input[type = "radio"]').on('click', function () {
+        let inp1 = `<div class="form-group col-sm-4 mb-1" id="cheqNo">
+                        <label for="chequeNo" class="text-md">Cheque No.</label>
+                        <input type="text" class="form-control form-control-sm" id="chequeNo" name="chequeNo" placeholder="Cheque No">
+                    </div>`;
+        let inp2 = `<div class="form-group col-sm-4 mb-1" id="tranNo">
+                       <label for="tId" class="text-md">Tranzaction Id</label>
+                       <input type="text" class="form-control form-control-sm" id="tId" name="tId" placeholder="Tranzaction Id">
+                    </div>`;
+
+        let value = $(this).val();
+        if (value == 'cash') {
+            $('.radio-form #cheqNo').remove();
+            $('.radio-form #tranNo').remove();
+            $('.radio-form .form-group').removeClass('col-sm-4');
+            $('.radio-form .form-group').addClass('col-sm-6')
+        } else if (value == 'cheque') {
+            $('.radio-form #tranNo').remove();
+            $('.radio-form .form-group').removeClass('col-sm-6');
+            $('.radio-form .form-group').addClass('col-sm-4');
+            $('.radio-form').append(inp1);
+        } else {
+            $('.radio-form #cheqNo').remove();
+            $('.radio-form .form-group').removeClass('col-sm-6');
+            $('.radio-form .form-group').addClass('col-sm-4');
+            $('.radio-form').append(inp2);
+        }
+    })
 
 })

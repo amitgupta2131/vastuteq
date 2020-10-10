@@ -98,7 +98,7 @@ export default class StageFifth {
         let dimension = that.distanceBetweenTwoPoints;
         let distance = Math.sqrt(Math.pow(this.points[0][0] - this.points[1][0], 2) + Math.pow(this.points[0][1] - this.points[1][1], 2));
 
-        swal(`The distance is ${Math.round(distance * dimension.scale / dimension.distance, 2)} ${dimension.unit}`);
+        swal(`The distance is ${(distance * dimension.scale / dimension.distance).toFixed(2)} ${dimension.unit}`);
 
         that._stage = 3;
         that.start('true');

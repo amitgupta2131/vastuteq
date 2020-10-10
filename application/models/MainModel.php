@@ -234,6 +234,23 @@ class MainModel extends ci_model
 		return $Id; // $maxid==NULL?1:$maxid+1;
 	}
 
+	public function getNewUserIDorNo($prefix, $tableName, $pad_length = 3)
+	{
+		$id = 0;
+		$row = $this->db->query("SELECT max(id) as maxid  FROM " . $tableName)->row();
+
+		if ($row) {
+			$id = $row->maxid;
+		}
+		$id++;
+		if(strlen($id)<3){
+			$id = '0'.$id;
+		}
+		$Id = strtoupper($prefix  . str_pad($id, $pad_length, '0', STR_PAD_LEFT));
+
+		return $Id; // $maxid==NULL?1:$maxid+1;
+	}
+
 	public function getColorAndDetils($table, $division)
 	{
 		$query = "SELECT * FROM `colors` ";
@@ -295,6 +312,14 @@ class MainModel extends ci_model
 		$query .= "propertydetails.clientId=clientdetails.cId ";
 		$query .= "where housemaps.mapId = '$id' ";
 		$query .= "order by housemaps.id DESC";
+		$q = $this->db->query($query)->result_array();
+		return $this->db->affected_rows() ? $q : false;
+	}
+
+	public function getClientPropertyHousemapDetails($id = '', $userid = ''){
+		$query = "SELECT * FROM `propertydetails` ";		
+		$query .= "where propertydetails.clientId = '$id' AND propertydetails.userId = '$userid' ";
+		
 		$q = $this->db->query($query)->result_array();
 		return $this->db->affected_rows() ? $q : false;
 	}

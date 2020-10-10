@@ -37,11 +37,11 @@
         <div class="form" id="form">
           <div class="field email">
             <div class="icon"></div>
-            <input class="input" id="email" type="email" placeholder="Email" name="email" autocomplete="off" />
+            <input class="input" id="email" type="text" placeholder="Id or Email" name="email" required autocomplete="off" />
           </div>
           <div class="field password">
             <div class="icon"></div>
-            <input class="input" id="password" type="password" name="password" placeholder="Password" />
+            <input class="input" id="password" type="password" name="password" required placeholder="Password" />
           </div>
           <input type="submit" class="button" value="LOGIN" id="submit">
           <div class="side-top-bottom"></div>

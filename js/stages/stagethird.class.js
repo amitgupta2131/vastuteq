@@ -19,6 +19,7 @@ export default class StageThird {
   startDrawing(REF) {
     let that = REF;
     let classRef = this;
+    let gMap = localStorage.getItem('Gmap');
 
     $('#pills-object-tab').removeClass('disabled');
 
@@ -177,10 +178,16 @@ export default class StageThird {
         <option value="32">32 Division</option>
         `
       );
-
+    let gMapBtn = actionBody.append("button")
+      .attr("class", "mt-1 btn btn-primary d-none g-map col-sm-12 text-sm")
+      .text('Gmap');
     let angleInputbox = actionBody.append('div').attr('class', 'col-md-4')
       .append("input").attr("class", "mt-1 form-control form-control-sm text-sm").style('height', '50px')
       .attr('name', 'angleInputbox').attr('type', 'number').attr('placeholder', 'Degree').attr('value', Math.abs(that.angle));
+
+    if (gMap == true || gMap == "true") {
+      angleInputbox.attr('disabled', true);
+    }
 
     let degreeUpdateBtn = actionBody.append('div').attr('class', 'col-md-4')
       .append("button").attr("class", "mt-1 form-control form-control-sm text-sm").style('height', '50px')
@@ -210,12 +217,16 @@ export default class StageThird {
     let deleteText = deleteContainer.append('i').attr('class', 'fa fa-trash').attr('aria-hidden', 'true')
     deleteContainer.append('div').attr('class', 'name text-xs').text('Delete');
 
+    let pointA, pointB;
+
     faceSelectbox.on("change", function () {
 
       let str = d3.select(this).node().value.split(',');
-      let pointA = [parseInt(str[0]), parseInt(str[1])];
-      let pointB = [parseInt(str[2]), parseInt(str[3])];
+      pointA = [parseInt(str[0]), parseInt(str[1])];
+      pointB = [parseInt(str[2]), parseInt(str[3])];
+      
       let face = $('select[name = "select-face"] option:selected').text()
+      localStorage.setItem('face',face)
       // console.log(face)
       that.model.editFaceWall(that.mapId, face);
       that.faceCoords = [pointA, pointB];
@@ -230,9 +241,15 @@ export default class StageThird {
       that.assist.drawMask({ layer: that.canvas, points: that.mapBoundariesCoords, size: that.RECT_SIZE });
       that.assist.drawBoundaries({ layer: that.canvas, points: that.mapBoundariesCoords });
       that.assist.drawBharamNabhi({ layer: that.canvas, centroid: that.centroid });
+      if(gMap == false || gMap == "false"){
       that.assist.drawDirectionLines(that.canvas, that.faceCoords, that.centroid, that.division, that.angle);
       that.assist.drawFacingLine(that.canvas, that.centroid, that.faceCoords);
       that.assist.drawGrid(that.canvas, that.centroid, that.faceCoords, that.screenBoundariesCoords, that.division, that.angle,);
+      alert('running')
+      console.log(gMap)
+      }
+     
+      
       d3.select(".facing-degree").text(`${Math.abs(theta)}°`);
       that.screenPolygons = Utility.getIntersectionPoints(that.calNorthAngle(), that.centroid, that.screenBoundariesCoords, that.division);
       that.mapPolygonsArray = Utility.getIntersectionPoints(that.calNorthAngle() + that.angle, that.centroid, that.mapBoundariesCoords, that.division);
@@ -240,8 +257,9 @@ export default class StageThird {
 
       // ? DRAW BAR CHART
       that.modal.drawMap({ areaArr: that.mapPolygonsAreaArray, division: that.division, dimension: that.distanceBetweenTwoPoints });
-
-
+      if(gMap == true || gMap == "true"){
+      $('.g-map').trigger('click');
+      }
     })
 
     gridSelectbox.on("change", function () {
@@ -267,6 +285,20 @@ export default class StageThird {
       } else {
         showAlert('Please select any grid', 'danger')
       }
+    });
+
+    gMapBtn.on('click', function () {
+      let houseMaps = JSON.parse(localStorage.getItem('houseMaps'));
+      let centerPoint = houseMaps[0].centroid;
+      let nPoint = { x: centerPoint.x, y: 0 };
+
+      let pPoint = Utility.getPerpendicularPoint(pointA, pointB, centerPoint);
+      let angle = Utility.find_angle(nPoint, centerPoint, pPoint);
+      angle = (angle * 180 / 3.14);
+      angle = centerPoint.x < pPoint.x ? angle : 360 - angle
+      angleInputbox.attr('value', angle);
+      angleInputbox.attr('disabled', true);   
+
     })
 
     $('[data-object-item]').on('click', function () {
@@ -315,9 +347,10 @@ export default class StageThird {
     degreeUpdateBtn.on("click", function () {
 
       let theta = (angleInputbox.property('value') == "") ? 0 : parseFloat(angleInputbox.property('value'));
+      console.log(theta)
       that.angle = -theta;
       that.model.editDegree(that.mapId, angleInputbox.property('value'));
-      d3.select(".facing-degree").text(`${Math.abs(theta)}°`);
+      
 
       // that.start();
       that.assist.drawBackgroundGrid(that.canvas, that.centroid, that.faceCoords, that.division, that.angle);
@@ -331,7 +364,7 @@ export default class StageThird {
       that.screenPolygons = Utility.getIntersectionPoints(that.calNorthAngle(), that.centroid, that.screenBoundariesCoords, that.division);
       that.mapPolygonsArray = Utility.getIntersectionPoints(that.calNorthAngle() + that.angle, that.centroid, that.mapBoundariesCoords, that.division);
       that.mapPolygonsAreaArray = Utility.getPolygonsArea(that.mapPolygonsArray);
-
+      d3.select(".facing-degree").text(`${Math.abs(theta)}°`);
       // for(let i in that.mapPolygonsArray){
       //   for(let j in that.mapPolygonsArray[i])
       //   that.secondLayer.append('polygon').attr('points',that.mapPolygonsArray[i][j]).style('fill-opacity','0').style('stroke','green').style('stroke-width','5');
@@ -606,17 +639,7 @@ export default class StageThird {
 
     });
 
-// select language
-$('#language').on('mouseover',function(){
- $('.profile-form').addClass('hide');
- $('.lan-container').removeClass('hide')
-});
-
-// select profile
-$('#profile').on('mouseover',function(){
-  $('.profile-form').removeClass('hide');
-  $('.lan-container').addClass('hide')
-});
+    
 
   }
 

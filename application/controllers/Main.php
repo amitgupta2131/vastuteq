@@ -164,13 +164,13 @@ class Main extends CI_Controller
 			if ($result) {
 				// $this->session->set_flashdata("success", "property successfully added");
 				// redirect(base_url('Main/draw/') . base64_encode($insertData['propertyId']));
-				echo (json_encode(array('propertyId' => $insertData['propertyId'],'type'=>"success")));
+				echo (json_encode(array('clientDetails' => $clientData, 'propertyDetails' => $insertData, 'type' => "success")));
 			} else {
-				echo(json_encode(array("error", "Could not add propert information, contact IT")));
+				echo (json_encode(array("error", "Could not add propert information, contact IT")));
 				// redirect(base_url('Main/propertyInfo'));
 			}
 		} else {
-			echo(json_encode(array("error", "All fields with * are required")));
+			echo (json_encode(array("error", "All fields with * are required")));
 			// redirect(base_url('Main/propertyInfo'));
 		}
 	}
@@ -203,12 +203,13 @@ class Main extends CI_Controller
 
 	public function admin()
 	{
-		$data['users'] = $this->MainModel->selectAllFromTableOrderBy('login', 'name', 'ASC', array('isAdmin' => '0'));
+		$data['users'] = $this->MainModel->selectAllFromTableOrderBy('login', 'firstName', 'ASC', array('isAdmin' => '0'));
 		$this->load->view('admin', $data);
-	}	
+	}
 
 	public function addUser()
 	{
+		// echo '<pre>';
 		// print_r($_POST);die;
 		if (isset($_POST['email']) && !empty($_POST['email'])) {
 
@@ -221,26 +222,47 @@ class Main extends CI_Controller
 				$this->session->set_flashdata("error", "Consultant Already Exist");
 				redirect(base_url('Main/admin'));
 			} else {
-				$insertData = array(
-					'password' => validateInput($_POST['password']),
+				$insertData = array(					
 					'isAdmin' => 0,
-					'name'	=> validateInput($_POST['name']),
+					'firstName'	=> validateInput($_POST['fname']),
+					'lastName'	=> validateInput($_POST['lname']),
 					'mobileNo' => validateInput($_POST['mNumber']),
 					'email'	=> validateInput($_POST['email']),
 					'address' => validateInput($_POST['address']),
+					'paymentType' => validateInput($_POST['payment']),
+					'amount' => validateInput($_POST['amount']),
+					'chequeNo' => isset($_POST['chequeNo'])?validateInput($_POST['chequeNo']):'',
+					'tranzactionId' => isset($_POST['tId'])?validateInput($_POST['tId']):'',
+					'date' => validateInput($_POST['date']),
 				);
-				$insertData['userId'] =   $this->MainModel->getNewIDorNo("usr-", 'login');
-				$result = $this->MainModel->insertInto('login', $insertData);
-				if ($result) {
-					$this->session->set_flashdata("success", "Consultant successfully added");
-					redirect(base_url('Main/admin'));
+				$insertData['password'] = $this->passwordGenerate(12);
+				
+
+				// Create user Id
+				$prefix = substr($insertData['firstName'], 0, 3).substr($insertData['lastName'], 0, 3);
+				$insertData['userId'] =   $this->MainModel->getNewUserIDorNo($prefix, 'login');				
+
+				// Send email to user
+				$this->load->helper('email');
+				$to = $insertData['email'];
+				$sub = 'No Reply';
+				$mess = 'Dear ' . $insertData['firstName'] . ' ' . $insertData['lastName'] . ',' . '<br>' . 'Find your creadiential and click on below link for further process' . '<br>' . 'link: ' . base_url('Login') . '<br>User Id: ' . $insertData['userId'] . '<br>' . 'Password: ' . $insertData['password'];
+				if (sentmail($to, $sub, $mess)) {
+					$result = $this->MainModel->insertInto('login', $insertData);
+					if ($result) {
+						$this->session->set_flashdata("success", "Consultant successfully added");
+						redirect(base_url('Main/admin'));
+					} else {
+						$this->session->set_flashdata("error", "Consultant could not be added contact to IT");
+						redirect(base_url('Main/admin'));
+					}
 				} else {
-					$this->session->set_flashdata("error", "Something went wrong contact to IT");
+					$this->session->set_flashdata('error', 'Something Wrong try again after some time.');
 					redirect(base_url('Main/admin'));
 				}
 			}
 		} else {
-			$this->session->set_flashdata("error", "Something went wrong contact to IT");
+			$this->session->set_flashdata("error", "Insuffiecient data found");
 			redirect(base_url('Main/admin'));
 		}
 	}
@@ -252,7 +274,8 @@ class Main extends CI_Controller
 			$insertData = array(
 				'password' => validateInput($data['password']),
 				'isAdmin' => 0,
-				'name'	=> validateInput($data['name']),
+				'firstName'	=> validateInput($_POST['fname']),
+				'lastName'	=> validateInput($_POST['lname']),
 				'mobileNo' => validateInput($data['mNumber']),
 				'email'	=> validateInput($data['email']),
 				'address' => validateInput($data['address']),
@@ -366,6 +389,7 @@ class Main extends CI_Controller
 				'mvpctoggle' => ($_POST['mvpctoggle']),
 				'objects' => ($_POST['objects']),
 				'activities' => ($_POST['activities']),
+				'gMap' => ($_POST['gMap']),
 				'reportData' => ''
 			);
 
@@ -400,6 +424,7 @@ class Main extends CI_Controller
 				'mvpctoggle' => ($_POST['mvpctoggle']),
 				'objects' => ($_POST['objects']),
 				'activities' => ($_POST['activities']),
+				'gMap' => ($_POST['gMap']),
 				'reportData' => ''
 			);
 
@@ -664,58 +689,60 @@ class Main extends CI_Controller
 	}
 
 	//get 16 zone data with colors
-	public function getSixteenZoneData(){
+	public function getSixteenZoneData()
+	{
 		$id = $_POST['id'];
 		$result = $this->MainModel->selectSixteenZoneData();
 		$colors = $this->MainModel->selectAllFromWhere("sixteen_zone_color", array("houseMapId" => $id));
-		if($result && $colors){
-			echo json_encode(array('zoneData' => $result,'userColors'=>$colors));
-		}else{
-			echo json_encode(array('error','No data found'));
+		if ($result && $colors) {
+			echo json_encode(array('zoneData' => $result, 'userColors' => $colors));
+		} else {
+			echo json_encode(array('error', 'No data found'));
 		}
-		
 	}
 
 	//get consultant report
-	public function consultantReport(){
+	public function consultantReport()
+	{
 		$id = $_POST['id'];
 		$report = $this->MainModel->selectAllFromWhere("consultant_report", array("mapId" => $id));
-		if($report){
-			echo json_encode(array('success',$report));
-		}else{
-			echo json_encode(array('error','No data found'));
+		if ($report) {
+			echo json_encode(array('success', $report));
+		} else {
+			echo json_encode(array('error', 'No data found'));
 		}
 	}
 
 	//getProperty Details
-	public function getPropertyHousemapDetails(){
+	public function getPropertyHousemapDetails()
+	{
 		$id = $_POST['id'];
 		$report = $this->MainModel->getPropertyHousemapDetails($id);
-		if($report){
-			echo json_encode(array('success',$report));
-		}else{
-			echo json_encode(array('error','No data found'));
+		if ($report) {
+			echo json_encode(array('success', $report));
+		} else {
+			echo json_encode(array('error', 'No data found'));
 		}
 	}
 
-	public function saveConsultantReport(){
-		
+	public function saveConsultantReport()
+	{
+
 		$data = array(
 			'mapId' => $_POST['id'],
 			'report' => $_POST['value'],
 		);
 
 		$report = $this->MainModel->selectAllFromWhere("consultant_report", array("mapId" => $data['report']));
-		if(!$report){
-			$result = $this->MainModel->insertInto("consultant_report",$data);
-			if($result){
-				echo json_encode(array('success','Report saved successfully'));
-			}else{
-				echo json_encode(array('error','Report could not saved contact to IT'));
+		if (!$report) {
+			$result = $this->MainModel->insertInto("consultant_report", $data);
+			if ($result) {
+				echo json_encode(array('success', 'Report saved successfully'));
+			} else {
+				echo json_encode(array('error', 'Report could not saved contact to IT'));
 			}
-			
-		}else{
-			echo json_encode(array('error','HouseMap already contains consultant Report'));
+		} else {
+			echo json_encode(array('error', 'HouseMap already contains consultant Report'));
 		}
 	}
 
@@ -746,26 +773,43 @@ class Main extends CI_Controller
 	}
 
 	//save 16 zone color data
-	public function saveSixteenZoneColorData(){
-		if(isset($_POST['mapId']) && !empty($_POST['mapId']) && isset($_POST['data']) && !empty($_POST['data'])){
+	public function saveSixteenZoneColorData()
+	{
+		if (isset($_POST['mapId']) && !empty($_POST['mapId']) && isset($_POST['data']) && !empty($_POST['data'])) {
 			$insertData = array(
 				'houseMapId' => validateInput($_POST['mapId']),
 				'colors' => $_POST['data']
 
 			);
 			$validate = $this->MainModel->selectAllFromWhere("sixteen_zone_color", array("houseMapId" => $insertData['houseMapId']));
-			if(!$validate){
+			if (!$validate) {
 				$result = $this->MainModel->insertInto("sixteen_zone_color", $insertData);
-				if($result){
-					echo json_encode(array('success','16 Zone color is successfullt set'));
-				}else{
-					echo json_encode(array('error','16 Zone color could not be set, contact to IT'));
+				if ($result) {
+					echo json_encode(array('success', '16 Zone color is successfullt set'));
+				} else {
+					echo json_encode(array('error', '16 Zone color could not be set, contact to IT'));
 				}
-			}else{
-				echo json_encode(array('error','16 Zone color is already set for this HouseMAp'));
+			} else {
+				echo json_encode(array('error', '16 Zone color is already set for this HouseMAp'));
 			}
-		}else{
-			echo json_encode(array('error','Insuffiecient data found'));
+		} else {
+			echo json_encode(array('error', 'Insuffiecient data found'));
+		}
+	}
+
+	//get client property data
+	public function getClientPropertData()
+	{
+		$id = $_POST['id'];
+		if (isset($id) && !empty($id)) {
+			$result = $this->MainModel->getClientPropertyHousemapDetails($id, $_SESSION['userInfo']['userId']);
+			if ($result) {
+				echo json_encode(array('success', $result));
+			} else {
+				echo json_encode(array('error', 'No data found'));
+			}
+		} else {
+			echo json_encode(array('error', 'No id found'));
 		}
 	}
 
@@ -773,5 +817,11 @@ class Main extends CI_Controller
 	public function getDate()
 	{
 		echo (Date('yy-m-d'));
+	}
+
+	function passwordGenerate($length)
+	{
+		$chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+		return substr(str_shuffle($chars), 0, $length);
 	}
 }

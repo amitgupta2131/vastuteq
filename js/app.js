@@ -950,11 +950,12 @@ $('#clientName').on('keyup', function () {
     var result = JSON.parse(content);
 
     if (result != "") {
-      console.log(result)
+      // console.log(result)
       $('#clients').empty();
       result.forEach(element => {
         $('#clients').removeClass('d-none')
-        $('#clients').append(`<a href="#" cId="${element.cId}">${element.clientName}, ${element.clientMobileNo},${element.landlineNo}, ${element.clientEmail}</a>`)
+        $('#clients').append(`<a href="#" cId="${element.cId}">${element.clientName}, ${element.clientMobileNo},${element.landlineNo}, ${element.clientEmail}</a>`);
+        $('.property-table').addClass('d-none');
       });
     } else {
       showAlert(result.error, 'danger');
@@ -965,13 +966,39 @@ $('#clientName').on('keyup', function () {
 $('#clients').on('click', 'a', function () {
   let data = $(this).text().split(',');
   let id = $(this).attr('cId')
-  $("input[name='cName']").val(data[0]);
-  $("input[name='cId']").val(id);
-  $("#mNumber").val(data[1]);
-  $("input[name='lNumber']").val(data[2]);
-  $("input[name='cEmail']").val(data[3]);
-  $("textarea[name='cAddress']").focus();
-  $('#clients').addClass('d-none')
+  console.log(id)
+  var formData = new FormData();
+  formData.append('id', id);
+  var url = BASE_URL + "/Main/getClientPropertData";
+  AjaxPost(formData, url, detailsSuccess, AjaxError);
+  function detailsSuccess(content, targetTextarea) {
+    var result = JSON.parse(content);
+    console.log(result)
+    if(result[0] == 'success'){
+      let rows = '';
+      let cdata = result[1]
+      for (let row of cdata){
+        rows += `<tr>
+        <td>${row.propertyId}</td>
+        <td>${row.propertyName}</td>
+        <td>${row.category}</td>
+        <td>${row.type}</td>
+        </tr>`
+      }
+
+      $('#propertyTable tbody').html(rows);
+      $('.property-table').removeClass('d-none');
+    }else{
+      $('.property-table').addClass('d-none');
+    }
+    $("input[name='cName']").val(data[0]);
+    $("input[name='cId']").val(id);
+    $("#mNumber").val(data[1]);
+    $("input[name='lNumber']").val(data[2]);
+    $("input[name='cEmail']").val(data[3]);
+    $("textarea[name='cAddress']").focus();
+    $('#clients').addClass('d-none');
+  }
 });
 
 $("input").on('focus', function () {
@@ -986,30 +1013,58 @@ $('input[type="submit"]').on('click', function (e) {
   AjaxPost(formData, url, detailsSuccess, AjaxError);
   function detailsSuccess(content, targetTextarea) {
     var result = JSON.parse(content);
+    console.log(result)
     if (result != "" && result.type == 'success') {
+      let client = result.clientDetails;
+      let property = result.propertyDetails;
 
-      $('.client-form .card').addClass('card-form');
-      $('.client-form .card-header').removeClass('bg-primary');
-      $('.client-form .modal-title').removeClass('text-white');
-      $('.client-form .card-body .form-group').removeClass('col-md-3');
-      $('.client-form .card-body .form-group').addClass('col-md-6 row m-0 form-border');
-      $('.client-form .card-body .form-group label').addClass('col-md-6 text-info');
-      $('.client-form .card-body .form-group input').addClass('col-md-6');
-      $('.client-form .card-body .form-group textarea').addClass('col-md-6');
-      $('.client-form .card-body .form-group select').addClass('col-md-6');
-      $('.client-form input').attr('disabled', 'true');
-      $('#category').val() == '' ? $('#category option:selected').remove() : '';
-      $('#type').val() == '' ? $('#type option:selected').remove() : '';
-      $('input[name="gpDate"]').val() == '' ? $('input[name="gpDate"]').css('color', 'transparent') : '';
-      $('input[name="fvDate"]').val() == '' ? $('input[name="fvDate"]').css('color', 'transparent') : '';
-      $('input[name="ppDate"]').val() == '' ? $('input[name="ppDate"]').css('color', 'transparent') : '';
-      $(':input').removeAttr('placeholder');
-      $('textarea').attr('disabled', 'true');
-      $('select').attr('disabled', 'true');
-      $('.client-form input').addClass('input-disable');
-      $('textarea').addClass('input-disable');
-      $('textarea').attr('rows', '1');
-      $('select').addClass('input-disable');
+      let clientDiv = `<div class="row m-0">
+      <div class="col-sm-4 text-md text-info">Name : </div>
+      <div class="col-sm-8 text-md ">${client.clientName}</div>
+      </div>
+      <div class="row m-0">
+      <div class="col-sm-4 text-md text-info">Mobile No : </div>
+      <div class="col-sm-8 text-md ">${client.clientMobileNo}</div>
+      </div>
+      <div class="row m-0">
+      <div class="col-sm-4 text-md text-info">Landline No : </div>
+      <div class="col-sm-8 text-md ">${client.landlineNo}</div>
+      </div>
+      <div class="row m-0">
+      <div class="col-sm-4 text-md text-info">Email : </div>
+      <div class="col-sm-8 text-md ">${client.clientEmail}</div>
+      </div>
+      <div class="row m-0">
+      <div class="col-sm-4 text-md text-info">Address : </div>
+      <div class="col-sm-8 text-md ">${client.clientAddress}</div>
+      </div>`;
+      let propertyDiv = `<div class="row m-0">
+      <div class="col-sm-7 text-md pl-0 text-info">Id : </div>
+      <div class="col-sm-5 text-md ">${property.propertyId}</div>
+      </div><div class="row m-0">
+      <div class="col-sm-7 text-md pl-0 text-info">Name : </div>
+      <div class="col-sm-5 text-md ">${property.propertyName}</div>
+      </div><div class="row m-0">
+      <div class="col-sm-7 text-md pl-0 text-info">Category : </div>
+      <div class="col-sm-5 text-md ">${property.category}</div>
+      </div><div class="row m-0">
+      <div class="col-sm-7 text-md pl-0 text-info">Type : </div>
+      <div class="col-sm-5 text-md ">${property.type}</div>
+      </div><div class="row m-0">
+      <div class="col-sm-7 text-md pl-0 text-info">Address : </div>
+      <div class="col-sm-5 text-md ">${property.propertyAddress}</div>
+      </div><div class="row m-0">
+      <div class="col-sm-7 text-md pl-0 text-info">GrahPravesh Date : </div>
+      <div class="col-sm-5 text-md ">${property.grahPravesh_date}</div>
+      </div><div class="row m-0">
+      <div class="col-sm-7 text-md pl-0 text-info">First Visit Date : </div>
+      <div class="col-sm-5 text-md ">${property.firstVisit_date}</div>
+      </div><div class="row m-0">
+      <div class="col-sm-7 text-md pl-0 text-info">Property Purchase/opening Date : </div>
+      <div class="col-sm-5 text-md ">${property.opening_date}</div>
+      </div>`;
+      $('.client-body').html(clientDiv);
+      $('.property-body').html(propertyDiv);
       $('[data-behavior="import"]').removeClass('d-none');
       $('input[value="Save Info"]').addClass('d-none');
 

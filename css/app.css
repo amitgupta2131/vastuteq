@@ -177,7 +177,7 @@
 
 .menu-sidebar {
   position: relative;
-  top: -5px;
+  top: -10px;
   margin-left: auto;
   font-size: 12px;
 }
@@ -196,6 +196,77 @@ ul.menu {
   font-size: 1.18em;
   position: relative;
   text-decoration: none;
+}
+
+#mainArea {
+  position: absolute;
+  top: 33px;
+  left: 0px;
+  width: 100%;
+  height: calc(100% - 33px);
+  overflow: scroll;
+}
+
+#mainArea .card {
+  cursor: pointer;
+  -webkit-transition: 250ms all ease-in-out;
+  transition: 250ms all ease-in-out;
+}
+
+#mainArea .card h5 {
+  font-size: 14px;
+}
+
+#mainArea .card .create-new {
+  -webkit-animation: stroke-rainbow 13s linear infinite;
+          animation: stroke-rainbow 13s linear infinite;
+}
+
+#mainArea .card .create-new:hover {
+  color: inherit;
+}
+
+#mainArea .card .card-img-top {
+  width: 100%;
+  height: 13vw;
+  -o-object-fit: cover;
+     object-fit: cover;
+  background-color: #ccc;
+}
+
+#mainArea .card .card-text {
+  font-size: 15px;
+}
+
+#mainArea .card .project-name span:nth-child(1) {
+  font-family: var(--font-family-sans-serif);
+  color: #191818;
+  font-weight: 500;
+}
+
+#mainArea .card .project-name span:nth-child(2) {
+  /* font-family: var(--font-family-sans-serif); */
+  color: #383737;
+  float: right;
+}
+
+#mainArea .card:hover {
+  -webkit-box-shadow: -1px 1px 22px 0px rgba(135,135,135,1);
+  -moz-box-shadow: -1px 1px 22px 0px rgba(135,135,135,1);
+  box-shadow: -1px 1px 22px 0px rgba(135,135,135,1);
+}
+
+#mainArea .card:active {
+  text-shadow: 0px 0px 15px #6968ab;
+  -webkit-box-shadow: 7px 6px 28px 1px rgba(0, 0, 0, 0.24);
+          box-shadow: 7px 6px 28px 1px rgba(0, 0, 0, 0.24);
+  -webkit-transform: scale(0.98);
+          transform: scale(0.98);
+}
+
+.border-thick {
+  border-color: #6869ab !important;
+  border-width: 1px !important;
 }
 
 .menu-sidebar li>a::after {
@@ -954,8 +1025,8 @@ input::-webkit-inner-spin-button {
   position: absolute;
   z-index: 99;
   border: 1px solid #ced4da;
-  top: 139px;
-  left: 20px;
+  top: 104px;
+  left: 187px;
   border-radius: 3px;
   padding: 0px !important;
   background: white;
@@ -1221,7 +1292,7 @@ input::-webkit-inner-spin-button {
 }
 
 .dropdown-menu.dropdown-menu-right.p-option.show {
-  display: flex;
+  display: flex !important;
 }
 
 .p-option {
@@ -1260,7 +1331,7 @@ body {
   overflow-y: scroll;
 }
 
-.note-editable.card-block{
+.note-editable.card-block {
   height: 300px !important;
 }
 
@@ -1268,7 +1339,7 @@ body {
 #main-tab-right #rtable .card:nth-child(3),
 #main-tab-right #rtable .card:nth-child(4),
 #main-tab-right #rtable .card:nth-child(5),
-#main-tab-right #rtable .card:nth-child(6){
+#main-tab-right #rtable .card:nth-child(6) {
   margin-top: 1rem;
 }
 
@@ -1276,7 +1347,7 @@ body {
 #main-tab-right #rtable .card:nth-child(3) .card-header:nth-child(1) div,
 #main-tab-right #rtable .card:nth-child(4) .card-header:nth-child(1) div,
 #main-tab-right #rtable .card:nth-child(5) .card-header:nth-child(1) div,
-#main-tab-right #rtable .card:nth-child(6) .card-header:nth-child(1) div{
+#main-tab-right #rtable .card:nth-child(6) .card-header:nth-child(1) div {
   display: none !important;
 }
 
@@ -1287,17 +1358,39 @@ body {
 #main-tab-right #rtable .card:nth-child(4) .rheader,
 #main-tab-right #rtable .card:nth-child(4) .rfooter,
 #main-tab-right #rtable .card:nth-child(5) .rheader,
-#main-tab-right #rtable .card:nth-child(5) .rfooter{
+#main-tab-right #rtable .card:nth-child(5) .rfooter {
   display: none !important;
 }
 
 #main-tab-right #rtable .card:nth-child(6) .rheader,
-#main-tab-right #rtable .card:nth-child(1) .rfooter{
-  display: none ;
+#main-tab-right #rtable .card:nth-child(1) .rfooter {
+  display: none;
 }
 
-#main-tab-right.flag #rtable .card:nth-child(1) .rfooter{
-  display: flex !important ;
+#main-tab-right.flag #rtable .card:nth-child(1) .rfooter {
+  display: flex !important;
+}
+
+.p-card {
+  box-shadow: none !important;
+  border: none !important; 
+}
+
+.c-card {
+  max-width: 49% !important;
+  /* box-shadow: none !important; */
+  padding: 0 !important;
+}
+
+.c-card:nth-child(1){
+  margin-right: 0.75rem !important;
+}
+.c-card:nth-child(2){
+  margin-left: 0.50rem !important;
+}
+
+.c-card:nth-child(2) .card-footer{
+  border: none !important;
 }
 
 /*# sourceMappingURL=app.css.map */

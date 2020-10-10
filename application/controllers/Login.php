@@ -35,6 +35,14 @@ class Login extends ci_controller
 			$password = $_POST['password'];
 
 			$result = $this->MainModel->selectAllFromWhere("login",Array("email"=>$email,"password"=>$password));
+			$result1 = $this->MainModel->selectAllFromWhere("login",Array("userId"=>$email,"password"=>$password));
+			
+			if(!$result && !$result1){
+				$this->session->set_flashdata("error","Please enter valid credentials");
+				redirect(base_url('Login/index'));
+			}else if(!$result && $result1){
+				$result = $result1;
+			}
 
 			if($result)
 			{

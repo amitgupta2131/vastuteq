@@ -31,6 +31,7 @@ export default class Model {
             complete: false,
             vedicBoundariesCoords: [],
             faceCoords: [],
+            gMap: false
         }
         while (this.houseMaps.length) {
             this.houseMaps.pop();
@@ -56,6 +57,7 @@ export default class Model {
         formData.append('vpmtoggle', false);
         formData.append('objects', []);
         formData.append('activities', []);
+        formData.append('gMap', false);
         var url = BASE_URL + "/Main/addhouseMaps";
         AjaxPost(formData, url, addHouseMapssuccess, AjaxError);
         function addHouseMapssuccess(content, targetTextarea) {
@@ -84,6 +86,7 @@ export default class Model {
                 complete: houseMap.complete,
                 vedicBoundariesCoords: houseMap.vedicBoundariesCoords,
                 faceCoords: houseMap.faceCoords,
+                gMap : houseMap.gMap
             } : houseMap
         )
 
@@ -113,6 +116,7 @@ export default class Model {
                 complete: houseMap.complete,
                 vedicBoundariesCoords: updatedVedicCoords,
                 faceCoords: houseMap.faceCoords,
+                gMap : houseMap.gMap
             } : houseMap
         )
 
@@ -142,6 +146,7 @@ export default class Model {
                 complete: houseMap.complete,
                 vedicBoundariesCoords: houseMap.vedicBoundariesCoords,
                 faceCoords: houseMap.faceCoords,
+                gMap : houseMap.gMap
             } : houseMap
         )
 
@@ -170,6 +175,7 @@ export default class Model {
                 complete: houseMap.complete,
                 vedicBoundariesCoords: houseMap.vedicBoundariesCoords,
                 faceCoords: houseMap.faceCoords,
+                gMap : houseMap.gMap
             } : houseMap
         )
 
@@ -198,6 +204,37 @@ export default class Model {
                 complete: houseMap.complete,
                 vedicBoundariesCoords: houseMap.vedicBoundariesCoords,
                 faceCoords: updatedFaceCoords,
+                gMap : houseMap.gMap
+            } : houseMap
+        )
+
+        this._commit(this.houseMaps);
+
+        // let updatedField = { name: 'faceCoords', value: JSON.stringify(updatedFaceCoords) };
+        // this.updateHouseMapInDataBase(id, this.houseMaps, updatedField)
+    }
+
+    editGmap(id, updatedGmap) {
+        this.houseMaps = this.houseMaps.map(houseMap =>
+            houseMap.id == id ? {
+                id: houseMap.id,
+                stage: houseMap.stage,
+                imageData: houseMap.imageData,
+                type: houseMap.type,   
+                customBoundariesCoords: houseMap.customBoundariesCoords,
+                centroid: houseMap.centroid,
+                faceWall: houseMap.faceWall,
+                degree: houseMap.degree,
+                dimension: houseMap.dimension,
+                vpmtoggle: houseMap.vpmtoggle,
+                mvpctoggle: houseMap.mvpctoggle,
+                objects: houseMap.objects,
+                activities: houseMap.activities,
+                complete: houseMap.complete,
+                vedicBoundariesCoords: houseMap.vedicBoundariesCoords,
+                faceCoords: houseMap.faceCoords,
+                gMap : updatedGmap,
+               
             } : houseMap
         )
 
@@ -226,6 +263,7 @@ export default class Model {
                 complete: houseMap.complete,
                 vedicBoundariesCoords: houseMap.vedicBoundariesCoords,
                 faceCoords: houseMap.faceCoords,
+                gMap : houseMap.gMap
             } : houseMap
         )
 
@@ -255,6 +293,7 @@ export default class Model {
                 complete: houseMap.complete,
                 vedicBoundariesCoords: houseMap.vedicBoundariesCoords,
                 faceCoords: houseMap.faceCoords,
+                gMap : houseMap.gMap
             } : houseMap
         )
 
@@ -285,6 +324,7 @@ export default class Model {
                 complete: houseMap.complete,
                 vedicBoundariesCoords: houseMap.vedicBoundariesCoords,
                 faceCoords: houseMap.faceCoords,
+                gMap : houseMap.gMap
             } : houseMap
         )
 
@@ -315,6 +355,7 @@ export default class Model {
                 complete: houseMap.complete,
                 vedicBoundariesCoords: houseMap.vedicBoundariesCoords,
                 faceCoords: houseMap.faceCoords,
+                gMap : houseMap.gMap
             } : houseMap
         )
 
@@ -345,6 +386,7 @@ export default class Model {
                 complete: houseMap.complete,
                 vedicBoundariesCoords: houseMap.vedicBoundariesCoords,
                 faceCoords: houseMap.faceCoords,
+                gMap : houseMap.gMap
             } : houseMap
         )
 
@@ -374,6 +416,7 @@ export default class Model {
                 complete: houseMap.complete,
                 vedicBoundariesCoords: houseMap.vedicBoundariesCoords,
                 faceCoords: houseMap.faceCoords,
+                gMap : houseMap.gMap
             } : houseMap
         )
 
@@ -403,6 +446,7 @@ export default class Model {
                 complete: houseMap.complete,
                 vedicBoundariesCoords: houseMap.vedicBoundariesCoords,
                 faceCoords: houseMap.faceCoords,
+                gMap : houseMap.gMap
             } : houseMap
         )
 
@@ -429,6 +473,7 @@ export default class Model {
                 complete: true,
                 vedicBoundariesCoords: houseMap.vedicBoundariesCoords,
                 faceCoords: houseMap.faceCoords,
+                gMap : houseMap.gMap
             } : houseMap
         )
 
@@ -503,6 +548,7 @@ export default class Model {
                 formData.append('mvpctoggle', updatedField.name == 'mvpctoggle' ? updatedField.value : houseMap.mvpctoggle);
                 formData.append('objects', updatedField.name == 'objects' ? updatedField.value : houseMap.objects);
                 formData.append('activities', updatedField.name == 'activities' ? updatedField.value : houseMap.activities);
+                formData.append('gMap', updatedField.name == 'gMap' ? updatedField.value : houseMap.gMap);
                 formData.append('complete', updatedField.name == 'complete' ? updatedField.value : houseMap.complete);
                 formData.append('propertyId', propertyId);
                 var url = BASE_URL + "/Main/updatehouseMaps";

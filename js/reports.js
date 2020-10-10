@@ -190,7 +190,7 @@ $(document).ready(function () {
                                     </div>
                                     <div class="card-body">
                                     ${reportHeader}
-                                    <table class="table table-bordered table-responsive table-hover mt-2">
+                                    <table class="table table-bordered table-hover mt-2">
                                     <thead id="zoneHead">
                                     <tr>
                                     <th scope="col">#</th>
@@ -587,7 +587,7 @@ $(document).ready(function () {
 
                 let reportTable = `<div class="card">
                 <div class="card-header row m-0">
-                <h5 class="col-sm-10"> Consultant Report </h5>
+                <h5 class="col-sm-9"> Consultant Report </h5>
                                         ${buttons}
                                         <button class="btn btn-outline-primary float-right mr-2 mb-1 btn-sm text-sm pl-3 pr-3" id="cReport" data-dismiss="modal" aria-label="Close" style="float:right">Save</button>
                                     </div>

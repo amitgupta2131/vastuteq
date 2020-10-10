@@ -1,3 +1,5 @@
+
+
 <section class="header" style="position:fixed;z-index:10">
     <div class="title-bar" style="justify-content:left;">
         <img class="logo" style="margin-left:20px" src="<?php echo base_url('assets/images/logo.jpg') ?>" alt="logo" width="30">
@@ -85,7 +87,13 @@
                                             <i class="fa fa-user prefix grey-text"></i>
                                             <input type="text" hidden class="form-control" name='id' value="<?php echo $user['userId'] ?>">
                                             <input type="text" hidden class="form-control" name='method' value="<?php echo current_url() ?>">
-                                            <input type="text" class="form-control" name="name" placeholder="Full Name" value="<?php echo $user['name'] ?>">
+                                            <input type="text" class="form-control" name="fname" placeholder="First Name" value="<?php echo $user['firstName'] ?>">
+
+                                        </div>
+
+                                        <div class="md-form col-sm-12">
+                                            <i class="fa fa-user prefix grey-text"></i>
+                                            <input type="text" class="form-control validate" name="lname" required placeholder="Last Name" value="<?php echo $user['lastName'] ?>">
 
                                         </div>
 
@@ -109,7 +117,7 @@
                                         </div>
                                         <div class="md-form col-sm-12">
                                             <img class="rounded-circle prefix" src="<?php echo $userImg != '' ? base_url('uploads/') . $userImg : '' ?>" alt="User Image" height="30" width="30">
-                                            <input class="form-control validate" type="file"  class="form-control" name="usrImage">
+                                            <input class="form-control validate" type="file" class="form-control" name="usrImage">
                                         </div>
 
                                         <div class="col-sm-12">
@@ -305,7 +313,7 @@
     function confirmSave(url = '') {
         let method = '<?php echo current_url() ?>';
         let importMap = method.match(/importMap/g);
-        let draw = method.match(/draw/g)
+        let draw = method.match(/draw/g);
         if (importMap != null || draw != null) {
 
             swal("Before Redirecting, want to save Map data or Discard it ?", {
@@ -340,4 +348,16 @@
     //     // Chrome requires returnValue to be set.        
     //     $('.savebtn').trigger('click');
     // });
+
+    // select language
+    $('#language').on('mouseover', function () {
+      $('.profile-form').addClass('hide');
+      $('.lan-container').removeClass('hide')
+    });
+
+    // select profile
+    $('#profile').on('mouseover', function () {
+      $('.profile-form').removeClass('hide');
+      $('.lan-container').addClass('hide')
+    });
 </script>

@@ -52,6 +52,7 @@ function drawMethod(id) {
 		localStorage.removeItem("houseMaps");
 		localStorage.removeItem("reportDivision");
 		localStorage.setItem("houseMaps", JSON.stringify(result));
+		localStorage.setItem("Gmap", result[0].gMap);
 
 		//creating object data for localstorage
 		if (result[0].objects != "") {
@@ -70,8 +71,8 @@ function drawMethod(id) {
 			localStorage.removeItem("objectReport");
 			localStorage.setItem("objectReport", result[0].reportData);
 		}
-
-		console.log(result[0].objects)
+		
+		console.log(result[0])
 	}
 
 	window.location.href = base_url + '/Main/draw/' + btoa(id);

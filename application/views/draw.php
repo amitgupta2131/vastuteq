@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="<?php echo base_url('css/modal.css') ?>">
     <!-- RULER CSS -->
     <link rel="stylesheet" href="<?php echo base_url('css/ruler.min.css') ?>">
+    
 
 
     <!-- BASE URL -->
@@ -50,6 +51,9 @@
     <script src="<?php echo base_url('js/MyScriptLibrary.js') ?>"></script>
     <!-- Notify library -->
     <script src="<?php echo base_url('js/bootstrap-notify.min.js') ?>"></script>
+    <!-- Data Table -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css">
+    <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
     <!-- D3 JS SCRIPT -->
     <script src="<?php echo base_url('js/helper/ruler.min.js') ?>"></script>
 
@@ -70,115 +74,7 @@
     <input class="import-map-file d-none" type="file">
 
     <!-- //////////////////////////////Cliend and property details form////////////////// -->
-    <div class="container client-form d-none">
-        <div class="row">
-            <div class="card col-md-12 p-0 mt-5">
-                <div class="card-header bg-primary">
-                    <h5 class="modal-title text-white text-center" id="exampleModalLabel">
-                        Client & Property Details
-                    </h5>
-                </div>
-                <div class="card-body">
-                    <form method="post" id="cpDetails">
-                        <div>
-
-                            <div class="form-row">
-                                <div class="form-group col-md-3">
-                                    <label for="inputEmail4">Full Name <span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control form-control-sm" id="clientName" name="cName" placeholder="Name" required />
-                                    <input type="text" hidden class="form-control form-control-sm" id="cId" name="cId" required />
-
-                                </div>
-
-                                <div class="form-group col-md-3">
-                                    <label for="inputEmail4">Mobile No.</label>
-                                    <input type="text" class="form-control form-control-sm" id="mNumber" name="mNumber" placeholder="Mobile No." />
-                                </div>
-                                <div class="form-group col-md-3">
-                                    <label for="inputEmail4">Landline No.</label>
-                                    <input type="number" class="form-control form-control-sm" name="lNumber" placeholder="Landline No." />
-                                </div>
-                                <div class="form-group col-md-3">
-                                    <label for="inputEmail4">Email </label>
-                                    <input type="email" class="form-control form-control-sm" name="cEmail" placeholder="Email" />
-                                </div>
-                                <div class="col-md-6 clientContainer d-none" id="clients"></div>
-                            </div>
-                            <div class="form-row">
-
-                                <div class="form-group col-md-3">
-                                    <label for="inputAddress">Client Address</label>
-                                    <textarea class="form-control form-control-sm" name="cAddress" placeholder="1234 Main St"></textarea>
-                                </div>
-                                <div class="form-group col-md-3">
-                                    <label for="inputEmail4">Property Name </label>
-                                    <input type="text" class="form-control form-control-sm" name="pname" placeholder="property name" />
-                                </div>
-                                <div class="form-group col-md-3">
-                                    <label for="inputEmail4">Category </label>
-                                    <select class="form-control form-control-sm" name="category" id="category" placeholder="property category">
-                                        <option value="">Select Category</option>
-                                        <?php if (isset($category) && !empty($category)) {
-                                            for ($i = 0; $i < count($category); $i++) { ?>
-                                                <option tId="<?php echo $category[$i]['id']; ?>" value=" <?php echo $category[$i]['category']; ?>"><?php echo $category[$i]['category']; ?></option>
-                                        <?php }
-                                        } ?>
-                                    </select>
-                                </div>
-                                <div class="form-group col-md-3">
-                                    <label for="inputEmail4">Type</label>
-                                    <select class="form-control form-control-sm" name="type" id="type" placeholder="property type">
-                                        <option value="">Select Type</option>
-
-                                    </select>
-                                </div>
-                            </div>
-
-
-                            <!-- 
-                            <div class="form-row">
-                                
-                            </div> -->
-                            <!-- <div class="form-row">
-                               
-                            </div> -->
-
-
-
-                            <div class="form-row">
-                                <div class="form-group col-md-3">
-                                    <label for="inputAddress">Property Address</label>
-                                    <textarea class="form-control form-control-sm" name="address" row='6' placeholder="property address"></textarea>
-                                </div>
-                                <div class="form-group col-md-3">
-
-                                    <label for="inputEmail4">Grah Pravesh Date</label>
-                                    <input type="date" class="form-control form-control-sm" name="gpDate" placeholder="Grah Pravesh Date (Optional)" />
-
-                                </div>
-                                <div class="form-group col-md-3">
-                                    <label for="inputEmail4">First Visit Date</label>
-                                    <input type="date" class="form-control form-control-sm" name="fvDate" placeholder="First Visit Date" />
-                                </div>
-                                <div class="form-group col-md-3">
-                                    <label for="inputEmail4">Property Purchase/opening Date</label>
-                                    <input type="date" class="form-control form-control-sm" name="ppDate" placeholder="Property Purchase/opening Date" />
-                                </div>
-                            </div>
-
-
-                        </div>
-                </div>
-                <div class="card-footer text-muted">
-                    <input type="submit" value="Save Info" class="btn btn-outline-primary btn-sm rounded-0 float-right">
-                    <div class="btn btn-primary text-sm d-none float-right" data-behavior="import"> Import Map</div>
-
-                </div>
-                </form>
-            </div>
-
-        </div>
-    </div>
+    <?php include 'client_property_form.php' ?>
 
 
     <!-- 

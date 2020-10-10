@@ -14,9 +14,9 @@ export default class StageZero {
 
     this.actionBox = this.actionbox.clear().get();
 
-    this.actionBox.append('p')
-    .attr('class','text-uppercase text-sm actionbox-text')
-    .text('Rotate');
+    // this.actionBox.append('p')
+    // .attr('class','text-uppercase text-sm actionbox-text')
+    // .text('Rotate');
 
     this.actionBody = this.actionBox.append('div')
     .attr('class','row actionbox-body');
@@ -24,7 +24,7 @@ export default class StageZero {
     this.rotator = this.actionBody.append('div')
     .attr('class','col-md-12 d-flex justify-content-center mb-2').append('button')
     .attr('class','btn btn-outline-success btn-sm btn-block text-sm')
-    .html('90 Degree');
+    .html('Rotate 90 Degree');
 
     this.actionBtnYes = this.actionBody.append('div')
     .attr('class','col-md-12 d-flex justify-content-center mt-2')

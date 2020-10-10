@@ -13,7 +13,8 @@
     <!-- FONTAWESOME CSS -->
     <link rel="stylesheet" href="<?php echo base_url('assets/fontawesome/css/all.min.css') ?>">
     <!-- CUSTOM CSS -->
-    <link rel="stylesheet" href="<?php echo base_url('css/main.css') ?>">
+    <!-- <link rel="stylesheet" href="<?php echo base_url('css/main.css') ?>"> -->
+    <link rel="stylesheet" href="<?php echo base_url('css/app.css') ?>">
 <!-- google fonts -->
 <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap" rel="stylesheet">
 

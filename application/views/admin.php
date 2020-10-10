@@ -45,21 +45,6 @@
             <!-- M E N U  I T E M S -->
             <div class="menu-sidebar">
                 <ul class="nav menu" style="float:right">
-                    <!-- <li class="nav-item">
-                        <a href="#">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="<?php echo base_url('Main') ?>">Dashboard</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="<?php echo base_url('Main/ayadhi') ?>">Ayadi Calculator</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="<?php echo base_url('Main/devtas') ?>">Devtas</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="<?php echo base_url('Main/propertyInfo') ?>"><i class="fas fa-plus"></i>&nbsp;&nbsp;New Project</a>
-                    </li> -->
                     <li class="nav-item">
                         <img class="profile thumbnail rounded-circle" src="<?php echo base_url('assets/images/thumbnail.png') ?>" alt="user" width="20" id="profileButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="profileButton">
@@ -86,10 +71,9 @@
                                 <tr class="border-0">
                                     <th class="border-0">Sr. No.</th>
                                     <th class="border-0">Name</th>
-                                    <th class="border-0">Mobile No.</th>
+                                    <th class="border-0">User Id</th>
                                     <th class="border-0">Email</th>
-                                    <th class="border-0">Password</th>
-                                    <th class="border-0">Address</th>
+                                    <th class="border-0">Mobile No.</th>
                                     <th class="border-0">Action</th>
 
                                 </tr>
@@ -99,13 +83,12 @@
                                     for ($i = 0; $i < count($users); $i++) { ?>
                                         <tr>
                                             <td><?php echo $i + 1 ?></td>
-                                            <td><?php echo $users[$i]['name'] ?></td>
-                                            <td><?php echo $users[$i]['mobileNo'] ?></td>
+                                            <td><?php echo $users[$i]['firstName'] . ' ' . $users[$i]['lastName'] ?></td>
+                                            <td><?php echo $users[$i]['userId'] ?></td>
                                             <td><?php echo $users[$i]['email'] ?></td>
-                                            <td><?php echo $users[$i]['password'] ?></td>
-                                            <td><?php echo $users[$i]['address'] ?></td>
-                                            <td><i class="fa fa-trash delete" aria-hidden="true" dId="<?php echo base64_encode($users[$i]['userId']) ?>" style="cursor:pointer"></i> 
-                                            <i data-toggle="modal" data-target="#modal1" class="fas fa-edit edit" eId="<?php echo base64_encode($users[$i]['userId']) ?>" aria-hidden="true" style="cursor:pointer"></i></td>
+                                            <td><?php echo $users[$i]['mobileNo'] ?></td>
+                                            <td><i class="fa fa-trash delete" aria-hidden="true" dId="<?php echo base64_encode($users[$i]['userId']) ?>" style="cursor:pointer"></i>
+                                                <i data-toggle="modal" data-target="#modal1" class="fas fa-edit edit" eId="<?php echo base64_encode($users[$i]['userId']) ?>" aria-hidden="true" style="cursor:pointer"></i></td>
                                         </tr>
                                 <?php }
                                 } ?>
@@ -118,11 +101,7 @@
         </div>
     </div>
 
-    <!-- 
-    //////////////////////////////// --- Client & Property Form ---  ////////////////////////////////
-    -->
-
-    <!-- //Client save form modal -->
+    <!-- Consultant form to create a consultant  -->
     <div class="modal fade" id="modal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="margin-left: 1px;">
         <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
             <div class="modal-content">
@@ -139,39 +118,73 @@
                     <form action="<?php echo base_url('Main/addUser') ?>" method="post" id="cnsltInfo">
                         <div>
                             <div class="form-row">
+                                <div class="form-group col-sm-6">
+                                    <label for="inputEmail4">First Name</label>
+                                    <input type="text" class="form-control form-control-sm" id="fname" name="fname" placeholder="First Name" required />
+                                </div>
+                                <div class="form-group col-sm-6">
+                                    <label for="inputEmail4">Last Name</label>
+                                    <input type="text" class="form-control form-control-sm" id="lname" name="lname" placeholder="Last Name" required />
+                                </div>
+
 
                             </div>
                             <div class="form-row">
-                                <div class="form-group col-md-6">
-                                    <label for="inputEmail4">Name</label>
-                                    <input type="text" class="form-control form-control-sm" id="name" name="name" placeholder="Consultant name" required />
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <label for="inputEmail4">Mobile No.</label>
-                                    <input type="number" class="form-control form-control-sm" id="mNumber" name="mNumber" placeholder="Consultant Phone Number" required />
-
-
-                                </div>
-
-                            </div>
-                            <div class="form-row">
-                                <div class="form-group col-md-6">
+                                <div class="form-group col-sm-6">
                                     <label for="inputEmail4">Email</label>
-                                    <input type="email" class="form-control form-control-sm" id="email" name="email" placeholder="Consultant email address" required>
+                                    <input type="email" class="form-control form-control-sm" id="email" name="email" placeholder="email address" required>
 
                                 </div>
-                                <div class="form-group col-md-6">
+                                <div class="form-group col-sm-6">
+                                    <label for="inputEmail4">Mobile No.</label>
+                                    <input type="number" class="form-control form-control-sm" id="mNumber" name="mNumber" placeholder="Phone Number" />
+
+
+                                </div>
+                                <!-- <div class="form-group col-sm-6">
                                     <label for="inputEmail4">Password</label>
-                                    <input type="text" class="form-control form-control-sm" id="password" name="password" placeholder="Password@#$1234" required>
+                                    <input type="password" class="form-control form-control-sm" id="password" name="password" placeholder="Password@#$1234" required>
 
-                                </div>
-                                <div class="form-group col-md-12">
+                                </div> -->
+                                <div class="form-group col-sm-12">
                                     <label for="inputAddress">Address</label>
                                     <textarea class="form-control form-control-sm" id="address" name="address" placeholder="Consultant Address" required /></textarea>
                                 </div>
+
+
                             </div>
 
-
+                            <div class="form-inline col-md-12 p-0 payment mb-2">
+                                <label>Payment</label>
+                                <div class="form-check ml-3">
+                                    <input class="form-check-input" type="radio" name="payment" id="cash" value="cash" checked>
+                                    <label class="form-check-label" for="cash">
+                                        Cash
+                                    </label>
+                                </div>
+                                <div class="form-check ml-3">
+                                    <input class="form-check-input" type="radio" name="payment" id="cheque" value="cheque">
+                                    <label class="form-check-label" for="cheque">
+                                        Cheque
+                                    </label>
+                                </div>
+                                <div class="form-check ml-3">
+                                    <input class="form-check-input" type="radio" name="payment" id="online" value="online">
+                                    <label class="form-check-label" for="online">
+                                        Online
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="form-row radio-form">
+                                <div class="form-group col-sm-6 mb-1">
+                                    <label for="date" class="text-md">Date</label>
+                                    <input type="date" class="form-control form-control-sm" id="date" name="date" placeholder="mm/dd/yyyy">
+                                </div>
+                                <div class="form-group col-sm-6 mb-1">
+                                    <label for="amount" class="text-md">Amount</label>
+                                    <input type="text" class="form-control form-control-sm" id="amount" name="amount" placeholder="Amount">
+                                </div>
+                            </div>
 
                         </div>
 
@@ -181,7 +194,7 @@
                             <button type="button" class="btn btn-outline-secondary btn-sm rounded-0" data-dismiss="modal">
                                 Close
                             </button>
-                            <input type="submit" value="Save Info" class="btn btn-outline-primary btn-sm rounded-0 float-right">
+                            <input type="submit" value="Create User" class="btn btn-outline-primary btn-sm rounded-0 float-right">
 
 
                     </form>
@@ -209,9 +222,7 @@
     <link rel="stylesheet" href="<?php echo base_url('assets/custom/jquery.dataTables.min.css') ?>">
     <script src="<?php echo base_url('assets/custom/jquery.dataTables.min.js') ?>"></script>
 
-    <script>
-        $('.dataTable').dataTable();
-    </script>
+   
 </body>
 
 </html>

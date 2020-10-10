@@ -12,28 +12,28 @@ export default class StageSecond {
     let actionBox = this.actionbox.clear().get();
 
     let row = actionBox.append('div')
-    .classed('form-row', true);
+      .classed('form-row', true);
 
     let col1 = row.append('div')
-    .classed('col-md-6', true);
+      .classed('col-md-6', true);
     let col2 = row.append('div')
-    .classed('col-md-6', true);
+      .classed('col-md-6', true);
     let col3 = row.append('div')
-    .classed('col-md-12', true);
+      .classed('col-md-12', true);
 
     let enableDiagonalsWrapper = col1.append('div')
-     .classed('form-check', true);
-    let enableDiagonals  = enableDiagonalsWrapper.append('input')
-     .classed('form-check-input', true).attr('type', 'checkbox');
-    
-    enableDiagonalsWrapper.append('label').attr('class','form-check-label, text-sm').html('Diagonals');
+      .classed('form-check', true);
+    let enableDiagonals = enableDiagonalsWrapper.append('input')
+      .classed('form-check-input', true).attr('type', 'checkbox');
+
+    enableDiagonalsWrapper.append('label').attr('class', 'form-check-label, text-sm').html('Diagonals');
 
     let enableGridWrapper = col2.append('div')
-    .classed('form-check', true);
-    let enableGrid  = enableGridWrapper.append('input')
-    .classed('form-check-input', true).attr('type', 'checkbox');
-   
-    enableGridWrapper.append('label').attr('class','form-check-label, text-sm').html('Grid');
+      .classed('form-check', true);
+    let enableGrid = enableGridWrapper.append('input')
+      .classed('form-check-input', true).attr('type', 'checkbox');
+
+    enableGridWrapper.append('label').attr('class', 'form-check-label, text-sm').html('Grid');
 
     let mapGridType = col3
       .append('select').attr('class', 'form-control form-control-sm text-sm')
@@ -44,9 +44,9 @@ export default class StageSecond {
 
     this.actionbox.show();
 
-    enableDiagonals.on('click', function(){
+    enableDiagonals.on('click', function () {
       diagonalChecked = d3.select(this).property("checked");
-      if(diagonalChecked) {
+      if (diagonalChecked) {
         that.assist.drawMask({ layer: that.canvas, points: that.mapBoundariesCoords, size: that.RECT_SIZE });
         that.assist.drawPolygon(that.canvas, that.mapBoundariesCoords, gridType, true, gridChecked, diagonalChecked);
         that.assist.drawBharamNabhi({ layer: that.canvas, centroid: that.centroid });
@@ -61,9 +61,9 @@ export default class StageSecond {
       }
     })
 
-    enableGrid.on('click', function(){
+    enableGrid.on('click', function () {
       gridChecked = d3.select(this).property("checked");
-      if(gridChecked) {
+      if (gridChecked) {
         that.assist.drawMask({ layer: that.canvas, points: that.mapBoundariesCoords, size: that.RECT_SIZE });
         that.assist.drawPolygon(that.canvas, that.mapBoundariesCoords, gridType, true, gridChecked, diagonalChecked);
         that.assist.drawBharamNabhi({ layer: that.canvas, centroid: that.centroid });
@@ -78,10 +78,10 @@ export default class StageSecond {
       }
     })
 
-    mapGridType.on('change', function() {
+    mapGridType.on('change', function () {
       gridType = mapGridType.property('value');
 
-      if(gridType == 3) {
+      if (gridType == 3) {
         that.assist.drawMask({ layer: that.canvas, points: that.mapBoundariesCoords, size: that.RECT_SIZE });
         that.assist.drawPolygon(that.canvas, that.mapBoundariesCoords, gridType, true, gridChecked, diagonalChecked);
         that.assist.drawBharamNabhi({ layer: that.canvas, centroid: that.centroid });
@@ -126,7 +126,7 @@ export default class StageSecond {
         value: [that.mapBoundariesCoords[i], that.mapBoundariesCoords[j]]
       });
     }
-   
+
 
     let options = selectbox.selectAll("option")
       .data(faceSelectData)
@@ -149,13 +149,17 @@ export default class StageSecond {
 
     this.actionbox.show();
 
+    let gMapBtn = actionBody.append("button")
+      .attr("class", "mt-2 btn btn-primary col-sm-12 text-sm")
+      .text('Gmap');
+
     let angleInputbox = actionBody.append("input")
-    .attr("class", "mt-2 form-control form-control-sm text-sm")
-    .attr('type', 'number').attr('placeholder', 'Degree');
+      .attr("class", "mt-2 form-control form-control-sm text-sm")
+      .attr('type', 'number').attr('placeholder', 'Degree');
 
     let degreeUpdateBtn = actionBody.append("button")
-    .attr("class", "mt-2 form-control form-control-sm text-sm")
-    .text('Update');
+      .attr("class", "mt-2 form-control form-control-sm text-sm")
+      .text('Update');
 
     selectbox.on("change", function () {
       str = d3.select(this).node().value.split(',');
@@ -163,8 +167,8 @@ export default class StageSecond {
       pointB = [parseInt(str[2]), parseInt(str[3])];
     })
 
-    degreeUpdateBtn.on("click", function() {
-      
+    degreeUpdateBtn.on("click", function () {
+
       let theta = (angleInputbox.property('value') == "") ? 0 : parseFloat(angleInputbox.property('value'));
       that.angle = -theta;
 
@@ -176,16 +180,36 @@ export default class StageSecond {
         that.actionbox.clear().hide();
         that.faceCoords = [pointA, pointB];
         that.model.editFaceCoords(that.mapId, [pointA, pointB]);
-        that.model.editFaceWall(that.mapId,face);
+        that.model.editFaceWall(that.mapId, face);
         that._stage = 3;
         that.model.editStage(that.mapId, 3);
         that.model.editDegree(that.mapId, angleInputbox.property('value'));
         that._type == "vedic" ? that.vedicStart() : that.start();
       }
 
-  })
-  
+    });
+
+    gMapBtn.on('click', function () {
+      let houseMaps = JSON.parse(localStorage.getItem('houseMaps'));
+      let centerPoint = houseMaps[0].centroid;
+      let nPoint = { x: centerPoint.x, y: 0 };
+      
+      let pPoint = Utility.getPerpendicularPoint(pointA, pointB, centerPoint);
+      let angle =  Utility.find_angle(nPoint, centerPoint, pPoint);
+      angle = Math.round(angle * 180 / 3.14);
+      angle = centerPoint.x < pPoint.x ? angle : 360 - angle
+      angleInputbox.attr('value',angle);
+      angleInputbox.attr('disabled',true);
+      that.model.editGmap(that.mapId, true);
+      localStorage.setItem('Gmap','true')
+      
+    })
+
+    
+
   }
+
+
 
   showToast(heading, msg, type = "warning") {
     let toastbox = d3.select('#appToast');
