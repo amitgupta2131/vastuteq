@@ -22,7 +22,12 @@
   <script src="<?php echo base_url('js/bootstrap-notify.min.js') ?>"></script>
   <!-- Latest compiled and minified CSS -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
-
+  <!-- custom js -->
+  <script src="<?php echo base_url('js/login.js') ?>"></script>
+  <!-- BASE URL -->
+  <script>
+        const BASE_URL = "<?php echo base_url() ?>";
+    </script>
 </head>
 
 <body style="background-color: #3a3b3c;">
@@ -33,7 +38,7 @@
         मद्गृहे धनधान्यादि समृद्धिं कुरु सर्वदा ।।</p>
     </div>
     <div class="login-box col-sm-6 p-0">
-      <form action="<?php echo base_url('Login/verifyUser'); ?>" method="post">
+      <form id="form1" action="<?php echo base_url('Login/verifyUser'); ?>" method="post">
         <div class="form" id="form">
           <div class="field email">
             <div class="icon"></div>
@@ -46,7 +51,9 @@
           <input type="submit" class="button" value="LOGIN" id="submit">
           <div class="side-top-bottom"></div>
           <div class="side-left-right"></div>
-          <small>Fill in the form</small>
+          <div class="text-center">
+            <a class="small" id="fPassword" href="<?php echo base_url('Login/register') ?>">Forgot Password!</a>
+          </div>
         </div>
       </form>
     </div>
@@ -57,7 +64,12 @@
       let error = '<?php echo $this->session->flashdata('error'); ?>';
       showAlert(error, 'danger');
     </script>
-  <?php } ?>
+  <?php }else{ ?>
+    <script>
+      let success = '<?php echo $this->session->flashdata('success'); ?>';
+      showAlert(success, 'success');
+    </script>
+  <?php }?>
 
 </body>
 
