@@ -162,9 +162,11 @@ export default class Paint {
 
 		if (Tool.TOOL_LINE == this.tool) {
 			if (!this.isShiftDown) {
+				this.context.setLineDash([]);
 				this.context.moveTo(this.roundToNextFive(this.startPos.x), this.roundToNextFive(this.startPos.y));
 				this.context.lineTo(this.roundToNextFive(this.currentPos.x), this.roundToNextFive(this.currentPos.y));
 			} else{
+				this.context.setLineDash([]);
 				this.context.moveTo(this.startPos.x, this.startPos.y);
 				this.context.lineTo(this.currentPos.x, this.currentPos.y);
 			}
@@ -181,6 +183,7 @@ export default class Paint {
 		}  
 		
 		else if (Tool.TOOL_RECTANGLE == this.tool) {
+			this.context.setLineDash([]);
 			this.context.rect(
 				this.startPos.x,
 				this.startPos.y,
@@ -189,6 +192,7 @@ export default class Paint {
 			);
 		} else if (Tool.TOOL_CIRCLE == this.tool) {
 			let distance = Utility.calcHypotenuse(this.startPos, this.currentPos);
+			this.context.setLineDash([]);
 			this.context.arc(
 				this.startPos.x,
 				this.startPos.y,
@@ -198,6 +202,7 @@ export default class Paint {
 				false
 			);
 		} else if (Tool.TOOL_TRIANGLE == this.tool) {
+			this.context.setLineDash([]);
 			this.context.moveTo(
 				this.startPos.x + (this.currentPos.x - this.startPos.x) / 2,
 				this.startPos.y

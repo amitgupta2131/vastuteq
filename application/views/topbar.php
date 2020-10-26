@@ -1,5 +1,3 @@
-
-
 <section class="header" style="position:fixed;z-index:10">
     <div class="title-bar" style="justify-content:left;">
         <img class="logo" style="margin-left:20px" src="<?php echo base_url('assets/images/logo.jpg') ?>" alt="logo" width="30">
@@ -28,7 +26,7 @@
                         <a class="dropdown-item savebtn d-none" href="#">Save</a>
                         <a class="dropdown-item" href="#" id='createMap'>Create Map</a>
                         <a class="dropdown-item" href="#" id="editMap">Edit Map</a>
-                        <a class="dropdown-item" onclick="javascript:toggleFullScreen()" href="#">Full Screen</a>
+                        <a class="dropdown-item" id="fullScreenTrigger" onclick="javascript:toggleFullScreen()" href="#">Full Screen</a>
                         <a class="dropdown-item exit" href="#">Exit</a>
                     </div>
 
@@ -243,9 +241,27 @@
 <?php } ?>
 
 <script>
+    // $(document).ready(function() {
+
+    //     // setTimeout(() => {
+    //     //     let elem = document.querySelector("html");
+
+    //     //     if (!document.fullscreenElement) {
+    //     //         elem.requestFullscreen().catch(err => {
+    //     //             alert(`Error attempting to enable full-screen mode: ${err.message} (${err.name})`);
+    //     //         });
+    //     //     } else {
+    //     //         //   document.exitFullscreen();
+    //     //     }
+    //     // }, 5000)
+
+    //     $('#fullScreenTrigger').click();
+
+    // })
+
     function toggleFullScreen() {
         var a = $(window).height() - 10;
-
+        // var promise = Element.requestFullscreen();
 
         if (!document.fullscreenElement && // alternative standard method
             !document.mozFullScreenElement && !document.webkitFullscreenElement) { // current working methods
@@ -350,14 +366,14 @@
     // });
 
     // select language
-    $('#language').on('mouseover', function () {
-      $('.profile-form').addClass('hide');
-      $('.lan-container').removeClass('hide')
+    $('#language').on('mouseover', function() {
+        $('.profile-form').addClass('hide');
+        $('.lan-container').removeClass('hide')
     });
 
     // select profile
-    $('#profile').on('mouseover', function () {
-      $('.profile-form').removeClass('hide');
-      $('.lan-container').addClass('hide')
+    $('#profile').on('mouseover', function() {
+        $('.profile-form').removeClass('hide');
+        $('.lan-container').addClass('hide')
     });
 </script>

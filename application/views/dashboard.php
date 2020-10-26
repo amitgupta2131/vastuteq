@@ -86,7 +86,7 @@
                                 </div>
                                 <div class="project-name card-text">
                                     <span class="col-sm-5 pr-0">Type : </span>
-                                    <span class="col-sm-7 pr-0"><?php echo ucwords($property[$i]['type']) ?></span>
+                                    <span class="col-sm-7 pr-0"><?php echo $property[$i]['type'] == "mahavastu" ? ucwords('mvastu'):'Vedic' ?></span>
                                 </div>                               
                             </div>
                             <div class="row m-0">

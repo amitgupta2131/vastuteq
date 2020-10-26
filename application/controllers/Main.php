@@ -95,30 +95,6 @@ class Main extends CI_Controller
 
 	public function addProperty()
 	{
-
-		// $insertData = array(
-		// 	'userId' => $_SESSION['userInfo']['userId'],
-		// 	'clientId'	=> "1234567890",
-		// 	'propertyName' => "DUMMY PROPERTY",
-		// 	'category'	=> "RESIDENTIAL",
-		// 	'type' => "FLAT",
-		// 	'propertyAddress' => "DUMMY ADDRESS",
-		// 	'grahPravesh_date' => "2020-07-28",
-		// 	'firstVisit_date' => "2020-07-28",
-		// 	'opening_date' => "2020-07-28",
-		// );
-		// $insertData['propertyId'] =   $this->MainModel->getNewIDorNo("P-", 'propertydetails');
-
-		// $result = $this->MainModel->insertInto('propertydetails', $insertData);
-		// if ($result) {
-		// 	// $this->session->set_flashdata("success", "Client successfully added");
-		// 	redirect(base_url('Main/draw/') . base64_encode($insertData['propertyId']));
-		// } else {
-		// 	$this->session->set_flashdata("error", "Something went wrong contact to IT");
-		// 	redirect(base_url('Main/propertyInfo'));
-		// }
-
-		//$clientData['cId'] = '';
 		$cId = $_POST['cId'];
 		if (!empty($_POST['cName'])) {
 
@@ -135,13 +111,8 @@ class Main extends CI_Controller
 
 			if (!$clientValidate) {
 				$clientData['cId'] =   $this->MainModel->getNewIDorNo("C-", 'clientdetails');
+				$cId = $clientData['cId'];
 				$result = $this->MainModel->insertInto('clientdetails', $clientData);
-
-				// if ($result) {
-				// 	echo json_encode(array("success", "Client successfully added", $insertData['cId'], $_POST['cName']));
-				// } else {
-				// 	echo json_encode(array("error", "Something went wrong contact to IT"));
-				// }
 			}
 		}
 
@@ -162,16 +133,12 @@ class Main extends CI_Controller
 			$insertData['propertyId'] =   $this->MainModel->getNewIDorNo("P-", 'propertydetails');
 			$result = $this->MainModel->insertInto('propertydetails', $insertData);
 			if ($result) {
-				// $this->session->set_flashdata("success", "property successfully added");
-				// redirect(base_url('Main/draw/') . base64_encode($insertData['propertyId']));
 				echo (json_encode(array('clientDetails' => $clientData, 'propertyDetails' => $insertData, 'type' => "success")));
 			} else {
 				echo (json_encode(array("error", "Could not add propert information, contact IT")));
-				// redirect(base_url('Main/propertyInfo'));
 			}
 		} else {
 			echo (json_encode(array("error", "All fields with * are required")));
-			// redirect(base_url('Main/propertyInfo'));
 		}
 	}
 
@@ -222,7 +189,7 @@ class Main extends CI_Controller
 				$this->session->set_flashdata("error", "Consultant Already Exist");
 				redirect(base_url('Main/admin'));
 			} else {
-				$insertData = array(					
+				$insertData = array(
 					'isAdmin' => 0,
 					'firstName'	=> validateInput($_POST['fname']),
 					'lastName'	=> validateInput($_POST['lname']),
@@ -231,16 +198,16 @@ class Main extends CI_Controller
 					'address' => validateInput($_POST['address']),
 					'paymentType' => validateInput($_POST['payment']),
 					'amount' => validateInput($_POST['amount']),
-					'chequeNo' => isset($_POST['chequeNo'])?validateInput($_POST['chequeNo']):'',
-					'tranzactionId' => isset($_POST['tId'])?validateInput($_POST['tId']):'',
+					'chequeNo' => isset($_POST['chequeNo']) ? validateInput($_POST['chequeNo']) : '',
+					'tranzactionId' => isset($_POST['tId']) ? validateInput($_POST['tId']) : '',
 					'date' => validateInput($_POST['date']),
 				);
 				$insertData['password'] = $this->passwordGenerate(12);
-				
+
 
 				// Create user Id
-				$prefix = substr($insertData['firstName'], 0, 3).substr($insertData['lastName'], 0, 3);
-				$insertData['userId'] =   $this->MainModel->getNewUserIDorNo($prefix, 'login');				
+				$prefix = substr($insertData['firstName'], 0, 3) . substr($insertData['lastName'], 0, 3);
+				$insertData['userId'] =   $this->MainModel->getNewUserIDorNo($prefix, 'login');
 
 				// Send email to user
 				$this->load->helper('email');

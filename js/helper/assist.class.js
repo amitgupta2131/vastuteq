@@ -8,30 +8,30 @@ export default class Assist {
         this.DATA_EIGHT = [
             { name: 'N', value: 1, color: "blue" }, { name: 'NE', value: 1, color: "blue" }, { name: 'E', value: 1, color: "green" },
             { name: 'SE', value: 1, color: "red" }, { name: 'S', value: 1, color: "red" }, { name: 'SW', value: 1, color: "yellow" },
-            { name: 'W', value: 1, color: "white" }, { name: 'NW', value: 1, color: "white" }
+            { name: 'W', value: 1, color: "gray" }, { name: 'NW', value: 1, color: "gray" }
         ];
 
         this.DATA_SIXTEEN = [
             { name: 'N', value: 1, color: "blue" }, { name: 'NNE', value: 1, color: "blue" }, { name: 'NE', value: 1, color: "blue" },
             { name: 'ENE', value: 1, color: "green" }, { name: 'E', value: 1, color: "green" }, { name: 'ESE', value: 1, color: "green" },
             { name: 'SE', value: 1, color: "red" }, { name: 'SSE', value: 1, color: "red" }, { name: 'S', value: 1, color: "red" },
-            { name: 'SSW', value: 1, color: "yellow" }, { name: 'SW', value: 1, color: "yellow" }, { name: 'WSW', value: 1, color: "white" },
-            { name: 'W', value: 1, color: "white" }, { name: 'WNW', value: 1, color: "white" }, { name: 'NW', value: 1, color: "white" },
+            { name: 'SSW', value: 1, color: "yellow" }, { name: 'SW', value: 1, color: "yellow" }, { name: 'WSW', value: 1, color: "gray" },
+            { name: 'W', value: 1, color: "gray" }, { name: 'WNW', value: 1, color: "gray" }, { name: 'NW', value: 1, color: "gray" },
             { name: 'NNW', value: 1, color: "blue" }
         ];
 
         this.DATA_THIRTYTWO = [
-            { name: 'N4', value: 1, color: "white" }, { name: 'N5', value: 1, color: "white" }, { name: 'N6', value: 1, color: "white" },
-            { name: 'N7', value: 1, color: "white" }, { name: 'N8', value: 1, color: "green" }, { name: 'E1', value: 1, color: "white" },
+            { name: 'N4', value: 1, color: "gray" }, { name: 'N5', value: 1, color: "gray" }, { name: 'N6', value: 1, color: "gray" },
+            { name: 'N7', value: 1, color: "gray" }, { name: 'N8', value: 1, color: "green" }, { name: 'E1', value: 1, color: "gray" },
             { name: 'E2', value: 1, color: "blue" }, { name: 'E3', value: 1, color: "blue" }, { name: 'E4', value: 1, color: "green" },
             { name: 'E5', value: 1, color: "blue" }, { name: 'E6', value: 1, color: "blue" }, { name: 'E7', value: 1, color: "red" },
             { name: 'E8', value: 1, color: "green" }, { name: 'S1', value: 1, color: "yellow" }, { name: 'S2', value: 1, color: "red" },
             { name: 'S3', value: 1, color: "red" }, { name: 'S4', value: 1, color: "red" }, { name: 'S5', value: 1, color: "green" },
             { name: 'S6', value: 1, color: "yellow" }, { name: 'S7', value: 1, color: "yellow" }, { name: 'S8', value: 1, color: "yellow" },
-            { name: 'W1', value: 1, color: "white" }, { name: 'W2', value: 1, color: "red" }, { name: 'W3', value: 1, color: "red" },
-            { name: 'W4', value: 1, color: "white" }, { name: 'W5', value: 1, color: "white" }, { name: 'W6', value: 1, color: "yellow" },
-            { name: 'W7', value: 1, color: "white" }, { name: 'W8', value: 1, color: "yellow" }, { name: 'N1', value: 1, color: "yellow" },
-            { name: 'N2', value: 1, color: "white" }, { name: 'N3', value: 1, color: "blue" }
+            { name: 'W1', value: 1, color: "gray" }, { name: 'W2', value: 1, color: "red" }, { name: 'W3', value: 1, color: "red" },
+            { name: 'W4', value: 1, color: "gray" }, { name: 'W5', value: 1, color: "gray" }, { name: 'W6', value: 1, color: "yellow" },
+            { name: 'W7', value: 1, color: "gray" }, { name: 'W8', value: 1, color: "yellow" }, { name: 'N1', value: 1, color: "yellow" },
+            { name: 'N2', value: 1, color: "gray" }, { name: 'N3', value: 1, color: "blue" }
         ];
         this.DEVTAS = DEVTAS;
     }
@@ -121,7 +121,7 @@ export default class Assist {
 
         if (division == 8) { data = this.DATA_EIGHT; }
         else if (division == 16) { data = this.DATA_SIXTEEN; }
-        else if (division == 32) { data = this.DATA_THIRTYTWO; }
+        else if (division == 32) { data = this.DATA_THIRTYTWO; angle+= 5.625; }
 
         for (let i = 0; i < division; i++) {
             let direction = layer
@@ -132,7 +132,7 @@ export default class Assist {
                 .attr("y1", centroid.y)
                 .attr("x2", parseFloat(centroid.x) + 800)
                 .attr("y2", centroid.y)
-                .attr("transform", "rotate(" + (nAngle + angle) + " " + centroid.x + " " + centroid.y + ")")
+                .attr("transform", "rotate(" + (nAngle + angle ) + " " + centroid.x + " " + centroid.y + ")")
                 .attr("stroke", (i == 0 ? "red" : "darkorange"))
                 .attr("stroke-width", (i == 0 ? 2 : 1))
                 .classed("directions", true)
@@ -266,7 +266,7 @@ export default class Assist {
             .attr("data-detail-hindi", function (d, i) { return data[i].hindiDetail; })
             .attr("d", arc)
             // .attr("stroke", "#21252963")
-            .attr("stroke", "#F7E7BD")
+            .attr("stroke", "#666363")
             .style("fill-opacity", "0");
 
         g.append("text")

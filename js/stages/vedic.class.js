@@ -72,7 +72,7 @@ export default class Vedic {
     this.actionLabelMahavastu = this.actionsdiv2.append('label')
       .attr('class', 'form-check-label text-sm')
       .attr('for', 'mahavastuRadio')
-      .html('Mahavastu');
+      .html('Mvastu');
 
     $('input[name="mahavastu"]').on('click', function () {
       swal("Before Redirecting, want to save Map data or Discard it ?", {
@@ -185,7 +185,7 @@ export default class Vedic {
       <a class="dropdown-item" type="fixed" href="#" id="3GD" value="3GD">3 X 3 Grid Diagonal</a>
       <a class="dropdown-item" type="fixed" href="#" id="9DL" value="9DL">9 X 9 Disha Lord Numero Grid</a>
       <a class="dropdown-item" type="fixed" href="#" id="9GL" value="9GL">9 X 9 Grid Layout</a>
-      <a class="dropdown-item" type="fixed" href="#" id="9SG" value="9SG">Maha Vastu Square Grid</a>
+      <a class="dropdown-item" type="fixed" href="#" id="9SG" value="9SG">Mvastu Square Grid</a>
       <a class="dropdown-item" type="fixed" href="#" id="9MS" value="9MS">Marma Sthana</a>
       <a class="dropdown-item" type="fixed" href="#" id="9SM" value="9SM">Shanmahanti</a>
       <a class="dropdown-item" type="fixed" href="#" id="9SD" value="9SD">Shubh Dwar</a>

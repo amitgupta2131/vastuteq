@@ -72,7 +72,7 @@ export default class StageThird {
     this.actionLabelMahavastu = this.actionsdiv2.append('label')
       .attr('class', 'form-check-label text-sm')
       .attr('for', 'mahavastuRadio')
-      .html('Mahavastu');
+      .html('Mvastu');
 
     $('input[name="vedic"]').on('click', function () {
       swal("Before Redirecting, want to save Map data or Discard it ?", {
@@ -379,7 +379,7 @@ export default class StageThird {
 
     let html = `<a class="dropdown-item" type="fixed" href="#" value="VPM" id="vpm">Vpm</a>
 <a class="dropdown-item" href="#" type="fixed" value="MVPC" id="mvpc">Shakti Chakra</a>
-<a class="dropdown-item" href="#" type="fixed" value="MVC" id="mvc">Maha Vastu Chakra</a>
+<a class="dropdown-item" href="#" type="fixed" value="MVC" id="mvc">Mvastu Chakra</a>
  `;
 
     let mapGridType = $('#toolMenu').html(html);

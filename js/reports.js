@@ -10,9 +10,9 @@ $(document).ready(function () {
     let div = localStorage.getItem('reportDivision')
 
     //Print and back buttons
-    let buttons = `<div class="col-sm-2" style="position:relative">
-                    <button class="btn btn-outline-primary float-right mb-1 btn-sm text-sm pl-3 pr-3" id="rPrint">Print</button>
-                    <button class="btn btn-outline-primary float-right mr-2 mb-1 btn-sm text-sm pl-3 pr-3" id="back">Back</button>
+    let buttons = `<div class="col-sm-3 row" style="position:relative">
+                    <button class="btn col-sm-5 btn-outline-primary float-right mb-1 btn-sm text-sm pl-3 pr-3" id="rPrint">Print</button>
+                    <button class="btn col-sm-5 btn-outline-primary float-right mb-1 ml-1 btn-sm text-sm pl-3 pr-3" id="back">Back</button>
                    </div>`;
     let backBtn = `<div style="position:relative">    
                     <button class="btn btn-outline-primary float-right mr-2 mb-1 btn-sm text-sm pl-3 pr-3" id="back">Back</button>
@@ -66,7 +66,7 @@ $(document).ready(function () {
         zoneWiseReport();
         sixteenZoneColorReport();
         consultantReport();
-        
+
     });
     $('#tab10').on('click', function () {
         window.location.href = BASE_URL + 'Main/ayadhi'
@@ -79,7 +79,6 @@ $(document).ready(function () {
 
                 $('#main-tab-right').append('<div id="rtable"></div>')
                 let data = JSON.parse(resolve)[1][0];
-
                 let reportHeader = `<div class="col-sm-12 row rheader text-center">
                 <div class="col-sm-3"><div class="font-weight-bold">Client Name  </div><div>${data.clientName}</div></div>
                 <div class="col-sm-3"><div class="font-weight-bold">Building Address  </div><div>${data.propertyAddress}</div></div>
@@ -88,7 +87,7 @@ $(document).ready(function () {
                 </div>`;
 
                 let reportFooter = `<div class="col-sm-12 rfooter row text-center">
-                <div class="col-sm-3"><div class="font-weight-bold">Consultant Name </div><div>${data.name}</div></div>
+                <div class="col-sm-3"><div class="font-weight-bold">Consultant Name </div><div>${data.firstName}</div></div>
                 <div class="col-sm-3"><div class="font-weight-bold">Address  </div><div>${data.address}</div></div>
                 <div class="col-sm-3"><div class="font-weight-bold">Contact No  </div><div>${data.mobileNo}</div></div>
                 <div class="col-sm-3"><div class="font-weight-bold">Email  </div><div>${data.email}</div></div>
@@ -96,7 +95,7 @@ $(document).ready(function () {
 
                 let reportTable = `<div class="card">
                                     <div class="card-header row m-0">
-                                   <h5 class="col-sm-10"> Object/Activity Wise Report </h5>
+                                   <h5 class="col-sm-9"> Object/Activity Wise Report </h5>
                                         ${buttons}
                                     </div>
                                     <div class="card-body">
@@ -185,7 +184,7 @@ $(document).ready(function () {
 
                 let reportTable = `<div class="card">
                                     <div class="card-header row m-0">
-                                    <h5 class="col-sm-10"> Zone ${objType} Report </h5>
+                                    <h5 class="col-sm-9"> Zone ${objType} Report </h5>
                                         ${buttons}
                                     </div>
                                     <div class="card-body">
@@ -413,7 +412,7 @@ $(document).ready(function () {
 
                     let reportTable = `<div class="card">
                     <div class="card-header row m-0">
-                    <h5 class="col-sm-10"> Zone Colour Report </h5>
+                    <h5 class="col-sm-9"> Zone Colour Report </h5>
                                             ${buttons}
                                         </div>
                                         <div class="card-body">
@@ -493,7 +492,7 @@ $(document).ready(function () {
 
                 let reportTable = `<div class="card">
                 <div class="card-header row m-0">
-                <h5 class="col-sm-10"> Main Gate Entry Report </h5>
+                <h5 class="col-sm-9"> Main Gate Entry Report </h5>
                                     ${buttons}
                                 </div>
                                 <div class="card-body">
@@ -587,9 +586,9 @@ $(document).ready(function () {
 
                 let reportTable = `<div class="card">
                 <div class="card-header row m-0">
-                <h5 class="col-sm-9"> Consultant Report </h5>
+                <h5 class="col-sm-8"> Consultant Report </h5>
                                         ${buttons}
-                                        <button class="btn btn-outline-primary float-right mr-2 mb-1 btn-sm text-sm pl-3 pr-3" id="cReport" data-dismiss="modal" aria-label="Close" style="float:right">Save</button>
+                                        <button class="btn btn-outline-primary float-right ml-1 mb-1 btn-sm text-sm pl-3 pr-3" id="cReport" data-dismiss="modal" aria-label="Close" style="float:right;margin-left: -26px !important;">Save</button>
                                     </div>
                                     <div class="card-body">
                                     ${reportHeader}
@@ -715,7 +714,7 @@ $(document).ready(function () {
         }
     })
 
-    $('#back').on('click', function () {
+    $('body').on('click','#back', function () {        
         var str = document.referrer;
         var res = str.match(/importMap/g);
         if (res) {
