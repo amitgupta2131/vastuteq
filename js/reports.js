@@ -17,20 +17,16 @@ $(document).ready(function () {
     let backBtn = `<div style="position:relative">    
                     <button class="btn btn-outline-primary float-right mr-2 mb-1 btn-sm text-sm pl-3 pr-3" id="back">Back</button>
                   </div>`;
-    setObjColor();
+    mainGateEntry();
+    $('#main-tab-right').addClass('flag');
     //Reports Click Events 
     $('#tab1').on('click', function () {
         setObjColor()
-    });
-    $('#tab2').on('click', function () {
-        setSixteenZoneColor()
     });
     $('#tab3').on('click', function () {
         $('#main-tab-right').empty();
         mainGateEntry();
         $('#main-tab-right').addClass('flag');
-
-
     });
     $('#tab4').on('click', function () {
         $('#main-tab-right').empty();
@@ -79,36 +75,45 @@ $(document).ready(function () {
 
                 $('#main-tab-right').append('<div id="rtable"></div>')
                 let data = JSON.parse(resolve)[1][0];
-                let reportHeader = `<div class="col-sm-12 row rheader text-center">
-                <div class="col-sm-3"><div class="font-weight-bold">Client Name  </div><div>${data.clientName}</div></div>
-                <div class="col-sm-3"><div class="font-weight-bold">Building Address  </div><div>${data.propertyAddress}</div></div>
-                <div class="col-sm-3"><div class="font-weight-bold">Facing of Building  </div><div>${localStorage.getItem('face')}</div></div>
-                <div class="col-sm-3"><div class="font-weight-bold">Degree  </div><div>${data.degree}</div></div>
-                </div>`;
+                let reportHeader = `
+                <div class="card rheader">
+                    <div class="card-header row m-0">
+                        <div class="col-sm-9"></div>${buttons}
+                    </div>
+                    <div class="card-body row m-0">
+                    <img src="${BASE_URL + 'assets/images/logoCropedTop.jpg'}" alt="Vastuteq" width="100">
+                    <div class="col-sm-10 row p-0 m-0 ml-auto mr-auto">
+                            <div class="row m-0 col-sm-12 p-0">
+                                <div class="col-sm-12"><h1 class="text-center">${data.firstName}</h1></div>
+                                <div class="col-sm-12"><h6 class="text-center" style="font-size:0.8rem"><span>Address : </span><span>${data.address} </span>
+                                <span>Mobile : ${data.mobileNo} </span><span>Email : ${data.email} <span></h6></div>
+                            
+                        </div> 
+                        </div>
+                                               
+                    </div>
 
-                let reportFooter = `<div class="col-sm-12 rfooter row text-center">
-                <div class="col-sm-3"><div class="font-weight-bold">Consultant Name </div><div>${data.firstName}</div></div>
-                <div class="col-sm-3"><div class="font-weight-bold">Address  </div><div>${data.address}</div></div>
-                <div class="col-sm-3"><div class="font-weight-bold">Contact No  </div><div>${data.mobileNo}</div></div>
-                <div class="col-sm-3"><div class="font-weight-bold">Email  </div><div>${data.email}</div></div>
-                </div>`
+                    <div class="col-sm-12 row m-0">
+                            <div class="row m-0 col-sm-6"><div class=" col-sm-6 pl-0">Client Name :  </div><div class="col-sm-6 pl-0">${data.clientName}</div></div>
+                            <div class="col-sm-6"></div>
+                            <div class="row m-0 col-sm-6"><div class=" col-sm-6 pl-0">Building Address :  </div><div class="col-sm-6 pl-0">${data.propertyAddress}</div></div>                            
+                            <div class="row m-0 col-sm-6"><div class=" col-sm-6 pl-0">Degree from north :  </div><div class="col-sm-6 pl-0">${data.degree}</div></div>
+                </div>`;
 
                 let reportTable = `<div class="card">
                                     <div class="card-header row m-0">
                                    <h5 class="col-sm-9"> Object/Activity Wise Report </h5>
-                                        ${buttons}
+                                        
                                     </div>
                                     <div class="card-body">
-                                    ${reportHeader}
+                                    
                 <table class="table table-bordered table-hover mt-2">
                               <thead>
                                 <tr>
                                   <th scope="col">#</th>
                                   <th scope="col">Object/Activity Name</th>
                                   <th scope="col">Direction</th>
-                                  <th scope="col">Type</th> 
-                                  <th scope="col">Object Colour</th>
-                                  <th scope="col">Recommended Colour</th>        
+                                  <th scope="col">Type</th>                                          
                                 </tr>
                               </thead>
                               <tbody>`
@@ -126,22 +131,26 @@ $(document).ready(function () {
                                 <td>${data.name}</td>
                                 <td>${keys[i]}</td>      
                                 <td>${type}</td> 
-                                <td>${data.color != undefined ? data.color : ""}</td>
-                                <td>${data.recommendedColor != undefined ? data.recommendedColor : ""}</td>
+                                
                               </tr>`
                         }
                     }
                 }
+
                 reportTable += `</tbody></table>      
                 <div class="form-group col-sm-12 p-0">
                     <label for="exampleFormControlTextarea1">Recommendation</label>
                     <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
                 </div>
-                ${reportFooter}
+                
                 </div>
                 </div>`
-                //appending table to modal body                
-                $('#rtable').append(reportTable)
+                //appending table to modal body 
+                let disclaim = disclaimer();
+                $('#rtable').append(reportHeader);
+                $('#rtable').append(reportTable);
+                $('#rtable').append(disclaim);
+
             });
         }
         else {
@@ -168,27 +177,38 @@ $(document).ready(function () {
                 let modal = new Modal()
                 let directions = modal.getDivData(div)
 
-                let reportHeader = `<div class="col-sm-12 rheader row text-center">
-                <div class="col-sm-3"><div class="font-weight-bold">Client Name  </div><div>${data.clientName}</div></div>
-                <div class="col-sm-3"><div class="font-weight-bold">Building Address  </div><div>${data.propertyAddress}</div></div>
-                <div class="col-sm-3"><div class="font-weight-bold">Facing of Building  </div><div>${localStorage.getItem('face')}</div></div>
-                <div class="col-sm-3"><div class="font-weight-bold">Degree  </div><div>${data.degree}</div></div>
-                </div>`;
+                let reportHeader = `
+                <div class="card rheader">
+                    <div class="card-header row m-0">
+                        <div class="col-sm-9"></div>${buttons}
+                    </div>
+                    <div class="card-body row m-0">
+                    <img src="${BASE_URL + 'assets/images/logoCropedTop.jpg'}" alt="Vastuteq" width="100">
+                    <div class="col-sm-10 row p-0 m-0 ml-auto mr-auto">
+                            <div class="row m-0 col-sm-12 p-0">
+                                <div class="col-sm-12"><h1 class="text-center">${data.firstName}</h1></div>
+                                <div class="col-sm-12"><h6 class="text-center" style="font-size:0.8rem"><span>Address : </span><span>${data.address} </span>
+                                <span>Mobile : ${data.mobileNo} </span><span>Email : ${data.email} <span></h6></div>
+                            
+                        </div> 
+                        </div>
+                                               
+                    </div>
 
-                let reportFooter = `<div class="col-sm-12 rfooter row text-center">
-                <div class="col-sm-3"><div class="font-weight-bold">Consultant Name </div><div>${data.name}</div></div>
-                <div class="col-sm-3"><div class="font-weight-bold">Address  </div><div>${data.address}</div></div>
-                <div class="col-sm-3"><div class="font-weight-bold">Contact No  </div><div>${data.mobileNo}</div></div>
-                <div class="col-sm-3"><div class="font-weight-bold">Email  </div><div>${data.email}</div></div>
-                </div>`
+                    <div class="col-sm-12 row m-0">
+                            <div class="row m-0 col-sm-6"><div class=" col-sm-6 pl-0">Client Name :  </div><div class="col-sm-6 pl-0">${data.clientName}</div></div>
+                            <div class="col-sm-6"></div>
+                            <div class="row m-0 col-sm-6"><div class=" col-sm-6 pl-0">Building Address :  </div><div class="col-sm-6 pl-0">${data.propertyAddress}</div></div>                            
+                            <div class="row m-0 col-sm-6"><div class=" col-sm-6 pl-0">Degree from north :  </div><div class="col-sm-6 pl-0">${data.degree}</div></div>
+                </div>`;
 
                 let reportTable = `<div class="card">
                                     <div class="card-header row m-0">
                                     <h5 class="col-sm-9"> Zone ${objType} Report </h5>
-                                        ${buttons}
+                                       
                                     </div>
                                     <div class="card-body">
-                                    ${reportHeader}
+                                    
                                     <table class="table table-bordered table-hover mt-2">
                                     <thead id="zoneHead">
                                     <tr>
@@ -244,11 +264,14 @@ $(document).ready(function () {
                     <label for="exampleFormControlTextarea1">Recommendation</label>
                     <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
                 </div>
-                ${reportFooter}
+                
                 </div>
                 </div>`
                 //appending table to modal body                
-                $('#rtable').append(reportTable)
+                let disclaim = disclaimer();
+                $('#rtable').append(reportHeader);
+                $('#rtable').append(reportTable);
+                $('#rtable').append(disclaim);
             });
 
         } else {
@@ -325,61 +348,6 @@ $(document).ready(function () {
         }
     }
 
-    //Set 16 Zone color
-    function setSixteenZoneColor() {
-
-        var formData = new FormData();
-        formData.append('grid', 'sixteen');
-        var url = BASE_URL + "/Main/getGridData";
-        AjaxPost(formData, url, sixteenZonesuccess, AjaxError);
-
-        function sixteenZonesuccess(content, targetTextarea) {
-            var result = JSON.parse(content);
-            $('#main-tab-right').empty();
-            $('#main-tab-right').append(backBtn);
-            $('#main-tab-right').append('<div id="rtable"></div>')
-            let objColor = `<div class="form-group mb-0">
-                            <select class="form-control objColor" >
-                              <option>Red</option>
-                              <option>Blue</option>
-                              <option>Green</option>
-                              <option>Orange</option>
-                              <option>Black</option>
-                            </select>
-                          </div>`
-            let reportTable = `<table id="colorTable" class="table table-bordered table-hover mt-2">
-                                  <thead>
-                                    <tr>
-                                      <th scope="col">#</th>
-                                      <th scope="col">Direction Name</th>                            
-                                      <th scope="col">Direction Short Name</th> 
-                                      <th scope="col">Colour</th>                                  
-                                    </tr>
-                                  </thead>
-                                  <tbody>`
-            let count = 1;
-            for (let data of result) {
-
-                reportTable += `<tr>
-                                    <th scope="row">${count++}</th>
-                                    <td>${data.zone}</td>                              
-                                    <td>${data.shortName}</td> 
-                                    <td>${objColor}</td>                          
-                                  </tr>`
-            }
-
-            reportTable += `</tbody></table>`
-            //appending table to modal body
-            $('#rtable').html(reportTable)
-            $('#rtable').append(`<button class="btn btn-primary" id="set16ZoneColor" data-dismiss="modal" aria-label="Close" style="float:right">Set</button>`)
-
-
-        }
-
-
-
-    }
-
     //16 zone color report
     function sixteenZoneColorReport() {
         var formData = new FormData();
@@ -395,28 +363,38 @@ $(document).ready(function () {
 
                     $('#main-tab-right').append('<div id="rtable"></div>')
                     let data = JSON.parse(resolve)[1][0];
-                    console.log(data)
-                    let reportHeader = `<div class="col-sm-12 row rheader text-center">
-                    <div class="col-sm-3"><div class="font-weight-bold">Client Name  </div><div>${data.clientName}</div></div>
-                    <div class="col-sm-3"><div class="font-weight-bold">Building Address  </div><div>${data.propertyAddress}</div></div>
-                    <div class="col-sm-3"><div class="font-weight-bold">Facing of Building  </div><div>${localStorage.getItem('face')}</div></div>
-                    <div class="col-sm-3"><div class="font-weight-bold">Degree  </div><div>${data.degree}</div></div>
-                    </div>`;
+                    let reportHeader = `
+                <div class="card rheader">
+                    <div class="card-header row m-0">
+                        <div class="col-sm-9"></div>${buttons}
+                    </div>
+                    <div class="card-body row m-0">
+                    <img src="${BASE_URL + 'assets/images/logoCropedTop.jpg'}" alt="Vastuteq" width="100">
+                    <div class="col-sm-10 row p-0 m-0 ml-auto mr-auto">
+                            <div class="row m-0 col-sm-12 p-0">
+                                <div class="col-sm-12"><h1 class="text-center">${data.firstName}</h1></div>
+                                <div class="col-sm-12"><h6 class="text-center" style="font-size:0.8rem"><span>Address : </span><span>${data.address} </span>
+                                <span>Mobile : ${data.mobileNo} </span><span>Email : ${data.email} <span></h6></div>
+                            
+                        </div> 
+                        </div>
+                                               
+                    </div>
 
-                    let reportFooter = `<div class="col-sm-12 row rfooter text-center">
-                    <div class="col-sm-3"><div class="font-weight-bold">Consultant Name </div><div>${data.name}</div></div>
-                    <div class="col-sm-3"><div class="font-weight-bold">Address  </div><div>${data.address}</div></div>
-                    <div class="col-sm-3"><div class="font-weight-bold">Contact No  </div><div>${data.mobileNo}</div></div>
-                    <div class="col-sm-3"><div class="font-weight-bold">Email  </div><div>${data.email}</div></div>
-                    </div>`
+                    <div class="col-sm-12 row m-0">
+                            <div class="row m-0 col-sm-6"><div class=" col-sm-6 pl-0">Client Name :  </div><div class="col-sm-6 pl-0">${data.clientName}</div></div>
+                            <div class="col-sm-6"></div>
+                            <div class="row m-0 col-sm-6"><div class=" col-sm-6 pl-0">Building Address :  </div><div class="col-sm-6 pl-0">${data.propertyAddress}</div></div>                            
+                            <div class="row m-0 col-sm-6"><div class=" col-sm-6 pl-0">Degree from north :  </div><div class="col-sm-6 pl-0">${data.degree}</div></div>
+                </div>`;
 
                     let reportTable = `<div class="card">
                     <div class="card-header row m-0">
                     <h5 class="col-sm-9"> Zone Colour Report </h5>
-                                            ${buttons}
+                                           
                                         </div>
                                         <div class="card-body">
-                                        ${reportHeader}
+                                       
                                         <table id="colorTable" class="table table-bordered table-hover mt-2">
                                         <thead>
                                           <tr>
@@ -447,11 +425,14 @@ $(document).ready(function () {
                         <label for="exampleFormControlTextarea1">Recommendation</label>
                         <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
                     </div>
-                    ${reportFooter}
+                    
                     </div>
                     </div>`
                     //appending table to modal body                
-                    $('#rtable').append(reportTable)
+                    let disclaim = disclaimer();
+                    $('#rtable').append(reportHeader);
+                    $('#rtable').append(reportTable);
+                    $('#rtable').append(disclaim);
                 });
 
             } else {
@@ -462,41 +443,53 @@ $(document).ready(function () {
 
     //Main gate entry Report
     function mainGateEntry() {
+        if (reportData != null && reportData != '') {
+            var formData = new FormData();
+            formData.append('grid', 'THIRTYTWO');
+            var url = BASE_URL + "/Main/getGridData";
 
-        var formData = new FormData();
-        formData.append('grid', 'THIRTYTWO');
-        var url = BASE_URL + "/Main/getGridData";
+            AjaxPost(formData, url, thirtyTwoZonesuccess, AjaxError);
 
-        AjaxPost(formData, url, thirtyTwoZonesuccess, AjaxError);
+            function thirtyTwoZonesuccess(content, targetTextarea) {
+                let result = JSON.parse(content);
+                getHouseMAp().then(resolve => {
 
-        function thirtyTwoZonesuccess(content, targetTextarea) {
-            let result = JSON.parse(content);
-            getHouseMAp().then(resolve => {
+                    $('#main-tab-right').append('<div class="ml-auto mr-auto" id="rtable"></div>')
+                    let data = JSON.parse(resolve)[1][0];
 
-                $('#main-tab-right').append('<div id="rtable"></div>')
-                let data = JSON.parse(resolve)[1][0];
+                    let reportHeader = `
+                <div class="card rheader">
+                    <div class="card-header row m-0">
+                        <div class="col-sm-9"></div>${buttons}
+                    </div>
+                    <div class="card-body row m-0">
+                    <img src="${BASE_URL + 'assets/images/logoCropedTop.jpg'}" alt="Vastuteq" width="100">
+                    <div class="col-sm-10 row p-0 m-0 ml-auto mr-auto">
+                            <div class="row m-0 col-sm-12 p-0">
+                                <div class="col-sm-12"><h1 class="text-center">${data.firstName}</h1></div>
+                                <div class="col-sm-12"><h6 class="text-center" style="font-size:0.8rem"><span>Address : </span><span>${data.address} </span>
+                                <span>Mobile : ${data.mobileNo} </span><span>Email : ${data.email} <span></h6></div>
+                            
+                        </div> 
+                        </div>
+                                               
+                    </div>
 
-                let reportHeader = `<div class="col-sm-12 row rheader text-center">
-            <div class="col-sm-3"><div class="font-weight-bold">Client Name  </div><div>${data.clientName}</div></div>
-            <div class="col-sm-3"><div class="font-weight-bold">Building Address  </div><div>${data.propertyAddress}</div></div>
-            <div class="col-sm-3"><div class="font-weight-bold">Facing of Building  </div><div>${localStorage.getItem('face')}</div></div>
-            <div class="col-sm-3"><div class="font-weight-bold">Degree  </div><div>${data.degree}</div></div>
-            </div>`;
+                    <div class="col-sm-12 row m-0">
+                            <div class="row m-0 col-sm-6"><div class=" col-sm-6 pl-0">Client Name :  </div><div class="col-sm-6 pl-0">${data.clientName}</div></div>
+                            <div class="col-sm-6"></div>
+                            <div class="row m-0 col-sm-6"><div class=" col-sm-6 pl-0">Building Address :  </div><div class="col-sm-6 pl-0">${data.propertyAddress}</div></div>                            
+                            <div class="row m-0 col-sm-6"><div class=" col-sm-6 pl-0">Degree from north :  </div><div class="col-sm-6 pl-0">${data.degree}</div></div>
+                </div>`;
 
-                let reportFooter = `<div class="col-sm-12 rfooter row text-center">
-            <div class="col-sm-3"><div class="font-weight-bold">Consultant Name </div><div>${data.name}</div></div>
-            <div class="col-sm-3"><div class="font-weight-bold">Address  </div><div>${data.address}</div></div>
-            <div class="col-sm-3"><div class="font-weight-bold">Contact No  </div><div>${data.mobileNo}</div></div>
-            <div class="col-sm-3"><div class="font-weight-bold">Email  </div><div>${data.email}</div></div>
-            </div>`
 
-                let reportTable = `<div class="card">
+
+                    let reportTable = `<div class="card">
                 <div class="card-header row m-0">
                 <h5 class="col-sm-9"> Main Gate Entry Report </h5>
-                                    ${buttons}
+                                    
                                 </div>
-                                <div class="card-body">
-                                ${reportHeader}
+                                <div class="card-body">                               
                                 <table id="colorTable" class="table table-bordered table-hover mt-2">
                                 <thead>
                                   <tr>
@@ -509,18 +502,19 @@ $(document).ready(function () {
                                   </tr>
                                 </thead>
                                 <tbody>`
-                for (let dir of result) {
-                    for (let devtas of DEVTAS) {
-                        for (let dData of reportData) {
-                            let keys = Object.keys(dData)
-                            let type = '';
-                            objects.map(object => object.image.id == dData.id ?
-                                type = object.image.type
-                                : object);
-                            for (let i = 2; i < keys.length; i++) {
-                                if (keys[i] == dir.shortName && type == 'activity' && devtas.direction == dir.shortName && dData.name == 'MAIN GATE') {
-                                    reportTable += `<tr>
-                                  <th scope="row">1</th>
+                    let count = 1;
+                    for (let dir of result) {
+                        for (let devtas of DEVTAS) {
+                            for (let dData of reportData) {
+                                let keys = Object.keys(dData)
+                                let type = '';
+                                objects.map(object => object.image.id == dData.id ?
+                                    type = object.image.type
+                                    : object);
+                                for (let i = 2; i < keys.length; i++) {
+                                    if (keys[i] == dir.shortName && type == 'activity' && devtas.direction == dir.shortName && dData.name == 'MAIN GATE') {
+                                        reportTable += `<tr>
+                                  <th scope="row">${count++}</th>
                                   <td>${dData.name}</td>                              
                                   <td>${dir.shortName}</td> 
                                   <td>${devtas.name}</td>  
@@ -528,30 +522,37 @@ $(document).ready(function () {
                                   <td>E3,E4,S3,S4,W4,W5,N3,N4,N5</td>                         
                                 </tr>`
 
+                                    }
                                 }
                             }
                         }
                     }
-                }
-                reportTable += `</tbody></table>      
+                    reportTable += `</tbody></table>      
             <div class="form-group col-sm-12 p-0">
                 <label for="exampleFormControlTextarea1">Recommendation</label>
                 <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
             </div>
-            ${reportFooter}
+            
             </div>
             </div>`
-                //appending table to modal body   
-                if (div != '32') {
-                    showAlert('Please choose 32 grid for this report', 'warning');
-                }
+                    //appending table to modal body   
+                    if (div != '32') {
+                        showAlert('Please choose 32 grid for this report', 'warning');
+                    }
 
-                let haveGate = reportData.filter(p => p.name == "MAIN GATE");
-                if (haveGate[0] == undefined) {
-                    showAlert('Please Select Main Gate from activities', 'warning');
-                }
-                $('#rtable').append(reportTable)
-            });
+                    let haveGate = reportData.filter(p => p.name == "MAIN GATE");
+                    if (haveGate[0] == undefined) {
+                        showAlert('Please Select Main Gate from activities', 'warning');
+                    }
+                    let disclaim = disclaimer();
+                    $('#rtable').append(reportHeader)
+                    $('#rtable').append(reportTable);
+                    $('#rtable').append(disclaim);
+                });
+            }
+        }
+        else {
+            showAlert('Add objects and then Select the grid Before generate the report', 'warning')
         }
     }
 
@@ -570,28 +571,39 @@ $(document).ready(function () {
                 $('#main-tab-right').append('<div id="rtable"></div>')
                 let data = JSON.parse(resolve)[1][0];
 
-                let reportHeader = `<div class="col-sm-12 row rheader text-center">
-                <div class="col-sm-3"><div class="font-weight-bold">Client Name  </div><div>${data.clientName}</div></div>
-                <div class="col-sm-3"><div class="font-weight-bold">Building Address  </div><div>${data.propertyAddress}</div></div>
-                <div class="col-sm-3"><div class="font-weight-bold">Facing of Building  </div><div>${localStorage.getItem('face')}</div></div>
-                <div class="col-sm-3"><div class="font-weight-bold">Degree  </div><div>${data.degree}</div></div>
-                </div>`;
+                let reportHeader = `
+                <div class="card rheader">
+                    <div class="card-header row m-0">
+                        <div class="col-sm-9"></div>${buttons}
+                    </div>
+                    <div class="card-body row m-0">
+                    <img src="${BASE_URL + 'assets/images/logoCropedTop.jpg'}" alt="Vastuteq" width="100">
+                    <div class="col-sm-10 row p-0 m-0 ml-auto mr-auto">
+                            <div class="row m-0 col-sm-12 p-0">
+                                <div class="col-sm-12"><h1 class="text-center">${data.firstName}</h1></div>
+                                <div class="col-sm-12"><h6 class="text-center" style="font-size:0.8rem"><span>Address : </span><span>${data.address} </span>
+                                <span>Mobile : ${data.mobileNo} </span><span>Email : ${data.email} <span></h6></div>
+                            
+                        </div> 
+                        </div>
+                                               
+                    </div>
 
-                let reportFooter = `<div class="col-sm-12 row rfooter text-center">
-                <div class="col-sm-3"><div class="font-weight-bold">Consultant Name </div><div>${data.name}</div></div>
-                <div class="col-sm-3"><div class="font-weight-bold">Address  </div><div>${data.address}</div></div>
-                <div class="col-sm-3"><div class="font-weight-bold">Contact No  </div><div>${data.mobileNo}</div></div>
-                <div class="col-sm-3"><div class="font-weight-bold">Email  </div><div>${data.email}</div></div>
-                </div>`
+                    <div class="col-sm-12 row m-0">
+                            <div class="row m-0 col-sm-6"><div class=" col-sm-6 pl-0">Client Name :  </div><div class="col-sm-6 pl-0">${data.clientName}</div></div>
+                            <div class="col-sm-6"></div>
+                            <div class="row m-0 col-sm-6"><div class=" col-sm-6 pl-0">Building Address :  </div><div class="col-sm-6 pl-0">${data.propertyAddress}</div></div>                            
+                            <div class="row m-0 col-sm-6"><div class=" col-sm-6 pl-0">Degree from north :  </div><div class="col-sm-6 pl-0">${data.degree}</div></div>
+                </div>`;
 
                 let reportTable = `<div class="card">
                 <div class="card-header row m-0">
-                <h5 class="col-sm-8"> Consultant Report </h5>
-                                        ${buttons}
-                                        <button class="btn btn-outline-primary float-right ml-1 mb-1 btn-sm text-sm pl-3 pr-3" id="cReport" data-dismiss="modal" aria-label="Close" style="float:right;margin-left: -26px !important;">Save</button>
+                <h5 class="col-sm-11"> Consultant Report </h5>
+                                       
+                                        <button class="btn btn-outline-primary float-right ml-1 mb-1 btn-sm text-sm pl-3 pr-3" id="cReport" data-dismiss="modal" aria-label="Close" style="float:right;">Save</button>
                                     </div>
                                     <div class="card-body">
-                                    ${reportHeader}
+                                   
                                     <div>
                         <div class="col-md-12">            
                             <div class="mb-3">
@@ -604,11 +616,14 @@ $(document).ready(function () {
                     <label for="exampleFormControlTextarea1">Recommendation</label>
                     <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
                 </div>
-                ${reportFooter}
+                
                 </div>
                 </div>`
                 //appending table to modal body                
+                let disclaim = disclaimer();
+                $('#rtable').append(reportHeader);
                 $('#rtable').append(reportTable);
+                $('#rtable').append(disclaim);
                 $('.textarea').summernote()
             });
 
@@ -624,32 +639,6 @@ $(document).ready(function () {
         let result = await AjaxPostPromise(formData, url).catch(AjaxError);
         return result;
     }
-
-
-    $('#main-tab-right').on('click', '#set16ZoneColor', function () {
-        let dataArray = [];
-        $('#main-tab-right table tbody tr').each(function () {
-            let name = $(this).find('td:eq(1)').html();
-            let color = $(this).find('td:eq(2)').find('option:selected').html();
-            dataArray.push({ shortName: name, color: color });
-        });
-
-        var formData = new FormData();
-        formData.append('mapId', mapId);
-        formData.append('data', JSON.stringify(dataArray));
-        var url = BASE_URL + "/Main/saveSixteenZoneColorData";
-        AjaxPost(formData, url, sixteenZoneSavesuccess, AjaxError);
-
-        function sixteenZoneSavesuccess(content, targetTextarea) {
-            let result = JSON.parse(content);
-            if (result[0] == 'success') {
-                showAlert(result[1], 'success')
-            } else {
-                showAlert(result[1], 'danger')
-            }
-        }
-        setTimeout(function () { window.location.reload(); }, 1000);
-    })
 
     $('#main-tab-right').on('click', '#setColor', function () {
 
@@ -714,7 +703,7 @@ $(document).ready(function () {
         }
     })
 
-    $('body').on('click','#back', function () {        
+    $('body').on('click', '#back', function () {
         var str = document.referrer;
         var res = str.match(/importMap/g);
         if (res) {
@@ -725,4 +714,22 @@ $(document).ready(function () {
             window.history.back();
         }
     })
+
+    function disclaimer() {
+        let disclaimer = `
+        <div class="card rfooter">                
+        <div class="card-body disclaimer">       
+        
+        <p class="text-center mb-3">Disclaimer</p>
+        
+        <p>All the information on this Application - https://www.vastuteq.com - is published in good faith and for general information purpose only. www.vastuteq.com does not make any warranties about the completeness, reliability and accuracy of this information. Any action you take upon the information you find on this website (www.vastuteq.com), is strictly at your own risk. www.vastuteq.com will not be liable for any losses and/or damages in connection with the use of our Application.</p>
+        
+        <p>From our Application, you can visit other pages by following hyperlinks to such internal services. While we strive to provide only quality links to useful and ethical pages for more information, we have fully control over the content and nature of these pages. These links to other pages do not imply a recommendation for all the content found on these pages. Site owners and content may change without notice and may occur before we have the opportunity to remove a link which may have gone 'bad'.</p>
+        
+        <p>Please be also aware that when you leave our Application, by saving your data it is safe with us. And you can also use your data further, when you come later on the Application.</p>
+        
+       `;
+
+        return disclaimer;
+    }
 });

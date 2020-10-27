@@ -75,17 +75,7 @@ export default class StageThird {
       .html('Mvastu');
 
     $('input[name="vedic"]').on('click', function () {
-      swal("Before Redirecting, want to save Map data or Discard it ?", {
-        buttons: {
-          Save: true,
-          Discard: true,
-        },
-      })
-        .then((value) => {
-          switch (value) {
-
-            case "Save": {
-              $('.savebtn').trigger('click');
+      
               let value = $(this).val();
               if (value == 'vedic') {
                 // $('.savebtn').trigger('click')
@@ -105,35 +95,7 @@ export default class StageThird {
                 that._stage = 3;
                 that.start()
               }
-              break;
-            }
-            case "Discard": {
-              let value = $(this).val();
-              if (value == 'vedic') {
-                // $('.savebtn').trigger('click')
-                that.centroid = Utility.getVedicCenteroid(that.vedicMapBoundariesCoords);
-                removeToolsImages();
-                let objName = localStorage.getItem('vedicImgObj');
-                that.objectDelete(objName);
-                that.model.editType(that.mapId, 'vedic');
-                that.model.editCentroid(that.mapId, that.centroid)
-                $('.fObject').parent().remove();
-                $(`g.sjx-svg-wrapper[data-id]`).remove();
-                that._stage = 3;
-                that.vedicStart()
-              } else {
-
-                that.centroid = Utility.getCentroid(that.mapBoundariesCoords);
-                that._stage = 3;
-                that.start()
-              }
-              break;
-            }
-
-            default:
-              break;
-          }
-        })
+            
 
     })
 
@@ -224,9 +186,9 @@ export default class StageThird {
       let str = d3.select(this).node().value.split(',');
       pointA = [parseInt(str[0]), parseInt(str[1])];
       pointB = [parseInt(str[2]), parseInt(str[3])];
-      
+
       let face = $('select[name = "select-face"] option:selected').text()
-      localStorage.setItem('face',face)
+      localStorage.setItem('face', face)
       // console.log(face)
       that.model.editFaceWall(that.mapId, face);
       that.faceCoords = [pointA, pointB];
@@ -241,15 +203,15 @@ export default class StageThird {
       that.assist.drawMask({ layer: that.canvas, points: that.mapBoundariesCoords, size: that.RECT_SIZE });
       that.assist.drawBoundaries({ layer: that.canvas, points: that.mapBoundariesCoords });
       that.assist.drawBharamNabhi({ layer: that.canvas, centroid: that.centroid });
-      if(gMap == false || gMap == "false"){
-      that.assist.drawDirectionLines(that.canvas, that.faceCoords, that.centroid, that.division, that.angle);
-      that.assist.drawFacingLine(that.canvas, that.centroid, that.faceCoords);
-      that.assist.drawGrid(that.canvas, that.centroid, that.faceCoords, that.screenBoundariesCoords, that.division, that.angle,);
-      alert('running')
-      console.log(gMap)
+      if (gMap == false || gMap == "false") {
+        that.assist.drawDirectionLines(that.canvas, that.faceCoords, that.centroid, that.division, that.angle);
+        that.assist.drawFacingLine(that.canvas, that.centroid, that.faceCoords);
+        that.assist.drawGrid(that.canvas, that.centroid, that.faceCoords, that.screenBoundariesCoords, that.division, that.angle,);
+        alert('running')
+        console.log(gMap)
       }
-     
-      
+
+
       d3.select(".facing-degree").text(`${Math.abs(theta)}°`);
       that.screenPolygons = Utility.getIntersectionPoints(that.calNorthAngle(), that.centroid, that.screenBoundariesCoords, that.division);
       that.mapPolygonsArray = Utility.getIntersectionPoints(that.calNorthAngle() + that.angle, that.centroid, that.mapBoundariesCoords, that.division);
@@ -257,8 +219,8 @@ export default class StageThird {
 
       // ? DRAW BAR CHART
       that.modal.drawMap({ areaArr: that.mapPolygonsAreaArray, division: that.division, dimension: that.distanceBetweenTwoPoints });
-      if(gMap == true || gMap == "true"){
-      $('.g-map').trigger('click');
+      if (gMap == true || gMap == "true") {
+        $('.g-map').trigger('click');
       }
     })
 
@@ -297,7 +259,7 @@ export default class StageThird {
       angle = (angle * 180 / 3.14);
       angle = centerPoint.x < pPoint.x ? angle : 360 - angle
       angleInputbox.attr('value', angle);
-      angleInputbox.attr('disabled', true);   
+      angleInputbox.attr('disabled', true);
 
     })
 
@@ -350,7 +312,7 @@ export default class StageThird {
       console.log(theta)
       that.angle = -theta;
       that.model.editDegree(that.mapId, angleInputbox.property('value'));
-      
+
 
       // that.start();
       that.assist.drawBackgroundGrid(that.canvas, that.centroid, that.faceCoords, that.division, that.angle);
@@ -639,7 +601,91 @@ export default class StageThird {
 
     });
 
-    
+    //Set 16 Zone color
+    $('#zoneColor').on('click', function () {
+
+      var formData = new FormData();
+      formData.append('grid', 'sixteen');
+      var url = BASE_URL + "/Main/getGridData";
+      AjaxPost(formData, url, sixteenZonesuccess, AjaxError);
+
+      function sixteenZonesuccess(content, targetTextarea) {
+        var result = JSON.parse(content);
+        // $('#main-tab-right').empty();
+        // $('#main-tab-right').append(backBtn);
+        $('#reportModal .modal-body').append('<div id="rtable"></div>')
+        let objColor = `<div class="form-group mb-0">
+                          <select class="form-control objColor" >
+                          <option value="N/A">Select Colour</option>
+                            <option value="Red">Red</option>
+                            <option value="Blue">Blue</option>
+                            <option value="Green">Green</option>
+                            <option value="Orange">Orange</option>
+                            <option value="Black">Black</option>
+                          </select>
+                        </div>`
+        let reportTable = `<table id="colorTable" class="table table-bordered table-hover mt-2">
+                                <thead>
+                                  <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Direction Name</th>                            
+                                    <th scope="col">Direction Short Name</th> 
+                                    <th scope="col">Colour</th>                                  
+                                  </tr>
+                                </thead>
+                                <tbody>`
+        let count = 1;
+        for (let data of result) {
+
+          reportTable += `<tr>
+                                  <th scope="row">${count++}</th>
+                                  <td>${data.zone}</td>                              
+                                  <td>${data.shortName}</td> 
+                                  <td>${objColor}</td>                          
+                                </tr>`
+        }
+
+        reportTable += `</tbody></table>`
+        //appending table to modal body
+        $('#reportModal').modal('show');
+        $('#rtable').html(reportTable)
+        $('#rtable').append(`<button class="btn btn-primary" id="set16ZoneColor" data-dismiss="modal" aria-label="Close" style="float:right">Set</button>`)
+
+
+      }
+
+
+
+    });
+
+    //save 16 zone color in data base
+
+    $('#reportModal .modal-body').on('click', '#set16ZoneColor', function () {
+      let dataArray = [];
+      let mapId = localStorage.getItem('selectedMapId');
+      $('#reportModal .modal-body table tbody tr').each(function () {
+        let name = $(this).find('td:eq(1)').html();
+        let color = $(this).find('td:eq(2)').find('option:selected').val();
+        dataArray.push({ shortName: name, color: color });
+      });
+
+      var formData = new FormData();
+      formData.append('mapId', mapId);
+      formData.append('data', JSON.stringify(dataArray));
+      var url = BASE_URL + "/Main/saveSixteenZoneColorData";
+      AjaxPost(formData, url, sixteenZoneSavesuccess, AjaxError);
+
+      function sixteenZoneSavesuccess(content, targetTextarea) {
+        let result = JSON.parse(content);
+        if (result[0] == 'success') {
+          showAlert(result[1], 'success')
+        } else {
+          showAlert(result[1], 'danger')
+        }
+      }      
+    })
+
+
 
   }
 

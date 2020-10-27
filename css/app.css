@@ -46,7 +46,7 @@
   font-size: 13px;
   font-weight: 400;
   padding: 0 !important;
-  padding-right: 0.5rem !important;
+  /* padding-right: 0.5rem !important; */
   padding-left: 0.5rem !important;
 }
 
@@ -187,7 +187,7 @@ ul.menu {
 }
 
 .menu-sidebar li {
-  padding: 18px 22px 0;
+  padding: 18px 16px 0;
   list-style-type: none;
 }
 
@@ -219,7 +219,7 @@ ul.menu {
 
 #mainArea .card .create-new {
   -webkit-animation: stroke-rainbow 13s linear infinite;
-          animation: stroke-rainbow 13s linear infinite;
+  animation: stroke-rainbow 13s linear infinite;
 }
 
 #mainArea .card .create-new:hover {
@@ -230,7 +230,7 @@ ul.menu {
   width: 100%;
   height: 13vw;
   -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
   background-color: #ccc;
 }
 
@@ -251,17 +251,17 @@ ul.menu {
 }
 
 #mainArea .card:hover {
-  -webkit-box-shadow: -1px 1px 22px 0px rgba(135,135,135,1);
-  -moz-box-shadow: -1px 1px 22px 0px rgba(135,135,135,1);
-  box-shadow: -1px 1px 22px 0px rgba(135,135,135,1);
+  -webkit-box-shadow: -1px 1px 22px 0px rgba(135, 135, 135, 1);
+  -moz-box-shadow: -1px 1px 22px 0px rgba(135, 135, 135, 1);
+  box-shadow: -1px 1px 22px 0px rgba(135, 135, 135, 1);
 }
 
 #mainArea .card:active {
   text-shadow: 0px 0px 15px #6968ab;
   -webkit-box-shadow: 7px 6px 28px 1px rgba(0, 0, 0, 0.24);
-          box-shadow: 7px 6px 28px 1px rgba(0, 0, 0, 0.24);
+  box-shadow: 7px 6px 28px 1px rgba(0, 0, 0, 0.24);
   -webkit-transform: scale(0.98);
-          transform: scale(0.98);
+  transform: scale(0.98);
 }
 
 .border-thick {
@@ -498,9 +498,18 @@ ul.menu {
   right: -14px;
 }
 
+.dropdown-menu {
+  padding: 0 !important;
+}
+
 .header #dynamicBar .dynamicbar-right .dropdown-menu .dropdown-item {
   font-size: 12px;
   color: #555;
+
+}
+
+.dropdown-menu .dropdown-item {
+  border-bottom: 1px solid #c0bcbc;
 }
 
 .header #menubar {
@@ -1335,45 +1344,26 @@ body {
   height: 300px !important;
 }
 
-#main-tab-right #rtable .card:nth-child(2),
-#main-tab-right #rtable .card:nth-child(3),
-#main-tab-right #rtable .card:nth-child(4),
-#main-tab-right #rtable .card:nth-child(5),
-#main-tab-right #rtable .card:nth-child(6) {
-  margin-top: 1rem;
+#main-tab-right #rtable .card
+ {
+  margin-bottom: 1rem;
 }
 
-#main-tab-right #rtable .card:nth-child(2) .card-header:nth-child(1) div,
-#main-tab-right #rtable .card:nth-child(3) .card-header:nth-child(1) div,
-#main-tab-right #rtable .card:nth-child(4) .card-header:nth-child(1) div,
-#main-tab-right #rtable .card:nth-child(5) .card-header:nth-child(1) div,
-#main-tab-right #rtable .card:nth-child(6) .card-header:nth-child(1) div {
+.rheader:not(:nth-child(1)){
   display: none !important;
 }
 
-#main-tab-right #rtable .card:nth-child(2) .rheader,
-#main-tab-right #rtable .card:nth-child(2) .rfooter,
-#main-tab-right #rtable .card:nth-child(3) .rheader,
-#main-tab-right #rtable .card:nth-child(3) .rfooter,
-#main-tab-right #rtable .card:nth-child(4) .rheader,
-#main-tab-right #rtable .card:nth-child(4) .rfooter,
-#main-tab-right #rtable .card:nth-child(5) .rheader,
-#main-tab-right #rtable .card:nth-child(5) .rfooter {
+.rfooter:not(:nth-last-child(1)){
   display: none !important;
 }
 
-#main-tab-right #rtable .card:nth-child(6) .rheader,
-#main-tab-right #rtable .card:nth-child(1) .rfooter {
-  display: none;
-}
-
-#main-tab-right.flag #rtable .card:nth-child(1) .rfooter {
+#main-tab-right.flag #rtable .rfooter:nth-child(3){
   display: flex !important;
-}
+} 
 
 .p-card {
   box-shadow: none !important;
-  border: none !important; 
+  border: none !important;
 }
 
 .c-card {
@@ -1382,15 +1372,29 @@ body {
   padding: 0 !important;
 }
 
-.c-card:nth-child(1){
+.c-card:nth-child(1) {
   margin-right: 0.75rem !important;
 }
-.c-card:nth-child(2){
+
+.c-card:nth-child(2) {
   margin-left: 0.50rem !important;
 }
 
-.c-card:nth-child(2) .card-footer{
+.c-card:nth-child(2) .card-footer {
   border: none !important;
+}
+
+.report-front {
+  background-repeat: no-repeat !important;
+  background-size: contain !important;
+  height: 382px;
+  width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.disclaimer p{
+  font-size: 0.6rem;
 }
 
 /*# sourceMappingURL=app.css.map */

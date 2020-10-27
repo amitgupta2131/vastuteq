@@ -280,6 +280,11 @@
                                 <img src="<?php echo base_url('assets/images/full-screen.svg') ?>" alt="" width="20">
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" id="zoneColor" name="Sixteen Zone Color" title="Set Sixteen Zone Colour">
+                                <img src="<?php echo base_url('assets/images/color-palette.svg') ?>" alt="" width="20">
+                            </a>
+                        </li>
                     </ul>
                 </div>
 

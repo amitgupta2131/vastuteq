@@ -75,17 +75,7 @@ export default class Vedic {
       .html('Mvastu');
 
     $('input[name="mahavastu"]').on('click', function () {
-      swal("Before Redirecting, want to save Map data or Discard it ?", {
-        buttons: {
-          Save: true,
-          Discard: true,
-        },
-      })
-        .then((value) => {
-          switch (value) {
-
-            case "Save": {
-              $('.savebtn').trigger('click');
+     
               let value = $(this).val();
               if (value == 'mahavastu') {
                 let objName = localStorage.getItem('vedicImgObj');
@@ -104,33 +94,7 @@ export default class Vedic {
                 that._stage = 3;
                 that.start()
               }
-              break;
-            }
-            case "Discard": {
-              let value = $(this).val();
-              if (value == 'mahavastu') {
-                let objName = localStorage.getItem('vedicImgObj');
-                d3.select('g.sjx-svg-wrapper').remove();
-                d3.select('g.vedic-polygon').remove();
-                $('.fObject').parent().remove();
-                d3.select('.properties-section.opacity').classed('d-none', true);
-                d3.select('.properties-section.opacity').classed('d-flex', false);
-                d3.select('.object-delete-toggle').classed('d-none', false);
-                d3.select('.object-delete-toggle').classed('d-flex', true);
-                d3.select('.toggle-fixed').classed('d-flex', true);
-                that.objectDelete(objName);
-                that.centroid = Utility.getCentroid(that.mapBoundariesCoords);
-                that.model.editType(that.mapId, 'mahavastu');
-                that.model.editCentroid(that.mapId, that.centroid);
-                that._stage = 3;
-                that.start()
-              }
-              break;
-            }
-            default:
-              break;
-          }
-        })
+             
 
     });
 

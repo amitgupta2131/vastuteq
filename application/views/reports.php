@@ -72,22 +72,22 @@
     <div class="row m-0 mt-3 report-container">
         <div class="col-2 p-4 b-right">
             <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                <a class="nav-link active" id="tab1" data-toggle="pill" href="#" role="tab" aria-controls="v-pills-home" aria-selected="true">Set Object Colour</a>
-                <a class="nav-link" id="tab2" data-toggle="pill" href="#" role="tab" aria-controls="v-pills-home" aria-selected="true">Set 16 Zone Colour</a>
-                <a class="nav-link" id="tab3" data-toggle="pill" href="#" role="tab" aria-controls="v-pills-home" aria-selected="true">Main Gate Entry</a>
+                <!-- <a class="nav-link active" id="tab1" data-toggle="pill" href="#" role="tab" aria-controls="v-pills-home" aria-selected="true">Set Object Colour</a> -->
+                <!-- <a class="nav-link" id="tab2" data-toggle="pill" href="#" role="tab" aria-controls="v-pills-home" aria-selected="true">Set 16 Zone Colour</a> -->
+                <a class="nav-link active" id="tab3" data-toggle="pill" href="#" role="tab" aria-controls="v-pills-home" aria-selected="true">Main Gate Entry</a>
                 <a class="nav-link" id="tab4" data-toggle="pill" href="#" role="tab" aria-controls="v-pills-home" aria-selected="true">Object/Activity Wise Report</a>
                 <a class="nav-link" id="tab5" data-toggle="pill" href="#" role="tab" aria-controls="v-pills-profile" aria-selected="false">Zone Activity Report</a>
                 <a class="nav-link" id="tab6" data-toggle="pill" href="#" role="tab" aria-controls="v-pills-messages" aria-selected="false">Zone Object Report</a>
                 <a class="nav-link" id="tab7" data-toggle="pill" href="#" role="tab" aria-controls="v-pills-settings" aria-selected="false">Zone Colour Report</a>
                 <a class="nav-link" id="tab8" data-toggle="pill" href="#" role="tab" aria-controls="v-pills-settings" aria-selected="false">Consultant Report</a>
-                <a class="nav-link" id="tab9" data-toggle="pill" href="#" role="tab" aria-controls="v-pills-settings" aria-selected="false">Complete Report</a>
                 <a class="nav-link" id="tab10" data-toggle="pill" href="#" role="tab" aria-controls="v-pills-settings" aria-selected="false">Ayadhi Report</a>
+                <a class="nav-link" id="tab9" data-toggle="pill" href="#" role="tab" aria-controls="v-pills-settings" aria-selected="false">Complete Report</a>
 
             </div>
         </div>
-        <div class="col-10 p-4">
+        <div class="col-10 p-4 ml-auto mr-auto">
             <div class="tab-content" id="v-pills-tabContent">
-                <div class="tab-pane fade show active" id="main-tab-right" role="tabpanel" aria-labelledby="v-pills-home-tab">
+                <div class="tab-pane fade show active ml-auto mr-auto" id="main-tab-right" role="tabpanel" aria-labelledby="v-pills-home-tab">
 
                 </div>
             </div>

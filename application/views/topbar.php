@@ -315,15 +315,15 @@
     });
 
     $('#ayadhi').on('click', function() {
-        confirmSave('Main/ayadhi')
+        window.location.href = BASE_URL + 'Main/ayadhi';
     })
 
     $('#devtas').on('click', function() {
-        confirmSave('Main/devtas')
+        window.location.href = BASE_URL + 'Main/devtas';
     })
 
     $('#reports').on('click', function() {
-        confirmSave('Main/reports')
+        window.location.href = BASE_URL + 'Main/reports';
     })
 
     function confirmSave(url = '') {
