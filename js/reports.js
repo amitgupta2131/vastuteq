@@ -154,7 +154,7 @@ $(document).ready(function () {
             });
         }
         else {
-            showAlert('Add objects and then Select the grid Before generate the report', 'warning');
+            showAlert('Currently there is no object/activity on the map', 'warning');
             $('#main-tab-right').append('<div class="ml-auto mr-auto" id="rtable"></div>');
             let rData = noReportData();
             $('#rtable').append(rData);
@@ -278,7 +278,7 @@ $(document).ready(function () {
             });
 
         } else {
-            showAlert('Add objects and then Select the grid Before generate the report', 'warning');
+            showAlert('Currently there is no object/activity on the map', 'warning');
             $('#main-tab-right').append('<div class="ml-auto mr-auto" id="rtable"></div>');
             let rData = noReportData();
             $('#rtable').append(rData);
@@ -442,7 +442,7 @@ $(document).ready(function () {
                 });
 
             } else {
-                showAlert('Please define colors for 16 zone', 'warning');
+                showAlert('For generating 16 zone colour report, it is mandatory to enter actual zone colors', 'warning');
                 $('#main-tab-right').append('<div class="ml-auto mr-auto" id="rtable"></div>');
                 let rData = noReportData();
                 $('#rtable').append(rData);
@@ -546,7 +546,7 @@ $(document).ready(function () {
             </div>`
                     //appending table to modal body   
                     if (div != '32') {
-                        showAlert('Please choose 32 grid for this report', 'warning');
+                        showAlert('For main gate entry report, select 32 grid in the option box', 'warning');
                     }
 
                     let haveGate = reportData.filter(p => p.name == "MAIN GATE");
@@ -561,7 +561,7 @@ $(document).ready(function () {
             }
         }
         else {
-            showAlert('Add objects and then Select the grid Before generate the report', 'warning');
+            showAlert('For main gate report, main gate activity should be added to the map', 'warning');
             $('#main-tab-right').append('<div class="ml-auto mr-auto" id="rtable"></div>');
             let rData = noReportData();
             $('#rtable').append(rData);
