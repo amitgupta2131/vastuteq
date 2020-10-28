@@ -12,6 +12,7 @@ export default class StageThird {
     this.attribute = attribute;
     this.actionbox = new ActionBox();
     d3.select('.properties-section.opacity').classed('d-none', true);
+    d3.select('.client-form').classed('d-none', true);
     $('.svg-inline--fa.fa-trash').removeClass('d-none');
     $('.svg-inline--fa.fa-trash').addClass('d-flex');
   }
@@ -75,27 +76,27 @@ export default class StageThird {
       .html('Mvastu');
 
     $('input[name="vedic"]').on('click', function () {
-      
-              let value = $(this).val();
-              if (value == 'vedic') {
-                // $('.savebtn').trigger('click')
-                that.centroid = Utility.getVedicCenteroid(that.vedicMapBoundariesCoords);
-                removeToolsImages();
-                let objName = localStorage.getItem('vedicImgObj');
-                that.objectDelete(objName);
-                that.model.editType(that.mapId, 'vedic');
-                that.model.editCentroid(that.mapId, that.centroid)
-                $('.fObject').parent().remove();
-                $(`g.sjx-svg-wrapper[data-id]`).remove();
-                that._stage = 3;
-                that.vedicStart()
-              } else {
 
-                that.centroid = Utility.getCentroid(that.mapBoundariesCoords);
-                that._stage = 3;
-                that.start()
-              }
-            
+      let value = $(this).val();
+      if (value == 'vedic') {
+        // $('.savebtn').trigger('click')
+        that.centroid = Utility.getVedicCenteroid(that.vedicMapBoundariesCoords);
+        removeToolsImages();
+        let objName = localStorage.getItem('vedicImgObj');
+        that.objectDelete(objName);
+        that.model.editType(that.mapId, 'vedic');
+        that.model.editCentroid(that.mapId, that.centroid)
+        $('.fObject').parent().remove();
+        $(`g.sjx-svg-wrapper[data-id]`).remove();
+        that._stage = 3;
+        that.vedicStart()
+      } else {
+
+        that.centroid = Utility.getCentroid(that.mapBoundariesCoords);
+        that._stage = 3;
+        that.start()
+      }
+
 
     })
 
@@ -603,7 +604,9 @@ export default class StageThird {
 
     //Set 16 Zone color
     $('#zoneColor').on('click', function () {
-
+      var tableRow = '';
+      let count = 1;
+      let btnName = ''
       var formData = new FormData();
       formData.append('grid', 'sixteen');
       var url = BASE_URL + "/Main/getGridData";
@@ -611,20 +614,70 @@ export default class StageThird {
 
       function sixteenZonesuccess(content, targetTextarea) {
         var result = JSON.parse(content);
-        // $('#main-tab-right').empty();
-        // $('#main-tab-right').append(backBtn);
-        $('#reportModal .modal-body').append('<div id="rtable"></div>')
-        let objColor = `<div class="form-group mb-0">
+        var formData = new FormData();
+        formData.append('mapId', localStorage.getItem('selectedMapId'));
+        var url = BASE_URL + "/Main/getSixteenZoneColorData";
+        AjaxPost(formData, url, colourSuccess, AjaxError);
+
+        function colourSuccess(content, targetTextarea) {
+          let objColor = `<div class="form-group mb-0">
                           <select class="form-control objColor" >
                           <option value="N/A">Select Colour</option>
-                            <option value="Red">Red</option>
-                            <option value="Blue">Blue</option>
-                            <option value="Green">Green</option>
-                            <option value="Orange">Orange</option>
-                            <option value="Black">Black</option>
+                          <option value="Black">Black</option>
+                          <option value="Blue">Blue</option>
+                          <option value="Gray">Gray</option>
+                          <option value="Green">Green</option>
+                          <option value="Orange">Orange</option>
+                          <option value="Red">Red</option>
+                          <option value="Voilet">Violet</option>
+                          <option value="White">White</option>
+                          <option value="Yellow">Yellow</option>
                           </select>
                         </div>`
-        let reportTable = `<table id="colorTable" class="table table-bordered table-hover mt-2">
+          let color = JSON.parse(content);
+          if (color[0] == 'success') {
+            color = JSON.parse(color[1][0]['colors']);
+            btnName = 'Update';
+            for (let data of color) {
+              for (let data1 of result) {
+                if (data.shortName == data1.shortName) {
+                  tableRow += `<tr>
+                        <th scope="row">${count++}</th>
+                        <td>${data1.zone}</td>                              
+                        <td>${data.shortName}</td> 
+                        <td><div class="form-group mb-0">
+                        <select class="form-control objColor" >
+                        <option value="N/A" ${data.color == 'N/A' ? 'selected' : ''}>Select Colour</option>
+                        <option value="Black" ${data.color == 'Black' ? 'selected' : ''}>Black</option>
+                        <option value="Blue" ${data.color == 'Blue' ? 'selected' : ''}>Blue</option>
+                        <option value="Gray" ${data.color == 'Gray' ? 'selected' : ''}>Gray</option>
+                        <option value="Green" ${data.color == 'Green' ? 'selected' : ''}>Green</option>
+                        <option value="Orange" ${data.color == 'Orange' ? 'selected' : ''}>Orange</option>
+                        <option value="Red" ${data.color == 'Red' ? 'selected' : ''}>Red</option>
+                        <option value="Voilet" ${data.color == 'Voilet' ? 'selected' : ''}>Violet</option>
+                        <option value="White" ${data.color == 'White' ? 'selected' : ''}>White</option>
+                        <option value="Yellow" ${data.color == 'Yellow' ? 'selected' : ''}>Yellow</option>
+                        </select>
+                      </div></td>                          
+                      </tr>`
+                }
+              }
+            }
+          } else {
+            btnName = 'Set';
+            for (let data of result) {
+              tableRow += `<tr>
+                        <th scope="row">${count++}</th>
+                        <td>${data.zone}</td>                              
+                        <td>${data.shortName}</td> 
+                        <td>${objColor}</td>                          
+                      </tr>`
+            }
+          }
+
+
+          $('#reportModal .modal-body').append('<div id="rtable"></div>');
+          let reportTable = `<table id="colorTable" class="table table-bordered table-hover mt-2">
                                 <thead>
                                   <tr>
                                     <th scope="col">#</th>
@@ -634,24 +687,14 @@ export default class StageThird {
                                   </tr>
                                 </thead>
                                 <tbody>`
-        let count = 1;
-        for (let data of result) {
 
-          reportTable += `<tr>
-                                  <th scope="row">${count++}</th>
-                                  <td>${data.zone}</td>                              
-                                  <td>${data.shortName}</td> 
-                                  <td>${objColor}</td>                          
-                                </tr>`
+          reportTable += tableRow;
+          reportTable += `</tbody></table>`;
+          //appending table to modal body
+          $('#reportModal').modal('show');
+          $('#rtable').html(reportTable)
+          $('#rtable').append(`<button class="btn btn-primary" id="set16ZoneColor" data-dismiss="modal" aria-label="Close" style="float:right">${btnName}</button>`)
         }
-
-        reportTable += `</tbody></table>`
-        //appending table to modal body
-        $('#reportModal').modal('show');
-        $('#rtable').html(reportTable)
-        $('#rtable').append(`<button class="btn btn-primary" id="set16ZoneColor" data-dismiss="modal" aria-label="Close" style="float:right">Set</button>`)
-
-
       }
 
 
@@ -682,7 +725,7 @@ export default class StageThird {
         } else {
           showAlert(result[1], 'danger')
         }
-      }      
+      }
     })
 
 

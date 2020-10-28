@@ -7,14 +7,13 @@ function sentmail($to = null, $subject = null, $mail_body = null, $target_file =
 
     $config = array(
         'protocol' => 'smtp',
-        'smtp_host' => 'ssl://smtp.gmail.com',
+        'smtp_host' => 'ssl://mail.vastuteq.com',
         'smtp_port' => 465,
-        'smtp_user' => 'yya9017@gmail.com',
-        'smtp_pass' => 'Yatharth@1234',
+        'smtp_user' => 'info@vastuteq.com',
+        'smtp_pass' => '^r6P#8u[1qME',
         'mailtype' => 'html',
         'charset' => 'iso-8859-1'
     );
-
     $CI->load->library('email', $config);
     $CI->email->set_newline("\r\n");
     $CI->email->initialize($config);

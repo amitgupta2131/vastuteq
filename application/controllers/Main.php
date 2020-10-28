@@ -265,8 +265,9 @@ class Main extends CI_Controller
 	public function uploadImage($FILES, $POST)
 	{
 		// print_r($_FILES["usrImage"]);die;
+		$currentTime = time();
 		$target_dir = "uploads/";
-		$target_file = $target_dir . basename($FILES["usrImage"]["name"]);
+		$target_file = $target_dir . $currentTime . basename($FILES["usrImage"]["name"]);
 		$imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
 		// Check if image file is a actual image or fake image
 
@@ -753,12 +754,33 @@ class Main extends CI_Controller
 			if (!$validate) {
 				$result = $this->MainModel->insertInto("sixteen_zone_color", $insertData);
 				if ($result) {
-					echo json_encode(array('success', '16 Zone color is successfullt set'));
+					echo json_encode(array('success', '16 Zone color is successfully set'));
 				} else {
 					echo json_encode(array('error', '16 Zone color could not be set, contact to IT'));
 				}
 			} else {
-				echo json_encode(array('error', '16 Zone color is already set for this HouseMAp'));
+				$result = $this->MainModel->updateWhere('sixteen_zone_color', array('colors' => $_POST['data']), array('houseMapId' => $insertData['houseMapId']));
+				if ($result) {
+					echo json_encode(array('success', '16 Zone color is successfully updated'));
+				} else {
+					echo json_encode(array('error', '16 Zone color could not be updated, contact to IT'));
+				}
+			}
+		} else {
+			echo json_encode(array('error', 'Insuffiecient data found'));
+		}
+	}
+
+	//get 16 zone color data
+	public function getSixteenZoneColorData()
+	{
+		if (isset($_POST['mapId']) && !empty($_POST['mapId'])) {
+
+			$result = $this->MainModel->selectAllFromWhere("sixteen_zone_color", array("houseMapId" => $_POST['mapId']));
+			if ($result) {
+				echo json_encode(array('success', $result));
+			} else {
+				echo json_encode(array('error', 'No data found'));
 			}
 		} else {
 			echo json_encode(array('error', 'Insuffiecient data found'));

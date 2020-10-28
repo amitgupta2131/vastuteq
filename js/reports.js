@@ -154,7 +154,10 @@ $(document).ready(function () {
             });
         }
         else {
-            showAlert('Add objects and then Select the grid Before generate the report', 'warning')
+            showAlert('Add objects and then Select the grid Before generate the report', 'warning');
+            $('#main-tab-right').append('<div class="ml-auto mr-auto" id="rtable"></div>');
+            let rData = noReportData();
+            $('#rtable').append(rData);
         }
 
     }
@@ -275,7 +278,10 @@ $(document).ready(function () {
             });
 
         } else {
-            showAlert('Add objects and then Select the grid Before generate the report', 'danger')
+            showAlert('Add objects and then Select the grid Before generate the report', 'warning');
+            $('#main-tab-right').append('<div class="ml-auto mr-auto" id="rtable"></div>');
+            let rData = noReportData();
+            $('#rtable').append(rData);
         }
     }
 
@@ -436,7 +442,10 @@ $(document).ready(function () {
                 });
 
             } else {
-                showAlert('Please define colors for 16 zone', 'warning')
+                showAlert('Please define colors for 16 zone', 'warning');
+                $('#main-tab-right').append('<div class="ml-auto mr-auto" id="rtable"></div>');
+                let rData = noReportData();
+                $('#rtable').append(rData);
             }
         }
     }
@@ -552,7 +561,10 @@ $(document).ready(function () {
             }
         }
         else {
-            showAlert('Add objects and then Select the grid Before generate the report', 'warning')
+            showAlert('Add objects and then Select the grid Before generate the report', 'warning');
+            $('#main-tab-right').append('<div class="ml-auto mr-auto" id="rtable"></div>');
+            let rData = noReportData();
+            $('#rtable').append(rData);
         }
     }
 
@@ -731,5 +743,21 @@ $(document).ready(function () {
        `;
 
         return disclaimer;
+    }
+
+    function noReportData() {
+        let NoReportData = `<div class="card rheader">
+    <div class="card-header row m-0">
+        <div class="col-sm-11"></div>${backBtn}
+    </div>
+    <div class="card-body row m-0">
+    <img src="${BASE_URL + 'assets/images/logoCropedTop.jpg'}" alt="Vastuteq" width="100">
+    <div class="col-sm-10 row p-0 m-0 ml-auto mr-auto">
+            <div class="row m-0 col-sm-12 p-0">
+                <div class="col-sm-12"><h4 class="text-center">No Report Available</h4></div>
+            </div>                                
+    </div>
+</div>`
+        return NoReportData;
     }
 });

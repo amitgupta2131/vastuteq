@@ -1330,6 +1330,8 @@ input::-webkit-inner-spin-button {
 
 .report-container .b-right {
   background-color: rgb(231, 230, 230);
+  height: auto;
+  min-height: calc(100vh - 0px);
 }
 
 .report-container .b-right .nav-link {
@@ -1395,6 +1397,11 @@ body {
 
 .disclaimer p{
   font-size: 0.6rem;
+}
+
+.dash-button{
+  height: 40px !important;
+  border-radius: 50% !important;
 }
 
 /*# sourceMappingURL=app.css.map */

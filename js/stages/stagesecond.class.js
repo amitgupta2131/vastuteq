@@ -162,6 +162,9 @@ export default class StageSecond {
       .text('Update');
 
     selectbox.on("change", function () {
+      $('input[placeholder="Degree"]').removeAttr('disabled');
+      that.model.editGmap(that.mapId, false);
+      localStorage.setItem('Gmap','false')
       str = d3.select(this).node().value.split(',');
       pointA = [parseInt(str[0]), parseInt(str[1])];
       pointB = [parseInt(str[2]), parseInt(str[3])];

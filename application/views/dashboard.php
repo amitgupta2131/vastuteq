@@ -15,8 +15,8 @@
     <!-- CUSTOM CSS -->
     <!-- <link rel="stylesheet" href="<?php echo base_url('css/main.css') ?>"> -->
     <link rel="stylesheet" href="<?php echo base_url('css/app.css') ?>">
-<!-- google fonts -->
-<link href="https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap" rel="stylesheet">
+    <!-- google fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap" rel="stylesheet">
 
     <!-- JQUERY -->
     <script src="<?php echo base_url('js/helper/jquery.min.js') ?>"></script>
@@ -45,7 +45,7 @@
     <!-- 
     //////////////////////////////// --- H E A D E R ---  ////////////////////////////////
     -->
-    
+
 
     <!-- M E N U  I C O N -->
     <?php include 'topbar.php' ?>
@@ -58,7 +58,7 @@
     -->
     <section id="mainArea" class="p-4">
         <div id="mapsContainer" class="row justify-content-md-start">
-         
+
             <?php
             if (isset($property) && !empty($property)) {
                 // echo "<pre>";
@@ -70,12 +70,12 @@
             ?>
                     <div class="col-lg-3 col-md-4 col-sm-12 mb-4">
                         <div class="card rounded bubbly-button p-1">
-                        <img class="card-img-top" src="<?php echo isset($imageResource['src'])?$imageResource['src']:base_url('assets/images/noImage.png') ?>">
+                            <img class="card-img-top" src="<?php echo isset($imageResource['src']) ? $imageResource['src'] : base_url('assets/images/noImage.png') ?>">
                             <div class="card-body p-2 border-top border-thick">
-                            <div class="project-name card-text">
+                                <div class="project-name card-text">
                                     <span class="col-sm-5 pr-0">Id : </span>
                                     <span class="col-sm-7 pr-0"><?php echo $property[$i]['propertyId'] ?></span>
-                                </div>                                
+                                </div>
                                 <div class="project-name card-text">
                                     <span class="col-sm-5 pr-0">Name : </span>
                                     <span class="col-sm-7 pr-0"><?php echo $property[$i]['propertyName'] ?></span>
@@ -86,14 +86,14 @@
                                 </div>
                                 <div class="project-name card-text">
                                     <span class="col-sm-5 pr-0">Type : </span>
-                                    <span class="col-sm-7 pr-0"><?php echo $property[$i]['type'] == "mahavastu" ? ucwords('mvastu'):'Vedic' ?></span>
-                                </div>                               
+                                    <span class="col-sm-7 pr-0"><?php echo $property[$i]['type'] == "mahavastu" ? ucwords('mvastu') : 'Vedic' ?></span>
+                                </div>
                             </div>
                             <div class="row m-0">
                                 <div class="col-sm-5"></div>
-                            <button title="Delete" class="btn btn-danger deleteMap mr-2 col-sm-2"  style="text-align:center;cursor:pointer"  dId="<?php echo $property[$i]['propertyId'] ?>"><i class="fas fa-trash"></i></button> 
-                            <button title="Edit" class="btn btn-primary mr-2  col-sm-2" data-map-id="<?php echo $property[$i]['mapId'] ?>" aria-hidden="true" style="cursor:pointer"><i class="far fa-edit"></i></button>
-                            <a class="btn btn-info col-sm-2" href = "<?php echo isset($imageResource['src'])?$imageResource['src']:base_url('assets/images/noImage.png') ?>" download title="Download HouseMap Image"><i class="fa fa-download" aria-hidden="true"></i></a>
+                                <button title="Delete" class="btn btn-danger deleteMap mr-2 col-sm-2 dash-button" style="text-align:center;cursor:pointer" dId="<?php echo $property[$i]['propertyId'] ?>"><i class="fas fa-trash"></i></button>
+                                <button title="Edit" class="btn btn-primary mr-2  col-sm-2 dash-button" data-map-id="<?php echo $property[$i]['mapId'] ?>" aria-hidden="true" style="cursor:pointer"><i class="far fa-edit"></i></button>
+                                <a class="btn btn-info col-sm-2 dash-button" href="<?php echo isset($imageResource['src']) ? $imageResource['src'] : base_url('assets/images/noImage.png') ?>" download title="Download HouseMap Image"><i class="fa fa-download" aria-hidden="true"></i></a>
                             </div>
                         </div>
                     </div>
@@ -128,8 +128,8 @@
                                     // echo "<pre>";
                                     // print_r($property);
                                     // die;
-                                    for ($i = 0; $i < count($property); $i++) { 
-                                        $imageResource = json_decode($property[$i]['imageData'], true);?>
+                                    for ($i = 0; $i < count($property); $i++) {
+                                        $imageResource = json_decode($property[$i]['imageData'], true); ?>
                                     
                                         <tr>
                                             
@@ -160,7 +160,7 @@
     <script>
         $('.dataTable').dataTable();
     </script> -->
-  
+
 </body>
 
 </html>

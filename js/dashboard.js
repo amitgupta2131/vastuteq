@@ -71,11 +71,12 @@ function drawMethod(id) {
 			localStorage.removeItem("objectReport");
 			localStorage.setItem("objectReport", result[0].reportData);
 		}
-		
+
 		console.log(result[0])
+		window.location.href = base_url + 'Main/draw/' + btoa(id);
 	}
 
-	window.location.href = base_url + '/Main/draw/' + btoa(id);
+
 }
 
 $('#mapsContainer').on('click', '.deleteMap', function () {
