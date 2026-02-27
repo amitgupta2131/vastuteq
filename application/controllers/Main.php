@@ -236,33 +236,45 @@ class Main extends CI_Controller
 		$target_dir = "uploads/";
 		$target_file = $target_dir . basename($FILES["usrImage"]["name"]);
 		$imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
-		// Check if image file is a actual image or fake image
-
-
+		
 		// Check if file already exists
 		if (file_exists($target_file)) {
 			$this->session->set_flashdata("error", "Sorry, file already exists.");
 			redirect($POST['method']);
 		}
 
-		// Check file size
-		if ($FILES["usrImage"]["size"] > 500000) {
-			$this->session->set_flashdata("error", "Sorry, your file is too large.");
+		// Check file size (5MB limit)
+		if ($FILES["usrImage"]["size"] > 5242880) {
+			$this->session->set_flashdata("error", "Sorry, your file is too large. Maximum file size is 5MB.");
 			redirect($POST['method']);
 		}
 
-		// Allow certain file formats
-		if (
-			$imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
-			&& $imageFileType != "gif"
-		) {
-			$this->session->set_flashdata("error", "Sorry, only JPG, JPEG, PNG & GIF files are allowed.");
+		// Check if file is an actual image
+		$check = getimagesize($FILES["usrImage"]["tmp_name"]);
+		if($check === false) {
+			$this->session->set_flashdata("error", "Sorry, file is not an image.");
+			redirect($POST['method']);
+		}
+
+		// Allow only PNG and JPG file formats
+		if ($imageFileType != "jpg" && $imageFileType != "jpeg" && $imageFileType != "png") {
+			$this->session->set_flashdata("error", "Sorry, only PNG and JPG files are allowed.");
+			redirect($POST['method']);
+		}
+
+		// Additional MIME type validation for security
+		$allowed_mime_types = array('image/jpeg', 'image/jpg', 'image/png');
+		$file_mime_type = mime_content_type($FILES["usrImage"]["tmp_name"]);
+		
+		if (!in_array($file_mime_type, $allowed_mime_types)) {
+			$this->session->set_flashdata("error", "Sorry, only PNG and JPG files are allowed.");
 			redirect($POST['method']);
 		}
 
 		if (move_uploaded_file($FILES["usrImage"]["tmp_name"], $target_file)) {
 			return true;
 		} else {
+			$this->session->set_flashdata("error", "Sorry, there was an error uploading your file.");
 			return false;
 		}
 	}

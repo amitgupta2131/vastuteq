@@ -265,6 +265,9 @@ document
       file.type != "image/png"
     ) {
       showAlert("Only JPEG,PNG and JPG files are allowed", "danger");
+    }
+    else if (file.size > 5 * 1024 * 1024) {
+      showAlert("File size must be under 5MB", "danger");
     } else {
       var reader = new FileReader();
 
@@ -494,7 +497,7 @@ function zoneWiseReport() {
     //create table for report showing
     $('#reportModal .modal-body').append('<div id="rtable"></div>')
     let div = localStorage.getItem('reportDivision')
-    if(div == null || div == ""){
+    if (div == null || div == "") {
       div = 8;
     }
     console.log(div)
